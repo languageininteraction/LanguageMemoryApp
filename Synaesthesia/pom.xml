@@ -11,8 +11,13 @@
     <packaging>war</packaging>
     <version>0.0-pretesting-SNAPSHOT</version>
     <name>Grapheme Colour Synaesthesia App</name>
-
+    <organization> 
+        <name>Language In Interaction</name>
+        <url>https://www.languageininteraction.nl</url>
+    </organization>
     <properties>
+        <netbeans.hint.license>gpl20</netbeans.hint.license>
+        <plugin.license.copyrightYear>2014</plugin.license.copyrightYear>
         <!-- Convenience property to set the GWT version -->
         <gwtVersion>2.6.1</gwtVersion>
         <!-- GWT needs at least java 1.5 -->
@@ -130,6 +135,26 @@
                     <buildType>pretesting</buildType>
                     <propertiesPrefix>application</propertiesPrefix>
                     <shortVersionModule></shortVersionModule>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version> 
+                <configuration>
+                    <header>${project.parent.basedir}/license-header.txt</header>
+                    <strictCheck>false</strictCheck>
+                    <properties>
+                        <year>${plugin.license.copyrightYear}</year>
+                        <organization>${project.organization.name}</organization>
+                    </properties>
+                    <mapping>
+                        <svg>XML_STYLE</svg>
+                    </mapping>
+                    <excludes>
+                        <exclude>**/*.txt</exclude>
+                        <exclude>**/nbactions.xml</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
