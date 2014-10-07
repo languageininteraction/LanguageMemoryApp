@@ -3,17 +3,17 @@
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "nl.mpi.tla.yams.annotator"
+        id        = "nl.ru.languageininteraction.synaesthesia"
         version   = "1.0.0">
 
-    <name>Quick Test Mobile Annotator</name>
+    <name>Grapheme Colour Synaesthesia App</name>
 
     <description>
-        A simple archive resource annotator.
+        A mobile synesthesia battery.
     </description>
 
     <author href="http://phonegap.com" email="support@phonegap.com">
-        Peter Withers, The Language Archive, Max Planck Institute for Psycholinguistics
+        Peter Withers, Language In Interaction, Radboud University
     </author>
 
     <!--

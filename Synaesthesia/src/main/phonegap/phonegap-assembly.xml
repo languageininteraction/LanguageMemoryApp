@@ -7,7 +7,7 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <files>
         <file>
-            <source>${project.build.directory}/${project.build.finalName}/annotator.html</source>
+            <source>${project.build.directory}/${project.build.finalName}/GraphemeColour.html</source>
             <outputDirectory>/</outputDirectory>
             <destName>index.html</destName>
             <!--<fileMode>0644</fileMode>-->
@@ -19,7 +19,7 @@
             <includes>
                 <include>*.*</include>
                 <include>/images/**</include>
-                <include>/annotator/**</include>
+                <include>/GraphemeColour/**</include>
             </includes>  
             <outputDirectory>/</outputDirectory>
             <filtered>false</filtered>
