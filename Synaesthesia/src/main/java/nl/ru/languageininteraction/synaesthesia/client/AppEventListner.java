@@ -17,36 +17,13 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.AppController.ApplicationState;
 
 /**
- * @since Oct 7, 2014 11:07:35 AM (creation date)
+ * @since Oct 8, 2014 11:01:07 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class AppController implements AppEventListner {
+public interface AppEventListner {
 
-    protected enum ApplicationState {
-
-        intro, stimulus, feedback, end
-    }
-    private final ScreenPresenter presenter;
-
-    public AppController(RootPanel widgetTag) {
-        this.presenter = new ScreenPresenter(widgetTag, this);
-        presenter.setState(ApplicationState.intro);
-    }
-
-    public void eventFired(ApplicationState state) {
-        switch (state) {
-            case intro:
-                presenter.setState(ApplicationState.stimulus);
-                break;
-            case stimulus:
-                presenter.setState(ApplicationState.feedback);
-                break;
-            case feedback:
-                presenter.setState(ApplicationState.end);
-                break;
-        }
-    }
+    public void eventFired(ApplicationState state);
 }

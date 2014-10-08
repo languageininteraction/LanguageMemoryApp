@@ -24,33 +24,36 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter {
+public class ScreenPresenter implements AppEventListner {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
+    private final AppEventListner appControllerListener;
+    final SimpleView simpleView = new SimpleView();
 
-    protected enum PresenterState {
-
-        intro, stimulus, feedback, end
-    }
-
-    public ScreenPresenter(RootPanel widgetTag) {
+    public ScreenPresenter(RootPanel widgetTag, AppEventListner appControllerListener) {
         this.widgetTag = widgetTag;
+        this.appControllerListener = appControllerListener;
     }
 
-    protected void setState(PresenterState state) {
+    protected void setState(AppController.ApplicationState state) {
         switch (state) {
             case intro:
-                final SimpleView simpleView = new SimpleView();
+                simpleView.clearAll();
+                simpleView.setButton("bla", state, this);
                 simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
                 widgetTag.add(simpleView);
                 break;
-            case feedback:
+            default:
+                simpleView.clearAll();
+                simpleView.setButton("foo", state, this);
+                simpleView.setDisplayText(state.name());
+                widgetTag.add(simpleView);
                 break;
         }
     }
 
-    protected void setNextState(PresenterState state) {
-
+    public void eventFired(AppController.ApplicationState state) {
+        appControllerListener.eventFired(state);
     }
 }

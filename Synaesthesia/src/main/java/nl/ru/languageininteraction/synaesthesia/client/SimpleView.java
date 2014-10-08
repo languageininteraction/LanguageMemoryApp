@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import nl.ru.languageininteraction.synaesthesia.client.ScreenPresenter.PresenterState;
+import nl.ru.languageininteraction.synaesthesia.client.AppController.ApplicationState;
 
 /**
  * @since Oct 7, 2014 2:06:28 PM (creation date)
@@ -56,15 +56,15 @@ public class SimpleView extends DockLayoutPanel {
         add(new ScrollPanel(new HTML(text)));
     }
 
-    protected void setButton(String buttonText, final PresenterState state, final ScreenPresenter presenter) {
+    protected void setButton(String buttonText, final ApplicationState state, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
-        nextButton.setEnabled(false);
+        nextButton.setEnabled(true);
         addSouth(nextButton, 2);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {
-                presenter.setNextState(state);
+                presenterListerner.eventFired(state);
             }
         });
     }
