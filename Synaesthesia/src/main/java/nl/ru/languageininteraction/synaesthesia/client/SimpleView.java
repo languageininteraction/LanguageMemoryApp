@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -54,6 +55,10 @@ public class SimpleView extends DockLayoutPanel {
 
     protected void setDisplayText(String text) {
         add(new ScrollPanel(new HTML(text)));
+    }
+
+    protected void addLink(String label, String target) {
+        addSouth(new ScrollPanel(new Anchor(label, target)), 2);
     }
 
     protected void setButton(String buttonText, final ApplicationState state, final AppEventListner presenterListerner) {

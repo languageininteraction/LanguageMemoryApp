@@ -44,6 +44,11 @@ public class ScreenPresenter implements AppEventListner {
                 simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
                 widgetTag.add(simpleView);
                 break;
+            case end:
+                simpleView.clearAll();
+                simpleView.addLink("StyleTestPage", "StyleTestPage.html");
+                widgetTag.add(simpleView);
+                break;
             default:
                 simpleView.clearAll();
                 simpleView.setButton("foo", state, this);

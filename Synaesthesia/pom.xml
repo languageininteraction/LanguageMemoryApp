@@ -11,7 +11,7 @@
     <packaging>war</packaging>
     <version>0.0-pretesting-SNAPSHOT</version>
     <name>Grapheme Colour Synaesthesia App</name>
-    <organization> 
+    <organization>
         <name>Language In Interaction</name>
         <url>https://www.languageininteraction.nl</url>
     </organization>

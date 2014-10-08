@@ -3,32 +3,84 @@
 
 /** Example rules used by the template application (remove for your app) */
 h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #777777;
+    margin: 40px 0px 70px;
+    text-align: center;
 }
 
 .sendButton {
-  display: block;
-  font-size: 16pt;
+    display: block;
+    font-size: 16pt;
 }
 
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
-  width: 400px;
+    width: 400px;
 }
 
 .dialogVPanel {
-  margin: 5px;
+    margin: 5px;
 }
 
 .serverResponseLabelError {
-  color: red;
+    color: red;
 }
 
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
-  margin: 15px 6px 6px;
+    margin: 15px 6px 6px;
 }
+
+
+/*
+Language in Interaction uses a fixed color sequence. 
+The main colors are blue and red, with shades derivative thereof. 
+In addition, black, gray and white are used.
+*/
+.PMS632 {background-color:rgb(0,158,200);}
+.PMS632-50 {background-color:rgb(142,207,230);}
+.PMS632-30 {background-color:rgb(193,227,241);}
+.PMS1788 {background-color:rgb(239,43,45);}
+.PMS1788-50 {background-color:rgb(246,170,139);}
+.zwart {background-color:rgb(0,0,0);}
+.zwart-50 {background-color:rgb(111,111,111);}
+.wit {background-color:rgb(255,255,255);}
+
+/*
+It may happen that there are additional colors are needed. 
+Alongside are a series of colors that fit well with the main colors of Language in Interaction.
+These colors may be also used in secondary colors (preferably in the percentages of 50% and 30%).
+*/
+/*
+#PMS 7447 r108 g99 b154
+#PMS 3405 r0 g164 b122
+#PMS 613 r199 g178 b0
+
+#PMS 411 r104 g85 b70
+#PMS 506 r139 g34 b31
+#PMS 506
+r239 g123 b16
+*/
+
+/*
+COLOUR BACKGROUND 
+In order to suggest, more depth use can be made of a color gradient.
+*/
+
+/*PMS 632 - 50% r142 g207 b230 to PMS 632 r0 g158 b200 */
+.gradientPMS632-632-50 {
+    height: 100%;
+    background: -webkit-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
+}
+
+/*
+wit
+r255 g255 b255
+to
+PMS 632 - 50% r142 g207 b230
+*/
