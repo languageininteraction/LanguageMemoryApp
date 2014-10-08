@@ -17,21 +17,35 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import nl.ru.languageininteraction.synaesthesia.client.ScreenPresenter.PresenterState;
 
 /**
  * @since Oct 7, 2014 2:06:28 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class SimpleView extends FlowPanel {
+public class SimpleView extends DockLayoutPanel {
 
     public SimpleView() {
-//        super(Unit.EM);
+        super(Unit.EM);
+        setWidth("100%");
+        setHeight(Window.getClientHeight() + "px");
+        Window.addResizeHandler(new ResizeHandler() {
+
+            public void onResize(ResizeEvent event) {
+                int height = event.getHeight();
+                setHeight(height + "px");
+            }
+        });
     }
 
     public void clearAll() {
@@ -39,18 +53,18 @@ public class SimpleView extends FlowPanel {
     }
 
     protected void setDisplayText(String text) {
-        add(new HTML(text));
+        add(new ScrollPanel(new HTML(text)));
     }
 
-    protected void setButton(String buttonText, final PresenterState clickState, final ScreenPresenter presenter) {
+    protected void setButton(String buttonText, final PresenterState state, final ScreenPresenter presenter) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(false);
-        add(nextButton);
+        addSouth(nextButton, 2);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {
-                presenter.setNextState(clickState);
+                presenter.setNextState(state);
             }
         });
     }
