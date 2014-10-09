@@ -37,6 +37,7 @@ public class ScreenPresenter implements AppEventListner {
     }
 
     protected void setState(AppController.ApplicationState state) {
+        widgetTag.clear();
         switch (state) {
             case intro:
                 simpleView.clearAll();
@@ -48,6 +49,9 @@ public class ScreenPresenter implements AppEventListner {
                 simpleView.clearAll();
                 simpleView.addLink("StyleTestPage", "StyleTestPage.html");
                 widgetTag.add(simpleView);
+                break;
+            case stimulus:
+                widgetTag.add(new ColourPickerView());
                 break;
             default:
                 simpleView.clearAll();
