@@ -24,9 +24,9 @@ import com.google.gwt.user.client.ui.Grid;
  * @since Oct 8, 2014 5:09:10 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ColourPickerView extends Grid {
+public class ColourPickerTableView extends Grid {
 
-    public ColourPickerView() {
+    public ColourPickerTableView() {
         super(50, 50);
         addStyleName("colourGrid");
         setBorderWidth(0);
