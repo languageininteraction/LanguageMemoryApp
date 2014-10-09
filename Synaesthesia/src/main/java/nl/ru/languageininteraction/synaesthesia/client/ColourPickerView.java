@@ -17,10 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates;
-import com.google.gwt.safehtml.client.SafeHtmlTemplates.Template;
-import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Grid;
 
 /**
@@ -29,23 +26,21 @@ import com.google.gwt.user.client.ui.Grid;
  */
 public class ColourPickerView extends Grid {
 
-    public interface PickerCellTemplate extends SafeHtmlTemplates {
-
-        @Template("<span style=\"width:2px;height:2px;color:#FFFFFF;background:rgb({0},{1},{2})\">&nbsp;</span>")
-        SafeHtml getCell(int red, int green, int blue);
-    }
-    private static final PickerCellTemplate PICKER_CELL_TEMPLATE = GWT.create(PickerCellTemplate.class);
-
     public ColourPickerView() {
-        super(20, 20);
+        super(50, 50);
+        addStyleName("colourGrid");
+        setBorderWidth(0);
         setCellPadding(0);
+        setCellSpacing(0);
         final double columnCount = getColumnCount();
         final double rowCount = getRowCount();
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
+                final Element element = getCellFormatter().getElement(row, column);
                 final int rowValue = 255 - (int) (row / (rowCount - 1) * 255);
                 final int columnValue = (int) (column / (columnCount - 1) * 255);
-                this.setHTML(row, column, PICKER_CELL_TEMPLATE.getCell((int) (columnValue * (1 - row / (rowCount - 1))), rowValue, rowValue));
+                final int colourValue = (int) (columnValue * (1 - row / (rowCount - 1)));
+                element.setAttribute("style", "height:5px;width:5px;border:0px none;font-size:1px;color:#FFFFFF;background:rgb(" + colourValue + "," + rowValue + "," + rowValue + ")");
             }
         }
     }
