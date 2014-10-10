@@ -17,15 +17,10 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -34,20 +29,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
  * @since Oct 7, 2014 2:06:28 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class SimpleView extends DockLayoutPanel {
-
-    public SimpleView() {
-        super(Unit.EM);
-        setWidth("100%");
-        setHeight(Window.getClientHeight() + "px");
-        Window.addResizeHandler(new ResizeHandler() {
-
-            public void onResize(ResizeEvent event) {
-                int height = event.getHeight();
-                setHeight(height + "px");
-            }
-        });
-    }
+public class SimpleView extends AbstractView {
 
     public void clearAll() {
         clear();

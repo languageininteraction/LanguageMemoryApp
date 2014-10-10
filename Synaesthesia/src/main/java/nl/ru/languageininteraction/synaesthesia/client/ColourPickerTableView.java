@@ -24,23 +24,24 @@ import com.google.gwt.user.client.ui.Grid;
  * @since Oct 8, 2014 5:09:10 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ColourPickerTableView extends Grid {
+public class ColourPickerTableView extends AbstractView {
 
     public ColourPickerTableView() {
-        super(50, 50);
-        setBorderWidth(0);
-        setCellPadding(0);
-        setCellSpacing(0);
-        final double columnCount = getColumnCount();
-        final double rowCount = getRowCount();
+        Grid grid = new Grid(50, 50);
+        grid.setBorderWidth(0);
+        grid.setCellPadding(0);
+        grid.setCellSpacing(0);
+        final double columnCount = grid.getColumnCount();
+        final double rowCount = grid.getRowCount();
         for (int row = 0; row < rowCount; row++) {
             for (int column = 0; column < columnCount; column++) {
-                final Element element = getCellFormatter().getElement(row, column);
+                final Element element = grid.getCellFormatter().getElement(row, column);
                 final int rowValue = 255 - (int) (row / (rowCount - 1) * 255);
                 final int columnValue = (int) (column / (columnCount - 1) * 255);
                 final int colourValue = (int) (columnValue * (1 - row / (rowCount - 1)));
                 element.setAttribute("style", "height:5px;width:5px;border:0px none;font-size:1px;color:#FFFFFF;background:rgb(" + colourValue + "," + rowValue + "," + rowValue + ")");
             }
         }
+        add(grid);
     }
 }

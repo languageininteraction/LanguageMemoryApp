@@ -33,16 +33,18 @@ import com.google.gwt.user.client.ui.Label;
  * @since Oct 8, 2014 5:09:10 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ColourPickerCanvasView extends HorizontalPanel {
+public class ColourPickerCanvasView extends AbstractView {
 
     private final Canvas canvas;
+    private final HorizontalPanel panel;
 
     public ColourPickerCanvasView() {
+        panel = new HorizontalPanel();
         int height = 300;
         int width = 300;
         canvas = Canvas.createIfSupported();
         if (canvas == null) {
-            add(new Label("canvas is unsupported"));
+            panel.add(new Label("canvas is unsupported"));
             return;
         } else {
             canvas.setSize(width + "px", height + "px");
@@ -71,11 +73,11 @@ public class ColourPickerCanvasView extends HorizontalPanel {
 //            context2d.setFillStyle(colorGreen);
             context2d.setFillStyle(lingrad);
             context2d.fillRect(50, 50, width, height);
-            add(canvas);
+            panel.add(canvas);
             final Label selectedColourLabel = new Label("SelectedColour");
-            add(selectedColourLabel);
+            panel.add(selectedColourLabel);
             final Label hoverColourLabel = new Label("HoverColour");
-            add(hoverColourLabel);
+            panel.add(hoverColourLabel);
 
             canvas.addMouseMoveHandler(new MouseMoveHandler() {
 
@@ -99,13 +101,14 @@ public class ColourPickerCanvasView extends HorizontalPanel {
                 }
             });
         }
+        add(panel);
     }
 
     protected void setButton(String buttonText, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
-        add(nextButton);
+        panel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {
