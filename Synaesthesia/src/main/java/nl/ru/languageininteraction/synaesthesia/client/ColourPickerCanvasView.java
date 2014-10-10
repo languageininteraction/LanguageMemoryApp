@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -98,5 +99,18 @@ public class ColourPickerCanvasView extends HorizontalPanel {
                 }
             });
         }
+    }
+
+    protected void setButton(String buttonText, final AppEventListner presenterListerner) {
+        final Button nextButton = new Button(buttonText);
+        nextButton.addStyleName("nextButton");
+        nextButton.setEnabled(true);
+        add(nextButton);
+        nextButton.addClickHandler(new ClickHandler() {
+
+            public void onClick(ClickEvent event) {
+                presenterListerner.eventFired();
+            }
+        });
     }
 }

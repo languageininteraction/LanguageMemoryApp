@@ -33,6 +33,18 @@ h1 {
     margin: 15px 6px 6px;
 }
 
+/*.gwt-Button {
+    background-color:rgb(246,170,139);
+}*/
+
+#widgetTag {
+    color:rgb(255,255,255);
+    height: 100%;
+    background: -webkit-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
+}
 
 /*
 Language in Interaction uses a fixed color sequence. 
