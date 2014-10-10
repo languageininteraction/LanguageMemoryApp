@@ -23,5 +23,5 @@ package nl.ru.languageininteraction.synaesthesia.client;
  */
 public interface Presenter {
 
-    void setState(AppController.ApplicationState state, AppEventListner appEventListner);
+    void setState(AppEventListner appEventListner);
 }

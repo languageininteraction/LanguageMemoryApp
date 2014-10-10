@@ -33,9 +33,16 @@ public class ColourPickerPresenter implements Presenter {
         this.widgetTag = widgetTag;
     }
 
-    public void setState(AppController.ApplicationState state, AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        widgetTag.add(new ColourPickerCanvasView());
-    }
+        ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
+        colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_nextbutton(), new AppEventListner() {
 
+            public void eventFired() {
+                appEventListner.eventFired();
+            }
+
+        });
+        widgetTag.add(colourPickerCanvasView);
+    }
 }

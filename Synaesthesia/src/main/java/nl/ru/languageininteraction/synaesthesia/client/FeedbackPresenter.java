@@ -24,13 +24,13 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class IntroPresenter implements Presenter {
+public class FeedbackPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
     final SimpleView simpleView = new SimpleView();
 
-    public IntroPresenter(RootPanel widgetTag) {
+    public FeedbackPresenter(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
     }
 
@@ -44,8 +44,8 @@ public class IntroPresenter implements Presenter {
             }
 
         });
-        simpleView.addTitle(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentitle());
-        simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
+        simpleView.addTitle(messages.nl_ru_languageininteraction_synaesthesia_userfeedbackscreentitle());
+        simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_userfeedbackscreentext());
         widgetTag.add(simpleView);
     }
 }

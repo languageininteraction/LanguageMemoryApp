@@ -42,22 +42,22 @@ public class AppController implements AppEventListner {
             case start:
                 state = ApplicationState.intro;
                 this.presenter = new IntroPresenter(widgetTag);
-                presenter.setState(state, this);
+                presenter.setState(this);
                 break;
             case intro:
                 state = ApplicationState.stimulus;
                 this.presenter = new ColourPickerPresenter(widgetTag);
-                presenter.setState(state, this);
+                presenter.setState(this);
                 break;
             case stimulus:
-                this.presenter = new ScreenPresenter(widgetTag);
+                this.presenter = new ColourPickerPresenter(widgetTag);
                 state = ApplicationState.feedback;
-                presenter.setState(state, this);
+                presenter.setState(this);
                 break;
             case feedback:
-                this.presenter = new ScreenPresenter(widgetTag);
+                this.presenter = new FeedbackPresenter(widgetTag);
                 state = ApplicationState.end;
-                presenter.setState(state, this);
+                presenter.setState(this);
                 break;
         }
     }

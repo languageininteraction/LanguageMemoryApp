@@ -34,41 +34,10 @@ public class ScreenPresenter implements Presenter {
         this.widgetTag = widgetTag;
     }
 
-    public void setState(AppController.ApplicationState state, final AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        switch (state) {
-            case intro:
-                simpleView.clearAll();
-                simpleView.setButton("bla", new AppEventListner() {
-
-                    public void eventFired() {
-                        appEventListner.eventFired();
-                    }
-
-                });
-                simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
-                widgetTag.add(simpleView);
-                break;
-            case end:
-                simpleView.clearAll();
-                simpleView.addLink("StyleTestPage", "StyleTestPage.html");
-                widgetTag.add(simpleView);
-                break;
-            case stimulus:
-//                widgetTag.add(new ColourPickerTableView());              
-                break;
-            default:
-                simpleView.clearAll();
-                simpleView.setButton("foo", new AppEventListner() {
-
-                    public void eventFired() {
-                        appEventListner.eventFired();
-                    }
-
-                });
-                simpleView.setDisplayText(state.name());
-                widgetTag.add(simpleView);
-                break;
-        }
+        simpleView.clearAll();
+        simpleView.addLink("StyleTestPage", "StyleTestPage.html");
+        widgetTag.add(simpleView);
     }
 }
