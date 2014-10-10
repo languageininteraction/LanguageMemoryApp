@@ -14,5 +14,6 @@ public class GraphemeColour implements EntryPoint {
     public void onModuleLoad() {
         final RootPanel widgetTag = RootPanel.get("widgetTag");
         final AppController appController = new AppController(widgetTag);
+        appController.eventFired();
     }
 }

@@ -27,8 +27,8 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import nl.ru.languageininteraction.synaesthesia.client.AppController.ApplicationState;
 
 /**
  * @since Oct 7, 2014 2:06:28 PM (creation date)
@@ -55,6 +55,10 @@ public class SimpleView extends DockLayoutPanel {
 
     protected void setDisplayText(String text) {
         add(new ScrollPanel(new HTML(text)));
+    }
+
+    protected void addTitle(String label) {
+        addNorth(new ScrollPanel(new Label(label)), 2);
     }
 
     protected void addLink(String label, String target) {
