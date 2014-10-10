@@ -28,7 +28,6 @@ public class ColourPickerTableView extends Grid {
 
     public ColourPickerTableView() {
         super(50, 50);
-        addStyleName("colourGrid");
         setBorderWidth(0);
         setCellPadding(0);
         setCellSpacing(0);

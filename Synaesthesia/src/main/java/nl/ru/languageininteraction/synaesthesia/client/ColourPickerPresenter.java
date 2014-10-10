@@ -17,11 +17,25 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.RootPanel;
+
 /**
- * @since Oct 8, 2014 11:01:07 AM (creation date)
+ * @since Oct 10, 2014 9:52:25 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface AppEventListner {
+public class ColourPickerPresenter implements Presenter {
 
-    public void eventFired();
+    private final Messages messages = GWT.create(Messages.class);
+    private final RootPanel widgetTag;
+
+    public ColourPickerPresenter(RootPanel widgetTag) {
+        this.widgetTag = widgetTag;
+    }
+
+    public void setState(AppController.ApplicationState state, AppEventListner appEventListner) {
+        widgetTag.clear();
+        widgetTag.add(new ColourPickerCanvasView());
+    }
+
 }

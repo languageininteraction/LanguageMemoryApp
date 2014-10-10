@@ -61,7 +61,7 @@ public class SimpleView extends DockLayoutPanel {
         addSouth(new ScrollPanel(new Anchor(label, target)), 2);
     }
 
-    protected void setButton(String buttonText, final ApplicationState state, final AppEventListner presenterListerner) {
+    protected void setButton(String buttonText, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
@@ -69,7 +69,7 @@ public class SimpleView extends DockLayoutPanel {
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {
-                presenterListerner.eventFired(state);
+                presenterListerner.eventFired();
             }
         });
     }

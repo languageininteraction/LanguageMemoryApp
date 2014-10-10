@@ -18,10 +18,10 @@
 package nl.ru.languageininteraction.synaesthesia.client;
 
 /**
- * @since Oct 8, 2014 11:01:07 AM (creation date)
+ * @since Oct 10, 2014 10:05:41 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface AppEventListner {
+public interface Presenter {
 
-    public void eventFired();
+    void setState(AppController.ApplicationState state, AppEventListner appEventListner);
 }

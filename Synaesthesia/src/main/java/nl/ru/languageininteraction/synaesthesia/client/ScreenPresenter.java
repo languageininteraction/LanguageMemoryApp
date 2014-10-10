@@ -24,24 +24,28 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter implements AppEventListner {
+public class ScreenPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
-    private final AppEventListner appControllerListener;
     final SimpleView simpleView = new SimpleView();
 
-    public ScreenPresenter(RootPanel widgetTag, AppEventListner appControllerListener) {
+    public ScreenPresenter(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
-        this.appControllerListener = appControllerListener;
     }
 
-    protected void setState(AppController.ApplicationState state) {
+    public void setState(AppController.ApplicationState state, final AppEventListner appEventListner) {
         widgetTag.clear();
         switch (state) {
             case intro:
                 simpleView.clearAll();
-                simpleView.setButton("bla", state, this);
+                simpleView.setButton("bla", new AppEventListner() {
+
+                    public void eventFired() {
+                        appEventListner.eventFired();
+                    }
+
+                });
                 simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
                 widgetTag.add(simpleView);
                 break;
@@ -51,18 +55,20 @@ public class ScreenPresenter implements AppEventListner {
                 widgetTag.add(simpleView);
                 break;
             case stimulus:
-                widgetTag.add(new ColourPickerView());
+//                widgetTag.add(new ColourPickerTableView());              
                 break;
             default:
                 simpleView.clearAll();
-                simpleView.setButton("foo", state, this);
+                simpleView.setButton("foo", new AppEventListner() {
+
+                    public void eventFired() {
+                        appEventListner.eventFired();
+                    }
+
+                });
                 simpleView.setDisplayText(state.name());
                 widgetTag.add(simpleView);
                 break;
         }
-    }
-
-    public void eventFired(AppController.ApplicationState state) {
-        appControllerListener.eventFired(state);
     }
 }

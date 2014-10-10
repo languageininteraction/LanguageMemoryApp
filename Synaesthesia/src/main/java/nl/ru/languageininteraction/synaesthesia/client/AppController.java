@@ -27,25 +27,34 @@ public class AppController implements AppEventListner {
 
     protected enum ApplicationState {
 
-        intro, stimulus, feedback, end
+        intro, metadata, stimulus, feedback, registration, moreinfo, end
     }
-    private final ScreenPresenter presenter;
+    private final RootPanel widgetTag;
+    private Presenter presenter;
+    private ApplicationState state = ApplicationState.intro;
 
     public AppController(RootPanel widgetTag) {
-        this.presenter = new ScreenPresenter(widgetTag, this);
-        presenter.setState(ApplicationState.intro);
+        this.widgetTag = widgetTag;
+        this.presenter = new ScreenPresenter(widgetTag);
+        presenter.setState(state, this);
     }
 
-    public void eventFired(ApplicationState state) {
+    public void eventFired() {
         switch (state) {
             case intro:
-                presenter.setState(ApplicationState.stimulus);
+                state = ApplicationState.stimulus;
+                this.presenter = new ColourPickerPresenter(widgetTag);
+                presenter.setState(state, this);
                 break;
             case stimulus:
-                presenter.setState(ApplicationState.feedback);
+                this.presenter = new ScreenPresenter(widgetTag);
+                state = ApplicationState.feedback;
+                presenter.setState(state, this);
                 break;
             case feedback:
-                presenter.setState(ApplicationState.end);
+                this.presenter = new ScreenPresenter(widgetTag);
+                state = ApplicationState.end;
+                presenter.setState(state, this);
                 break;
         }
     }
