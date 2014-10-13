@@ -26,6 +26,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -45,6 +46,9 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel stimulusPanel;
     private final Label instructionsLabel;
     private final Label progressLabel;
+    private final int height = 300;
+    private final int width = 300;
+    private final int barWidth = 20;
 
     public ColourPickerCanvasView() {
         final HorizontalPanel outerPanel = new HorizontalPanel();
@@ -52,9 +56,6 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel = new VerticalPanel();
         instructionsLabel = new Label();
         progressLabel = new Label();
-        int height = 300;
-        int width = 300;
-        int barWidth = 20;
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
         luminanceCanvas = Canvas.createIfSupported();
@@ -72,21 +73,8 @@ public class ColourPickerCanvasView extends AbstractView {
             luminanceCanvas.setCoordinateSpaceHeight(barWidth);
             luminanceCanvas.setCoordinateSpaceWidth(width);
             luminanceCanvas.setSize(width + "px", barWidth + "px");
-            final Context2d mainContext2d = mainCanvas.getContext2d();
             final Context2d hueContext2d = hueCanvas.getContext2d();
             final Context2d luminanceContext2d = luminanceCanvas.getContext2d();
-
-            CanvasGradient linearColour = mainContext2d.createLinearGradient(0, 0, width, 0);
-            linearColour.addColorStop(1f, "white");
-            linearColour.addColorStop(0f, "hsl(" + 100 + ",100%,50%);");
-            mainContext2d.setFillStyle(linearColour);
-            mainContext2d.fillRect(0, 0, width, height);
-
-            CanvasGradient linearGrey = mainContext2d.createLinearGradient(0, 0, 0, height);
-            linearGrey.addColorStop(1f, "black");
-            linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
-            mainContext2d.setFillStyle(linearGrey);
-            mainContext2d.fillRect(0, 0, width, height);
 
             CanvasGradient hueGradient = hueContext2d.createLinearGradient(0, 0, 0, height);
             for (int stop = 0; stop <= 10; stop++) {
@@ -155,6 +143,13 @@ public class ColourPickerCanvasView extends AbstractView {
                     setColour(event, luminanceCanvas, selectedColourPanel);
                 }
             });
+            hueCanvas.addClickHandler(new ClickHandler() {
+
+                @Override
+                public void onClick(ClickEvent event) {
+                    setHue(event, hueCanvas);
+                }
+            });
 //            mainCanvas.addTouchMoveHandler(new HandlesAllTouchEvents() {
 //
 //                @Override
@@ -183,6 +178,26 @@ public class ColourPickerCanvasView extends AbstractView {
         add(verticalPanel);
     }
 
+    protected void setRandomColour() {
+        setHue(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255));
+    }
+
+    private void setHue(int red, int green, int blue) {
+        final Context2d mainContext2d = mainCanvas.getContext2d();
+        CanvasGradient linearColour = mainContext2d.createLinearGradient(0, 0, width, 0);
+        linearColour.addColorStop(1f, "white");
+//        linearColour.addColorStop(0f, "hsl(" + hue + ",100%,50%);");
+        linearColour.addColorStop(0f, "rgb(" + red + "," + green + "," + blue + ")");
+        mainContext2d.setFillStyle(linearColour);
+        mainContext2d.fillRect(0, 0, width, height);
+
+        CanvasGradient linearGrey = mainContext2d.createLinearGradient(0, 0, 0, height);
+        linearGrey.addColorStop(1f, "black");
+        linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
+        mainContext2d.setFillStyle(linearGrey);
+        mainContext2d.fillRect(0, 0, width, height);
+    }
+
     private void setColour(MouseEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
         setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
     }
@@ -199,6 +214,18 @@ public class ColourPickerCanvasView extends AbstractView {
         final int green = imageData.getGreenAt(0, 0);
         final int red = imageData.getRedAt(0, 0);
         targetPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+    }
+
+    private void setHue(MouseEvent event, Canvas targetCanvas) {
+        setHue(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas);
+    }
+
+    private void setHue(int x, int y, Canvas targetCanvas) {
+        final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
+        final int blue = imageData.getBlueAt(0, 0);
+        final int green = imageData.getGreenAt(0, 0);
+        final int red = imageData.getRedAt(0, 0);
+        setHue(red, green, blue);
     }
 
     protected void setInstructions(String instructions) {
