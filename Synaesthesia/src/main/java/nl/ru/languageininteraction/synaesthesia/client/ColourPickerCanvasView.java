@@ -133,12 +133,26 @@ public class ColourPickerCanvasView extends AbstractView {
                     setColour(event, mainCanvas, hoverColourPanel);
                 }
             });
+            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+
+                @Override
+                public void onMouseMove(MouseMoveEvent event) {
+                    setColour(event, luminanceCanvas, hoverColourPanel);
+                }
+            });
 
             mainCanvas.addClickHandler(new ClickHandler() {
 
                 @Override
                 public void onClick(ClickEvent event) {
                     setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addClickHandler(new ClickHandler() {
+
+                @Override
+                public void onClick(ClickEvent event) {
+                    setColour(event, luminanceCanvas, selectedColourPanel);
                 }
             });
 //            mainCanvas.addTouchMoveHandler(new HandlesAllTouchEvents() {

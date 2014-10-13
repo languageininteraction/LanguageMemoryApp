@@ -28,6 +28,7 @@ public class ColourPickerPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
+    private int stimulusCounter = 10;
 
     public ColourPickerPresenter(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
@@ -35,23 +36,32 @@ public class ColourPickerPresenter implements Presenter {
 
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
+        final ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
         colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenrejectbutton(), new AppEventListner() {
 
             public void eventFired() {
-                appEventListner.eventFired();
+                stimulusCounter--;
+                if (stimulusCounter > 0) {
+                    colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
+                } else {
+                    appEventListner.eventFired();
+                }
             }
 
         });
         colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenselectbutton(), new AppEventListner() {
 
             public void eventFired() {
-                appEventListner.eventFired();
+                stimulusCounter--;
+                if (stimulusCounter > 0) {
+                    colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
+                } else {
+                    appEventListner.eventFired();
+                }
             }
-
         });
         colourPickerCanvasView.setInstructions(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreeninstructions());
-        colourPickerCanvasView.setStimulus("G", messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(3), Integer.toString(10)));
+        colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
         widgetTag.add(colourPickerCanvasView);
     }
 }
