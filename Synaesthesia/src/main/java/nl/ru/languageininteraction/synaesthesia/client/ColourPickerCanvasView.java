@@ -23,9 +23,11 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.ImageData;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -35,73 +37,129 @@ import com.google.gwt.user.client.ui.Label;
  */
 public class ColourPickerCanvasView extends AbstractView {
 
-    private final Canvas canvas;
+    private final Canvas mainCanvas;
+    private final Canvas hueCanvas;
+    private final Canvas luminanceCanvas;
     private final HorizontalPanel panel;
 
     public ColourPickerCanvasView() {
         panel = new HorizontalPanel();
         int height = 300;
         int width = 300;
-        canvas = Canvas.createIfSupported();
-        if (canvas == null) {
+        int barWidth = 20;
+        mainCanvas = Canvas.createIfSupported();
+        hueCanvas = Canvas.createIfSupported();
+        luminanceCanvas = Canvas.createIfSupported();
+
+        if (mainCanvas == null || hueCanvas == null || luminanceCanvas == null) {
             panel.add(new Label("canvas is unsupported"));
             return;
         } else {
-            canvas.setSize(width + "px", height + "px");
-            final Context2d context2d = canvas.getContext2d();
-            CanvasGradient lingrad = context2d.createLinearGradient(0, 0, width, height);
-            lingrad.addColorStop(0.0f, "black");
-//            lingrad.addColorStop(0.5f, "#fff");
-//            lingrad.addColorStop(0.5f, "#26C000");
-            lingrad.addColorStop(1, "#fff");
+            mainCanvas.setCoordinateSpaceHeight(height);
+            mainCanvas.setCoordinateSpaceWidth(width);
+            mainCanvas.setSize(width + "px", height + "px");
+            hueCanvas.setCoordinateSpaceHeight(height);
+            hueCanvas.setCoordinateSpaceWidth(barWidth);
+            hueCanvas.setSize(barWidth + "px", height + "px");
+            luminanceCanvas.setCoordinateSpaceHeight(barWidth);
+            luminanceCanvas.setCoordinateSpaceWidth(width);
+            luminanceCanvas.setSize(width + "px", barWidth + "px");
+            final Context2d mainContext2d = mainCanvas.getContext2d();
+            final Context2d hueContext2d = hueCanvas.getContext2d();
+            final Context2d luminanceContext2d = luminanceCanvas.getContext2d();
 
-//            final double columnCount = 10;
-//            final double rowCount = 100;
-//            for (int row = 0; row < rowCount; row += 2) {
-////            for (int column = 0; column < columnCount; column++) {
-////                final Element element = getCellFormatter().getElement(row, column);
-//                final int rowValue = 255 - (int) (row / (rowCount - 1) * 255);
-////                final int columnValue = (int) (column / (columnCount - 1) * 255);
-////                final int colourValue = (int) (columnValue * (1 - row / (rowCount - 1)));
-////                element.setAttribute("style", "height:5px;width:5px;border:0px none;font-size:1px;color:#FFFFFF;background:rgb(" + colourValue + "," + rowValue + "," + rowValue + ")");
-//                CssColor colorGreen = CssColor.make(rowValue, rowValue, rowValue);
-//                context2d.setFillStyle(colorGreen);
-//                context2d.fillRect(0, ((double) height) / rowCount * row, width, ((double) height) / rowCount);
-////            }
-//            }
-//            CssColor colorGreen = CssColor.make(200, 0, 0);
-//            context2d.setFillStyle(colorGreen);
-            context2d.setFillStyle(lingrad);
-            context2d.fillRect(50, 50, width, height);
-            panel.add(canvas);
+            CanvasGradient linearColour = mainContext2d.createLinearGradient(0, 0, width, 0);
+            linearColour.addColorStop(1f, "white");
+            linearColour.addColorStop(0f, "hsl(" + 100 + ",100%,50%);");
+            mainContext2d.setFillStyle(linearColour);
+            mainContext2d.fillRect(0, 0, width, height);
+
+            CanvasGradient linearGrey = mainContext2d.createLinearGradient(0, 0, 0, height);
+            linearGrey.addColorStop(1f, "black");
+            linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
+            mainContext2d.setFillStyle(linearGrey);
+            mainContext2d.fillRect(0, 0, width, height);
+
+            CanvasGradient hueGradient = hueContext2d.createLinearGradient(0, 0, 0, height);
+            for (int stop = 0; stop <= 10; stop++) {
+                hueGradient.addColorStop(stop * 0.1f, "hsl(" + 36 * stop + ",100%,50%);");
+            }
+            hueContext2d.setFillStyle(hueGradient);
+            hueContext2d.fillRect(0, 0, barWidth, height);
+
+            CanvasGradient luminanceGradient = luminanceContext2d.createLinearGradient(0, 0, width, 0);
+            luminanceGradient.addColorStop(0f, "white");
+            luminanceGradient.addColorStop(1f, "black");
+            luminanceContext2d.setFillStyle(luminanceGradient);
+            luminanceContext2d.fillRect(0, 0, width, barWidth);
+
+            Grid pickerPanel = new Grid(2, 2);
+            pickerPanel.setCellPadding(5);
+            pickerPanel.setWidget(0, 0, mainCanvas);
+            pickerPanel.setWidget(0, 1, hueCanvas);
+            pickerPanel.setWidget(1, 0, luminanceCanvas);
+            panel.add(pickerPanel);
             final Label selectedColourLabel = new Label("SelectedColour");
             panel.add(selectedColourLabel);
             final Label hoverColourLabel = new Label("HoverColour");
             panel.add(hoverColourLabel);
 
-            canvas.addMouseMoveHandler(new MouseMoveHandler() {
+            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 
+                @Override
                 public void onMouseMove(MouseMoveEvent event) {
-                    final ImageData imageData = context2d.getImageData(event.getClientX(), event.getClientY(), 1, 1);
-                    final int blue = imageData.getBlueAt(0, 0);
-                    final int green = imageData.getGreenAt(0, 0);
-                    final int red = imageData.getRedAt(0, 0);
-                    hoverColourLabel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+                    setColour(event, mainCanvas, hoverColourLabel);
                 }
             });
 
-            canvas.addClickHandler(new ClickHandler() {
+            mainCanvas.addClickHandler(new ClickHandler() {
 
+                @Override
                 public void onClick(ClickEvent event) {
-                    final ImageData imageData = context2d.getImageData(event.getClientX(), event.getClientY(), 1, 1);
-                    final int blue = imageData.getBlueAt(0, 0);
-                    final int green = imageData.getGreenAt(0, 0);
-                    final int red = imageData.getRedAt(0, 0);
-                    selectedColourLabel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+                    setColour(event, mainCanvas, selectedColourLabel);
                 }
             });
+//            mainCanvas.addTouchMoveHandler(new HandlesAllTouchEvents() {
+//
+//                @Override
+//                public void onTouchStart(TouchStartEvent event) {
+//                }
+//
+//                @Override
+//                public void onTouchMove(TouchMoveEvent event) {
+//                    setColour(event, mainCanvas, hoverColourLabel);
+//                }
+//
+//                @Override
+//                public void onTouchEnd(TouchEndEvent event) {
+//                    setColour(event, mainCanvas, selectedColourLabel);
+//                }
+//
+//                @Override
+//                public void onTouchCancel(TouchCancelEvent event) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//            });
         }
         add(panel);
+    }
+
+    private void setColour(MouseEvent event, Canvas targetCanvas, Label targetLabel) {
+        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetLabel);
+    }
+
+//    private void setColour(TouchEvent event, Canvas targetCanvas, Label targetLabel) {
+//        if (event.getTouches().length() > 0) {
+//          Touch touch = event.getTouches().get(0);
+//        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetLabel);
+//        }
+//    }
+    private void setColour(int x, int y, Canvas targetCanvas, Label targetLabel) {
+        final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
+        final int blue = imageData.getBlueAt(0, 0);
+        final int green = imageData.getGreenAt(0, 0);
+        final int red = imageData.getRedAt(0, 0);
+        targetLabel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
     }
 
     protected void setButton(String buttonText, final AppEventListner presenterListerner) {
