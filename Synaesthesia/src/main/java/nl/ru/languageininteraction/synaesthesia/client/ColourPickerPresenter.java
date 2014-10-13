@@ -36,13 +36,22 @@ public class ColourPickerPresenter implements Presenter {
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
         ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
-        colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_nextbutton(), new AppEventListner() {
+        colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenrejectbutton(), new AppEventListner() {
 
             public void eventFired() {
                 appEventListner.eventFired();
             }
 
         });
+        colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenselectbutton(), new AppEventListner() {
+
+            public void eventFired() {
+                appEventListner.eventFired();
+            }
+
+        });
+        colourPickerCanvasView.setInstructions(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreeninstructions());
+        colourPickerCanvasView.setStimulus("G", messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(3), Integer.toString(10)));
         widgetTag.add(colourPickerCanvasView);
     }
 }

@@ -40,7 +40,7 @@ public class SimpleView extends AbstractView {
     }
 
     protected void addTitle(String label) {
-        addNorth(new ScrollPanel(new Label(label)), 2);
+        addNorth(new ScrollPanel(new Label(label)), 3);
     }
 
     protected void addLink(String label, String target) {
@@ -51,7 +51,7 @@ public class SimpleView extends AbstractView {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
-        addSouth(nextButton, 2);
+        addSouth(nextButton, 3);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {

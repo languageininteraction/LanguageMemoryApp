@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * @since Oct 8, 2014 5:09:10 PM (creation date)
@@ -40,10 +41,17 @@ public class ColourPickerCanvasView extends AbstractView {
     private final Canvas mainCanvas;
     private final Canvas hueCanvas;
     private final Canvas luminanceCanvas;
-    private final HorizontalPanel panel;
+    private final HorizontalPanel buttonPanel;
+    private final VerticalPanel stimulusPanel;
+    private final Label instructionsLabel;
+    private final Label progressLabel;
 
     public ColourPickerCanvasView() {
-        panel = new HorizontalPanel();
+        final HorizontalPanel outerPanel = new HorizontalPanel();
+        buttonPanel = new HorizontalPanel();
+        stimulusPanel = new VerticalPanel();
+        instructionsLabel = new Label();
+        progressLabel = new Label();
         int height = 300;
         int width = 300;
         int barWidth = 20;
@@ -52,7 +60,7 @@ public class ColourPickerCanvasView extends AbstractView {
         luminanceCanvas = Canvas.createIfSupported();
 
         if (mainCanvas == null || hueCanvas == null || luminanceCanvas == null) {
-            panel.add(new Label("canvas is unsupported"));
+            add(new Label("canvas is unsupported"));
             return;
         } else {
             mainCanvas.setCoordinateSpaceHeight(height);
@@ -98,17 +106,31 @@ public class ColourPickerCanvasView extends AbstractView {
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
             pickerPanel.setWidget(1, 0, luminanceCanvas);
-            panel.add(pickerPanel);
+            outerPanel.add(pickerPanel);
+            final VerticalPanel verticalPanel = new VerticalPanel();
             final Label selectedColourLabel = new Label("SelectedColour");
-            panel.add(selectedColourLabel);
+            selectedColourLabel.setHeight(100 + "px");
+            selectedColourLabel.setWidth(100 + "px");
+            final VerticalPanel selectedColourPanel = new VerticalPanel();
+            selectedColourPanel.add(selectedColourLabel);
+            verticalPanel.add(selectedColourPanel);
             final Label hoverColourLabel = new Label("HoverColour");
-            panel.add(hoverColourLabel);
-
+            hoverColourLabel.setHeight(50 + "px");
+            hoverColourLabel.setWidth(100 + "px");
+            final VerticalPanel hoverColourPanel = new VerticalPanel();
+            hoverColourPanel.add(hoverColourLabel);
+            verticalPanel.add(hoverColourPanel);
+            verticalPanel.add(buttonPanel);
+            stimulusPanel.setHeight(100 + "px");
+            stimulusPanel.setWidth(100 + "px");
+            verticalPanel.add(stimulusPanel);
+            verticalPanel.add(progressLabel);
+            outerPanel.add(verticalPanel);
             mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 
                 @Override
                 public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, mainCanvas, hoverColourLabel);
+                    setColour(event, mainCanvas, hoverColourPanel);
                 }
             });
 
@@ -116,7 +138,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
-                    setColour(event, mainCanvas, selectedColourLabel);
+                    setColour(event, mainCanvas, selectedColourPanel);
                 }
             });
 //            mainCanvas.addTouchMoveHandler(new HandlesAllTouchEvents() {
@@ -141,11 +163,14 @@ public class ColourPickerCanvasView extends AbstractView {
 //                }
 //            });
         }
-        add(panel);
+        VerticalPanel verticalPanel = new VerticalPanel();
+        verticalPanel.add(outerPanel);
+        verticalPanel.add(instructionsLabel);
+        add(verticalPanel);
     }
 
-    private void setColour(MouseEvent event, Canvas targetCanvas, Label targetLabel) {
-        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetLabel);
+    private void setColour(MouseEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
+        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
     }
 
 //    private void setColour(TouchEvent event, Canvas targetCanvas, Label targetLabel) {
@@ -154,19 +179,29 @@ public class ColourPickerCanvasView extends AbstractView {
 //        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetLabel);
 //        }
 //    }
-    private void setColour(int x, int y, Canvas targetCanvas, Label targetLabel) {
+    private void setColour(int x, int y, Canvas targetCanvas, VerticalPanel targetPanel) {
         final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
         final int blue = imageData.getBlueAt(0, 0);
         final int green = imageData.getGreenAt(0, 0);
         final int red = imageData.getRedAt(0, 0);
-        targetLabel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+        targetPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+    }
+
+    protected void setInstructions(String instructions) {
+        instructionsLabel.setText(instructions);
+    }
+
+    protected void setStimulus(String stimulus, String progress) {
+        progressLabel.setText(progress);
+        stimulusPanel.clear();
+        stimulusPanel.add(new Label(stimulus));
     }
 
     protected void setButton(String buttonText, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
-        panel.add(nextButton);
+        buttonPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {

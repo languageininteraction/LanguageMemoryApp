@@ -59,6 +59,12 @@ public class AppController implements AppEventListner {
                 state = ApplicationState.end;
                 presenter.setState(this);
                 break;
+            default:
+                this.presenter = new ScreenPresenter(widgetTag);
+                state = ApplicationState.end;
+                presenter.setState(this);
+                break;
+
         }
     }
 }
