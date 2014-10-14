@@ -34,11 +34,12 @@ public class FeedbackPresenter implements Presenter {
         this.widgetTag = widgetTag;
     }
 
+    @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        simpleView.clearAll();
         simpleView.setButton(messages.nl_ru_languageininteraction_synaesthesia_nextbutton(), new AppEventListner() {
 
+            @Override
             public void eventFired() {
                 appEventListner.eventFired();
             }
@@ -46,6 +47,7 @@ public class FeedbackPresenter implements Presenter {
         });
         simpleView.addTitle(messages.nl_ru_languageininteraction_synaesthesia_userfeedbackscreentitle());
         simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_userfeedbackscreentext());
+        simpleView.resizeView();
         widgetTag.add(simpleView);
     }
 }

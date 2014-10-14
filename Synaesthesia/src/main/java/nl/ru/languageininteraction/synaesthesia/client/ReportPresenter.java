@@ -36,10 +36,19 @@ public class ReportPresenter implements Presenter {
     }
 
     @Override
-    public void setState(AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
         final ReportView reportView = new ReportView();
+        reportView.setButton(messages.nl_ru_languageininteraction_synaesthesia_nextbutton(), new AppEventListner() {
+
+            @Override
+            public void eventFired() {
+                appEventListner.eventFired();
+            }
+
+        });
         reportView.showResults(userResults);
+        reportView.resizeView();
         widgetTag.add(reportView);
     }
 

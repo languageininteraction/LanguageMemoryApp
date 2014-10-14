@@ -36,7 +36,6 @@ public class IntroPresenter implements Presenter {
 
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        simpleView.clearAll();
         simpleView.setButton(messages.nl_ru_languageininteraction_synaesthesia_nextbutton(), new AppEventListner() {
 
             public void eventFired() {
@@ -46,6 +45,7 @@ public class IntroPresenter implements Presenter {
         });
         simpleView.addTitle(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentitle());
         simpleView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
+        simpleView.resizeView();
         widgetTag.add(simpleView);
     }
 }

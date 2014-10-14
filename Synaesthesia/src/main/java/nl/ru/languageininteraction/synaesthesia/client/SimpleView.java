@@ -38,11 +38,6 @@ public class SimpleView extends AbstractView {
     public SimpleView() {
         footerPanel = new HorizontalPanel();
         footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-        resizeView();
-    }
-
-    public void clearAll() {
-        clear();
         addSouth(footerPanel, 3);
     }
 
@@ -80,5 +75,4 @@ public class SimpleView extends AbstractView {
     protected void parentResized(int height, int width, String units) {
         footerPanel.setWidth(width + "px");
     }
-
 }

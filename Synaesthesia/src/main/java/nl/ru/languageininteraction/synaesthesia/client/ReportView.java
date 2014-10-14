@@ -30,7 +30,7 @@ import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
  * @since Oct 14, 2014 10:57:45 AM (creation date)
  * @author peterwithers
  */
-public class ReportView extends AbstractView {
+public class ReportView extends SimpleView {
 
     final private HorizontalPanel resultsPanel;
     final VerticalPanel outerPanel;
@@ -71,6 +71,7 @@ public class ReportView extends AbstractView {
 
     @Override
     protected void parentResized(int height, int width, String units) {
+        super.parentResized(height, width, units);
         outerPanel.setHeight(height + units);
         outerPanel.setWidth(width + units);
         resultsPanel.setHeight(height + units);

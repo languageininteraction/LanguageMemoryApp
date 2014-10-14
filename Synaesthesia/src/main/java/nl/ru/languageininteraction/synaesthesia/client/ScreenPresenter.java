@@ -36,8 +36,8 @@ public class ScreenPresenter implements Presenter {
 
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        simpleView.clearAll();
         simpleView.addLink("StyleTestPage", "StyleTestPage.html");
+        simpleView.resizeView();
         widgetTag.add(simpleView);
     }
 }
