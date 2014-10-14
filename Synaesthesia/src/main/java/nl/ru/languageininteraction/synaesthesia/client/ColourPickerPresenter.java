@@ -42,20 +42,19 @@ public class ColourPickerPresenter implements Presenter {
             public void eventFired() {
                 stimulusCounter--;
                 if (stimulusCounter > 0) {
-                    widgetTag.add(colourPickerCanvasView);
+                    colourPickerCanvasView.setRandomColour();
                     colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
                 } else {
                     appEventListner.eventFired();
                 }
             }
-
         });
         colourPickerCanvasView.setButton(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenselectbutton(), new AppEventListner() {
 
             public void eventFired() {
                 stimulusCounter--;
                 if (stimulusCounter > 0) {
-                    widgetTag.add(colourPickerCanvasView);
+                    colourPickerCanvasView.setRandomColour();
                     colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
                 } else {
                     appEventListner.eventFired();
