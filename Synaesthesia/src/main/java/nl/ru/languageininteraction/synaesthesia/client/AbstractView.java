@@ -46,5 +46,13 @@ public abstract class AbstractView extends DockLayoutPanel {
         });
     }
 
+    protected void resizeView() {
+        int height = Window.getClientHeight();
+        setHeight(height + "px");
+        int width = Window.getClientWidth();
+        setWidth(width + "px");
+        parentResized(height, width, "px");
+    }
+
     abstract protected void parentResized(int height, int width, String units);
 }

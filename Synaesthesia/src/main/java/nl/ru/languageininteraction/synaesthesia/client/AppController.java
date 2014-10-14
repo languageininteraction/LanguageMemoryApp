@@ -27,14 +27,16 @@ public class AppController implements AppEventListner {
 
     protected enum ApplicationState {
 
-        start, intro, metadata, stimulus, feedback, registration, moreinfo, end
+        start, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
     }
     private final RootPanel widgetTag;
     private Presenter presenter;
     private ApplicationState state = ApplicationState.start;
+    private final UserResults userResults;
 
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
+        userResults = new UserResults("todo", "metadata collection screen");
     }
 
     public void eventFired() {
@@ -50,21 +52,24 @@ public class AppController implements AppEventListner {
                 presenter.setState(this);
                 break;
             case stimulus:
-                this.presenter = new ColourPickerPresenter(widgetTag);
+                state = ApplicationState.report;
+                this.presenter = new ReportPresenter(widgetTag, userResults);
+                presenter.setState(this);
+                break;
+            case report:
                 state = ApplicationState.feedback;
+                this.presenter = new FeedbackPresenter(widgetTag);
                 presenter.setState(this);
                 break;
             case feedback:
-                this.presenter = new FeedbackPresenter(widgetTag);
                 state = ApplicationState.end;
+                this.presenter = new ScreenPresenter(widgetTag);
                 presenter.setState(this);
                 break;
             default:
-                this.presenter = new ScreenPresenter(widgetTag);
-                state = ApplicationState.end;
-                presenter.setState(this);
+//                state = ApplicationState.start;
+//                presenter.setState(this);
                 break;
-
         }
     }
 }

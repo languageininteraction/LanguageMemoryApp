@@ -33,9 +33,19 @@ h1 {
     margin: 15px 6px 6px;
 }
 
-/*.gwt-Button {
-    background-color:rgb(246,170,139);
-}*/
+.gwt-Button.nextButton {
+    /*background:rgb(246,170,139);*/
+    display: block;
+    display: inline-block;
+    background-color:rgb(111,111,111);
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: transparent;
+    border-radius: 5px;
+}
 
 #widgetTag {
     color:rgb(255,255,255);

@@ -22,6 +22,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
@@ -31,8 +33,17 @@ import com.google.gwt.user.client.ui.ScrollPanel;
  */
 public class SimpleView extends AbstractView {
 
+    private final HorizontalPanel footerPanel;
+
+    public SimpleView() {
+        footerPanel = new HorizontalPanel();
+        footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        resizeView();
+    }
+
     public void clearAll() {
         clear();
+        addSouth(footerPanel, 3);
     }
 
     protected void setDisplayText(String text) {
@@ -51,7 +62,7 @@ public class SimpleView extends AbstractView {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
-        addSouth(nextButton, 3);
+        footerPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
 
             public void onClick(ClickEvent event) {
@@ -65,9 +76,9 @@ public class SimpleView extends AbstractView {
 //p.addSouth(new HTML("footer"), 2);
 //p.addWest(new HTML("navigation"), 10);
 //p.add(new HTML(content));
-
     @Override
     protected void parentResized(int height, int width, String units) {
+        footerPanel.setWidth(width + "px");
     }
-   
+
 }
