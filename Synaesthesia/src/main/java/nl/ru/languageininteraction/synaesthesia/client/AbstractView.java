@@ -27,18 +27,24 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
  * @since Oct 10, 2014 2:40:58 PM (creation date)
  * @author peterwithers
  */
-public class AbstractView extends DockLayoutPanel {
+public abstract class AbstractView extends DockLayoutPanel {
 
     public AbstractView() {
         super(Style.Unit.EM);
-        setWidth("100%");
+        setWidth(Window.getClientWidth() + "px");
         setHeight(Window.getClientHeight() + "px");
         Window.addResizeHandler(new ResizeHandler() {
 
+            @Override
             public void onResize(ResizeEvent event) {
                 int height = event.getHeight();
                 setHeight(height + "px");
+                int width = event.getWidth();
+                setWidth(width + "px");
+                parentResized(height, width, "px");
             }
         });
     }
+
+    abstract protected void parentResized(int height, int width, String units);
 }

@@ -44,4 +44,9 @@ public class ColourPickerTableView extends AbstractView {
         }
         add(grid);
     }
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+        
+    }
 }

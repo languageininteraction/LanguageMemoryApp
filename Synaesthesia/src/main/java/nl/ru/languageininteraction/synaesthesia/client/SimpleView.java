@@ -65,4 +65,9 @@ public class SimpleView extends AbstractView {
 //p.addSouth(new HTML("footer"), 2);
 //p.addWest(new HTML("navigation"), 10);
 //p.add(new HTML(content));
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+    }
+   
 }

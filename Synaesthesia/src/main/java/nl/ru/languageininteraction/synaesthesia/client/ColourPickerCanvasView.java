@@ -250,4 +250,9 @@ public class ColourPickerCanvasView extends AbstractView {
             }
         });
     }
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+
+    }
 }
