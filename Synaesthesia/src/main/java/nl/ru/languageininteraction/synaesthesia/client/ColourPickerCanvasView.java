@@ -27,10 +27,12 @@ import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -42,18 +44,33 @@ public class ColourPickerCanvasView extends AbstractView {
     private final Canvas mainCanvas;
     private final Canvas hueCanvas;
     private final Canvas luminanceCanvas;
+    private final Grid innerGrid;
+    private final Grid pickerPanel;
+    private final VerticalPanel controlsPanel;
     private final HorizontalPanel buttonPanel;
     private final VerticalPanel stimulusPanel;
     private final Label instructionsLabel;
     private final Label progressLabel;
-    private final int height = 300;
-    private final int width = 300;
-    private final int barWidth = 20;
+    private final int height;
+    private final int width;
+    private final int barWidth;
+    private final int selectedColourPanelSize;
 
     public ColourPickerCanvasView() {
-        final HorizontalPanel outerPanel = new HorizontalPanel();
+
+        final int clientHeight = Window.getClientHeight();
+        final int clientWidth = Window.getClientWidth();
+        final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;
+        height = (int) (minClient * 0.5);
+        width = (int) (minClient * 0.5);
+        barWidth = (int) (minClient * 0.05);
+        selectedColourPanelSize = (int) (minClient * 0.1);
+
         buttonPanel = new HorizontalPanel();
         stimulusPanel = new VerticalPanel();
+        innerGrid = new Grid(2, 2);
+        pickerPanel = new Grid(2, 2);
+        controlsPanel = new VerticalPanel();
         instructionsLabel = new Label();
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
@@ -89,45 +106,41 @@ public class ColourPickerCanvasView extends AbstractView {
             luminanceContext2d.setFillStyle(luminanceGradient);
             luminanceContext2d.fillRect(0, 0, width, barWidth);
 
-            Grid pickerPanel = new Grid(2, 2);
             pickerPanel.setCellPadding(5);
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
             pickerPanel.setWidget(1, 0, luminanceCanvas);
-            outerPanel.add(pickerPanel);
-            final VerticalPanel verticalPanel = new VerticalPanel();
             final Label selectedColourLabel = new Label("SelectedColour");
             selectedColourLabel.setHeight(100 + "px");
             selectedColourLabel.setWidth(100 + "px");
             final VerticalPanel selectedColourPanel = new VerticalPanel();
             selectedColourPanel.add(selectedColourLabel);
-            verticalPanel.add(selectedColourPanel);
-            final Label hoverColourLabel = new Label("HoverColour");
-            hoverColourLabel.setHeight(50 + "px");
-            hoverColourLabel.setWidth(100 + "px");
-            final VerticalPanel hoverColourPanel = new VerticalPanel();
-            hoverColourPanel.add(hoverColourLabel);
-            verticalPanel.add(hoverColourPanel);
-            verticalPanel.add(buttonPanel);
-            stimulusPanel.setHeight(100 + "px");
-            stimulusPanel.setWidth(100 + "px");
-            verticalPanel.add(stimulusPanel);
-            verticalPanel.add(progressLabel);
-            outerPanel.add(verticalPanel);
-            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-
-                @Override
-                public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, mainCanvas, hoverColourPanel);
-                }
-            });
-            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-
-                @Override
-                public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, luminanceCanvas, hoverColourPanel);
-                }
-            });
+            controlsPanel.add(selectedColourPanel);
+//            final Label hoverColourLabel = new Label("HoverColour");
+//            hoverColourLabel.setHeight(selectedColourPanelSize + "px");
+//            hoverColourLabel.setWidth(selectedColourPanelSize + "px");
+//            final VerticalPanel hoverColourPanel = new VerticalPanel();
+//            hoverColourPanel.add(hoverColourLabel);
+//            controlsPanel.add(hoverColourPanel);
+            controlsPanel.add(buttonPanel);
+            stimulusPanel.setHeight(selectedColourPanelSize + "px");
+            stimulusPanel.setWidth(selectedColourPanelSize + "px");
+            controlsPanel.add(stimulusPanel);
+            controlsPanel.add(progressLabel);
+//            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//
+//                @Override
+//                public void onMouseMove(MouseMoveEvent event) {
+//                    setColour(event, mainCanvas, hoverColourPanel);
+//                }
+//            });
+//            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//
+//                @Override
+//                public void onMouseMove(MouseMoveEvent event) {
+//                    setColour(event, luminanceCanvas, hoverColourPanel);
+//                }
+//            });
 
             mainCanvas.addClickHandler(new ClickHandler() {
 
@@ -172,10 +185,13 @@ public class ColourPickerCanvasView extends AbstractView {
 //                }
 //            });
         }
-        VerticalPanel verticalPanel = new VerticalPanel();
-        verticalPanel.add(outerPanel);
-        verticalPanel.add(instructionsLabel);
-        add(verticalPanel);
+        innerGrid.setWidget(0, 0, pickerPanel);
+        Grid outerGrid = new Grid(2, 1);
+        outerGrid.setWidget(0, 0, innerGrid);
+        outerGrid.setWidget(1, 0, instructionsLabel);
+        final ScrollPanel scrollPanel = new ScrollPanel();
+        scrollPanel.add(outerGrid);
+        add(scrollPanel);
     }
 
     protected void setRandomColour() {
@@ -253,6 +269,10 @@ public class ColourPickerCanvasView extends AbstractView {
 
     @Override
     protected void parentResized(int height, int width, String units) {
-
+        if (height < width) {
+            innerGrid.setWidget(0, 1, controlsPanel);
+        } else {
+            innerGrid.setWidget(1, 0, controlsPanel);
+        }
     }
 }

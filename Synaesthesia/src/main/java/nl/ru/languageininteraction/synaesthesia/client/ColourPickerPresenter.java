@@ -64,6 +64,7 @@ public class ColourPickerPresenter implements Presenter {
         colourPickerCanvasView.setInstructions(messages.nl_ru_languageininteraction_synaesthesia_stimulusscreeninstructions());
         colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.nl_ru_languageininteraction_synaesthesia_stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
         colourPickerCanvasView.setRandomColour();
+        colourPickerCanvasView.resizeView();
         widgetTag.add(colourPickerCanvasView);
     }
 }
