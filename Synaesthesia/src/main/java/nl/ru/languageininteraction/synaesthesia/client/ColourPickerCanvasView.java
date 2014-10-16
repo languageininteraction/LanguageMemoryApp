@@ -21,11 +21,13 @@ import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.ImageData;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseEvent;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseEvent;import com.google.gwt.event.dom.client.TouchEvent;
+import com.google.gwt.event.dom.client.TouchMoveEvent;
+import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -128,20 +130,20 @@ public class ColourPickerCanvasView extends AbstractView {
             stimulusPanel.setWidth(selectedColourPanelSize + "px");
             controlsPanel.add(stimulusPanel);
             controlsPanel.add(progressLabel);
-            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-
-                @Override
-                public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, mainCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-
-                @Override
-                public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, luminanceCanvas, selectedColourPanel);
-                }
-            });
+//            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//
+//                @Override
+//                public void onMouseMove(MouseMoveEvent event) {
+//                    setColour(event, mainCanvas, selectedColourPanel);
+//                }
+//            });
+//            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//
+//                @Override
+//                public void onMouseMove(MouseMoveEvent event) {
+//                    setColour(event, luminanceCanvas, selectedColourPanel);
+//                }
+//            });
 
             mainCanvas.addClickHandler(new ClickHandler() {
 
@@ -164,35 +166,35 @@ public class ColourPickerCanvasView extends AbstractView {
                     setHue(event, hueCanvas);
                 }
             });
-            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+//
+//                @Override
+//                public void onMouseMove(MouseMoveEvent event) {
+//                    setColour(event, hueCanvas, selectedColourPanel);
+//                    setHue(event, hueCanvas);
+//                }
+//            });
+            mainCanvas.addTouchMoveHandler(new TouchMoveHandler() {
 
                 @Override
-                public void onMouseMove(MouseMoveEvent event) {
-                    setColour(event, hueCanvas, selectedColourPanel);
+                public void onTouchMove(TouchMoveEvent event) {
+                    setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
+                    setColour(event, luminanceCanvas, selectedColourPanel);
+                }
+            });
+            hueCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
                     setHue(event, hueCanvas);
                 }
             });
-//            mainCanvas.addTouchMoveHandler(new HandlesAllTouchEvents() {
-//
-//                @Override
-//                public void onTouchStart(TouchStartEvent event) {
-//                }
-//
-//                @Override
-//                public void onTouchMove(TouchMoveEvent event) {
-//                    setColour(event, mainCanvas, hoverColourLabel);
-//                }
-//
-//                @Override
-//                public void onTouchEnd(TouchEndEvent event) {
-//                    setColour(event, mainCanvas, selectedColourLabel);
-//                }
-//
-//                @Override
-//                public void onTouchCancel(TouchCancelEvent event) {
-//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//                }
-//            });
         }
         innerGrid.setWidget(0, 0, pickerPanel);
         Grid outerGrid = new Grid(2, 1);
@@ -231,18 +233,28 @@ public class ColourPickerCanvasView extends AbstractView {
         setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
     }
 
-//    private void setColour(TouchEvent event, Canvas targetCanvas, Label targetLabel) {
-//        if (event.getTouches().length() > 0) {
-//          Touch touch = event.getTouches().get(0);
-//        setColour(event.getRelativeX(targetCanvas.getElement()), event.getRelativeY(targetCanvas.getElement()), targetCanvas, targetLabel);
-//        }
-//    }
+    private void setColour(TouchEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
+        if (event.getTouches().length() > 0) {
+            final JsArray<Touch> touches = event.getTouches();
+            Touch touch = touches.get(0);
+            setColour(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
+        }
+    }
+
     private void setColour(int x, int y, Canvas targetCanvas, VerticalPanel targetPanel) {
         final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
         final int blue = imageData.getBlueAt(0, 0);
         final int green = imageData.getGreenAt(0, 0);
         final int red = imageData.getRedAt(0, 0);
         targetPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+    }
+
+    private void setHue(TouchEvent event, Canvas targetCanvas) {
+        if (event.getTouches().length() > 0) {
+            final JsArray<Touch> touches = event.getTouches();
+            Touch touch = touches.get(0);
+            setHue(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas);
+        }
     }
 
     private void setHue(MouseEvent event, Canvas targetCanvas) {
