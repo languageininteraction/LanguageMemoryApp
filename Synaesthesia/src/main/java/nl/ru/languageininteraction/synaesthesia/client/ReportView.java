@@ -62,7 +62,14 @@ public class ReportView extends SimpleView {
                     label.getElement().setAttribute("style", "color:" + foreground + ";background:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
                     grid.setWidget(row, column, label);
                 }
-                grid.setWidget(row, columnCount, new Label(Integer.toString(row)));
+                final HorizontalPanel bargraphOuter = new HorizontalPanel();
+                final HorizontalPanel bargraphInner = new HorizontalPanel();
+                bargraphOuter.setPixelSize(100, 10);
+                bargraphInner.setPixelSize(100 / 10 * row, 10);
+                bargraphOuter.setStyleName("bargraphOuter");
+                bargraphInner.setStyleName("bargraphInner");
+                bargraphOuter.add(bargraphInner);
+                grid.setWidget(row, columnCount, bargraphOuter);
                 row++;
             }
             resultsPanel.add(grid);
