@@ -57,7 +57,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int selectedColourPanelSize;
 
     public ColourPickerCanvasView() {
-
+        getElement().setId("stimulusPanel");
         final int clientHeight = Window.getClientHeight();
         final int clientWidth = Window.getClientWidth();
         final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;

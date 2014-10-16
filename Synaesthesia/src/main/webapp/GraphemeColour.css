@@ -1,38 +1,3 @@
-/** Add css rules here for your application. */
-
-
-/** Example rules used by the template application (remove for your app) */
-h1 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #777777;
-    margin: 40px 0px 70px;
-    text-align: center;
-}
-
-.sendButton {
-    display: block;
-    font-size: 16pt;
-}
-
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-    width: 400px;
-}
-
-.dialogVPanel {
-    margin: 5px;
-}
-
-.serverResponseLabelError {
-    color: red;
-}
-
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-    margin: 15px 6px 6px;
-}
-
 .gwt-Button.nextButton {
     /*background:rgb(246,170,139);*/
     display: block;
@@ -47,8 +12,29 @@ h1 {
     border-radius: 5px;
 }
 
+canvas {
+    border: grey;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#stimulusPanel {
+    background: black;
+}
+
+.gwt-Label, .gwt-HTML{   
+    color:rgb(255,255,255); 
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-size: 17pt;
+    line-height: 20pt;
+    /*    
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 16pt;
+    line-height: 20pt;
+    */
+}
+
 #widgetTag {
-    color:rgb(255,255,255);
     height: 100%;
     background: -webkit-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Opera 11.1 to 12.0 */
