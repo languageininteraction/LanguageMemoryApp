@@ -47,6 +47,7 @@ public class ReportPresenter implements Presenter {
             }
 
         });
+        reportView.addTitle(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentitle());
         reportView.showResults(userResults);
         reportView.resizeView();
         widgetTag.add(reportView);

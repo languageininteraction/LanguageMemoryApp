@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 public abstract class AbstractView extends DockLayoutPanel {
 
     public AbstractView() {
-        super(Style.Unit.EM);
+        super(Style.Unit.PX);
         setWidth(Window.getClientWidth() + "px");
         setHeight(Window.getClientHeight() + "px");
         Window.addResizeHandler(new ResizeHandler() {

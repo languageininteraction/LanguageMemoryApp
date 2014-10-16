@@ -24,7 +24,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
@@ -34,23 +36,42 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 public class SimpleView extends AbstractView {
 
     private final HorizontalPanel footerPanel;
+    private final HorizontalPanel headerPanel;
+    private final HorizontalPanel borderedContentPanel;
+    private final ScrollPanel scrollPanel;
 
     public SimpleView() {
+        headerPanel = new HorizontalPanel();
+//        headerPanel.setStylePrimaryName("headerPanel");
         footerPanel = new HorizontalPanel();
+        borderedContentPanel = new HorizontalPanel();
+        borderedContentPanel.setStylePrimaryName("contentPanel");
         footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-        addSouth(footerPanel, 3);
+        addNorth(headerPanel, 50);
+        addSouth(footerPanel, 50);
+        scrollPanel = new ScrollPanel();
+        borderedContentPanel.add(scrollPanel);
+        add(borderedContentPanel);
+    }
+
+    protected void setContent(Panel panel) {
+        scrollPanel.setWidget(panel);
     }
 
     protected void setDisplayText(String text) {
-        add(new ScrollPanel(new HTML(text)));
+        final HTML html = new HTML(text);
+        scrollPanel.setWidget(html);
     }
 
     protected void addTitle(String label) {
-        addNorth(new ScrollPanel(new Label(label)), 3);
+        final Image image = new Image("./images/icon.png");
+        image.setSize(50 + "px", 50 + "px");
+        headerPanel.add(image);
+        headerPanel.add(new Label(label));
     }
 
     protected void addLink(String label, String target) {
-        addSouth(new ScrollPanel(new Anchor(label, target)), 2);
+        scrollPanel.setWidget(new Anchor(label, target));
     }
 
     protected void setButton(String buttonText, final AppEventListner presenterListerner) {
@@ -74,5 +95,7 @@ public class SimpleView extends AbstractView {
     @Override
     protected void parentResized(int height, int width, String units) {
         footerPanel.setWidth(width + "px");
+        scrollPanel.setWidth(width + "px");
+        scrollPanel.setHeight(height - 50 - 50 + "px");
     }
 }

@@ -11,10 +11,18 @@
     border-color: transparent;
     border-radius: 5px;
 }
-.bargraphInner{
+
+.contentPanel {
+    border-top-color: white;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.bargraphInner {
     background-color:rgb(246,170,139);
 }
-.bargraphOuter{
+
+.bargraphOuter {
     border: rgb(111,111,111);
     border-width: 1px;
     border-style: solid;
@@ -29,7 +37,12 @@ canvas {
     background: black;
 }
 
-.gwt-Label, .gwt-HTML{   
+.gwt-HTML{
+    margin-left: 69px;   
+    margin-right: 69px;   
+}
+
+.gwt-Label, .gwt-HTML{  
     color:rgb(255,255,255); 
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
     font-size: 17pt;

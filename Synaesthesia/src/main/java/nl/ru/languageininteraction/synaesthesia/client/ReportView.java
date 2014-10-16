@@ -43,7 +43,7 @@ public class ReportView extends SimpleView {
         outerPanel.add(instructionsLabel);
         outerPanel.add(resultsPanel);
         outerPanel.add(progressLabel);
-        add(outerPanel);
+        setContent(outerPanel);
     }
 
     protected void showResults(UserResults userResults) {
@@ -79,9 +79,9 @@ public class ReportView extends SimpleView {
     @Override
     protected void parentResized(int height, int width, String units) {
         super.parentResized(height, width, units);
-        outerPanel.setHeight(height + units);
-        outerPanel.setWidth(width + units);
-        resultsPanel.setHeight(height + units);
-        resultsPanel.setWidth(width + units);
+//        outerPanel.setHeight(height + units);
+//        outerPanel.setWidth(width + units);
+//        resultsPanel.setHeight(height + units);
+//        resultsPanel.setWidth(width + units);
     }
 }
