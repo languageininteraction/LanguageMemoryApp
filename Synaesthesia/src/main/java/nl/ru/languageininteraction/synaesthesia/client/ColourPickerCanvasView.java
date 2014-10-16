@@ -49,6 +49,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel controlsPanel;
     private final HorizontalPanel buttonPanel;
     private final VerticalPanel stimulusPanel;
+    private final VerticalPanel selectedColourPanel;
     private final Label instructionsLabel;
     private final Label progressLabel;
     private final int height;
@@ -72,6 +73,7 @@ public class ColourPickerCanvasView extends AbstractView {
         pickerPanel = new Grid(2, 2);
         controlsPanel = new VerticalPanel();
         instructionsLabel = new Label();
+        selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
@@ -113,7 +115,6 @@ public class ColourPickerCanvasView extends AbstractView {
             final Label selectedColourLabel = new Label("SelectedColour");
             selectedColourLabel.setHeight(100 + "px");
             selectedColourLabel.setWidth(100 + "px");
-            final VerticalPanel selectedColourPanel = new VerticalPanel();
             selectedColourPanel.add(selectedColourLabel);
             controlsPanel.add(selectedColourPanel);
 //            final Label hoverColourLabel = new Label("HoverColour");
@@ -127,20 +128,20 @@ public class ColourPickerCanvasView extends AbstractView {
             stimulusPanel.setWidth(selectedColourPanelSize + "px");
             controlsPanel.add(stimulusPanel);
             controlsPanel.add(progressLabel);
-//            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-//
-//                @Override
-//                public void onMouseMove(MouseMoveEvent event) {
-//                    setColour(event, mainCanvas, hoverColourPanel);
-//                }
-//            });
-//            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-//
-//                @Override
-//                public void onMouseMove(MouseMoveEvent event) {
-//                    setColour(event, luminanceCanvas, hoverColourPanel);
-//                }
-//            });
+            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+
+                @Override
+                public void onMouseMove(MouseMoveEvent event) {
+                    setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+
+                @Override
+                public void onMouseMove(MouseMoveEvent event) {
+                    setColour(event, luminanceCanvas, selectedColourPanel);
+                }
+            });
 
             mainCanvas.addClickHandler(new ClickHandler() {
 
@@ -160,6 +161,14 @@ public class ColourPickerCanvasView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
+                    setHue(event, hueCanvas);
+                }
+            });
+            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
+
+                @Override
+                public void onMouseMove(MouseMoveEvent event) {
+                    setColour(event, hueCanvas, selectedColourPanel);
                     setHue(event, hueCanvas);
                 }
             });
@@ -195,7 +204,11 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     protected void setRandomColour() {
-        setHue(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255));
+        final int red = Random.nextInt(255);
+        final int green = Random.nextInt(255);
+        final int blue = Random.nextInt(255);
+        setHue(red, green, blue);
+        selectedColourPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
     }
 
     private void setHue(int red, int green, int blue) {
