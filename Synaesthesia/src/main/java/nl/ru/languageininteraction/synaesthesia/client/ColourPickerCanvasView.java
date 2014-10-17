@@ -25,9 +25,8 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseEvent;import com.google.gwt.event.dom.client.TouchEvent;
-import com.google.gwt.event.dom.client.TouchMoveEvent;
-import com.google.gwt.event.dom.client.TouchMoveHandler;
+import com.google.gwt.event.dom.client.MouseEvent;
+import com.google.gwt.event.dom.client.TouchEvent;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -164,37 +163,41 @@ public class ColourPickerCanvasView extends AbstractView {
                 @Override
                 public void onClick(ClickEvent event) {
                     setHue(event, hueCanvas);
+                    setColour(event, hueCanvas, selectedColourPanel);
                 }
             });
 //            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 //
 //                @Override
 //                public void onMouseMove(MouseMoveEvent event) {
+//                    event.preventDefault();
+////                    if (event.getNativeButton() == NativeEvent.BUTTON_LEFT || event.getNativeButton() == NativeEvent.BUTTON_RIGHT || event.getNativeButton() == NativeEvent.BUTTON_MIDDLE) {
 //                    setColour(event, hueCanvas, selectedColourPanel);
+//                    setHue(event, hueCanvas);
+////                    }
+//                }
+//            });
+//            mainCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+//
+//                @Override
+//                public void onTouchMove(TouchMoveEvent event) {
+//                    setColour(event, mainCanvas, selectedColourPanel);
+//                }
+//            });
+//            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+//
+//                @Override
+//                public void onTouchMove(TouchMoveEvent event) {
+//                    setColour(event, luminanceCanvas, selectedColourPanel);
+//                }
+//            });
+//            hueCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+//
+//                @Override
+//                public void onTouchMove(TouchMoveEvent event) {
 //                    setHue(event, hueCanvas);
 //                }
 //            });
-            mainCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-
-                @Override
-                public void onTouchMove(TouchMoveEvent event) {
-                    setColour(event, mainCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-
-                @Override
-                public void onTouchMove(TouchMoveEvent event) {
-                    setColour(event, luminanceCanvas, selectedColourPanel);
-                }
-            });
-            hueCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-
-                @Override
-                public void onTouchMove(TouchMoveEvent event) {
-                    setHue(event, hueCanvas);
-                }
-            });
         }
         innerGrid.setWidget(0, 0, pickerPanel);
         Grid outerGrid = new Grid(2, 1);
@@ -235,9 +238,11 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private void setColour(TouchEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
         if (event.getTouches().length() > 0) {
-            final JsArray<Touch> touches = event.getTouches();
-            Touch touch = touches.get(0);
-            setColour(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
+            final JsArray<Touch> touches = event.getTargetTouches();
+            if (touches.length() < 0) {
+                Touch touch = touches.get(0);
+                setColour(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
+            }
         }
     }
 
@@ -251,9 +256,11 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private void setHue(TouchEvent event, Canvas targetCanvas) {
         if (event.getTouches().length() > 0) {
-            final JsArray<Touch> touches = event.getTouches();
-            Touch touch = touches.get(0);
-            setHue(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas);
+            final JsArray<Touch> touches = event.getTargetTouches();
+            if (touches.length() < 0) {
+                Touch touch = touches.get(0);
+                setHue(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas);
+            }
         }
     }
 
