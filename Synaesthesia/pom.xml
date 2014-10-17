@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synaesthesia</artifactId>
     <packaging>war</packaging>
-    <version>0.0.42-testing</version>
+    <version>0.1-testing-SNAPSHOT</version>
     <name>Grapheme Colour Synaesthesia App</name>
     <organization>
         <name>Language In Interaction</name>
@@ -131,7 +131,7 @@
                     <vcsType>git</vcsType>
                     <allowSnapshots>true</allowSnapshots>
                     <majorVersion>0</majorVersion>
-                    <minorVersion>0</minorVersion>
+                    <minorVersion>1</minorVersion>
                     <buildType>testing</buildType>
                     <propertiesPrefix>application</propertiesPrefix>
                     <shortVersionModule></shortVersionModule>
