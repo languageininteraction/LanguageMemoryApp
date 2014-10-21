@@ -47,6 +47,11 @@ public class AppController implements AppEventListner {
                 presenter.setState(this);
                 break;
             case intro:
+                state = ApplicationState.metadata;
+                this.presenter = new MetadataPresenter(widgetTag);
+                presenter.setState(this);
+                break;
+            case metadata:
                 state = ApplicationState.stimulus;
                 this.presenter = new ColourPickerPresenter(widgetTag);
                 presenter.setState(this);
