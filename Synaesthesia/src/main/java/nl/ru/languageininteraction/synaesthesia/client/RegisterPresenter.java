@@ -21,24 +21,35 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * @since Oct 7, 2014 2:17:51 PM (creation date)
+ * @since Oct 21, 2014 5:06:21 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter implements Presenter {
+public class RegisterPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
-    final SimpleView simpleView = new SimpleView();
+    final RegisterView registerView = new RegisterView();
+    private final UserResults userResults;
 
-    public ScreenPresenter(RootPanel widgetTag) {
+    public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
         this.widgetTag = widgetTag;
+        this.userResults = userResults;
     }
 
     @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        simpleView.addLink("StyleTestPage", "StyleTestPage.html");
-        simpleView.resizeView();
-        widgetTag.add(simpleView);
+        registerView.setButton(messages.registerButton(), new AppEventListner() {
+
+            @Override
+            public void eventFired() {
+                appEventListner.eventFired();
+            }
+        });
+        registerView.addTitle(messages.registerScreenTitle());
+        registerView.addText(messages.registerScreenText());
+        registerView.addMetadata(userResults.getMetadataValues());
+        registerView.resizeView();
+        widgetTag.add(registerView);
     }
 }

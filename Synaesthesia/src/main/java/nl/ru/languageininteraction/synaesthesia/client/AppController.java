@@ -68,6 +68,11 @@ public class AppController implements AppEventListner {
                 presenter.setState(this);
                 break;
             case feedback:
+                state = ApplicationState.registration;
+                this.presenter = new RegisterPresenter(widgetTag, userResults);
+                presenter.setState(this);
+                break;
+            case registration:
                 state = ApplicationState.end;
                 this.presenter = new ScreenPresenter(widgetTag);
                 presenter.setState(this);
