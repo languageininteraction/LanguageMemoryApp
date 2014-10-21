@@ -46,13 +46,14 @@ public class ReportPresenter implements Presenter {
                 appEventListner.eventFired();
             }
         });
+        final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         reportView.addTitle(messages.reportScreenTitle());
         reportView.showResults(userResults);
-        reportView.addText(messages.reportScreenScore(Double.toString(userResults.getScore())));
+        reportView.addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
         reportView.addText(messages.reportScreenPostScoreText());
         reportView.addText(messages.reportScreenSCT());
-        reportView.addText(messages.reportScreenSCTaccuracy(Double.toString(userResults.getAccuracy())));
-        reportView.addText(messages.reportScreenSCTmeanreactionTime(Double.toString(userResults.getMeanReactionTime()), Double.toString(userResults.getReactionTimeDeviation())));
+        reportView.addText(messages.reportScreenSCTaccuracy(Double.toString(scoreCalculator.getAccuracy())));
+        reportView.addText(messages.reportScreenSCTmeanreactionTime(Double.toString(scoreCalculator.getMeanReactionTime()), Double.toString(scoreCalculator.getReactionTimeDeviation())));
         reportView.addText(messages.reportScreenPostSCTtext());
         reportView.resizeView();
         widgetTag.add(reportView);
