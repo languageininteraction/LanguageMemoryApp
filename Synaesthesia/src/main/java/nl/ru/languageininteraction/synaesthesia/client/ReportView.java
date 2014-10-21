@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client;
 
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -38,12 +39,14 @@ public class ReportView extends SimpleView {
     public ReportView() {
         outerPanel = new VerticalPanel();
         resultsPanel = new HorizontalPanel();
-        Label instructionsLabel = new Label("instructionsLabel");
-        Label progressLabel = new Label("progressLabel");
-        outerPanel.add(instructionsLabel);
+        resultsPanel.setStylePrimaryName("resultsTablePanel");
         outerPanel.add(resultsPanel);
-        outerPanel.add(progressLabel);
         setContent(outerPanel);
+    }
+
+    protected void addText(String textString) {
+        HTML html = new HTML(textString);
+        outerPanel.add(html);
     }
 
     protected void showResults(UserResults userResults) {
@@ -74,14 +77,5 @@ public class ReportView extends SimpleView {
             }
             resultsPanel.add(grid);
         }
-    }
-
-    @Override
-    protected void parentResized(int height, int width, String units) {
-        super.parentResized(height, width, units);
-//        outerPanel.setHeight(height + units);
-//        outerPanel.setWidth(width + units);
-//        resultsPanel.setHeight(height + units);
-//        resultsPanel.setWidth(width + units);
     }
 }

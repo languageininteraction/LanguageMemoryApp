@@ -46,8 +46,14 @@ public class ReportPresenter implements Presenter {
                 appEventListner.eventFired();
             }
         });
-        reportView.addTitle(messages.introductionscreentitle());
+        reportView.addTitle(messages.reportScreenTitle());
         reportView.showResults(userResults);
+        reportView.addText(messages.reportScreenScore(Double.toString(userResults.getScore())));
+        reportView.addText(messages.reportScreenPostScoreText());
+        reportView.addText(messages.reportScreenSCT());
+        reportView.addText(messages.reportScreenSCTaccuracy(Double.toString(userResults.getAccuracy())));
+        reportView.addText(messages.reportScreenSCTmeanreactionTime(Double.toString(userResults.getMeanReactionTime()), Double.toString(userResults.getReactionTimeDeviation())));
+        reportView.addText(messages.reportScreenPostSCTtext());
         reportView.resizeView();
         widgetTag.add(reportView);
     }

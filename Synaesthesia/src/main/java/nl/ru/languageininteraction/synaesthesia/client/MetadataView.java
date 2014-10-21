@@ -17,7 +17,8 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -29,24 +30,26 @@ import java.util.HashMap;
  */
 public class MetadataView extends SimpleView {
 
-    final private VerticalPanel outerPanel;
+    final private FlexTable flexTable;
     final private HashMap<String, TextBox> fieldBoxes;
 
-    public MetadataView() {
-        outerPanel = new VerticalPanel();
+    public MetadataView(String instructionsText) {
+        flexTable = new FlexTable();
+        flexTable.setStylePrimaryName("metadataTable");
         fieldBoxes = new HashMap<>();
-        Label instructionsLabel = new Label("instructionsLabel");
-        outerPanel.add(instructionsLabel);
-        setContent(outerPanel);
+        final VerticalPanel verticalPanel = new VerticalPanel();
+        HTML instructionsLabel = new HTML(instructionsText);
+        verticalPanel.add(instructionsLabel);
+        verticalPanel.add(flexTable);
+        setContent(verticalPanel);
     }
 
     public void addField(final String fieldName, final String displayName) {
-        final HorizontalPanel fieldPanel = new HorizontalPanel();
-        fieldPanel.add(new Label(displayName));
+        final int rowCount = flexTable.getRowCount();
+        flexTable.setWidget(rowCount, 0, new Label(displayName));
         final TextBox textBox = new TextBox();
-        fieldPanel.add(textBox);
+        flexTable.setWidget(rowCount, 1, textBox);
         fieldBoxes.put(fieldName, textBox);
-        outerPanel.add(fieldPanel);
     }
 
     public HashMap<String, String> getFieldValues() {

@@ -29,7 +29,7 @@ public class MetadataPresenter implements Presenter {
     private final Messages messages = GWT.create(Messages.class);
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final RootPanel widgetTag;
-    final MetadataView metadataView = new MetadataView();
+    final MetadataView metadataView = new MetadataView(messages.metadatascreentext());
 
     public MetadataPresenter(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
