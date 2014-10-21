@@ -81,6 +81,7 @@ public class SimpleView extends AbstractView {
         footerPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
 
+            @Override
             public void onClick(ClickEvent event) {
                 presenterListerner.eventFired();
             }

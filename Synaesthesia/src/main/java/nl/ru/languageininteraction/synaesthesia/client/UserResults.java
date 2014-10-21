@@ -27,7 +27,7 @@ import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
 
 /**
  * @since Oct 14, 2014 1:11:22 PM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class UserResults {
 

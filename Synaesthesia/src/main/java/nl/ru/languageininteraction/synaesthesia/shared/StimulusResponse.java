@@ -21,7 +21,7 @@ import java.util.Date;
 
 /**
  * @since Oct 14, 2014 1:23:24 PM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class StimulusResponse {
 

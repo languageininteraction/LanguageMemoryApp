@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 
 /**
  * @since Oct 10, 2014 2:40:58 PM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public abstract class AbstractView extends DockLayoutPanel {
 

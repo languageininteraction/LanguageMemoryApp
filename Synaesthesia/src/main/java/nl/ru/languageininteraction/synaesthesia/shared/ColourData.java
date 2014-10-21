@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.shared;
 
 /**
  * @since Oct 14, 2014 1:17:38 PM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class ColourData {
 

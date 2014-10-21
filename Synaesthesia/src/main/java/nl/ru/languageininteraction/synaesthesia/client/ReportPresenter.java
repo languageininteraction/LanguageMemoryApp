@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * @since Oct 14, 2014 10:57:39 AM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class ReportPresenter implements Presenter {
 

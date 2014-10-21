@@ -21,7 +21,7 @@ import java.util.Objects;
 
 /**
  * @since Oct 14, 2014 1:17:57 PM (creation date)
- * @author peterwithers
+ * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class Stimulus {
 
