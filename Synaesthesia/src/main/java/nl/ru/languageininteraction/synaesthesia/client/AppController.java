@@ -36,9 +36,10 @@ public class AppController implements AppEventListner {
 
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
-        userResults = new UserResults("todo", "metadata collection screen");
+        userResults = new UserResults();
     }
 
+    @Override
     public void eventFired() {
         switch (state) {
             case start:
@@ -48,7 +49,7 @@ public class AppController implements AppEventListner {
                 break;
             case intro:
                 state = ApplicationState.metadata;
-                this.presenter = new MetadataPresenter(widgetTag);
+                this.presenter = new MetadataPresenter(widgetTag, userResults);
                 presenter.setState(this);
                 break;
             case metadata:

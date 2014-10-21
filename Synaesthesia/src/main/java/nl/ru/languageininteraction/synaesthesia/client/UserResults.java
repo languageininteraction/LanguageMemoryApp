@@ -18,8 +18,10 @@
 package nl.ru.languageininteraction.synaesthesia.client;
 
 import com.google.gwt.user.client.Random;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
@@ -31,13 +33,10 @@ import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
  */
 public class UserResults {
 
-    private final String name;
-    private final String email;
+    private final HashMap<String, String> metadataValues = new HashMap<>();
     private final HashMap<Stimulus, StimulusResponse[]> results = new HashMap<>();
 
-    public UserResults(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public UserResults() {
         for (int mockCount = 0; mockCount < 10; mockCount++) {
             results.put(new Stimulus(Integer.toString(mockCount)),
                     new StimulusResponse[]{
@@ -60,5 +59,13 @@ public class UserResults {
             max = (max > responses.length) ? max : responses.length;
         }
         return max;
+    }
+
+    public void setMetadataValue(String key, String value) {
+        metadataValues.put(key, value);
+    }
+
+    public Map<String, String> getMetadataValues() {
+        return Collections.unmodifiableMap(metadataValues);
     }
 }

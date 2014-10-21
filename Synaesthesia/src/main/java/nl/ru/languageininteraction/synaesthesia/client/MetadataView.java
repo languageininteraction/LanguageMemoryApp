@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)
@@ -52,11 +53,11 @@ public class MetadataView extends SimpleView {
         fieldBoxes.put(fieldName, textBox);
     }
 
-    public HashMap<String, String> getFieldValues() {
-        final HashMap<String, String> fieldValues = new HashMap<>();
-        for (String fieldName : fieldBoxes.keySet()) {
-            fieldValues.put(fieldName, fieldBoxes.get(fieldName).getValue());
-        }
-        return fieldValues;
+    public Set<String> getFieldNames() {
+        return fieldBoxes.keySet();
+    }
+
+    public String getFieldValue(String fieldName) {
+        return fieldBoxes.get(fieldName).getValue();
     }
 }

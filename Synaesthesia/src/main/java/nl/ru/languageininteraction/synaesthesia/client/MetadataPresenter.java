@@ -30,19 +30,23 @@ public class MetadataPresenter implements Presenter {
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final RootPanel widgetTag;
     final MetadataView metadataView = new MetadataView(messages.metadatascreentext());
+    private final UserResults userResults;
 
-    public MetadataPresenter(RootPanel widgetTag) {
+    public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
         this.widgetTag = widgetTag;
+        this.userResults = userResults;
     }
 
     @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        metadataView.setButton(mateadataFields.registerButton(), new AppEventListner() {
+        metadataView.setButton(messages.nextbutton(), new AppEventListner() {
 
             @Override
             public void eventFired() {
-//                metadataView.getFieldValues();
+                for (String fieldName : metadataView.getFieldNames()) {
+                    userResults.setMetadataValue(fieldName, metadataView.getFieldValue(fieldName));
+                }
                 appEventListner.eventFired();
             }
 
