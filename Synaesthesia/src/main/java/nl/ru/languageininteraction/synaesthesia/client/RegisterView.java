@@ -17,10 +17,8 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import java.util.Map;
 
 /**
  * @since Oct 21, 2014 5:15:19 PM (creation date)
@@ -28,26 +26,24 @@ import java.util.Map;
  */
 public class RegisterView extends SimpleView {
 
-    final VerticalPanel outerPanel;
+    final private FlexTable flexTable;
 
     public RegisterView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
+        flexTable = new FlexTable();
+//        flexTable.setStylePrimaryName("metadataTable");
+        setContent(flexTable);
     }
 
     protected void addText(String textString) {
         HTML html = new HTML(textString);
-        outerPanel.add(html);
+        final int row = flexTable.getRowCount();
+        flexTable.setWidget(row, 0, html);
+        flexTable.getFlexCellFormatter().setColSpan(row, 0, 2);
     }
 
-    protected void addMetadata(Map<String, String> metadataValues) {
-        Grid grid = new Grid(metadataValues.size(), 2);
-        int rowCount = 0;
-        for (String valueName : metadataValues.keySet()) {
-            grid.setWidget(rowCount, 0, new HTML(valueName));
-            grid.setWidget(rowCount, 1, new HTML(metadataValues.get(valueName)));
-            rowCount++;
-        }
-        outerPanel.add(grid);
+    public void addField(final String displayName, final String value) {
+        final int rowCount = flexTable.getRowCount();
+        flexTable.setWidget(rowCount, 0, new HTML(displayName));
+        flexTable.setWidget(rowCount, 1, new HTML(value));
     }
 }

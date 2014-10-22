@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class RegisterPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
+    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final RootPanel widgetTag;
     final RegisterView registerView = new RegisterView();
     private final UserResults userResults;
@@ -48,7 +49,10 @@ public class RegisterPresenter implements Presenter {
         });
         registerView.addTitle(messages.registerScreenTitle());
         registerView.addText(messages.registerScreenText());
-        registerView.addMetadata(userResults.getMetadataValues());
+        registerView.addField(mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));
+        registerView.addField(mateadataFields.registrationField2(), userResults.getMetadataValue(mateadataFields.postName2()));
+        registerView.addField(mateadataFields.registrationField3(), userResults.getMetadataValue(mateadataFields.postName3()));
+        registerView.addField(mateadataFields.registrationField4(), userResults.getMetadataValue(mateadataFields.postName4()));
         registerView.resizeView();
         widgetTag.add(registerView);
     }

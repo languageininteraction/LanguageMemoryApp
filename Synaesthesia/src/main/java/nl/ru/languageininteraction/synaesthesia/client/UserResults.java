@@ -65,7 +65,7 @@ public class UserResults {
         metadataValues.put(key, value);
     }
 
-    public Map<String, String> getMetadataValues() {
-        return Collections.unmodifiableMap(metadataValues);
+    public String getMetadataValue(String key) {
+        return metadataValues.get(key);
     }
 }

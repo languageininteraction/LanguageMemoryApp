@@ -52,10 +52,10 @@ public class MetadataPresenter implements Presenter {
 
         });
         metadataView.addTitle(messages.metadatascreentitle());
-        metadataView.addField("registrationField1", mateadataFields.registrationField1());
-        metadataView.addField("registrationField2", mateadataFields.registrationField2());
-        metadataView.addField("registrationField3", mateadataFields.registrationField3());
-        metadataView.addField("registrationField4", mateadataFields.registrationField4());
+        metadataView.addField(mateadataFields.postName1(), mateadataFields.registrationField1());
+        metadataView.addField(mateadataFields.postName2(), mateadataFields.registrationField2());
+        metadataView.addField(mateadataFields.postName3(), mateadataFields.registrationField3());
+        metadataView.addField(mateadataFields.postName4(), mateadataFields.registrationField4());
 //        metadataView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
         metadataView.resizeView();
         widgetTag.add(metadataView);
