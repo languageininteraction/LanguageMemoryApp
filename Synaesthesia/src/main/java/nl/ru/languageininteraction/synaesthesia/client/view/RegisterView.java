@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -36,7 +36,7 @@ public class RegisterView extends SimpleView {
         setContent(outerPanel);
     }
 
-    protected void addText(String textString) {
+    public void addText(String textString) {
         HTML html = new HTML(textString);
         outerPanel.add(html);
     }

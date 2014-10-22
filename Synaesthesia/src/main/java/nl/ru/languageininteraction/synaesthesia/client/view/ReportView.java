@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.Set;
+import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
@@ -44,12 +45,12 @@ public class ReportView extends SimpleView {
         setContent(outerPanel);
     }
 
-    protected void addText(String textString) {
+    public void addText(String textString) {
         HTML html = new HTML(textString);
         outerPanel.add(html);
     }
 
-    protected void showResults(UserResults userResults) {
+    public void showResults(UserResults userResults) {
         final Set<Stimulus> allStimulus = userResults.getStimulus();
         int rowCount = allStimulus.size();
         int columnCount = userResults.getMaxResponses();

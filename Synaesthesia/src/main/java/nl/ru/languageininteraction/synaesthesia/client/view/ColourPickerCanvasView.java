@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 
 /**
  * @since Oct 8, 2014 5:09:10 PM (creation date)
@@ -208,7 +209,7 @@ public class ColourPickerCanvasView extends AbstractView {
         add(scrollPanel);
     }
 
-    protected void setRandomColour() {
+    public void setRandomColour() {
         final int red = Random.nextInt(255);
         final int green = Random.nextInt(255);
         final int blue = Random.nextInt(255);
@@ -276,17 +277,17 @@ public class ColourPickerCanvasView extends AbstractView {
         setHue(red, green, blue);
     }
 
-    protected void setInstructions(String instructions) {
+    public void setInstructions(String instructions) {
         instructionsLabel.setText(instructions);
     }
 
-    protected void setStimulus(String stimulus, String progress) {
+    public void setStimulus(String stimulus, String progress) {
         progressLabel.setText(progress);
         stimulusPanel.clear();
         stimulusPanel.add(new Label(stimulus));
     }
 
-    protected void setButton(String buttonText, final AppEventListner presenterListerner) {
+    public void setButton(String buttonText, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);

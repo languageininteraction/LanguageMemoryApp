@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -46,7 +46,7 @@ public abstract class AbstractView extends DockLayoutPanel {
         });
     }
 
-    protected void resizeView() {
+    public void resizeView() {
         int height = Window.getClientHeight();
         setHeight(height + "px");
         int width = Window.getClientWidth();

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 
 /**
  * @since Oct 7, 2014 2:06:28 PM (creation date)
@@ -54,27 +55,27 @@ public class SimpleView extends AbstractView {
         add(borderedContentPanel);
     }
 
-    protected void setContent(Panel panel) {
+    public void setContent(Panel panel) {
         scrollPanel.setWidget(panel);
     }
 
-    protected void setDisplayText(String text) {
+    public void setDisplayText(String text) {
         final HTML html = new HTML(text);
         scrollPanel.setWidget(html);
     }
 
-    protected void addTitle(String label) {
+    public void addTitle(String label) {
         final Image image = new Image("./images/icon.png");
         image.setSize(50 + "px", 50 + "px");
         headerPanel.add(image);
         headerPanel.add(new Label(label));
     }
 
-    protected void addLink(String label, String target) {
+    public void addLink(String label, String target) {
         scrollPanel.setWidget(new Anchor(label, target));
     }
 
-    protected void setButton(String buttonText, final AppEventListner presenterListerner) {
+    public void setButton(String buttonText, final AppEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
