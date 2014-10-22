@@ -15,11 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.Messages;
+import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
+import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)
