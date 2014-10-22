@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import java.util.ArrayList;
 import java.util.List;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
@@ -38,10 +39,13 @@ public class ColourPickerPresenter implements Presenter {
     private final ArrayList<Stimulus> stimuli;
     private final int maxStimuli;
 
-    public ColourPickerPresenter(RootPanel widgetTag, List<Stimulus> stimuli) {
+    final ColourPickerCanvasView colourPickerCanvasView;
+
+    public ColourPickerPresenter(RootPanel widgetTag, List<Stimulus> stimuli) throws CanvasError {
         this.widgetTag = widgetTag;
         this.stimuli = new ArrayList<>(stimuli);
         maxStimuli = this.stimuli.size();
+        colourPickerCanvasView = new ColourPickerCanvasView();
     }
 
     private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView) {
@@ -56,15 +60,14 @@ public class ColourPickerPresenter implements Presenter {
     @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
-        final ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
-        colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new AppEventListner() {
+        colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new AppEventListner() {
 
             @Override
             public void eventFired() {
                 triggerEvent(appEventListner, colourPickerCanvasView);
             }
         });
-        colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new AppEventListner() {
+        colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new AppEventListner() {
 
             @Override
             public void eventFired() {

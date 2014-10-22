@@ -22,6 +22,7 @@ import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.ImageData;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -36,6 +37,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
 /**
@@ -50,7 +52,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final Grid innerGrid;
     private final Grid pickerPanel;
     private final VerticalPanel controlsPanel;
-    private final HorizontalPanel buttonPanel;
+    private final VerticalPanel buttonPanel;
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
     private final Label instructionsLabel;
@@ -60,17 +62,17 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int barWidth;
     private final int selectedColourPanelSize;
 
-    public ColourPickerCanvasView() {
+    public ColourPickerCanvasView() throws CanvasError {
         getElement().setId("stimulusPanel");
         final int clientHeight = Window.getClientHeight();
         final int clientWidth = Window.getClientWidth();
         final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;
-        height = (int) (minClient * 0.5);
-        width = (int) (minClient * 0.5);
-        barWidth = (int) (minClient * 0.05);
+        height = (int) (minClient * 0.7);
+        width = (int) (minClient * 0.7);
+        barWidth = (int) (minClient * 0.1);
         selectedColourPanelSize = (int) (minClient * 0.1);
 
-        buttonPanel = new HorizontalPanel();
+        buttonPanel = new VerticalPanel();
         stimulusPanel = new VerticalPanel();
         innerGrid = new Grid(2, 2);
         pickerPanel = new Grid(2, 2);
@@ -83,8 +85,7 @@ public class ColourPickerCanvasView extends AbstractView {
         luminanceCanvas = Canvas.createIfSupported();
 
         if (mainCanvas == null || hueCanvas == null || luminanceCanvas == null) {
-            add(new Label("canvas is unsupported"));
-            return;
+            throw new CanvasError("Failed to create a canvas for the stimulus screen.");
         } else {
             mainCanvas.setCoordinateSpaceHeight(height);
             mainCanvas.setCoordinateSpaceWidth(width);
@@ -115,21 +116,21 @@ public class ColourPickerCanvasView extends AbstractView {
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
             pickerPanel.setWidget(1, 0, luminanceCanvas);
-            final Label selectedColourLabel = new Label("SelectedColour");
+            final Label selectedColourLabel = new Label("");
             selectedColourLabel.setHeight(100 + "px");
             selectedColourLabel.setWidth(100 + "px");
             selectedColourPanel.add(selectedColourLabel);
-            controlsPanel.add(selectedColourPanel);
 //            final Label hoverColourLabel = new Label("HoverColour");
 //            hoverColourLabel.setHeight(selectedColourPanelSize + "px");
 //            hoverColourLabel.setWidth(selectedColourPanelSize + "px");
 //            final VerticalPanel hoverColourPanel = new VerticalPanel();
 //            hoverColourPanel.add(hoverColourLabel);
 //            controlsPanel.add(hoverColourPanel);
-            controlsPanel.add(buttonPanel);
             stimulusPanel.setHeight(selectedColourPanelSize + "px");
             stimulusPanel.setWidth(selectedColourPanelSize + "px");
             controlsPanel.add(stimulusPanel);
+            controlsPanel.add(selectedColourPanel);
+            controlsPanel.add(buttonPanel);
             controlsPanel.add(progressLabel);
 //            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 //
@@ -285,7 +286,9 @@ public class ColourPickerCanvasView extends AbstractView {
     public void setStimulus(Stimulus stimulus, String progress) {
         progressLabel.setText(progress);
         stimulusPanel.clear();
-        stimulusPanel.add(new Label(stimulus.getValue()));
+        final Label label = new Label(stimulus.getValue());
+        label.getElement().getStyle().setFontSize(selectedColourPanelSize, Unit.PX);
+        stimulusPanel.add(label);
     }
 
     public void setButton(String buttonText, final AppEventListner presenterListerner) {

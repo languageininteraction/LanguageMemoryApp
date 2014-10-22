@@ -91,7 +91,7 @@ public class AppController implements AppEventListner {
 //                presenter.setState(this);
                     break;
             }
-        } catch (StimulusError error) {
+        } catch (StimulusError | CanvasError error) {
             this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
             presenter.setState(this);
         }
