@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
 /**
  * @since Oct 8, 2014 5:09:10 PM (creation date)
@@ -281,10 +282,10 @@ public class ColourPickerCanvasView extends AbstractView {
         instructionsLabel.setText(instructions);
     }
 
-    public void setStimulus(String stimulus, String progress) {
+    public void setStimulus(Stimulus stimulus, String progress) {
         progressLabel.setText(progress);
         stimulusPanel.clear();
-        stimulusPanel.add(new Label(stimulus));
+        stimulusPanel.add(new Label(stimulus.getValue()));
     }
 
     public void setButton(String buttonText, final AppEventListner presenterListerner) {

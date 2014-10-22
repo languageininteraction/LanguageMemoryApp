@@ -17,25 +17,27 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
- * @since Oct 7, 2014 2:17:51 PM (creation date)
+ * @since Oct 22, 2014 3:00:25 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class FeedbackPresenter implements Presenter {
+public class ErrorPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
     private final SimpleView simpleView = new SimpleView();
+    private final String errorMessage;
 
-    public FeedbackPresenter(RootPanel widgetTag) {
+    public ErrorPresenter(RootPanel widgetTag, String errorMessage) {
         this.widgetTag = widgetTag;
+        this.errorMessage = errorMessage;
     }
 
     @Override
@@ -49,8 +51,8 @@ public class FeedbackPresenter implements Presenter {
             }
 
         });
-        simpleView.addTitle(messages.userfeedbackscreentitle());
-        simpleView.setDisplayText(messages.userfeedbackscreentext());
+        simpleView.addTitle(messages.errorScreenTitle());
+        simpleView.setDisplayText(messages.errorScreenText(errorMessage));
         simpleView.resizeView();
         widgetTag.add(simpleView);
     }

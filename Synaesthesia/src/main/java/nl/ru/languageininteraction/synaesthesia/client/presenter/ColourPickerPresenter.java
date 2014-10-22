@@ -20,9 +20,12 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import nl.ru.languageininteraction.synaesthesia.client.view.ColourPickerCanvasView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import java.util.ArrayList;
+import java.util.List;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
 /**
  * @since Oct 10, 2014 9:52:25 AM (creation date)
@@ -32,42 +35,44 @@ public class ColourPickerPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
     private final RootPanel widgetTag;
-    private int stimulusCounter = 10;
+    private final ArrayList<Stimulus> stimuli;
+    private final int maxStimuli;
 
-    public ColourPickerPresenter(RootPanel widgetTag) {
+    public ColourPickerPresenter(RootPanel widgetTag, List<Stimulus> stimuli) {
         this.widgetTag = widgetTag;
+        this.stimuli = new ArrayList<>(stimuli);
+        maxStimuli = this.stimuli.size();
     }
 
+    private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView) {
+        if (stimuli.isEmpty()) {
+            appEventListner.eventFired();
+        } else {
+            colourPickerCanvasView.setRandomColour();
+            colourPickerCanvasView.setStimulus(stimuli.remove((int) (Math.random() * stimuli.size())), messages.stimulusscreenprogresstext(Integer.toString(maxStimuli - stimuli.size()), Integer.toString(maxStimuli)));
+        }
+    }
+
+    @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
         final ColourPickerCanvasView colourPickerCanvasView = new ColourPickerCanvasView();
         colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new AppEventListner() {
 
+            @Override
             public void eventFired() {
-                stimulusCounter--;
-                if (stimulusCounter > 0) {
-                    colourPickerCanvasView.setRandomColour();
-                    colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
-                } else {
-                    appEventListner.eventFired();
-                }
+                triggerEvent(appEventListner, colourPickerCanvasView);
             }
         });
         colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new AppEventListner() {
 
+            @Override
             public void eventFired() {
-                stimulusCounter--;
-                if (stimulusCounter > 0) {
-                    colourPickerCanvasView.setRandomColour();
-                    colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
-                } else {
-                    appEventListner.eventFired();
-                }
+                triggerEvent(appEventListner, colourPickerCanvasView);
             }
         });
         colourPickerCanvasView.setInstructions(messages.stimulusscreeninstructions());
-        colourPickerCanvasView.setStimulus(Integer.toString(stimulusCounter), messages.stimulusscreenprogresstext(Integer.toString(stimulusCounter), Integer.toString(10)));
-        colourPickerCanvasView.setRandomColour();
+        triggerEvent(appEventListner, colourPickerCanvasView);
         colourPickerCanvasView.resizeView();
         widgetTag.add(colourPickerCanvasView);
     }

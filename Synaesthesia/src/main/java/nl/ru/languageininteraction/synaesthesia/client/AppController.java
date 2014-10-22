@@ -24,6 +24,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.ColourPickerPre
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterPresenter;
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -47,46 +48,52 @@ public class AppController implements AppEventListner {
 
     @Override
     public void eventFired() {
-        switch (state) {
-            case start:
-                state = ApplicationState.intro;
-                this.presenter = new IntroPresenter(widgetTag);
-                presenter.setState(this);
-                break;
-            case intro:
-                state = ApplicationState.metadata;
-                this.presenter = new MetadataPresenter(widgetTag, userResults);
-                presenter.setState(this);
-                break;
-            case metadata:
-                state = ApplicationState.stimulus;
-                this.presenter = new ColourPickerPresenter(widgetTag);
-                presenter.setState(this);
-                break;
-            case stimulus:
-                state = ApplicationState.report;
-                this.presenter = new ReportPresenter(widgetTag, userResults);
-                presenter.setState(this);
-                break;
-            case report:
-                state = ApplicationState.feedback;
-                this.presenter = new FeedbackPresenter(widgetTag);
-                presenter.setState(this);
-                break;
-            case feedback:
-                state = ApplicationState.registration;
-                this.presenter = new RegisterPresenter(widgetTag, userResults);
-                presenter.setState(this);
-                break;
-            case registration:
-                state = ApplicationState.end;
-                this.presenter = new ScreenPresenter(widgetTag);
-                presenter.setState(this);
-                break;
-            default:
+        try {
+            switch (state) {
+                case start:
+                    state = ApplicationState.intro;
+                    this.presenter = new IntroPresenter(widgetTag);
+                    presenter.setState(this);
+                    break;
+                case intro:
+                    state = ApplicationState.metadata;
+                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+                    presenter.setState(this);
+                    break;
+                case metadata:
+                    state = ApplicationState.stimulus;
+                    final StimuliProvider stimuliProvider = new StimuliProvider();
+                    this.presenter = new ColourPickerPresenter(widgetTag, stimuliProvider.getStimuli(stimuliProvider.getStimuliNames()[0]));
+                    presenter.setState(this);
+                    break;
+                case stimulus:
+                    state = ApplicationState.report;
+                    this.presenter = new ReportPresenter(widgetTag, userResults);
+                    presenter.setState(this);
+                    break;
+                case report:
+                    state = ApplicationState.feedback;
+                    this.presenter = new FeedbackPresenter(widgetTag);
+                    presenter.setState(this);
+                    break;
+                case feedback:
+                    state = ApplicationState.registration;
+                    this.presenter = new RegisterPresenter(widgetTag, userResults);
+                    presenter.setState(this);
+                    break;
+                case registration:
+                    state = ApplicationState.end;
+                    this.presenter = new ScreenPresenter(widgetTag);
+                    presenter.setState(this);
+                    break;
+                default:
 //                state = ApplicationState.start;
 //                presenter.setState(this);
-                break;
+                    break;
+            }
+        } catch (StimulusError error) {
+            this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
+            presenter.setState(this);
         }
     }
 }
