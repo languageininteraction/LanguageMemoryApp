@@ -19,6 +19,8 @@ package nl.ru.languageininteraction.synaesthesia.client;
 
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  * @since Oct 21, 2014 5:15:19 PM (creation date)
@@ -26,24 +28,27 @@ import com.google.gwt.user.client.ui.HTML;
  */
 public class RegisterView extends SimpleView {
 
-    final private FlexTable flexTable;
+    final VerticalPanel outerPanel;
+    private FlexTable flexTable = null;
 
     public RegisterView() {
-        flexTable = new FlexTable();
-//        flexTable.setStylePrimaryName("metadataTable");
-        setContent(flexTable);
+        outerPanel = new VerticalPanel();
+        setContent(outerPanel);
     }
 
     protected void addText(String textString) {
         HTML html = new HTML(textString);
-        final int row = flexTable.getRowCount();
-        flexTable.setWidget(row, 0, html);
-        flexTable.getFlexCellFormatter().setColSpan(row, 0, 2);
+        outerPanel.add(html);
     }
 
     public void addField(final String displayName, final String value) {
+        if (flexTable == null) {
+            flexTable = new FlexTable();
+            flexTable.setStylePrimaryName("metadataTable");
+            outerPanel.add(flexTable);
+        }
         final int rowCount = flexTable.getRowCount();
-        flexTable.setWidget(rowCount, 0, new HTML(displayName));
+        flexTable.setWidget(rowCount, 0, new Label(displayName));
         flexTable.setWidget(rowCount, 1, new HTML(value));
     }
 }
