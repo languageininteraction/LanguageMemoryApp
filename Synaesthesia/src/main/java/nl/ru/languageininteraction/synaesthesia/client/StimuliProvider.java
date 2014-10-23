@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
 
 /**
  * @since Oct 22, 2014 12:07:20 PM (creation date)
@@ -29,8 +30,8 @@ public class StimuliProvider {
 
     private final Stimuli stimuli = GWT.create(Stimuli.class);
 
-    public String[] getStimuliNames() {
-        return new String[]{stimuli.stimuli1Label(), stimuli.stimuli2Label(), stimuli.stimuli3Label()};
+    public StimuliGroup[] getStimuliNames() {
+        return new StimuliGroup[]{new StimuliGroup(stimuli.stimuli1Label()), new StimuliGroup(stimuli.stimuli2Label()), new StimuliGroup(stimuli.stimuli3Label())};
     }
 
     private ArrayList<Stimulus> getStimulusArray(String stimuliCsv) {
@@ -41,7 +42,8 @@ public class StimuliProvider {
         return arrayList;
     }
 
-    public ArrayList<Stimulus> getStimuli(String stimuliLabel) throws StimulusError {
+    public ArrayList<Stimulus> getStimuli(StimuliGroup stimuliGroup) throws StimulusError {
+        String stimuliLabel = stimuliGroup.getGroupLabel();
         if (stimuli.stimuli1Label().equals(stimuliLabel)) {
             return getStimulusArray(stimuli.stimuli1csv());
         } else if (stimuli.stimuli2Label().equals(stimuliLabel)) {

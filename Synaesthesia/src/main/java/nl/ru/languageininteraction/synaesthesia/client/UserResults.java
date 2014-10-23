@@ -22,8 +22,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
+import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
+import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponseGroup;
 
 /**
  * @since Oct 14, 2014 1:11:22 PM (creation date)
@@ -32,31 +34,27 @@ import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
 public class UserResults {
 
     private final HashMap<String, String> metadataValues = new HashMap<>();
-    private final HashMap<Stimulus, StimulusResponse[]> results = new HashMap<>();
+    private final HashMap<StimuliGroup, StimulusResponseGroup> results = new HashMap<>();
 
     public UserResults() {
+    }
+
+    public void addDummyResults(String groupName) {
+        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
+        results.put(new StimuliGroup(groupName), stimulusResponseGroup);
         for (int mockCount = 0; mockCount < 10; mockCount++) {
-            results.put(new Stimulus(Integer.toString(mockCount)),
-                    new StimulusResponse[]{
-                        new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble())
-                    });
+            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
+            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
+            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
         }
     }
 
-    public Set<Stimulus> getStimulus() {
+    public Set<StimuliGroup> getStimuliGroups() {
         return results.keySet();
     }
 
-    public StimulusResponse[] getResults(Stimulus stimulus) {
-        return results.get(stimulus);
-    }
-
-    public int getMaxResponses() {
-        int max = 0;
-        for (StimulusResponse[] responses : results.values()) {
-            max = (max > responses.length) ? max : responses.length;
-        }
-        return max;
+    public StimulusResponseGroup getStimulusResponseGroup(StimuliGroup stimuliGroup) {
+        return results.get(stimuliGroup);
     }
 
     public void setMetadataValue(String key, String value) {
