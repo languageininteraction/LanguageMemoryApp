@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.shared;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,9 +27,15 @@ import java.util.Objects;
 public class StimuliGroup {
 
     private final String groupLabel;
+    private final List<Stimulus> stimuli;
 
-    public StimuliGroup(String groupLabel) {
+    public StimuliGroup(String groupLabel, List<Stimulus> stimuli) {
         this.groupLabel = groupLabel;
+        this.stimuli = stimuli;
+    }
+
+    public List<Stimulus> getStimuli() {
+        return stimuli;
     }
 
     public String getGroupLabel() {

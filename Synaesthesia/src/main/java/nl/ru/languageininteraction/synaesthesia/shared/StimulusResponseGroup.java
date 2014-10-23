@@ -42,10 +42,6 @@ public class StimulusResponseGroup {
         }
     }
 
-    public Set<Stimulus> getStimulus() {
-        return stimulusResponses.keySet();
-    }
-
     public List<StimulusResponse> getResults(Stimulus stimulus) {
         return Collections.<StimulusResponse>unmodifiableList(stimulusResponses.get(stimulus));
     }

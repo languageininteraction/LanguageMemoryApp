@@ -21,12 +21,16 @@ import nl.ru.languageininteraction.synaesthesia.client.view.ColourPickerCanvasVi
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.UserResults;
+import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
+import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponseGroup;
 
 /**
  * @since Oct 10, 2014 9:52:25 AM (creation date)
@@ -38,12 +42,17 @@ public class ColourPickerPresenter implements Presenter {
     private final RootPanel widgetTag;
     private final ArrayList<Stimulus> stimuli;
     private final int maxStimuli;
+    private final UserResults userResults;
+    private final ColourPickerCanvasView colourPickerCanvasView;
+    private final StimuliGroup stimuliGroup;
+    private Stimulus currentStimulus = null;
+    private long startMs;
 
-    final ColourPickerCanvasView colourPickerCanvasView;
-
-    public ColourPickerPresenter(RootPanel widgetTag, List<Stimulus> stimuli) throws CanvasError {
+    public ColourPickerPresenter(RootPanel widgetTag, StimuliGroup stimuliGroup, UserResults userResults) throws CanvasError {
         this.widgetTag = widgetTag;
-        this.stimuli = new ArrayList<>(stimuli);
+        this.stimuliGroup = stimuliGroup;
+        this.stimuli = new ArrayList<>(stimuliGroup.getStimuli());
+        this.userResults = userResults;
         maxStimuli = this.stimuli.size();
         colourPickerCanvasView = new ColourPickerCanvasView();
     }
@@ -53,17 +62,22 @@ public class ColourPickerPresenter implements Presenter {
             appEventListner.eventFired();
         } else {
             colourPickerCanvasView.setRandomColour();
-            colourPickerCanvasView.setStimulus(stimuli.remove((int) (Math.random() * stimuli.size())), messages.stimulusscreenprogresstext(Integer.toString(maxStimuli - stimuli.size()), Integer.toString(maxStimuli)));
+            currentStimulus = stimuli.remove((int) (Math.random() * stimuli.size()));
+            startMs = System.currentTimeMillis();
+            colourPickerCanvasView.setStimulus(currentStimulus, messages.stimulusscreenprogresstext(Integer.toString(maxStimuli - stimuli.size()), Integer.toString(maxStimuli)));
         }
     }
 
     @Override
     public void setState(final AppEventListner appEventListner) {
         widgetTag.clear();
+        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
+        userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
         colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new AppEventListner() {
 
             @Override
             public void eventFired() {
+                stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(colourPickerCanvasView.getColour(), new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView);
             }
         });
@@ -71,6 +85,7 @@ public class ColourPickerPresenter implements Presenter {
 
             @Override
             public void eventFired() {
+                stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(null, new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView);
             }
         });

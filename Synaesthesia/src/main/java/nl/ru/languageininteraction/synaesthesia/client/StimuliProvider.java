@@ -19,8 +19,8 @@ package nl.ru.languageininteraction.synaesthesia.client;
 
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
-import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
 /**
  * @since Oct 22, 2014 12:07:20 PM (creation date)
@@ -30,8 +30,12 @@ public class StimuliProvider {
 
     private final Stimuli stimuli = GWT.create(Stimuli.class);
 
-    public StimuliGroup[] getStimuliNames() {
-        return new StimuliGroup[]{new StimuliGroup(stimuli.stimuli1Label()), new StimuliGroup(stimuli.stimuli2Label()), new StimuliGroup(stimuli.stimuli3Label())};
+    public StimuliGroup[] getStimuli() throws StimulusError {
+        return new StimuliGroup[]{
+            new StimuliGroup(stimuli.stimuli1Label(), getStimulusArray(stimuli.stimuli1csv())),
+            new StimuliGroup(stimuli.stimuli2Label(), getStimulusArray(stimuli.stimuli2csv())),
+            new StimuliGroup(stimuli.stimuli3Label(), getStimulusArray(stimuli.stimuli3csv()))
+        };
     }
 
     private ArrayList<Stimulus> getStimulusArray(String stimuliCsv) {
@@ -40,17 +44,5 @@ public class StimuliProvider {
             arrayList.add(new Stimulus(simulus));
         }
         return arrayList;
-    }
-
-    public ArrayList<Stimulus> getStimuli(StimuliGroup stimuliGroup) throws StimulusError {
-        String stimuliLabel = stimuliGroup.getGroupLabel();
-        if (stimuli.stimuli1Label().equals(stimuliLabel)) {
-            return getStimulusArray(stimuli.stimuli1csv());
-        } else if (stimuli.stimuli2Label().equals(stimuliLabel)) {
-            return getStimulusArray(stimuli.stimuli2csv());
-        } else if (stimuli.stimuli3Label().equals(stimuliLabel)) {
-            return getStimulusArray(stimuli.stimuli3csv());
-        }
-        throw new StimulusError("No stimuli for " + stimuliLabel);
     }
 }

@@ -56,8 +56,7 @@ public class ReportView extends SimpleView {
     public void showResults(UserResults userResults) {
         for (StimuliGroup group : userResults.getStimuliGroups()) {
             final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
-            final Set<Stimulus> allStimulus = stimulusResponseGroup.getStimulus();
-            int rowCount = allStimulus.size();
+            final List<Stimulus> allStimulus = group.getStimuli();
             int columnCount = stimulusResponseGroup.getMaxResponses();
             int row = 0;
             final FlexTable grid = new FlexTable();
@@ -69,8 +68,12 @@ public class ReportView extends SimpleView {
                 for (int column = 0; column < columnCount; column++) {
                     final Label label = new Label(stimulus.getValue());
                     final ColourData colour = responses.get(column).getColour();
-                    String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
-                    label.getElement().setAttribute("style", "color:" + foreground + ";background:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
+                    if (colour == null) {
+                        label.getElement().setAttribute("style", "color: grey;background: none;");
+                    } else {
+                        String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
+                        label.getElement().setAttribute("style", "color:" + foreground + ";background:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
+                    }
                     grid.setWidget(row, column, label);
                 }
                 final HorizontalPanel bargraphOuter = new HorizontalPanel();

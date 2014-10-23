@@ -39,18 +39,22 @@ public class UserResults {
     public UserResults() {
     }
 
-    public void addDummyResults(String groupName) {
+    public void addDummyResults(StimuliGroup stimuliGroup) {
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
-        results.put(new StimuliGroup(groupName), stimulusResponseGroup);
-        for (int mockCount = 0; mockCount < 10; mockCount++) {
-            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
-            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
-            stimulusResponseGroup.addResponse(new Stimulus(Integer.toString(mockCount)), new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
+        results.put(stimuliGroup, stimulusResponseGroup);
+        for (Stimulus stimulus : stimuliGroup.getStimuli()) {
+            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
+            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
+            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
         }
     }
 
     public Set<StimuliGroup> getStimuliGroups() {
         return results.keySet();
+    }
+
+    public void addStimulusResponseGroup(StimuliGroup stimuliGroup, StimulusResponseGroup stimulusResponseGroup) {
+        results.put(stimuliGroup, stimulusResponseGroup);
     }
 
     public StimulusResponseGroup getStimulusResponseGroup(StimuliGroup stimuliGroup) {

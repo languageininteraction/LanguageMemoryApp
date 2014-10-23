@@ -32,12 +32,12 @@ import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
+import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
 /**
@@ -61,6 +61,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int width;
     private final int barWidth;
     private final int selectedColourPanelSize;
+    private ColourData selectedColourData = null;
 
     public ColourPickerCanvasView() throws CanvasError {
         getElement().setId("stimulusPanel");
@@ -216,6 +217,7 @@ public class ColourPickerCanvasView extends AbstractView {
         final int green = Random.nextInt(255);
         final int blue = Random.nextInt(255);
         setHue(red, green, blue);
+        selectedColourData = new ColourData(red, green, blue);
         selectedColourPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
     }
 
@@ -233,6 +235,10 @@ public class ColourPickerCanvasView extends AbstractView {
         linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
         mainContext2d.setFillStyle(linearGrey);
         mainContext2d.fillRect(0, 0, width, height);
+    }
+
+    public ColourData getColour() {
+        return selectedColourData;
     }
 
     private void setColour(MouseEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
@@ -254,6 +260,9 @@ public class ColourPickerCanvasView extends AbstractView {
         final int blue = imageData.getBlueAt(0, 0);
         final int green = imageData.getGreenAt(0, 0);
         final int red = imageData.getRedAt(0, 0);
+        if (targetPanel.equals(selectedColourPanel)) {
+            selectedColourData = new ColourData(red, green, blue);
+        }
         targetPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
     }
 
