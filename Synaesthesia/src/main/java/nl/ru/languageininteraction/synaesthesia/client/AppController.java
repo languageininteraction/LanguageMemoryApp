@@ -78,7 +78,7 @@ public class AppController implements AppEventListner {
                 case metadata:
                     state = ApplicationState.stimulus;
                     final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults);
+                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults, 3);
                     presenter.setState(this);
                     break;
                 case stimulus:

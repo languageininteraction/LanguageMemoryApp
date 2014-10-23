@@ -47,17 +47,25 @@ public class ColourPickerPresenter implements Presenter {
     private final StimuliGroup stimuliGroup;
     private Stimulus currentStimulus = null;
     private long startMs;
+    private int repeatCount;
 
-    public ColourPickerPresenter(RootPanel widgetTag, StimuliGroup stimuliGroup, UserResults userResults) throws CanvasError {
+    public ColourPickerPresenter(RootPanel widgetTag, StimuliGroup stimuliGroup, UserResults userResults, int repeatCount) throws CanvasError {
         this.widgetTag = widgetTag;
         this.stimuliGroup = stimuliGroup;
         this.stimuli = new ArrayList<>(stimuliGroup.getStimuli());
         this.userResults = userResults;
+        this.repeatCount = repeatCount;
         maxStimuli = this.stimuli.size();
         colourPickerCanvasView = new ColourPickerCanvasView();
     }
 
     private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView) {
+        if (stimuli.isEmpty()) {
+            repeatCount--;
+            if (repeatCount > 0) {
+                this.stimuli.addAll(stimuliGroup.getStimuli());
+            }
+        }
         if (stimuli.isEmpty()) {
             appEventListner.eventFired();
         } else {
