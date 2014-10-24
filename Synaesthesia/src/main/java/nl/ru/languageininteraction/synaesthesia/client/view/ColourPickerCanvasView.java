@@ -26,8 +26,16 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HandlesAllTouchEvents;
 import com.google.gwt.event.dom.client.MouseEvent;
+import com.google.gwt.event.dom.client.TouchCancelEvent;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.event.dom.client.TouchEvent;
+import com.google.gwt.event.dom.client.TouchMoveEvent;
+import com.google.gwt.event.dom.client.TouchMoveHandler;
+import com.google.gwt.event.dom.client.TouchStartEvent;
+import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -35,6 +43,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
@@ -57,6 +66,10 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel selectedColourPanel;
     private final Label instructionsLabel;
     private final Label progressLabel;
+    Label touchMoveLabel = new Label("TouchMove");
+    Label touchStartLabel = new Label("TouchStart");
+    Label touchEndLabel = new Label("TouchEnd");
+    Label touchCancelLabel = new Label("TouchCancel");
     private final int height;
     private final int width;
     private final int barWidth;
@@ -129,6 +142,10 @@ public class ColourPickerCanvasView extends AbstractView {
 //            controlsPanel.add(hoverColourPanel);
             stimulusPanel.setHeight(selectedColourPanelSize + "px");
             stimulusPanel.setWidth(selectedColourPanelSize + "px");
+            controlsPanel.add(touchStartLabel);
+            controlsPanel.add(touchMoveLabel);
+            controlsPanel.add(touchEndLabel);
+            controlsPanel.add(touchCancelLabel);
             controlsPanel.add(stimulusPanel);
             controlsPanel.add(selectedColourPanel);
             controlsPanel.add(buttonPanel);
@@ -170,6 +187,42 @@ public class ColourPickerCanvasView extends AbstractView {
                     setColour(event, hueCanvas, selectedColourPanel);
                 }
             });
+            final HandlesAllTouchEvents mainCanvasTouchHandler = new HandlesAllTouchEvents() {
+
+                @Override
+                public void onTouchStart(TouchStartEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                    touchStartLabel.setText(event.getTargetTouches().length() + " TouchStart" + new Date());
+                }
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                    touchMoveLabel.setText(event.getTargetTouches().length() + " TouchMove" + new Date());
+                }
+
+                @Override
+                public void onTouchEnd(TouchEndEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                    touchEndLabel.setText(event.getTargetTouches().length() + " TouchEnd" + new Date());
+                }
+
+                @Override
+                public void onTouchCancel(TouchCancelEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                    touchCancelLabel.setText(event.getTargetTouches().length() + " TouchCancel" + new Date());
+                }
+            };
+
+            mainCanvas.addTouchStartHandler(mainCanvasTouchHandler);
+            mainCanvas.addTouchMoveHandler(mainCanvasTouchHandler);
+            mainCanvas.addTouchEndHandler(mainCanvasTouchHandler);
+            mainCanvas.addTouchCancelHandler(mainCanvasTouchHandler);
+
 //            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 //
 //                @Override
@@ -181,27 +234,81 @@ public class ColourPickerCanvasView extends AbstractView {
 ////                    }
 //                }
 //            });
-//            mainCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-//
-//                @Override
-//                public void onTouchMove(TouchMoveEvent event) {
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                }
-//            });
-//            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-//
-//                @Override
-//                public void onTouchMove(TouchMoveEvent event) {
-//                    setColour(event, luminanceCanvas, selectedColourPanel);
-//                }
-//            });
-//            hueCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-//
-//                @Override
-//                public void onTouchMove(TouchMoveEvent event) {
-//                    setHue(event, hueCanvas);
-//                }
-//            });
+            mainCanvas.addTouchStartHandler(new TouchStartHandler() {
+
+                @Override
+                public void onTouchStart(TouchStartEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            mainCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            mainCanvas.addTouchEndHandler(new TouchEndHandler() {
+
+                @Override
+                public void onTouchEnd(TouchEndEvent event) {
+                    event.preventDefault();
+                    setColour(event, mainCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addTouchStartHandler(new TouchStartHandler() {
+
+                @Override
+                public void onTouchStart(TouchStartEvent event) {
+                    event.preventDefault();
+                    setColour(event, luminanceCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
+                    event.preventDefault();
+                    setColour(event, luminanceCanvas, selectedColourPanel);
+                }
+            });
+            luminanceCanvas.addTouchEndHandler(new TouchEndHandler() {
+
+                @Override
+                public void onTouchEnd(TouchEndEvent event) {
+                    event.preventDefault();
+                    setColour(event, luminanceCanvas, selectedColourPanel);
+                }
+            });
+            hueCanvas.addTouchStartHandler(new TouchStartHandler() {
+
+                @Override
+                public void onTouchStart(TouchStartEvent event) {
+                    event.preventDefault();
+                    setHue(event, hueCanvas);
+                    setColour(event, hueCanvas, selectedColourPanel);
+                }
+            });
+            hueCanvas.addTouchMoveHandler(new TouchMoveHandler() {
+
+                @Override
+                public void onTouchMove(TouchMoveEvent event) {
+                    event.preventDefault();
+                    setHue(event, hueCanvas);
+                    setColour(event, hueCanvas, selectedColourPanel);
+                }
+            });
+            hueCanvas.addTouchEndHandler(new TouchEndHandler() {
+
+                @Override
+                public void onTouchEnd(TouchEndEvent event) {
+                    event.preventDefault();
+                    setHue(event, hueCanvas);
+                    setColour(event, hueCanvas, selectedColourPanel);
+                }
+            });
         }
         innerGrid.setWidget(0, 0, pickerPanel);
         Grid outerGrid = new Grid(2, 1);
@@ -248,7 +355,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private void setColour(TouchEvent event, Canvas targetCanvas, VerticalPanel targetPanel) {
         if (event.getTouches().length() > 0) {
             final JsArray<Touch> touches = event.getTargetTouches();
-            if (touches.length() < 0) {
+            if (touches.length() > 0) {
                 Touch touch = touches.get(0);
                 setColour(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas, targetPanel);
             }
@@ -269,7 +376,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private void setHue(TouchEvent event, Canvas targetCanvas) {
         if (event.getTouches().length() > 0) {
             final JsArray<Touch> touches = event.getTargetTouches();
-            if (touches.length() < 0) {
+            if (touches.length() > 0) {
                 Touch touch = touches.get(0);
                 setHue(touch.getRelativeX(targetCanvas.getElement()), touch.getRelativeY(targetCanvas.getElement()), targetCanvas);
             }
