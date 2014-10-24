@@ -28,13 +28,14 @@ public class LocalStorage {
 
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private Storage stockstore = null;
+    private static final String USER_RESULTS = "UserResults.";
 
     public UserResults getStoredData() {
         UserResults userResults = new UserResults();
         stockstore = Storage.getLocalStorageIfSupported();
         if (stockstore != null) {
             for (String postName : new String[]{mateadataFields.postName1(), mateadataFields.postName2(), mateadataFields.postName3(), mateadataFields.postName4()}) {
-                userResults.setMetadataValue(postName, stockstore.getItem("UserResults." + postName));
+                userResults.setMetadataValue(postName, stockstore.getItem(USER_RESULTS + postName));
             }
         }
         return userResults;
@@ -44,7 +45,7 @@ public class LocalStorage {
         stockstore = Storage.getLocalStorageIfSupported();
         if (stockstore != null) {
             for (String postName : new String[]{mateadataFields.postName1(), mateadataFields.postName2(), mateadataFields.postName3(), mateadataFields.postName4()}) {
-                stockstore.setItem("UserResults." + postName, userResults.getMetadataValue(postName));
+                stockstore.setItem(USER_RESULTS + postName, userResults.getMetadataValue(postName));
             }
         }
     }
