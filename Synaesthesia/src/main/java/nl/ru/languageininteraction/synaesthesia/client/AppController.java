@@ -49,7 +49,7 @@ public class AppController implements AppEventListner {
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
         stimuliProvider = new StimuliProvider();
-        userResults = new UserResults();
+        userResults = new LocalStorage().getStoredData();
         try {
             final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
             userResults.addDummyResults(stimuli[0]);

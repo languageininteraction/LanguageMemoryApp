@@ -21,6 +21,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
@@ -53,15 +54,16 @@ public class MetadataPresenter implements Presenter {
                 for (String fieldName : metadataView.getFieldNames()) {
                     userResults.setMetadataValue(fieldName, metadataView.getFieldValue(fieldName));
                 }
+                new LocalStorage().storeData(userResults);
                 appEventListner.eventFired();
             }
 
         });
         metadataView.addTitle(messages.metadatascreentitle());
-        metadataView.addField(mateadataFields.postName1(), mateadataFields.registrationField1());
-        metadataView.addField(mateadataFields.postName2(), mateadataFields.registrationField2());
-        metadataView.addField(mateadataFields.postName3(), mateadataFields.registrationField3());
-        metadataView.addField(mateadataFields.postName4(), mateadataFields.registrationField4());
+        metadataView.addField(mateadataFields.postName1(), mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));
+        metadataView.addField(mateadataFields.postName2(), mateadataFields.registrationField2(), userResults.getMetadataValue(mateadataFields.postName2()));
+        metadataView.addField(mateadataFields.postName3(), mateadataFields.registrationField3(), userResults.getMetadataValue(mateadataFields.postName3()));
+        metadataView.addField(mateadataFields.postName4(), mateadataFields.registrationField4(), userResults.getMetadataValue(mateadataFields.postName4()));
 //        metadataView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
         metadataView.resizeView();
         widgetTag.add(metadataView);
