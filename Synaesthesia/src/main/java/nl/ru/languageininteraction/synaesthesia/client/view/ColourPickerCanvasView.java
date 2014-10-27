@@ -166,6 +166,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
+                    event.preventDefault();
                     setColour(event, mainCanvas, selectedColourPanel);
                 }
             });
@@ -173,6 +174,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
+                    event.preventDefault();
                     setColour(event, luminanceCanvas, selectedColourPanel);
                 }
             });
@@ -180,6 +182,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
+                    event.preventDefault();
                     setHue(event, hueCanvas);
                     setColour(event, hueCanvas, selectedColourPanel);
                 }
@@ -219,7 +222,6 @@ public class ColourPickerCanvasView extends AbstractView {
 //            mainCanvas.addTouchMoveHandler(mainCanvasTouchHandler);
 //            mainCanvas.addTouchEndHandler(mainCanvasTouchHandler);
 //            mainCanvas.addTouchCancelHandler(mainCanvasTouchHandler);
-
 //            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
 //
 //                @Override
