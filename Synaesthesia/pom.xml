@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synaesthesia</artifactId>
     <packaging>war</packaging>
-    <version>0.1-testing-SNAPSHOT</version>
+    <version>0.1.70-testing</version>
     <name>Grapheme Colour Synaesthesia App</name>
     <organization>
         <name>Language In Interaction</name>
