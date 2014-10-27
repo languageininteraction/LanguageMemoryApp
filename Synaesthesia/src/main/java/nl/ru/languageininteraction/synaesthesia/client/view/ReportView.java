@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.List;
-import java.util.Set;
+import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
@@ -53,7 +53,7 @@ public class ReportView extends SimpleView {
         outerPanel.add(html);
     }
 
-    public void showResults(UserResults userResults) {
+    public void showResults(UserResults userResults, ScoreCalculator scoreCalculator) {
         for (StimuliGroup group : userResults.getStimuliGroups()) {
             final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
             final List<Stimulus> allStimulus = group.getStimuli();
@@ -79,7 +79,7 @@ public class ReportView extends SimpleView {
                 final HorizontalPanel bargraphOuter = new HorizontalPanel();
                 final HorizontalPanel bargraphInner = new HorizontalPanel();
                 bargraphOuter.setPixelSize(100, 10);
-                bargraphInner.setPixelSize(100 / 10 * row, 10);
+                bargraphInner.setPixelSize((int) (100 * scoreCalculator.getScore(stimulus)), 10);
                 bargraphOuter.setStyleName("bargraphOuter");
                 bargraphInner.setStyleName("bargraphInner");
                 bargraphOuter.add(bargraphInner);

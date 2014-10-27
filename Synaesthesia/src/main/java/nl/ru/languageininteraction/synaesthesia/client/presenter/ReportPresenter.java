@@ -54,7 +54,7 @@ public class ReportPresenter implements Presenter {
         });
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         reportView.addTitle(messages.reportScreenTitle());
-        reportView.showResults(userResults);
+        reportView.showResults(userResults, scoreCalculator);
         reportView.addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
         reportView.addText(messages.reportScreenPostScoreText());
         reportView.addText(messages.reportScreenSCT());

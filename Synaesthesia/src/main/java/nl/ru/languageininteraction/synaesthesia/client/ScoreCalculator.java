@@ -17,16 +17,25 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
+
 /**
  * @since Oct 21, 2014 4:49:43 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class ScoreCalculator {
 
+    double tempScoreValue = 0.5;
     private final UserResults userResults;
 
     public ScoreCalculator(UserResults userResults) {
         this.userResults = userResults;
+    }
+
+    public double getScore(Stimulus stimulus) {
+        tempScoreValue += 0.1;
+        tempScoreValue = (tempScoreValue > 1) ? 0 : tempScoreValue;
+        return tempScoreValue;
     }
 
     public double getScore() {
