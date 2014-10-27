@@ -10,6 +10,7 @@
     cursor: pointer;
     border-color: transparent;
     border-radius: 5px;
+    outline: none;
 }
 
 .contentPanel {
@@ -28,6 +29,7 @@
     border-style: solid;
 }
 canvas {
+    outline: none;
     border: grey;
     border-width: 1px;
     border-style: solid;
@@ -44,7 +46,7 @@ canvas {
 
 .gwt-Label, .gwt-HTML{  
     color:rgb(255,255,255); 
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
     font-size: 17pt;
     line-height: 20pt;
     /*    
