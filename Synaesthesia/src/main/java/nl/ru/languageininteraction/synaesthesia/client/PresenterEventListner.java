@@ -18,15 +18,10 @@
 package nl.ru.languageininteraction.synaesthesia.client;
 
 /**
- * @since Oct 8, 2014 11:01:07 AM (creation date)
+ * @since Oct 28, 2014 12:16:19 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface AppEventListner {
+public interface PresenterEventListner {
 
-    enum ApplicationState {
-
-        start, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
-    }
-
-    public void requestApplicationState(ApplicationState applicationState);
+    public void eventFired();
 }

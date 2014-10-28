@@ -17,34 +17,31 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
- * @since Oct 7, 2014 2:17:51 PM (creation date)
+ * @since Oct 28, 2014 3:32:10 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter implements Presenter {
+public abstract class AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
+    protected final Messages messages = GWT.create(Messages.class);
+    protected final RootPanel widgetTag;
     final SimpleView simpleView = new SimpleView();
 
-    public ScreenPresenter(RootPanel widgetTag) {
+    public AbstractPresenter(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
     }
 
     @Override
     public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
-        simpleView.addLink("StyleTestPage", "StyleTestPage.html");
-        simpleView.resizeView();
-        widgetTag.add(simpleView);
         if (prevState != null) {
             simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
@@ -65,5 +62,13 @@ public class ScreenPresenter implements Presenter {
 
             });
         }
+        setTitle();
+        setContent();
+        simpleView.resizeView();
+        widgetTag.add(simpleView);
     }
+
+    abstract void setTitle();
+
+    abstract void setContent();
 }

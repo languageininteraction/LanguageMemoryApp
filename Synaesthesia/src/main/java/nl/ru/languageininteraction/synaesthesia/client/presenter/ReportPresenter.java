@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 
@@ -42,16 +43,29 @@ public class ReportPresenter implements Presenter {
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
         final ReportView reportView = new ReportView();
-        reportView.setButton(messages.nextbutton(), new AppEventListner() {
+        if (prevState != null) {
+            reportView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
-            @Override
-            public void eventFired() {
-                appEventListner.eventFired();
-            }
-        });
+                @Override
+                public void eventFired() {
+                    appEventListner.requestApplicationState(prevState);
+                }
+
+            });
+        }
+        if (nextState != null) {
+            reportView.setButton(messages.nextbutton(), new PresenterEventListner() {
+
+                @Override
+                public void eventFired() {
+                    appEventListner.requestApplicationState(nextState);
+                }
+
+            });
+        }
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         reportView.addTitle(messages.reportScreenTitle());
         reportView.showResults(userResults, scoreCalculator);

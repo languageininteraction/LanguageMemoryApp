@@ -41,8 +41,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
+import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 
@@ -406,7 +406,7 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.add(label);
     }
 
-    public void setButton(String buttonText, final AppEventListner presenterListerner) {
+    public void setButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);

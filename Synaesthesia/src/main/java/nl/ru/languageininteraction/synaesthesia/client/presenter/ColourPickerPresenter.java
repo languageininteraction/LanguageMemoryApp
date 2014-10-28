@@ -26,6 +26,7 @@ import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
@@ -59,7 +60,7 @@ public class ColourPickerPresenter implements Presenter {
         colourPickerCanvasView = new ColourPickerCanvasView();
     }
 
-    private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView) {
+    private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView, final AppEventListner.ApplicationState nextState) {
         if (stimuli.isEmpty()) {
             repeatCount--;
             if (repeatCount > 0) {
@@ -67,7 +68,7 @@ public class ColourPickerPresenter implements Presenter {
             }
         }
         if (stimuli.isEmpty()) {
-            appEventListner.eventFired();
+            appEventListner.requestApplicationState(nextState);
         } else {
             colourPickerCanvasView.setRandomColour();
             currentStimulus = stimuli.remove((int) (Math.random() * stimuli.size()));
@@ -77,28 +78,28 @@ public class ColourPickerPresenter implements Presenter {
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
-        colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new AppEventListner() {
+        colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new PresenterEventListner() {
 
             @Override
             public void eventFired() {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(colourPickerCanvasView.getColour(), new Date(), System.currentTimeMillis() - startMs));
-                triggerEvent(appEventListner, colourPickerCanvasView);
+                triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
         });
-        colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new AppEventListner() {
+        colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new PresenterEventListner() {
 
             @Override
             public void eventFired() {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(null, new Date(), System.currentTimeMillis() - startMs));
-                triggerEvent(appEventListner, colourPickerCanvasView);
+                triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
         });
         colourPickerCanvasView.setInstructions(messages.stimulusscreeninstructions());
-        triggerEvent(appEventListner, colourPickerCanvasView);
+        triggerEvent(appEventListner, colourPickerCanvasView, nextState);
         colourPickerCanvasView.resizeView();
         widgetTag.add(colourPickerCanvasView);
     }

@@ -25,6 +25,7 @@ import nl.ru.languageininteraction.synaesthesia.client.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 
 /**
@@ -44,21 +45,38 @@ public class MetadataPresenter implements Presenter {
         this.userResults = userResults;
     }
 
+    private void saveFields() {
+        for (String fieldName : metadataView.getFieldNames()) {
+            userResults.setMetadataValue(fieldName, metadataView.getFieldValue(fieldName));
+        }
+        new LocalStorage().storeData(userResults);
+    }
+
     @Override
-    public void setState(final AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
-        metadataView.setButton(messages.nextbutton(), new AppEventListner() {
+        if (prevState != null) {
+            metadataView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
-            @Override
-            public void eventFired() {
-                for (String fieldName : metadataView.getFieldNames()) {
-                    userResults.setMetadataValue(fieldName, metadataView.getFieldValue(fieldName));
+                @Override
+                public void eventFired() {
+                    saveFields();
+                    appEventListner.requestApplicationState(prevState);
                 }
-                new LocalStorage().storeData(userResults);
-                appEventListner.eventFired();
-            }
 
-        });
+            });
+        }
+        if (nextState != null) {
+            metadataView.setButton(messages.nextbutton(), new PresenterEventListner() {
+
+                @Override
+                public void eventFired() {
+                    saveFields();
+                    appEventListner.requestApplicationState(nextState);
+                }
+
+            });
+        }
         metadataView.addTitle(messages.metadatascreentitle());
         metadataView.addField(mateadataFields.postName1(), mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));
         metadataView.addField(mateadataFields.postName2(), mateadataFields.registrationField2(), userResults.getMetadataValue(mateadataFields.postName2()));

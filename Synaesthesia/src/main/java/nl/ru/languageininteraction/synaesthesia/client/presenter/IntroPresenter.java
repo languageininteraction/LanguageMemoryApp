@@ -15,38 +15,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.Presenter;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class IntroPresenter implements Presenter {
-
-    private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
-    final SimpleView simpleView = new SimpleView();
+public class IntroPresenter extends AbstractPresenter implements Presenter {
 
     public IntroPresenter(RootPanel widgetTag) {
-        this.widgetTag = widgetTag;
+        super(widgetTag);
     }
 
-    public void setState(final AppEventListner appEventListner) {
-        widgetTag.clear();
-        simpleView.setButton(messages.nextbutton(), new AppEventListner() {
-
-            public void eventFired() {
-                appEventListner.eventFired();
-            }
-
-        });
+    @Override
+    void setTitle() {
         simpleView.addTitle(messages.introductionscreentitle());
+    }
+
+    @Override
+    void setContent() {
         simpleView.setDisplayText(messages.introductionscreentext());
-        simpleView.resizeView();
-        widgetTag.add(simpleView);
     }
 }

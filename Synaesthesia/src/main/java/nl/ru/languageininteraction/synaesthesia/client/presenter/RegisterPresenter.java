@@ -24,7 +24,9 @@ import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
+import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)
@@ -35,7 +37,6 @@ public class RegisterPresenter implements Presenter {
     private final Messages messages = GWT.create(Messages.class);
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final RootPanel widgetTag;
-    final RegisterView registerView = new RegisterView();
     private final UserResults userResults;
 
     public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
@@ -44,15 +45,42 @@ public class RegisterPresenter implements Presenter {
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner) {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
-        registerView.setButton(messages.registerButton(), new AppEventListner() {
+        final RegisterView registerView = new RegisterView();
+        if (prevState != null) {
+            registerView.setButton(messages.prevbutton(), new PresenterEventListner() {
+
+                @Override
+                public void eventFired() {
+                    appEventListner.requestApplicationState(prevState);
+                }
+
+            });
+        }
+        registerView.setButton(messages.registerButton(), new PresenterEventListner() {
 
             @Override
             public void eventFired() {
-                appEventListner.eventFired();
+                widgetTag.clear();
+                final SimpleView simpleView = new SimpleView();
+                simpleView.addTitle(messages.registerScreenTitle());
+                simpleView.setDisplayText("Not supported yet.");
+                if (nextState != null) {
+                    simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
+
+                        @Override
+                        public void eventFired() {
+                            appEventListner.requestApplicationState(nextState);
+                        }
+
+                    });
+                }
+                simpleView.resizeView();
+                widgetTag.add(simpleView);
             }
         });
+
         registerView.addTitle(messages.registerScreenTitle());
         registerView.addText(messages.registerScreenText());
         registerView.addField(mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));

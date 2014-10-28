@@ -17,43 +17,30 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.Presenter;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 22, 2014 3:00:25 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ErrorPresenter implements Presenter {
+public class ErrorPresenter extends AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
-    private final SimpleView simpleView = new SimpleView();
     private final String errorMessage;
 
     public ErrorPresenter(RootPanel widgetTag, String errorMessage) {
-        this.widgetTag = widgetTag;
+        super(widgetTag);
         this.errorMessage = errorMessage;
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner) {
-        widgetTag.clear();
-        simpleView.setButton(messages.nextbutton(), new AppEventListner() {
-
-            @Override
-            public void eventFired() {
-                appEventListner.eventFired();
-            }
-
-        });
+    void setTitle() {
         simpleView.addTitle(messages.errorScreenTitle());
-        simpleView.setDisplayText(messages.errorScreenText(errorMessage));
-        simpleView.resizeView();
-        widgetTag.add(simpleView);
     }
+
+    @Override
+    void setContent() {
+        simpleView.setDisplayText(messages.errorScreenText(errorMessage));
+    }
+
 }

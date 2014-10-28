@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ReportPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.FeedbackPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ScreenPresenter;
@@ -36,13 +37,8 @@ public class AppController implements AppEventListner {
 
     private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
-    protected enum ApplicationState {
-
-        start, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
-    }
     private final RootPanel widgetTag;
     private Presenter presenter;
-    private ApplicationState state = ApplicationState.start;
     private final UserResults userResults;
     private final StimuliProvider stimuliProvider;
 
@@ -62,54 +58,53 @@ public class AppController implements AppEventListner {
     }
 
     @Override
-    public void eventFired() {
+    public void requestApplicationState(ApplicationState applicationState) {
         try {
-            switch (state) {
+            switch (applicationState) {
                 case start:
-                    state = ApplicationState.intro;
-                    this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this);
-                    break;
                 case intro:
-                    state = ApplicationState.metadata;
-                    this.presenter = new MetadataPresenter(widgetTag, userResults);
-                    presenter.setState(this);
+                    this.presenter = new IntroPresenter(widgetTag);
+                    presenter.setState(this, null, ApplicationState.metadata);
                     break;
                 case metadata:
-                    state = ApplicationState.stimulus;
-                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults, 3);
-                    presenter.setState(this);
+                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+                    presenter.setState(this, ApplicationState.intro, ApplicationState.stimulus);
                     break;
                 case stimulus:
-                    state = ApplicationState.report;
-                    this.presenter = new ReportPresenter(widgetTag, userResults);
-                    presenter.setState(this);
+                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
+                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults, 3);
+                    presenter.setState(this, ApplicationState.metadata, ApplicationState.report);
                     break;
                 case report:
-                    state = ApplicationState.feedback;
-                    this.presenter = new FeedbackPresenter(widgetTag);
-                    presenter.setState(this);
+                    this.presenter = new ReportPresenter(widgetTag, userResults);
+                    presenter.setState(this, ApplicationState.stimulus, ApplicationState.feedback);
                     break;
                 case feedback:
-                    state = ApplicationState.registration;
-                    this.presenter = new RegisterPresenter(widgetTag, userResults);
-                    presenter.setState(this);
+                    this.presenter = new FeedbackPresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.report, ApplicationState.registration);
                     break;
                 case registration:
-                    state = ApplicationState.end;
+                    this.presenter = new RegisterPresenter(widgetTag, userResults);
+                    presenter.setState(this, ApplicationState.feedback, ApplicationState.moreinfo);
+                    break;
+                case moreinfo:
+                case end:
                     this.presenter = new ScreenPresenter(widgetTag);
-                    presenter.setState(this);
+                    presenter.setState(this, ApplicationState.start, null);
                     break;
                 default:
-//                state = ApplicationState.start;
-//                presenter.setState(this);
+                    this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
+                    presenter.setState(this, ApplicationState.start, applicationState);
                     break;
             }
         } catch (StimulusError | CanvasError error) {
             logger.warning(error.getMessage());
             this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
-            presenter.setState(this);
+            presenter.setState(this, ApplicationState.start, applicationState);
         }
+    }
+
+    public void start() {
+        requestApplicationState(AppEventListner.ApplicationState.start);
     }
 }
