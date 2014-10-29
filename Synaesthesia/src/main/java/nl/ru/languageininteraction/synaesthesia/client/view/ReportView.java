@@ -37,12 +37,12 @@ import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponseGroup;
  */
 public class ReportView extends SimpleView {
 
-    final private HorizontalPanel resultsPanel;
+    final private VerticalPanel resultsPanel;
     final VerticalPanel outerPanel;
 
     public ReportView() {
         outerPanel = new VerticalPanel();
-        resultsPanel = new HorizontalPanel();
+        resultsPanel = new VerticalPanel();
         resultsPanel.setStylePrimaryName("resultsTablePanel");
         outerPanel.add(resultsPanel);
         setContent(outerPanel);
@@ -72,7 +72,7 @@ public class ReportView extends SimpleView {
                         label.getElement().setAttribute("style", "color: grey;background: none;");
                     } else {
                         String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
-                        label.getElement().setAttribute("style", "color:" + foreground + ";background:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
+                        label.getElement().setAttribute("style", "background:" + foreground + ";color:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
                     }
                     grid.setWidget(row, column, label);
                 }
