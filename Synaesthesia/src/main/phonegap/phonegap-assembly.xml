@@ -30,7 +30,7 @@
                 <include>config.xml</include>
             </includes>  
             <outputDirectory>/</outputDirectory>
-            <filtered>false</filtered>
+            <filtered>true</filtered>
         </fileSet>
     </fileSets>
 </assembly>

@@ -62,9 +62,20 @@
     <build>
         <!-- Generate compiled stuff in the folder used for developing mode -->
         <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
-
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>                
+                <includes>
+                    <include>**/Version.properties</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
-
             <!-- GWT Maven Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -90,6 +101,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.MetadataFields</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Stimuli</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.ServiceLocations</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Version</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>

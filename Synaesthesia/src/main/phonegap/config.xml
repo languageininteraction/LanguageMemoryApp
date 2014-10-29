@@ -4,15 +4,14 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "nl.ru.languageininteraction.synaesthesia"
-        version   = "1.0.0">
-
+        version   = "${application.majorVersion}.${application.minorVersion}.${application.buildVersion}">
     <name>Grapheme Colour Synaesthesia App</name>
 
     <description>
         A mobile synesthesia battery.
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
+    <author href="https://github.com/languageininteraction/GraphemeColourSynaesthesiaApp" email="">
         Peter Withers, Language In Interaction, Radboud University
     </author>
 

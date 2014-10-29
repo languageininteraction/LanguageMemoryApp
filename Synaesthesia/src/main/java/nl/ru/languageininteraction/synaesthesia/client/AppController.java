@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
 
 /**
@@ -66,6 +67,10 @@ public class AppController implements AppEventListner {
         try {
             switch (applicationState) {
                 case start:
+                case version:
+                    this.presenter = new VersionPresenter(widgetTag);
+                    presenter.setState(this, null, ApplicationState.intro);
+                    break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
                     presenter.setState(this, null, ApplicationState.metadata);
