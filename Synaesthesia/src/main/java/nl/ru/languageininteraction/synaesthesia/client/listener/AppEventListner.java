@@ -15,13 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.listener;
 
 /**
- * @since Oct 10, 2014 10:05:41 AM (creation date)
+ * @since Oct 8, 2014 11:01:07 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface Presenter {
+public interface AppEventListner {
 
-    void setState(AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState);
+    enum ApplicationState {
+
+        start, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
+    }
+
+    public void requestApplicationState(ApplicationState applicationState);
 }

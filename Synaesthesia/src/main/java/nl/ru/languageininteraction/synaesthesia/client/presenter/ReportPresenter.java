@@ -20,10 +20,9 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
-import nl.ru.languageininteraction.synaesthesia.client.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
-import nl.ru.languageininteraction.synaesthesia.client.Presenter;
-import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 

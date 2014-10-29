@@ -41,8 +41,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import nl.ru.languageininteraction.synaesthesia.client.CanvasError;
-import nl.ru.languageininteraction.synaesthesia.client.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
 import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
 

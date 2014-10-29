@@ -15,16 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.presenter;
+
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 
 /**
- * @since Oct 22, 2014 4:43:29 PM (creation date)
+ * @since Oct 10, 2014 10:05:41 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class CanvasError extends Exception {
+public interface Presenter {
 
-    public CanvasError(String message) {
-        super(message);
-    }
-
+    void setState(AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState);
 }

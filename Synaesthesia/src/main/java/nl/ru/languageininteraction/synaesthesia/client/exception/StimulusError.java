@@ -15,13 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.exception;
 
 /**
- * @since Oct 28, 2014 12:16:19 PM (creation date)
+ * @since Oct 22, 2014 2:22:43 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface PresenterEventListner {
+public class StimulusError extends Exception {
 
-    public void eventFired();
+    public StimulusError(String message) {
+        super(message);
+    }
+
 }

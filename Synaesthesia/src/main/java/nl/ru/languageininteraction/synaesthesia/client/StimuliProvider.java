@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;

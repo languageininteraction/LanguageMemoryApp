@@ -18,7 +18,6 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.RootPanel;
-import nl.ru.languageininteraction.synaesthesia.client.Presenter;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)

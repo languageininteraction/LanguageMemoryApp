@@ -17,6 +17,10 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
+import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ReportPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.FeedbackPresenter;

@@ -15,18 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.synaesthesia.client.exception;
 
 /**
- * @since Oct 8, 2014 11:01:07 AM (creation date)
+ * @since Oct 22, 2014 4:43:29 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface AppEventListner {
+public class CanvasError extends Exception {
 
-    enum ApplicationState {
-
-        start, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
+    public CanvasError(String message) {
+        super(message);
     }
 
-    public void requestApplicationState(ApplicationState applicationState);
 }
