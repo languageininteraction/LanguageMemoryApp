@@ -25,6 +25,8 @@ import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
+import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
@@ -46,7 +48,7 @@ public class RegisterPresenter implements Presenter {
     @Override
     public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
-        final RegisterView registerView = new RegisterView();
+        RegisterView registerView = new RegisterView();
         if (prevState != null) {
             registerView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
@@ -64,17 +66,40 @@ public class RegisterPresenter implements Presenter {
                 widgetTag.clear();
                 final SimpleView simpleView = new SimpleView();
                 simpleView.addTitle(messages.registerScreenTitle());
-                simpleView.setDisplayText("Not supported yet.");
-                if (nextState != null) {
-                    simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
+                if (prevState != null) {
+                    simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
                         @Override
                         public void eventFired() {
-                            appEventListner.requestApplicationState(nextState);
+                            appEventListner.requestApplicationState(prevState);
                         }
 
                     });
                 }
+                simpleView.setDisplayText("Connecting");
+                final RegistrationService registrationService = new RegistrationService();
+                registrationService.submitRegistration(userResults, new RegistrationListener() {
+
+                    @Override
+                    public void registrationFailed(Throwable exception) {
+                        simpleView.setDisplayText("Registration failed. " + exception.getMessage());
+                    }
+
+                    @Override
+                    public void registrationComplete() {
+                        simpleView.setDisplayText("Registration complete.");
+                        if (nextState != null) {
+                            simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
+
+                                @Override
+                                public void eventFired() {
+                                    appEventListner.requestApplicationState(nextState);
+                                }
+
+                            });
+                        }
+                    }
+                });
                 simpleView.resizeView();
                 widgetTag.add(simpleView);
             }

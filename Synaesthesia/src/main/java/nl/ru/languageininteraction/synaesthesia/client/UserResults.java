@@ -68,4 +68,8 @@ public class UserResults {
     public String getMetadataValue(String key) {
         return metadataValues.get(key);
     }
+
+    public Set<String> getMetadataKeys() {
+        return metadataValues.keySet();
+    }
 }

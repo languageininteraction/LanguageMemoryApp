@@ -23,9 +23,11 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
+import nl.ru.languageininteraction.synaesthesia.client.UserResults;
 
 /**
  * @since Oct 29, 2014 11:18:31 AM (creation date)
@@ -36,9 +38,19 @@ public class RegistrationService {
     private static final Logger logger = Logger.getLogger(RegistrationService.class.getName());
     final private ServiceLocations serviceLocations = GWT.create(ServiceLocations.class);
 
-    public void submitRegistration(RegistrationListener registrationListener) {
+    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener) {
         final String registratinoUrl = serviceLocations.registrationUrl();
-        final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, registratinoUrl);
+        final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
+        builder.setHeader("Content-type", "application/x-www-form-urlencoded");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String key : userResults.getMetadataKeys()) {
+            String value = URL.encodeQueryString(userResults.getMetadataValue(key));
+            if (stringBuilder.length() > 0) {
+                stringBuilder.append("&");
+            }
+            stringBuilder.append(key).append("=").append(value);
+        }
+        builder.setRequestData(stringBuilder.toString());
         try {
             builder.sendRequest(null, geRequestBuilder(builder, registrationListener, registratinoUrl));
         } catch (RequestException exception) {
