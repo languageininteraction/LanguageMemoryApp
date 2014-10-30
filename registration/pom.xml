@@ -73,6 +73,11 @@
             <version>${glassfish.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.7</version>
+        </dependency>
     </dependencies>
     <properties>
         <jersey.version>1.18.2</jersey.version>

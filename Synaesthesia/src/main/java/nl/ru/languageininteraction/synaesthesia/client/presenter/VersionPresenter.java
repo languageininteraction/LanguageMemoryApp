@@ -35,7 +35,7 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     void setTitle() {
-        simpleView.addTitle(messages.applicationVersion());
+        simpleView.addTitle(messages.versionScreenTitle());
     }
 
     @Override
