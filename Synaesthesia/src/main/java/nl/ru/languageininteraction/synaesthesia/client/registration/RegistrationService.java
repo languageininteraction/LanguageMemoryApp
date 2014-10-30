@@ -50,9 +50,8 @@ public class RegistrationService {
             }
             stringBuilder.append(key).append("=").append(value);
         }
-        builder.setRequestData(stringBuilder.toString());
         try {
-            builder.sendRequest(null, geRequestBuilder(builder, registrationListener, registratinoUrl));
+            builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));
         } catch (RequestException exception) {
             registrationListener.registrationFailed(exception);
             logger.log(Level.SEVERE, "SubmitRegistration", exception);

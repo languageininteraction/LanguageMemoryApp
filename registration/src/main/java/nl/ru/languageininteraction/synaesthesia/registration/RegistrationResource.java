@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 
 @Path("submit")
 public class RegistrationResource {
@@ -25,17 +26,23 @@ public class RegistrationResource {
     }
 
     @POST
-    @Produces("text/plain")
-    public String postSubmit(MultivaluedMap<String, String> formParams) {
+    @Produces("text/html")
+    public Response postSubmit(MultivaluedMap<String, String> formParams) {
+        StringBuilder stringBuilder = new StringBuilder();
         logger.info("postSubmit");
+        stringBuilder.append("postSubmit");
         for (String key : formParams.keySet()) {
             logger.info("key");
+            stringBuilder.append("<br>key: ");
             logger.info(key);
+            stringBuilder.append(key);
             for (String value : formParams.get(key)) {
                 logger.info("value");
+                stringBuilder.append("<br>value: ");
                 logger.info(value);
+                stringBuilder.append(value);
             }
         }
-        return "submitted";
+        return Response.ok(stringBuilder.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 }
