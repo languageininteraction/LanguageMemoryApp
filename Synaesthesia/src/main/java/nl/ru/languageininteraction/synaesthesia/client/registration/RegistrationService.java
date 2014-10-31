@@ -26,8 +26,10 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser;
 
 /**
  * @since Oct 29, 2014 11:18:31 AM (creation date)
@@ -37,6 +39,7 @@ public class RegistrationService {
 
     private static final Logger logger = Logger.getLogger(RegistrationService.class.getName());
     final private ServiceLocations serviceLocations = GWT.create(ServiceLocations.class);
+    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
 
     public void submitRegistration(UserResults userResults, RegistrationListener registrationListener) {
         final String registratinoUrl = serviceLocations.registrationUrl();
@@ -50,6 +53,11 @@ public class RegistrationService {
             }
             stringBuilder.append(key).append("=").append(value);
         }
+        if (stringBuilder.length() > 0) {
+            stringBuilder.append("&");
+        }
+        String restultsData = URL.encodeQueryString(new ResultsSerialiser().serialise(userResults, mateadataFields.postName_email()));
+        stringBuilder.append("quiz_results=").append(restultsData);
         try {
             builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));
         } catch (RequestException exception) {
