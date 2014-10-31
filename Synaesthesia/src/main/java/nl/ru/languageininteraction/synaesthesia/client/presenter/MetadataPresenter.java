@@ -23,9 +23,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
-import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)
@@ -34,7 +35,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 public class MetadataPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
-    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final RootPanel widgetTag;
     final MetadataView metadataView = new MetadataView(messages.metadatascreentext());
     private final UserResults userResults;
@@ -77,11 +78,9 @@ public class MetadataPresenter implements Presenter {
             });
         }
         metadataView.addTitle(messages.metadatascreentitle());
-        metadataView.addField(mateadataFields.postName1(), mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));
-        metadataView.addField(mateadataFields.postName2(), mateadataFields.registrationField2(), userResults.getMetadataValue(mateadataFields.postName2()));
-        metadataView.addField(mateadataFields.postName3(), mateadataFields.registrationField3(), userResults.getMetadataValue(mateadataFields.postName3()));
-        metadataView.addField(mateadataFields.postName4(), mateadataFields.registrationField4(), userResults.getMetadataValue(mateadataFields.postName4()));
-//        metadataView.setDisplayText(messages.nl_ru_languageininteraction_synaesthesia_introductionscreentext());
+        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+            metadataView.addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+        }
         metadataView.resizeView();
         widgetTag.add(metadataView);
     }

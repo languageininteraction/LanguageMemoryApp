@@ -18,34 +18,31 @@
 package nl.ru.languageininteraction.synaesthesia.client.model;
 
 /**
- * @since Oct 14, 2014 1:17:38 PM (creation date)
+ * @since Oct 31, 2014 4:15:16 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ColourData {
+public class MetadataField {
 
-    private final int red;
-    private final int green;
-    private final int blue;
+    private final String postName;
+    private final String fieldLabel;
+    private final String controlledVocabulary;
 
-    public ColourData(int red, int green, int blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+    public MetadataField(String postName, String fieldLabel, String controlledVocabulary) {
+        this.postName = postName;
+        this.fieldLabel = fieldLabel;
+        this.controlledVocabulary = controlledVocabulary;
     }
 
-    public int getRed() {
-        return red;
+    public String getPostName() {
+        return postName;
     }
 
-    public int getGreen() {
-        return green;
+    public String getFieldLabel() {
+        return fieldLabel;
     }
 
-    public int getBlue() {
-        return blue;
+    public String getControlledVocabulary() {
+        return controlledVocabulary;
     }
 
-    public String getHexValue() {
-        return String.format("#%02x%02x%02x", red, green, blue);
-    }
 }

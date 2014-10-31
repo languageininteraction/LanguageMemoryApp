@@ -18,9 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.storage.client.Storage;
-import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
+import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -28,16 +27,16 @@ import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
  */
 public class LocalStorage {
 
-    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private Storage stockstore = null;
     private static final String USER_RESULTS = "UserResults.";
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
     public UserResults getStoredData() {
         UserResults userResults = new UserResults();
         stockstore = Storage.getLocalStorageIfSupported();
         if (stockstore != null) {
-            for (String postName : new String[]{mateadataFields.postName1(), mateadataFields.postName2(), mateadataFields.postName3(), mateadataFields.postName4()}) {
-                userResults.setMetadataValue(postName, stockstore.getItem(USER_RESULTS + postName));
+            for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+                userResults.setMetadataValue(metadataField.getPostName(), stockstore.getItem(USER_RESULTS + metadataField.getPostName()));
             }
         }
         return userResults;
@@ -46,8 +45,8 @@ public class LocalStorage {
     public void storeData(UserResults userResults) {
         stockstore = Storage.getLocalStorageIfSupported();
         if (stockstore != null) {
-            for (String postName : new String[]{mateadataFields.postName1(), mateadataFields.postName2(), mateadataFields.postName3(), mateadataFields.postName4()}) {
-                stockstore.setItem(USER_RESULTS + postName, userResults.getMetadataValue(postName));
+            for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+                stockstore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
             }
         }
     }

@@ -22,11 +22,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
-import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
+import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
@@ -36,7 +37,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 public class RegisterPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
-    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final RootPanel widgetTag;
     private final UserResults userResults;
 
@@ -107,10 +108,9 @@ public class RegisterPresenter implements Presenter {
 
         registerView.addTitle(messages.registerScreenTitle());
         registerView.addText(messages.registerScreenText());
-        registerView.addField(mateadataFields.registrationField1(), userResults.getMetadataValue(mateadataFields.postName1()));
-        registerView.addField(mateadataFields.registrationField2(), userResults.getMetadataValue(mateadataFields.postName2()));
-        registerView.addField(mateadataFields.registrationField3(), userResults.getMetadataValue(mateadataFields.postName3()));
-        registerView.addField(mateadataFields.registrationField4(), userResults.getMetadataValue(mateadataFields.postName4()));
+        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+            registerView.addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+        }
         registerView.resizeView();
         widgetTag.add(registerView);
     }
