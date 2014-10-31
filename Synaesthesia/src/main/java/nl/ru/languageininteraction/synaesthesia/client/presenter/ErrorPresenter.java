@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 22, 2014 3:00:25 PM (creation date)
@@ -28,7 +29,7 @@ public class ErrorPresenter extends AbstractPresenter implements Presenter {
     private final String errorMessage;
 
     public ErrorPresenter(RootPanel widgetTag, String errorMessage) {
-        super(widgetTag);
+        super(widgetTag, new SimpleView());
         this.errorMessage = errorMessage;
     }
 

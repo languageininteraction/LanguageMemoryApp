@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 29, 2014 4:42:44 PM (creation date)
@@ -30,7 +31,7 @@ public class VersionPresenter extends AbstractPresenter {
     private final Version version = GWT.create(Version.class);
 
     public VersionPresenter(RootPanel widgetTag) {
-        super(widgetTag);
+        super(widgetTag, new SimpleView());
     }
 
     @Override

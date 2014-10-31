@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
@@ -26,7 +27,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class IntroPresenter extends AbstractPresenter implements Presenter {
 
     public IntroPresenter(RootPanel widgetTag) {
-        super(widgetTag);
+        super(widgetTag, new SimpleView());
     }
 
     @Override

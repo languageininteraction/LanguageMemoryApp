@@ -32,10 +32,11 @@ public abstract class AbstractPresenter implements Presenter {
 
     protected final Messages messages = GWT.create(Messages.class);
     protected final RootPanel widgetTag;
-    final SimpleView simpleView = new SimpleView();
+    final SimpleView simpleView;
 
-    public AbstractPresenter(RootPanel widgetTag) {
+    public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
+        this.simpleView = simpleView;
     }
 
     @Override

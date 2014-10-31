@@ -13,6 +13,25 @@
     outline: none;
 }
 
+.gwt-Button.menuButton {
+    /*background:rgb(246,170,139);*/
+    display: block;
+    display: inline-block;
+    background: rgb(246,170,139);
+    /*background: rgb(193,227,241);*/
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    color: black;
+    border-color: rgb(142,207,230);
+    /*border-color: rgb(142,207,230);*/
+    text-decoration: none;
+    cursor: pointer;
+    /*border-color: transparent;*/
+    border-radius: 15px;
+    outline: none;
+    width: 100%;
+}
+
 .contentPanel {
     border-top-color: white;
     border-top-width: 1px;
