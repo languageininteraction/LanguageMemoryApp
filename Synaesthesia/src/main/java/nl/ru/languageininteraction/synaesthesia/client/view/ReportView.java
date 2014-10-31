@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.List;
-import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
+import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;

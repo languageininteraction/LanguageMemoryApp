@@ -17,6 +17,8 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
+import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;

@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
+import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 
 /**

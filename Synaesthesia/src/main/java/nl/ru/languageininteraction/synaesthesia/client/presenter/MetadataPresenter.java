@@ -21,7 +21,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.LocalStorage;
+import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
