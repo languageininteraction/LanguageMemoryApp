@@ -58,12 +58,26 @@ canvas {
     background: black;
 }
 
-.gwt-HTML, .resultsTablePanel, .metadataTable{
+.headerLabel {
+    padding: 10px 10px;
+}
+
+.menuTable {
+    padding: 10px 10px;
+    margin: 10px 10px 10px 10px;
+    border-color: rgb(142,207,230);
+    border-radius: 15px;
+    /*background: rgb(193,227,241);*/
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+}
+.gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable {
     margin-left: 69px;   
     margin-right: 69px;   
 }
 
-.gwt-Label, .gwt-HTML{  
+.gwt-Label, .gwt-HTML, .headerLabel{  
     color:rgb(255,255,255); 
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
     font-size: 17pt;

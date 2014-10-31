@@ -43,7 +43,7 @@ public class SimpleView extends AbstractView {
 
     public SimpleView() {
         headerPanel = new HorizontalPanel();
-//        headerPanel.setStylePrimaryName("headerPanel");
+        headerPanel.setStylePrimaryName("headerPanel");
         footerPanel = new HorizontalPanel();
         borderedContentPanel = new HorizontalPanel();
         borderedContentPanel.setStylePrimaryName("contentPanel");
@@ -68,7 +68,9 @@ public class SimpleView extends AbstractView {
         final Image image = new Image("./images/icon.png");
         image.setSize(50 + "px", 50 + "px");
         headerPanel.add(image);
-        headerPanel.add(new Label(label));
+        final Label headerLabel = new Label(label);
+        headerLabel.setStylePrimaryName("headerLabel");
+        headerPanel.add(headerLabel);
     }
 
     public void addLink(String label, String target) {
