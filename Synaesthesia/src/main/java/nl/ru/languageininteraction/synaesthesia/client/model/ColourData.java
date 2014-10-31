@@ -46,6 +46,15 @@ public class ColourData {
     }
 
     public String getHexValue() {
-        return String.format("#%02x%02x%02x", red, green, blue);
+        // String format is not available in GWT so we manualy format the hex instead
+//        return String.format("#%02x%02x%02x", red, green, blue);
+        return "#"
+                + addPadding(Integer.toHexString(red))
+                + addPadding(Integer.toHexString(green))
+                + addPadding(Integer.toHexString(blue));
+    }
+
+    private String addPadding(String hexValue) {
+        return (hexValue.length() == 1) ? "0" + hexValue : hexValue;
     }
 }
