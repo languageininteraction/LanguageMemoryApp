@@ -24,12 +24,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.List;
 import nl.ru.languageininteraction.synaesthesia.client.ScoreCalculator;
-import nl.ru.languageininteraction.synaesthesia.client.UserResults;
-import nl.ru.languageininteraction.synaesthesia.shared.ColourData;
-import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
-import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponse;
-import nl.ru.languageininteraction.synaesthesia.shared.StimulusResponseGroup;
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
 
 /**
  * @since Oct 14, 2014 10:57:45 AM (creation date)

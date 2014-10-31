@@ -15,46 +15,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.shared;
-
-import java.util.Objects;
+package nl.ru.languageininteraction.synaesthesia.client.model;
 
 /**
- * @since Oct 14, 2014 1:17:57 PM (creation date)
+ * @since Oct 14, 2014 1:17:38 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class Stimulus {
+public class ColourData {
 
-    private final String value;
+    private final int red;
+    private final int green;
+    private final int blue;
 
-    public Stimulus(String value) {
-        this.value = value;
+    public ColourData(int red, int green, int blue) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
     }
 
-    public String getValue() {
-        return value;
+    public int getRed() {
+        return red;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.value);
-        return hash;
+    public int getGreen() {
+        return green;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Stimulus other = (Stimulus) obj;
-        if (!Objects.equals(this.value, other.value)) {
-            return false;
-        }
-        return true;
+    public int getBlue() {
+        return blue;
     }
-
 }

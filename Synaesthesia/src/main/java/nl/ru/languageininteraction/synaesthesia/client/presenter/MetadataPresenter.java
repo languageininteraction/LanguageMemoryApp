@@ -25,7 +25,7 @@ import nl.ru.languageininteraction.synaesthesia.client.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)

@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
@@ -33,7 +34,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
-import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)

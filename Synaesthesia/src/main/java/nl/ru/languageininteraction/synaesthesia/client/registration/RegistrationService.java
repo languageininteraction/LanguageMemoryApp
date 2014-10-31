@@ -27,7 +27,7 @@ import com.google.gwt.http.client.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
-import nl.ru.languageininteraction.synaesthesia.client.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 
 /**
  * @since Oct 29, 2014 11:18:31 AM (creation date)

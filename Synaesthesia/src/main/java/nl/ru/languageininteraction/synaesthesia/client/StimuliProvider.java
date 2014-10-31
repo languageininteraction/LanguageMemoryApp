@@ -20,8 +20,8 @@ package nl.ru.languageininteraction.synaesthesia.client;
 import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
-import nl.ru.languageininteraction.synaesthesia.shared.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 
 /**
  * @since Oct 22, 2014 12:07:20 PM (creation date)

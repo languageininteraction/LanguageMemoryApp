@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.storage.client.Storage;
 

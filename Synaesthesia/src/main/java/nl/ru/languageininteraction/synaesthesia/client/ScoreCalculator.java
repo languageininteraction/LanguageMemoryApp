@@ -17,7 +17,8 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
-import nl.ru.languageininteraction.synaesthesia.shared.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 
 /**
  * @since Oct 21, 2014 4:49:43 PM (creation date)

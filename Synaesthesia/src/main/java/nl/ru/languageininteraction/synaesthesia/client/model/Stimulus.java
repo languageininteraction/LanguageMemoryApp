@@ -15,37 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.shared;
+package nl.ru.languageininteraction.synaesthesia.client.model;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
- * @since Oct 22, 2014 5:08:11 PM (creation date)
+ * @since Oct 14, 2014 1:17:57 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class StimuliGroup {
+public class Stimulus {
 
-    private final String groupLabel;
-    private final List<Stimulus> stimuli;
+    private final String value;
 
-    public StimuliGroup(String groupLabel, List<Stimulus> stimuli) {
-        this.groupLabel = groupLabel;
-        this.stimuli = stimuli;
+    public Stimulus(String value) {
+        this.value = value;
     }
 
-    public List<Stimulus> getStimuli() {
-        return stimuli;
-    }
-
-    public String getGroupLabel() {
-        return groupLabel;
+    public String getValue() {
+        return value;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.groupLabel);
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.value);
         return hash;
     }
 
@@ -57,8 +50,8 @@ public class StimuliGroup {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final StimuliGroup other = (StimuliGroup) obj;
-        if (!Objects.equals(this.groupLabel, other.groupLabel)) {
+        final Stimulus other = (Stimulus) obj;
+        if (!Objects.equals(this.value, other.value)) {
             return false;
         }
         return true;
