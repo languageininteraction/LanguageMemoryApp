@@ -36,6 +36,11 @@ public class RegisterView extends SimpleView {
         setContent(outerPanel);
     }
 
+    public void clearGui() {
+        outerPanel.clear();
+        flexTable = null;
+    }
+
     public void addText(String textString) {
         HTML html = new HTML(textString);
         outerPanel.add(html);

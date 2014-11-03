@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -56,7 +57,7 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
                 ((MenuView) simpleView).addMenuItem(displayName, new PresenterEventListner() {
 
                     @Override
-                    public void eventFired() {
+                    public void eventFired(Button button) {
                         final String queryString = Window.Location.getQueryString();
                         final String localeGet = "locale=";
                         final String updatedPathValue;

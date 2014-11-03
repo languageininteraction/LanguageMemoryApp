@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
@@ -46,7 +47,7 @@ public abstract class AbstractPresenter implements Presenter {
             simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
 
                 @Override
-                public void eventFired() {
+                public void eventFired(Button button) {
                     pageClosing();
                     appEventListner.requestApplicationState(prevState);
                 }
@@ -56,7 +57,7 @@ public abstract class AbstractPresenter implements Presenter {
             simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
 
                 @Override
-                public void eventFired() {
+                public void eventFired(Button button) {
                     pageClosing();
                     appEventListner.requestApplicationState(nextState);
                 }
@@ -65,7 +66,7 @@ public abstract class AbstractPresenter implements Presenter {
         setTitle(new PresenterEventListner() {
 
             @Override
-            public void eventFired() {
+            public void eventFired(Button button) {
                 pageClosing();
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
             }

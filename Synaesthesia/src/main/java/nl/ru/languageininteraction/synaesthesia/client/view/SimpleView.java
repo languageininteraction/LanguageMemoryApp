@@ -76,7 +76,7 @@ public class SimpleView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
-                    presenterListerner.eventFired();
+                    presenterListerner.eventFired(null);
                 }
             };
             backLabel.addClickHandler(backHandler);
@@ -91,7 +91,7 @@ public class SimpleView extends AbstractView {
         scrollPanel.setWidget(new Anchor(label, target));
     }
 
-    public void setButton(String buttonText, final PresenterEventListner presenterListerner) {
+    public Button setButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("nextButton");
         nextButton.setEnabled(true);
@@ -100,16 +100,16 @@ public class SimpleView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
-                presenterListerner.eventFired();
+                presenterListerner.eventFired(nextButton);
             }
         });
+        return nextButton;
     }
 
-//    DockLayoutPanel p = new DockLayoutPanel();
-//p.addNorth(new HTML("header"), 2);
-//p.addSouth(new HTML("footer"), 2);
-//p.addWest(new HTML("navigation"), 10);
-//p.add(new HTML(content));
+    public void removeButton(Button button) {
+        footerPanel.remove(button);
+    }
+
     @Override
     protected void parentResized(int height, int width, String units) {
         footerPanel.setWidth(width + "px");

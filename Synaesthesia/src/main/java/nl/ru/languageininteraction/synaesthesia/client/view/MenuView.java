@@ -57,7 +57,7 @@ public class MenuView extends SimpleView {
 
             @Override
             public void onClick(ClickEvent event) {
-                menuItemListerner.eventFired();
+                menuItemListerner.eventFired(menuButton);
             }
         });
         final int rowCount = flexTable.getRowCount();

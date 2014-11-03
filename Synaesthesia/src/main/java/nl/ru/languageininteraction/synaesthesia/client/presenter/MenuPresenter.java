@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -39,17 +40,22 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(final AppEventListner appEventListner) {
-        setUpLocaleOptions(appEventListner, messages.versionScreenTitle(), AppEventListner.ApplicationState.version);
-        setUpLocaleOptions(appEventListner, messages.introductionscreentitle(), AppEventListner.ApplicationState.intro);
-        setUpLocaleOptions(appEventListner, messages.localeScreenTitle(), AppEventListner.ApplicationState.locale);
-        setUpLocaleOptions(appEventListner, messages.versionScreenTitle(), AppEventListner.ApplicationState.version);
+        setUpLocaleOptions(appEventListner, messages.introMenuLabel(), AppEventListner.ApplicationState.intro);
+        setUpLocaleOptions(appEventListner, messages.metadataMenuLabel(), AppEventListner.ApplicationState.metadata);
+        setUpLocaleOptions(appEventListner, messages.stimulusMenuLabel(), AppEventListner.ApplicationState.stimulus);
+        setUpLocaleOptions(appEventListner, messages.reportMenuLabel(), AppEventListner.ApplicationState.report);
+        setUpLocaleOptions(appEventListner, messages.feedbackMenuLabel(), AppEventListner.ApplicationState.feedback);
+        setUpLocaleOptions(appEventListner, messages.registerMenuLabel(), AppEventListner.ApplicationState.registration);
+        setUpLocaleOptions(appEventListner, messages.moreInfoMenuLabel(), AppEventListner.ApplicationState.moreinfo);
+        setUpLocaleOptions(appEventListner, messages.localeMenuLabel(), AppEventListner.ApplicationState.locale);
+        setUpLocaleOptions(appEventListner, messages.versionMenuLabel(), AppEventListner.ApplicationState.version);
     }
 
     private void setUpLocaleOptions(final AppEventListner appEventListner, String displayName, final AppEventListner.ApplicationState applicationState) {
         ((MenuView) simpleView).addMenuItem(displayName, new PresenterEventListner() {
 
             @Override
-            public void eventFired() {
+            public void eventFired(Button button) {
                 appEventListner.requestApplicationState(applicationState);
             }
         });

@@ -17,66 +17,58 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class RegisterPresenter implements Presenter {
+public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
-    private final RootPanel widgetTag;
     private final UserResults userResults;
 
     public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
-        this.widgetTag = widgetTag;
+        super(widgetTag, new RegisterView());
         this.userResults = userResults;
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
-        widgetTag.clear();
-        RegisterView registerView = new RegisterView();
-        if (prevState != null) {
-            registerView.setButton(messages.prevbutton(), new PresenterEventListner() {
+    public void setState(AppEventListner appEventListner, AppEventListner.ApplicationState prevState, AppEventListner.ApplicationState nextState) {
+        this.nextState = nextState;
+        super.setState(appEventListner, prevState, null);
+    }
 
-                @Override
-                public void eventFired() {
-                    appEventListner.requestApplicationState(prevState);
-                }
+    @Override
+    void pageClosing() {
+    }
 
-            });
+    @Override
+    void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.registerScreenTitle(), titleBarListner);
+    }
+
+    @Override
+    void setContent(AppEventListner appEventListner) {
+        ((RegisterView) simpleView).addText(messages.registerScreenText());
+        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+            ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        registerView.setButton(messages.registerButton(), new PresenterEventListner() {
+        simpleView.setButton(messages.registerButton(), new PresenterEventListner() {
 
             @Override
-            public void eventFired() {
-                widgetTag.clear();
-                final SimpleView simpleView = new SimpleView();
-                simpleView.addTitle(messages.registerScreenTitle());
-                if (prevState != null) {
-                    simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
-
-                        @Override
-                        public void eventFired() {
-                            appEventListner.requestApplicationState(prevState);
-                        }
-
-                    });
-                }
+            public void eventFired(Button button) {
+                ((RegisterView) simpleView).clearGui();
+                simpleView.removeButton(button);
                 simpleView.setDisplayText("Connecting");
                 final RegistrationService registrationService = new RegistrationService();
                 registrationService.submitRegistration(userResults, new RegistrationListener() {
@@ -89,29 +81,10 @@ public class RegisterPresenter implements Presenter {
                     @Override
                     public void registrationComplete() {
                         simpleView.setDisplayText("Registration complete.");
-                        if (nextState != null) {
-                            simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
-
-                                @Override
-                                public void eventFired() {
-                                    appEventListner.requestApplicationState(nextState);
-                                }
-
-                            });
-                        }
                     }
                 });
-                simpleView.resizeView();
-                widgetTag.add(simpleView);
             }
         });
-
-        registerView.addTitle(messages.registerScreenTitle());
-        registerView.addText(messages.registerScreenText());
-        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            registerView.addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
-        }
-        registerView.resizeView();
-        widgetTag.add(registerView);
     }
+
 }

@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import nl.ru.languageininteraction.synaesthesia.client.view.ColourPickerCanvasView;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.ArrayList;
 import java.util.Date;
@@ -84,7 +85,7 @@ public class ColourPickerPresenter implements Presenter {
         colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new PresenterEventListner() {
 
             @Override
-            public void eventFired() {
+            public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(colourPickerCanvasView.getColour(), new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
@@ -92,7 +93,7 @@ public class ColourPickerPresenter implements Presenter {
         colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new PresenterEventListner() {
 
             @Override
-            public void eventFired() {
+            public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(null, new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }

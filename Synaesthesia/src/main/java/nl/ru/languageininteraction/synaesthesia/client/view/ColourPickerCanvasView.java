@@ -415,7 +415,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
-                presenterListerner.eventFired();
+                presenterListerner.eventFired(nextButton);
             }
         });
     }
