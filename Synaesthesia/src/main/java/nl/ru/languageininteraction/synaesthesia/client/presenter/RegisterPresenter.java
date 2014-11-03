@@ -36,17 +36,18 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final UserResults userResults;
+//    private AppEventListner.ApplicationState nextState;
 
     public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new RegisterView());
         this.userResults = userResults;
     }
 
-    @Override
-    public void setState(AppEventListner appEventListner, AppEventListner.ApplicationState prevState, AppEventListner.ApplicationState nextState) {
-        this.nextState = nextState;
-        super.setState(appEventListner, prevState, null);
-    }
+//    @Override
+//    public void setState(AppEventListner appEventListner, AppEventListner.ApplicationState prevState, AppEventListner.ApplicationState nextState) {
+//        this.nextState = nextState;
+//        super.setState(appEventListner, prevState, null);
+//    }
 
     @Override
     void pageClosing() {
