@@ -37,6 +37,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -71,13 +72,17 @@ public class AppController implements AppEventListner {
         try {
             switch (applicationState) {
                 case start:
+                case menu:
+                    this.presenter = new MenuPresenter(widgetTag);
+                    presenter.setState(this, null, null);
+                    break;
                 case locale:
                     this.presenter = new LocalePresenter(widgetTag);
                     presenter.setState(this, null, ApplicationState.version);
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.locale, ApplicationState.intro);
+                    presenter.setState(this, ApplicationState.menu, null);
                     break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);

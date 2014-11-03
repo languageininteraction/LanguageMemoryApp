@@ -60,7 +60,6 @@ public class MenuView extends SimpleView {
                 menuItemListerner.eventFired();
             }
         });
-
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, menuButton);
     }

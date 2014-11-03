@@ -18,6 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
@@ -31,12 +33,16 @@ public class IntroPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void setTitle() {
-        simpleView.addTitle(messages.introductionscreentitle());
+    void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
     }
 
     @Override
-    void setContent() {
+    void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.introductionscreentext());
+    }
+
+    @Override
+    void pageClosing() {
     }
 }

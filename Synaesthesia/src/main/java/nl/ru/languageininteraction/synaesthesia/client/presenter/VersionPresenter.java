@@ -20,6 +20,8 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
@@ -35,17 +37,21 @@ public class VersionPresenter extends AbstractPresenter {
     }
 
     @Override
-    void setTitle() {
-        simpleView.addTitle(messages.versionScreenTitle());
+    void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.versionScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent() {
+    void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
                 + version.projectVersion() + "<BR>"
                 + "Compile Date: " + version.compileDate() + "<BR>"
                 + "Last Commit Date: " + version.lastCommitDate());
+    }
+
+    @Override
+    void pageClosing() {
     }
 }

@@ -47,9 +47,9 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired() {
+                    pageClosing();
                     appEventListner.requestApplicationState(prevState);
                 }
-
             });
         }
         if (nextState != null) {
@@ -57,18 +57,27 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired() {
+                    pageClosing();
                     appEventListner.requestApplicationState(nextState);
                 }
-
             });
         }
-        setTitle();
-        setContent();
+        setTitle(new PresenterEventListner() {
+
+            @Override
+            public void eventFired() {
+                pageClosing();
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+            }
+        });
+        setContent(appEventListner);
         simpleView.resizeView();
         widgetTag.add(simpleView);
     }
 
-    abstract void setTitle();
+    abstract void pageClosing();
 
-    abstract void setContent();
+    abstract void setTitle(PresenterEventListner titleBarListner);
+
+    abstract void setContent(final AppEventListner appEventListner);
 }

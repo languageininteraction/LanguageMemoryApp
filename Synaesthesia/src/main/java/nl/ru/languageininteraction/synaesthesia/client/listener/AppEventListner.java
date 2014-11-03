@@ -25,7 +25,7 @@ public interface AppEventListner {
 
     enum ApplicationState {
 
-        start, locale, version, intro, metadata, stimulus, report, feedback, registration, moreinfo, end
+        start, locale, version, intro, menu, metadata, stimulus, report, feedback, registration, moreinfo, end
     }
 
     public void requestApplicationState(ApplicationState applicationState);

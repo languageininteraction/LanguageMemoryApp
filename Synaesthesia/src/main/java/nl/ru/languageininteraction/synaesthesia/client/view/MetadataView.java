@@ -31,21 +31,27 @@ import java.util.Set;
  */
 public class MetadataView extends SimpleView {
 
-    final private FlexTable flexTable;
+    final VerticalPanel outerPanel;
+    private FlexTable flexTable = null;
     final private HashMap<String, TextBox> fieldBoxes;
 
-    public MetadataView(String instructionsText) {
-        flexTable = new FlexTable();
-        flexTable.setStylePrimaryName("metadataTable");
+    public MetadataView() {
+        outerPanel = new VerticalPanel();
+        setContent(outerPanel);
         fieldBoxes = new HashMap<>();
-        final VerticalPanel verticalPanel = new VerticalPanel();
-        HTML instructionsLabel = new HTML(instructionsText);
-        verticalPanel.add(instructionsLabel);
-        verticalPanel.add(flexTable);
-        setContent(verticalPanel);
+    }
+
+    public void addText(String textString) {
+        HTML html = new HTML(textString);
+        outerPanel.add(html);
     }
 
     public void addField(final String fieldName, final String displayName, final String existingValue) {
+        if (flexTable == null) {
+            flexTable = new FlexTable();
+            flexTable.setStylePrimaryName("metadataTable");
+            outerPanel.add(flexTable);
+        }
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, new Label(displayName));
         final TextBox textBox = new TextBox();

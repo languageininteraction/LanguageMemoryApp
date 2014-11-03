@@ -18,10 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -30,52 +28,35 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
  * @since Oct 14, 2014 10:57:39 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ReportPresenter implements Presenter {
+public class ReportPresenter extends AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
     private final UserResults userResults;
 
     public ReportPresenter(RootPanel widgetTag, UserResults userResults) {
-        this.widgetTag = widgetTag;
+        super(widgetTag, new ReportView());
         this.userResults = userResults;
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
-        widgetTag.clear();
-        final ReportView reportView = new ReportView();
-        if (prevState != null) {
-            reportView.setButton(messages.prevbutton(), new PresenterEventListner() {
+    void pageClosing() {
+    }
 
-                @Override
-                public void eventFired() {
-                    appEventListner.requestApplicationState(prevState);
-                }
+    @Override
+    void setTitle(PresenterEventListner titleBarListner) {
+        ((ReportView) simpleView).addTitle(messages.reportScreenTitle(), titleBarListner);
+    }
 
-            });
-        }
-        if (nextState != null) {
-            reportView.setButton(messages.nextbutton(), new PresenterEventListner() {
-
-                @Override
-                public void eventFired() {
-                    appEventListner.requestApplicationState(nextState);
-                }
-
-            });
-        }
+    @Override
+    void setContent(AppEventListner appEventListner) {
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        reportView.addTitle(messages.reportScreenTitle());
-        reportView.showResults(userResults, scoreCalculator);
-        reportView.addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
-        reportView.addText(messages.reportScreenPostScoreText());
-        reportView.addText(messages.reportScreenSCT());
-        reportView.addText(messages.reportScreenSCTaccuracy(Double.toString(scoreCalculator.getAccuracy())));
-        reportView.addText(messages.reportScreenSCTmeanreactionTime(Double.toString(scoreCalculator.getMeanReactionTime()), Double.toString(scoreCalculator.getReactionTimeDeviation())));
-        reportView.addText(messages.reportScreenPostSCTtext());
-        reportView.resizeView();
-        widgetTag.add(reportView);
+        ((ReportView) simpleView).showResults(userResults, scoreCalculator);
+        ((ReportView) simpleView).addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
+        ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
+        ((ReportView) simpleView).addText(messages.reportScreenSCT());
+        ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(Double.toString(scoreCalculator.getAccuracy())));
+        ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(Double.toString(scoreCalculator.getMeanReactionTime()), Double.toString(scoreCalculator.getReactionTimeDeviation())));
+        ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
+
     }
 
 }

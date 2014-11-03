@@ -18,11 +18,9 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -32,56 +30,38 @@ import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProv
  * @since Oct 21, 2014 11:50:56 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MetadataPresenter implements Presenter {
+public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
-    private final RootPanel widgetTag;
-    final MetadataView metadataView = new MetadataView(messages.metadatascreentext());
     private final UserResults userResults;
 
     public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
-        this.widgetTag = widgetTag;
+        super(widgetTag, new MetadataView());
         this.userResults = userResults;
     }
 
     private void saveFields() {
-        for (String fieldName : metadataView.getFieldNames()) {
-            userResults.setMetadataValue(fieldName, metadataView.getFieldValue(fieldName));
+        for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
+            userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
         }
         new LocalStorage().storeData(userResults);
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
-        widgetTag.clear();
-        if (prevState != null) {
-            metadataView.setButton(messages.prevbutton(), new PresenterEventListner() {
+    void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.metadatascreentitle(), titleBarListner);
+    }
 
-                @Override
-                public void eventFired() {
-                    saveFields();
-                    appEventListner.requestApplicationState(prevState);
-                }
-
-            });
-        }
-        if (nextState != null) {
-            metadataView.setButton(messages.nextbutton(), new PresenterEventListner() {
-
-                @Override
-                public void eventFired() {
-                    saveFields();
-                    appEventListner.requestApplicationState(nextState);
-                }
-
-            });
-        }
-        metadataView.addTitle(messages.metadatascreentitle());
+    @Override
+    void setContent(AppEventListner appEventListner) {
+        ((MetadataView) simpleView).addText(messages.metadatascreentext());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            metadataView.addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+            ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        metadataView.resizeView();
-        widgetTag.add(metadataView);
+    }
+
+    @Override
+    void pageClosing() {
+        saveFields();
     }
 }

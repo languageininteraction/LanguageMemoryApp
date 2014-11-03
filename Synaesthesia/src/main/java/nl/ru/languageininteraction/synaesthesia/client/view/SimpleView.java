@@ -64,12 +64,26 @@ public class SimpleView extends AbstractView {
         scrollPanel.setWidget(html);
     }
 
-    public void addTitle(String label) {
+    public void addTitle(String label, final PresenterEventListner presenterListerner) {
         final Image image = new Image("./images/icon.png");
         image.setSize(50 + "px", 50 + "px");
-        headerPanel.add(image);
         final Label headerLabel = new Label(label);
         headerLabel.setStylePrimaryName("headerLabel");
+        if (presenterListerner != null) {
+            final Label backLabel = new Label("<");
+            headerPanel.add(backLabel);
+            final ClickHandler backHandler = new ClickHandler() {
+
+                @Override
+                public void onClick(ClickEvent event) {
+                    presenterListerner.eventFired();
+                }
+            };
+            backLabel.addClickHandler(backHandler);
+            image.addClickHandler(backHandler);
+            headerLabel.addClickHandler(backHandler);
+        }
+        headerPanel.add(image);
         headerPanel.add(headerLabel);
     }
 

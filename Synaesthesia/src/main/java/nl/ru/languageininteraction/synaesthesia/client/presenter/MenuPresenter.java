@@ -20,26 +20,39 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
 
 /**
- * @since Oct 7, 2014 2:17:51 PM (creation date)
+ * @since Nov 3, 2014 11:03:38 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class FeedbackPresenter extends AbstractPresenter implements Presenter {
+public class MenuPresenter extends AbstractPresenter implements Presenter {
 
-    public FeedbackPresenter(RootPanel widgetTag) {
-        super(widgetTag, new SimpleView());
+    public MenuPresenter(RootPanel widgetTag) {
+        super(widgetTag, new MenuView());
     }
 
     @Override
     void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.userfeedbackscreentitle(), titleBarListner);
+        simpleView.addTitle(messages.menuScreenTitle(), null);
     }
 
     @Override
     void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.userfeedbackscreentext());
+        setUpLocaleOptions(appEventListner, messages.versionScreenTitle(), AppEventListner.ApplicationState.version);
+        setUpLocaleOptions(appEventListner, messages.introductionscreentitle(), AppEventListner.ApplicationState.intro);
+        setUpLocaleOptions(appEventListner, messages.localeScreenTitle(), AppEventListner.ApplicationState.locale);
+        setUpLocaleOptions(appEventListner, messages.versionScreenTitle(), AppEventListner.ApplicationState.version);
+    }
+
+    private void setUpLocaleOptions(final AppEventListner appEventListner, String displayName, final AppEventListner.ApplicationState applicationState) {
+        ((MenuView) simpleView).addMenuItem(displayName, new PresenterEventListner() {
+
+            @Override
+            public void eventFired() {
+                appEventListner.requestApplicationState(applicationState);
+            }
+        });
     }
 
     @Override
