@@ -367,6 +367,8 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     private void setColour(int x, int y, Canvas targetCanvas, VerticalPanel targetPanel) {
+        x = (x >= targetCanvas.getCoordinateSpaceWidth()) ? targetCanvas.getCoordinateSpaceWidth() - 1 : x;
+        y = (y >= targetCanvas.getCoordinateSpaceHeight()) ? targetCanvas.getCoordinateSpaceHeight() - 1 : y;
         final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
         final int blue = imageData.getBlueAt(0, 0);
         final int green = imageData.getGreenAt(0, 0);
@@ -392,6 +394,8 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     private void setHue(int x, int y, Canvas targetCanvas) {
+        x = (x >= targetCanvas.getCoordinateSpaceWidth()) ? targetCanvas.getCoordinateSpaceWidth() - 1 : x;
+        y = (y >= targetCanvas.getCoordinateSpaceHeight()) ? targetCanvas.getCoordinateSpaceHeight() - 1 : y;
         final ImageData imageData = targetCanvas.getContext2d().getImageData(x, y, 1, 1);
         final int blue = imageData.getBlueAt(0, 0);
         final int green = imageData.getGreenAt(0, 0);
