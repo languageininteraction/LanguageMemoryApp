@@ -65,10 +65,6 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel selectedColourPanel;
     private final Button infoButton;
     private final Label progressLabel;
-//    Label touchMoveLabel = new Label("TouchMove");
-//    Label touchStartLabel = new Label("TouchStart");
-//    Label touchEndLabel = new Label("TouchEnd");
-//    Label touchCancelLabel = new Label("TouchCancel");
     private final int height;
     private final int width;
     private final int barWidth;
@@ -123,37 +119,10 @@ public class ColourPickerCanvasView extends AbstractView {
             selectedColourLabel.setHeight(100 + "px");
             selectedColourLabel.setWidth(100 + "px");
             selectedColourPanel.add(selectedColourLabel);
-//            final Label hoverColourLabel = new Label("HoverColour");
-//            hoverColourLabel.setHeight(selectedColourPanelSize + "px");
-//            hoverColourLabel.setWidth(selectedColourPanelSize + "px");
-//            final VerticalPanel hoverColourPanel = new VerticalPanel();
-//            hoverColourPanel.add(hoverColourLabel);
-//            controlsPanel.add(hoverColourPanel);
-//            stimulusPanel.setHeight(selectedColourPanelSize + "px");
-//            stimulusPanel.setWidth(selectedColourPanelSize + "px");
-//            controlsPanel.add(touchStartLabel);
-//            controlsPanel.add(touchMoveLabel);
-//            controlsPanel.add(touchEndLabel);
-//            controlsPanel.add(touchCancelLabel);
             controlsPanel.add(stimulusPanel);
             controlsPanel.add(selectedColourPanel);
             controlsPanel.add(buttonPanel);
             controlsPanel.add(progressLabel);
-//            mainCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-//
-//                @Override
-//                public void onMouseMove(MouseMoveEvent event) {
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                }
-//            });
-//            luminanceCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-//
-//                @Override
-//                public void onMouseMove(MouseMoveEvent event) {
-//                    setColour(event, luminanceCanvas, selectedColourPanel);
-//                }
-//            });
-
             mainCanvas.addClickHandler(new ClickHandler() {
 
                 @Override
@@ -171,52 +140,6 @@ public class ColourPickerCanvasView extends AbstractView {
                     setColour(event, hueCanvas, selectedColourPanel);
                 }
             });
-//            final HandlesAllTouchEvents mainCanvasTouchHandler = new HandlesAllTouchEvents() {
-//
-//                @Override
-//                public void onTouchStart(TouchStartEvent event) {
-//                    event.preventDefault();
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                    touchStartLabel.setText(event.getTargetTouches().length() + " TouchStart" + new Date());
-//                }
-//
-//                @Override
-//                public void onTouchMove(TouchMoveEvent event) {
-//                    event.preventDefault();
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                    touchMoveLabel.setText(event.getTargetTouches().length() + " TouchMove" + new Date());
-//                }
-//
-//                @Override
-//                public void onTouchEnd(TouchEndEvent event) {
-//                    event.preventDefault();
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                    touchEndLabel.setText(event.getTargetTouches().length() + " TouchEnd" + new Date());
-//                }
-//
-//                @Override
-//                public void onTouchCancel(TouchCancelEvent event) {
-//                    event.preventDefault();
-//                    setColour(event, mainCanvas, selectedColourPanel);
-//                    touchCancelLabel.setText(event.getTargetTouches().length() + " TouchCancel" + new Date());
-//                }
-//            };
-
-//            mainCanvas.addTouchStartHandler(mainCanvasTouchHandler);
-//            mainCanvas.addTouchMoveHandler(mainCanvasTouchHandler);
-//            mainCanvas.addTouchEndHandler(mainCanvasTouchHandler);
-//            mainCanvas.addTouchCancelHandler(mainCanvasTouchHandler);
-//            hueCanvas.addMouseMoveHandler(new MouseMoveHandler() {
-//
-//                @Override
-//                public void onMouseMove(MouseMoveEvent event) {
-//                    event.preventDefault();
-////                    if (event.getNativeButton() == NativeEvent.BUTTON_LEFT || event.getNativeButton() == NativeEvent.BUTTON_RIGHT || event.getNativeButton() == NativeEvent.BUTTON_MIDDLE) {
-//                    setColour(event, hueCanvas, selectedColourPanel);
-//                    setHue(event, hueCanvas);
-////                    }
-//                }
-//            });
             mainCanvas.addTouchStartHandler(new TouchStartHandler() {
 
                 @Override
@@ -291,7 +214,6 @@ public class ColourPickerCanvasView extends AbstractView {
         final Context2d mainContext2d = mainCanvas.getContext2d();
         CanvasGradient linearColour = mainContext2d.createLinearGradient(0, 0, width, 0);
         linearColour.addColorStop(1f, "white");
-//        linearColour.addColorStop(0f, "hsl(" + hue + ",100%,50%);");
         linearColour.addColorStop(0f, "rgb(" + red + "," + green + "," + blue + ")");
         mainContext2d.setFillStyle(linearColour);
         mainContext2d.fillRect(0, 0, width, height);
