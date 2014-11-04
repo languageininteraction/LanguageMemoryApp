@@ -34,11 +34,14 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
@@ -61,7 +64,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel buttonPanel;
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
-    private final Label instructionsLabel;
+    private final Button infoButton;
     private final Label progressLabel;
 //    Label touchMoveLabel = new Label("TouchMove");
 //    Label touchStartLabel = new Label("TouchStart");
@@ -74,7 +77,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private ColourData selectedColourData = null;
 
     public ColourPickerCanvasView() throws CanvasError {
-        getElement().setId("stimulusPanel");
+        setStylePrimaryName("stimulusScreen");
         final int clientHeight = Window.getClientHeight();
         final int clientWidth = Window.getClientWidth();
         final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;
@@ -85,10 +88,12 @@ public class ColourPickerCanvasView extends AbstractView {
 
         buttonPanel = new VerticalPanel();
         stimulusPanel = new VerticalPanel();
+        stimulusPanel.addStyleName("stimulusPanel");
         innerGrid = new Grid(2, 2);
         pickerPanel = new Grid(2, 2);
         controlsPanel = new VerticalPanel();
-        instructionsLabel = new Label();
+        infoButton = new Button();
+        infoButton.setStylePrimaryName("stimulusHelpButton");
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
@@ -137,8 +142,8 @@ public class ColourPickerCanvasView extends AbstractView {
 //            final VerticalPanel hoverColourPanel = new VerticalPanel();
 //            hoverColourPanel.add(hoverColourLabel);
 //            controlsPanel.add(hoverColourPanel);
-            stimulusPanel.setHeight(selectedColourPanelSize + "px");
-            stimulusPanel.setWidth(selectedColourPanelSize + "px");
+//            stimulusPanel.setHeight(selectedColourPanelSize + "px");
+//            stimulusPanel.setWidth(selectedColourPanelSize + "px");
 //            controlsPanel.add(touchStartLabel);
 //            controlsPanel.add(touchMoveLabel);
 //            controlsPanel.add(touchEndLabel);
@@ -312,7 +317,7 @@ public class ColourPickerCanvasView extends AbstractView {
         innerGrid.setWidget(0, 0, pickerPanel);
         Grid outerGrid = new Grid(2, 1);
         outerGrid.setWidget(0, 0, innerGrid);
-        outerGrid.setWidget(1, 0, instructionsLabel);
+        outerGrid.setWidget(1, 0, infoButton);
         final ScrollPanel scrollPanel = new ScrollPanel();
         scrollPanel.add(outerGrid);
         add(scrollPanel);
@@ -394,8 +399,28 @@ public class ColourPickerCanvasView extends AbstractView {
         setHue(red, green, blue);
     }
 
-    public void setInstructions(String instructions) {
-        instructionsLabel.setText(instructions);
+    public void setInstructions(final String instructions, final String infoButtonChar) {
+        final Label instructionsLabel = new Label(instructions);
+        final PopupPanel popupPanel = new PopupPanel(true);
+        popupPanel.setStylePrimaryName("stimulusHelpPanel");
+        instructionsLabel.setStylePrimaryName("stimulusHelpText");
+        popupPanel.setWidget(new ScrollPanel(instructionsLabel));
+        infoButton.setText(infoButtonChar);
+        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(CloseEvent<PopupPanel> event) {
+                infoButton.setEnabled(true);
+            }
+        });
+        infoButton.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                popupPanel.showRelativeTo(infoButton);
+                infoButton.setEnabled(false);
+            }
+        });
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {

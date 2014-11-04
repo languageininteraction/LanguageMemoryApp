@@ -60,6 +60,7 @@
     border-width: 1px;
     border-style: solid;
 }
+
 canvas {
     outline: none;
     border: grey;
@@ -67,7 +68,31 @@ canvas {
     border-style: solid;
 }
 
-#stimulusPanel {
+.stimulusHelpButton {
+    font-size: 17pt;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.stimulusHelpText {
+    font-size: 17pt;
+    color: black;
+    padding: 10px 10px 10px 10px;
+}
+
+.stimulusHelpPanel {
+    border: rgb(111,111,111); 
+    background: white;
+    border-width: 3px;
+    border-style: solid;
+    
+}
+
+.stimulusPanel {
+    padding: 50px 50px 50px 50px;
+}
+
+.stimulusScreen {
     background: black;
 }
 
