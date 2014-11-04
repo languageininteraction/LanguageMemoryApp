@@ -36,18 +36,18 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final UserResults userResults;
-//    private AppEventListner.ApplicationState nextState;
+    private AppEventListner.ApplicationState nextState;
 
     public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new RegisterView());
         this.userResults = userResults;
     }
 
-//    @Override
-//    public void setState(AppEventListner appEventListner, AppEventListner.ApplicationState prevState, AppEventListner.ApplicationState nextState) {
-//        this.nextState = nextState;
-//        super.setState(appEventListner, prevState, null);
-//    }
+    @Override
+    public void setState(AppEventListner appEventListner, AppEventListner.ApplicationState prevState, AppEventListner.ApplicationState nextState) {
+        this.nextState = nextState;
+        super.setState(appEventListner, prevState, null);
+    }
 
     @Override
     void pageClosing() {
@@ -64,6 +64,10 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
+        addRegisterButton();
+    }
+
+    private void addRegisterButton() {
         simpleView.setButton(messages.registerButton(), new PresenterEventListner() {
 
             @Override
@@ -77,6 +81,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                     @Override
                     public void registrationFailed(Throwable exception) {
                         simpleView.setDisplayText("Registration failed. " + exception.getMessage());
+                        addRegisterButton();
                     }
 
                     @Override
@@ -87,5 +92,4 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
             }
         });
     }
-
 }

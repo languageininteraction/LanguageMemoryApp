@@ -44,7 +44,7 @@ public abstract class AbstractPresenter implements Presenter {
     public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
         if (prevState != null) {
-            simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
+            simpleView.setButton(prevState.label, new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
@@ -54,7 +54,7 @@ public abstract class AbstractPresenter implements Presenter {
             });
         }
         if (nextState != null) {
-            simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
+            simpleView.setButton(nextState.label, new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {

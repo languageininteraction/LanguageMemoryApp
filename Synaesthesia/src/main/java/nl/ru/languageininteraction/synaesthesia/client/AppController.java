@@ -78,11 +78,11 @@ public class AppController implements AppEventListner {
                     break;
                 case locale:
                     this.presenter = new LocalePresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.version);
+                    presenter.setState(this, null, null);
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.menu, null);
+                    presenter.setState(this, null, null);
                     break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
@@ -90,16 +90,16 @@ public class AppController implements AppEventListner {
                     break;
                 case metadata:
                     this.presenter = new MetadataPresenter(widgetTag, userResults);
-                    presenter.setState(this, ApplicationState.intro, ApplicationState.stimulus);
+                    presenter.setState(this, null, ApplicationState.stimulus);
                     break;
                 case stimulus:
                     final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
                     this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults, 3);
-                    presenter.setState(this, ApplicationState.metadata, ApplicationState.report);
+                    presenter.setState(this, null, ApplicationState.report);
                     break;
                 case report:
                     this.presenter = new ReportPresenter(widgetTag, userResults);
-                    presenter.setState(this, ApplicationState.stimulus, ApplicationState.feedback);
+                    presenter.setState(this, null, ApplicationState.feedback);
                     break;
                 case feedback:
                     this.presenter = new FeedbackPresenter(widgetTag);
@@ -107,7 +107,7 @@ public class AppController implements AppEventListner {
                     break;
                 case registration:
                     this.presenter = new RegisterPresenter(widgetTag, userResults);
-                    presenter.setState(this, ApplicationState.feedback, ApplicationState.moreinfo);
+                    presenter.setState(this, null, ApplicationState.moreinfo);
                     break;
                 case moreinfo:
                 case end:

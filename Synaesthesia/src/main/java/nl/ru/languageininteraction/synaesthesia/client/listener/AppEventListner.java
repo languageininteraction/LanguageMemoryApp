@@ -17,15 +17,37 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.listener;
 
+import com.google.gwt.core.client.GWT;
+import nl.ru.languageininteraction.synaesthesia.client.Messages;
+
 /**
  * @since Oct 8, 2014 11:01:07 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public interface AppEventListner {
 
+    final Messages messages = GWT.create(Messages.class);
+
     enum ApplicationState {
 
-        start, locale, version, intro, menu, metadata, stimulus, report, feedback, registration, moreinfo, end
+        start(messages.startButton()),
+        locale(messages.localeMenuLabel()),
+        version(messages.versionMenuLabel()),
+        intro(messages.introMenuLabel()),
+        menu(messages.menuButton()),
+        metadata(messages.metadataMenuLabel()),
+        stimulus(messages.stimulusMenuLabel()),
+        report(messages.reportMenuLabel()),
+        feedback(messages.feedbackMenuLabel()),
+        registration(messages.registerMenuLabel()),
+        moreinfo(messages.moreInfoMenuLabel()),
+        end(messages.exitButton());
+
+        final public String label;
+
+        ApplicationState(String label) {
+            this.label = label;
+        }
     }
 
     public void requestApplicationState(ApplicationState applicationState);

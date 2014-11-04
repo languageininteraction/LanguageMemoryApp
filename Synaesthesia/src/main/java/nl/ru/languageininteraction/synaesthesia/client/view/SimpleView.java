@@ -47,7 +47,7 @@ public class SimpleView extends AbstractView {
         footerPanel = new HorizontalPanel();
         borderedContentPanel = new HorizontalPanel();
         borderedContentPanel.setStylePrimaryName("contentPanel");
-        footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         addNorth(headerPanel, 50);
         addSouth(footerPanel, 50);
         scrollPanel = new ScrollPanel();

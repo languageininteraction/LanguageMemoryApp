@@ -17,53 +17,36 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter implements Presenter {
+public class ScreenPresenter extends AbstractPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
-    final SimpleView simpleView = new SimpleView();
 
     public ScreenPresenter(RootPanel widgetTag) {
-        this.widgetTag = widgetTag;
+        super(widgetTag, new MenuView());
     }
 
     @Override
-    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
-        widgetTag.clear();
+    void pageClosing() {
+    }
+
+    @Override
+    void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.moreInfoScreenTitle(), titleBarListner);
+    }
+
+    @Override
+    void setContent(AppEventListner appEventListner) {
         simpleView.addLink("StyleTestPage", "StyleTestPage.html");
-        simpleView.resizeView();
-        widgetTag.add(simpleView);
-        if (prevState != null) {
-            simpleView.setButton(messages.prevbutton(), new PresenterEventListner() {
-
-                @Override
-                public void eventFired(Button button) {
-                    appEventListner.requestApplicationState(prevState);
-                }
-
-            });
-        }
-        if (nextState != null) {
-            simpleView.setButton(messages.nextbutton(), new PresenterEventListner() {
-
-                @Override
-                public void eventFired(Button button) {
-                    appEventListner.requestApplicationState(nextState);
-                }
-
-            });
-        }
     }
 }

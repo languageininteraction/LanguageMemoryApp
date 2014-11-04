@@ -40,19 +40,19 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(final AppEventListner appEventListner) {
-        setUpLocaleOptions(appEventListner, messages.introMenuLabel(), AppEventListner.ApplicationState.intro);
-        setUpLocaleOptions(appEventListner, messages.metadataMenuLabel(), AppEventListner.ApplicationState.metadata);
-        setUpLocaleOptions(appEventListner, messages.stimulusMenuLabel(), AppEventListner.ApplicationState.stimulus);
-        setUpLocaleOptions(appEventListner, messages.reportMenuLabel(), AppEventListner.ApplicationState.report);
-        setUpLocaleOptions(appEventListner, messages.feedbackMenuLabel(), AppEventListner.ApplicationState.feedback);
-        setUpLocaleOptions(appEventListner, messages.registerMenuLabel(), AppEventListner.ApplicationState.registration);
-        setUpLocaleOptions(appEventListner, messages.moreInfoMenuLabel(), AppEventListner.ApplicationState.moreinfo);
-        setUpLocaleOptions(appEventListner, messages.localeMenuLabel(), AppEventListner.ApplicationState.locale);
-        setUpLocaleOptions(appEventListner, messages.versionMenuLabel(), AppEventListner.ApplicationState.version);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.intro);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.registration);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.moreinfo);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.locale);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.version);
     }
 
-    private void setUpLocaleOptions(final AppEventListner appEventListner, String displayName, final AppEventListner.ApplicationState applicationState) {
-        ((MenuView) simpleView).addMenuItem(displayName, new PresenterEventListner() {
+    private void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState) {
+        ((MenuView) simpleView).addMenuItem(applicationState.label, new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {

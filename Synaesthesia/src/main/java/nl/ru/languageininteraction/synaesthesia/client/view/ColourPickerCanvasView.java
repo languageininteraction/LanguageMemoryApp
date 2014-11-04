@@ -408,7 +408,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
     public void setButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
-        nextButton.addStyleName("nextButton");
+        nextButton.addStyleName("stimulusButton");
         nextButton.setEnabled(true);
         buttonPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
