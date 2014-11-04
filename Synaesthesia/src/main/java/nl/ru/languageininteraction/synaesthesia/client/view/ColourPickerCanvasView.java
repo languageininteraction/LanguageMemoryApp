@@ -68,7 +68,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int height;
     private final int width;
     private final int barWidth;
-    private final int selectedColourPanelSize;
+    private final int stimulusTextHeight;
     private ColourData selectedColourData = null;
 
     public ColourPickerCanvasView() throws CanvasError {
@@ -76,10 +76,10 @@ public class ColourPickerCanvasView extends AbstractView {
         final int clientHeight = Window.getClientHeight();
         final int clientWidth = Window.getClientWidth();
         final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;
-        height = (int) (minClient * 0.7);
-        width = (int) (minClient * 0.7);
+        height = (int) (minClient * 0.9);
+        width = (int) (minClient * 0.8);
         barWidth = (int) (minClient * 0.1);
-        selectedColourPanelSize = (int) (minClient * 0.1);
+        stimulusTextHeight = (int) (minClient * 0.1);
 
         buttonPanel = new VerticalPanel();
         stimulusPanel = new VerticalPanel();
@@ -123,6 +123,7 @@ public class ColourPickerCanvasView extends AbstractView {
             controlsPanel.add(selectedColourPanel);
             controlsPanel.add(buttonPanel);
             controlsPanel.add(progressLabel);
+            controlsPanel.add(infoButton);
             mainCanvas.addClickHandler(new ClickHandler() {
 
                 @Override
@@ -193,12 +194,7 @@ public class ColourPickerCanvasView extends AbstractView {
             });
         }
         innerGrid.setWidget(0, 0, pickerPanel);
-        Grid outerGrid = new Grid(2, 1);
-        outerGrid.setWidget(0, 0, innerGrid);
-        outerGrid.setWidget(1, 0, infoButton);
-        final ScrollPanel scrollPanel = new ScrollPanel();
-        scrollPanel.add(outerGrid);
-        add(scrollPanel);
+        add(innerGrid);
     }
 
     public void setRandomColour() {
@@ -308,7 +304,7 @@ public class ColourPickerCanvasView extends AbstractView {
         progressLabel.setText(progress);
         stimulusPanel.clear();
         final Label label = new Label(stimulus.getValue());
-        label.getElement().getStyle().setFontSize(selectedColourPanelSize, Unit.PX);
+        label.getElement().getStyle().setFontSize(stimulusTextHeight, Unit.PX);
         stimulusPanel.add(label);
     }
 
