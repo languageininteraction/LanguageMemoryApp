@@ -94,7 +94,7 @@ public class AppController implements AppEventListner {
                     break;
                 case stimulus:
                     final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[0], userResults, 3);
+                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[1], userResults, 3);
                     presenter.setState(this, null, ApplicationState.report);
                     break;
                 case report:

@@ -119,7 +119,7 @@ public class ColourPickerCanvasView extends AbstractView {
             pickerPanel.setWidget(0, 1, hueCanvas);
             final Label selectedColourLabel = new Label("");
             selectedColourLabel.setHeight(selectedColourPanelSize + "px");
-            selectedColourLabel.setWidth(selectedColourPanelSize * 1.5 + "px");
+            selectedColourLabel.setWidth(selectedColourPanelSize * 1.6 + "px");
             selectedColourPanel.add(selectedColourLabel);
             mainCanvas.addClickHandler(new ClickHandler() {
 
