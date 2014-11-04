@@ -82,7 +82,7 @@ public class ColourPickerPresenter implements Presenter {
         widgetTag.clear();
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
-        colourPickerCanvasView.setButton(messages.stimulusscreenselectbutton(), new PresenterEventListner() {
+        colourPickerCanvasView.setAcceptButton(messages.stimulusscreenselectbutton(), new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
@@ -90,7 +90,7 @@ public class ColourPickerPresenter implements Presenter {
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
         });
-        colourPickerCanvasView.setButton(messages.stimulusscreenrejectbutton(), new PresenterEventListner() {
+        colourPickerCanvasView.setRejectButton(messages.stimulusscreenrejectbutton(), new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {

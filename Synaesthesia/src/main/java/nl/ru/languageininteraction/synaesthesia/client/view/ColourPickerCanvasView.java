@@ -57,18 +57,20 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private final Canvas mainCanvas;
     private final Canvas hueCanvas;
+    private final Grid outerGrid;
     private final Grid innerGrid;
     private final Grid pickerPanel;
-    private final VerticalPanel controlsPanel;
-    private final VerticalPanel buttonPanel;
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
     private final Button infoButton;
+    private Button acceptButton = null;
+    private Button rejectButton = null;
     private final Label progressLabel;
     private final int height;
     private final int width;
     private final int barWidth;
     private final int stimulusTextHeight;
+    private final int selectedColourPanelSize;
     private ColourData selectedColourData = null;
 
     public ColourPickerCanvasView() throws CanvasError {
@@ -80,16 +82,16 @@ public class ColourPickerCanvasView extends AbstractView {
         width = (int) (minClient * 0.8);
         barWidth = (int) (minClient * 0.1);
         stimulusTextHeight = (int) (minClient * 0.1);
-
-        buttonPanel = new VerticalPanel();
+        selectedColourPanelSize = (int) (minClient * 0.3);
         stimulusPanel = new VerticalPanel();
         stimulusPanel.addStyleName("stimulusPanel");
-        innerGrid = new Grid(2, 2);
-        pickerPanel = new Grid(2, 2);
-        controlsPanel = new VerticalPanel();
+        outerGrid = new Grid(2, 2);
+        innerGrid = new Grid(3, 2);
+        pickerPanel = new Grid(1, 2);
         infoButton = new Button();
         infoButton.setStylePrimaryName("stimulusHelpButton");
         selectedColourPanel = new VerticalPanel();
+        selectedColourPanel.addStyleName("stimulusPanel");
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
@@ -116,14 +118,9 @@ public class ColourPickerCanvasView extends AbstractView {
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
             final Label selectedColourLabel = new Label("");
-            selectedColourLabel.setHeight(100 + "px");
-            selectedColourLabel.setWidth(100 + "px");
+            selectedColourLabel.setHeight(selectedColourPanelSize + "px");
+            selectedColourLabel.setWidth(selectedColourPanelSize * 1.5 + "px");
             selectedColourPanel.add(selectedColourLabel);
-            controlsPanel.add(stimulusPanel);
-            controlsPanel.add(selectedColourPanel);
-            controlsPanel.add(buttonPanel);
-            controlsPanel.add(progressLabel);
-            controlsPanel.add(infoButton);
             mainCanvas.addClickHandler(new ClickHandler() {
 
                 @Override
@@ -193,8 +190,8 @@ public class ColourPickerCanvasView extends AbstractView {
                 }
             });
         }
-        innerGrid.setWidget(0, 0, pickerPanel);
-        add(innerGrid);
+        outerGrid.setWidget(0, 0, pickerPanel);
+        add(outerGrid);
     }
 
     public void setRandomColour() {
@@ -308,11 +305,18 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.add(label);
     }
 
-    public void setButton(String buttonText, final PresenterEventListner presenterListerner) {
+    public void setAcceptButton(String buttonText, final PresenterEventListner presenterListerner) {
+        acceptButton = getButton(buttonText, presenterListerner);
+    }
+
+    public void setRejectButton(String buttonText, final PresenterEventListner presenterListerner) {
+        rejectButton = getButton(buttonText, presenterListerner);
+    }
+
+    private Button getButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
         nextButton.addStyleName("stimulusButton");
         nextButton.setEnabled(true);
-        buttonPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
 
             @Override
@@ -320,14 +324,27 @@ public class ColourPickerCanvasView extends AbstractView {
                 presenterListerner.eventFired(nextButton);
             }
         });
+        return nextButton;
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
         if (height < width) {
-            innerGrid.setWidget(0, 1, controlsPanel);
+            innerGrid.setWidget(0, 0, stimulusPanel);
+            innerGrid.setWidget(0, 1, rejectButton);
+            innerGrid.setWidget(1, 0, selectedColourPanel);
+            innerGrid.setWidget(1, 1, acceptButton);
+            innerGrid.setWidget(2, 0, progressLabel);
+            innerGrid.setWidget(2, 1, infoButton);
+            outerGrid.setWidget(0, 1, innerGrid);
         } else {
-            innerGrid.setWidget(1, 0, controlsPanel);
+            innerGrid.setWidget(0, 0, stimulusPanel);
+            innerGrid.setWidget(0, 1, rejectButton);
+            innerGrid.setWidget(1, 0, selectedColourPanel);
+            innerGrid.setWidget(1, 1, acceptButton);
+            innerGrid.setWidget(2, 0, progressLabel);
+            innerGrid.setWidget(2, 1, infoButton);
+            outerGrid.setWidget(1, 0, innerGrid);
         }
     }
 }
