@@ -57,7 +57,6 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private final Canvas mainCanvas;
     private final Canvas hueCanvas;
-    private final Canvas luminanceCanvas;
     private final Grid innerGrid;
     private final Grid pickerPanel;
     private final VerticalPanel controlsPanel;
@@ -98,9 +97,8 @@ public class ColourPickerCanvasView extends AbstractView {
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
-        luminanceCanvas = Canvas.createIfSupported();
 
-        if (mainCanvas == null || hueCanvas == null || luminanceCanvas == null) {
+        if (mainCanvas == null || hueCanvas == null) {
             throw new CanvasError("Failed to create a canvas for the stimulus screen.");
         } else {
             mainCanvas.setCoordinateSpaceHeight(height);
@@ -109,11 +107,7 @@ public class ColourPickerCanvasView extends AbstractView {
             hueCanvas.setCoordinateSpaceHeight(height);
             hueCanvas.setCoordinateSpaceWidth(barWidth);
             hueCanvas.setSize(barWidth + "px", height + "px");
-            luminanceCanvas.setCoordinateSpaceHeight(barWidth);
-            luminanceCanvas.setCoordinateSpaceWidth(width);
-            luminanceCanvas.setSize(width + "px", barWidth + "px");
             final Context2d hueContext2d = hueCanvas.getContext2d();
-            final Context2d luminanceContext2d = luminanceCanvas.getContext2d();
 
             CanvasGradient hueGradient = hueContext2d.createLinearGradient(0, 0, 0, height);
             for (int stop = 0; stop <= 10; stop++) {
@@ -122,16 +116,9 @@ public class ColourPickerCanvasView extends AbstractView {
             hueContext2d.setFillStyle(hueGradient);
             hueContext2d.fillRect(0, 0, barWidth, height);
 
-            CanvasGradient luminanceGradient = luminanceContext2d.createLinearGradient(0, 0, width, 0);
-            luminanceGradient.addColorStop(0f, "white");
-            luminanceGradient.addColorStop(1f, "black");
-            luminanceContext2d.setFillStyle(luminanceGradient);
-            luminanceContext2d.fillRect(0, 0, width, barWidth);
-
             pickerPanel.setCellPadding(5);
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
-            pickerPanel.setWidget(1, 0, luminanceCanvas);
             final Label selectedColourLabel = new Label("");
             selectedColourLabel.setHeight(100 + "px");
             selectedColourLabel.setWidth(100 + "px");
@@ -173,14 +160,6 @@ public class ColourPickerCanvasView extends AbstractView {
                 public void onClick(ClickEvent event) {
                     event.preventDefault();
                     setColour(event, mainCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addClickHandler(new ClickHandler() {
-
-                @Override
-                public void onClick(ClickEvent event) {
-                    event.preventDefault();
-                    setColour(event, luminanceCanvas, selectedColourPanel);
                 }
             });
             hueCanvas.addClickHandler(new ClickHandler() {
@@ -260,30 +239,6 @@ public class ColourPickerCanvasView extends AbstractView {
                 public void onTouchEnd(TouchEndEvent event) {
                     event.preventDefault();
                     setColour(event, mainCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addTouchStartHandler(new TouchStartHandler() {
-
-                @Override
-                public void onTouchStart(TouchStartEvent event) {
-                    event.preventDefault();
-                    setColour(event, luminanceCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addTouchMoveHandler(new TouchMoveHandler() {
-
-                @Override
-                public void onTouchMove(TouchMoveEvent event) {
-                    event.preventDefault();
-                    setColour(event, luminanceCanvas, selectedColourPanel);
-                }
-            });
-            luminanceCanvas.addTouchEndHandler(new TouchEndHandler() {
-
-                @Override
-                public void onTouchEnd(TouchEndEvent event) {
-                    event.preventDefault();
-                    setColour(event, luminanceCanvas, selectedColourPanel);
                 }
             });
             hueCanvas.addTouchStartHandler(new TouchStartHandler() {
