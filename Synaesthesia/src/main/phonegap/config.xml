@@ -5,7 +5,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "nl.ru.languageininteraction.synaesthesia"
         version   = "${application.majorVersion}.${application.minorVersion}.${application.buildVersion}">
-    <name>Grapheme Colour Synaesthesia App</name>
+    <name>SynQuiz</name>
 
     <description>
         A mobile synesthesia battery.

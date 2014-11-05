@@ -65,7 +65,7 @@ public class SimpleView extends AbstractView {
     }
 
     public void addTitle(String label, final PresenterEventListner presenterListerner) {
-        final Image image = new Image("./images/icon.png");
+        final Image image = new Image("./images/icon.jpg");
         image.setSize(50 + "px", 50 + "px");
         final Label headerLabel = new Label(label);
         headerLabel.setStylePrimaryName("headerLabel");

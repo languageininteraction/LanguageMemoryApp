@@ -8,7 +8,7 @@
     <files>
         <file>
             <source>${project.build.directory}/${project.build.finalName}/GraphemeColour.html</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>/www</outputDirectory>
             <destName>index.html</destName>
             <!--<fileMode>0644</fileMode>-->
         </file>
@@ -17,11 +17,19 @@
         <fileSet>
             <directory>${project.build.directory}/${project.build.finalName}</directory>
             <includes>
-                <include>*.*</include>
                 <include>/images/**</include>
-                <include>/GraphemeColour/**</include>
             </includes>  
             <outputDirectory>/</outputDirectory>
+            <filtered>false</filtered>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/${project.build.finalName}</directory>
+            <includes>
+                <include>/images/icon.jpg</include>
+                <include>*.*</include>
+                <include>/GraphemeColour/**</include>
+            </includes>  
+            <outputDirectory>/www</outputDirectory>
             <filtered>false</filtered>
         </fileSet>
         <fileSet>
