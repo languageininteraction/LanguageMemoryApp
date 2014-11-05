@@ -70,6 +70,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int width;
     private final int barWidth;
     private final int stimulusTextHeight;
+    private final int buttonSize;
     private final int selectedColourPanelSize;
     private ColourData selectedColourData = null;
 
@@ -81,8 +82,9 @@ public class ColourPickerCanvasView extends AbstractView {
         height = (int) (minClient * 0.9);
         width = (int) (minClient * 0.8);
         barWidth = (int) (minClient * 0.1);
-        stimulusTextHeight = (int) (minClient * 0.1);
-        selectedColourPanelSize = (int) (minClient * 0.3);
+        stimulusTextHeight = (int) (minClient * 0.09);
+        selectedColourPanelSize = (int) (minClient * 0.25);
+        buttonSize = (int) (minClient * 0.2);
         stimulusPanel = new VerticalPanel();
         stimulusPanel.addStyleName("stimulusPanel");
         outerGrid = new Grid(2, 2);
@@ -291,7 +293,7 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
-                popupPanel.showRelativeTo(infoButton);
+                popupPanel.center();
                 infoButton.setEnabled(false);
             }
         });
@@ -315,6 +317,8 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private Button getButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
+        nextButton.setHeight(buttonSize + "px");
+        nextButton.setWidth(buttonSize + "px");
         nextButton.addStyleName("stimulusButton");
         nextButton.setEnabled(true);
         nextButton.addClickHandler(new ClickHandler() {
