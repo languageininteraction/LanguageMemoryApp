@@ -31,9 +31,13 @@ convert -geometry 200x320 -quality 100 $splashImage platforms/android/res/drawab
 convert -geometry 320x480 -quality 100 $splashImage platforms/android/res/drawable-port-mdpi/screen.png
 convert -geometry 720x1280 -quality 100 $splashImage platforms/android/res/drawable-port-xhdpi/screen.png
 
+# copy the ant.properties file with the android key store and alias (key.store= key.alias=) information so that the APK can be signed
+cp ~/android-keys/ant.properties platforms/android/
+
 echo "building"
-cordova prepare
-cordova compile
+#cordova prepare
+#cordova compile
+cordova build -release
 # cordova emulate android
 
 # list the schemes available 
@@ -44,5 +48,5 @@ cordova compile
 #xcrun -sdk iphoneos PackageApplication -v "build/Release-iphoneos/MyApp.app" -o "build/Release-iphoneos/MyApp.ipa" --sign "iPhone Distribution: NAME (ID)" --embed "PROFILE_UUID.mobileprovision"
 #xcodebuild -scheme YOURSCHEMENAME -project MyApp.xcodeproj -alltargets -sdk iphoneos7.0 PROVISIONING_PROFILE="PROFILE_UUID.mobileprovision" -configuration Release
 
-echo "launching xcode"
-open platforms/ios/SynQuiz.xcodeproj
+#echo "launching xcode"
+#open platforms/ios/SynQuiz.xcodeproj
