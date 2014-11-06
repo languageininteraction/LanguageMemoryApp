@@ -1,8 +1,8 @@
 #mvn install
 cd target
-rm -rf synquiz-0.1-testing-SNAPSHOT-phonegap
-unzip synquiz-0.1-testing-SNAPSHOT-phonegap.zip -d synquiz-0.1-testing-SNAPSHOT-phonegap
-cd synquiz-0.1-testing-SNAPSHOT-phonegap 
+rm -rf synquiz-0.1.104-testing-phonegap
+unzip synquiz-0.1.104-testing-phonegap.zip -d synquiz-0.1.104-testing-phonegap
+cd synquiz-0.1.104-testing-phonegap 
 cordova platform add ios
 cordova platform add android
 
