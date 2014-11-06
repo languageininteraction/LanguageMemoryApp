@@ -7,10 +7,10 @@
     <!-- POM file generated with GWT webAppCreator -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.ru.languageininteraction</groupId>
-    <artifactId>synaesthesia</artifactId>
+    <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
     <version>0.1-testing-SNAPSHOT</version>
-    <name>Grapheme Colour Synaesthesia App</name>
+    <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
         <url>https://www.languageininteraction.nl</url>

@@ -1,6 +1,6 @@
 <html>
     <body>
-        <h2>Synaesthesia Registration Test Application</h2>
+        <h2>SynQuiz Registration Demo Application</h2>
         <p><a href="registration/submit">submit</a><br>
         <form action="registration/submit" method="post">
             <input type="text" name="firstname" value="firstname"/>
