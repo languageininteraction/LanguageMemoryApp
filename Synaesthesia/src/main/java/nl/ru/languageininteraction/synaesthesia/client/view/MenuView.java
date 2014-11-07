@@ -17,12 +17,15 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
 /**
@@ -31,6 +34,7 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
  */
 public class MenuView extends SimpleView {
 
+    final private ArrayList<Button> buttonsArray = new ArrayList<>();
     final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
 
@@ -51,6 +55,7 @@ public class MenuView extends SimpleView {
             outerPanel.add(flexTable);
         }
         final Button menuButton = new Button(itemLabel);
+        buttonsArray.add(menuButton);
         menuButton.addStyleName("menuButton");
         menuButton.setEnabled(true);
         menuButton.addClickHandler(new ClickHandler() {
@@ -63,4 +68,30 @@ public class MenuView extends SimpleView {
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, menuButton);
     }
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+        super.parentResized(height, width, units);
+        boolean portrate = height < width;
+        final int rowPerColumn = (portrate) ? buttonsArray.size() / 2 : buttonsArray.size();
+        final int textHeight = (height / (3 + rowPerColumn)) / 3;
+        int row = 0;
+        int col = 0;
+        flexTable.removeAllRows();
+        flexTable.setCellPadding(textHeight / 7);
+        for (Button menuButton : buttonsArray) {
+            menuButton.getElement().getStyle().setFontSize(textHeight, Style.Unit.PX);
+            flexTable.setWidget(row, col, menuButton);
+            row++;
+            if (portrate) {
+                if (row > rowPerColumn) {
+                    row = 0;
+                    col++;
+                    flexTable.setWidget(row, col, new Label(""));
+                    col++;
+                }
+            }
+        }
+    }
+
 }
