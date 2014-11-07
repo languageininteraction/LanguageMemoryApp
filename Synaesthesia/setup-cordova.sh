@@ -1,8 +1,9 @@
 #mvn install
 cd target
-rm -rf synquiz-0.1.104-testing-phonegap
-unzip synquiz-0.1.104-testing-phonegap.zip -d synquiz-0.1.104-testing-phonegap
-cd synquiz-0.1.104-testing-phonegap 
+synquizname=synquiz-0.2.106-testing
+rm -rf $synquizname-phonegap
+unzip $synquizname-phonegap.zip -d $synquizname-phonegap
+cd $synquizname-phonegap 
 cordova platform add ios
 cordova platform add android
 
@@ -50,3 +51,31 @@ cordova build -release
 
 #echo "launching xcode"
 #open platforms/ios/SynQuiz.xcodeproj
+
+# generate the IPA
+#cd platforms/ios/CordovaLib/
+#pwd
+#xcodebuild -alltargets -project CordovaLib.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -scheme CordovaLib -project CordovaLib.xcodeproj -sdk iphoneos -configuration Release
+
+#cd ..
+#pwd
+#xcodebuild -alltargets -project SynQuiz.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -scheme SynQuiz -project SynQuiz.xcodeproj -sdk iphoneos -configuration Release
+#cd build/Release-iphoneos
+cd platforms/ios/
+cd build/emulator
+pwd
+xcrun -sdk iphoneos PackageApplication -v "$(pwd)/SynQuiz.app" -o "$(pwd)/$synquizname.ipa"
+
+# validate the results
+xcrun -verbose -sdk iphoneos Validation "$(pwd)/$synquizname.ipa"
+
+pwd
+cd ../../../../
+# list the APK files that have been built
+find platforms/ -iname *.apk
+
+# list the IPA files that have been built
+find platforms/ -iname *.ipa
+
