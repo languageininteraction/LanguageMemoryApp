@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
-    <version>0.2.108-testing</version>
+    <version>0.2-testing-SNAPSHOT</version>
     <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
