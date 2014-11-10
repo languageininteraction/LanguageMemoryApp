@@ -49,7 +49,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     @Override
     void setContent(AppEventListner appEventListner) {
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        ((ReportView) simpleView).showResults(userResults, scoreCalculator);
+        ((ReportView) simpleView).showResults(scoreCalculator);
         ((ReportView) simpleView).addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
         ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
         ((ReportView) simpleView).addText(messages.reportScreenSCT());

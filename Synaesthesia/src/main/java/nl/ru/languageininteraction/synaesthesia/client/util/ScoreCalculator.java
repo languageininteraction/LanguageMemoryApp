@@ -17,8 +17,16 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
 
 /**
  * @since Oct 21, 2014 4:49:43 PM (creation date)
@@ -31,6 +39,45 @@ public class ScoreCalculator {
 
     public ScoreCalculator(UserResults userResults) {
         this.userResults = userResults;
+    }
+
+    public Set<StimuliGroup> getStimuliGroups() {
+        return userResults.getStimuliGroups();
+    }
+
+    public List<ScoreData> calculateScores(StimuliGroup group) {
+        ArrayList<ScoreData> scoreList = new ArrayList<>();
+        final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
+        final List<Stimulus> allStimulus = group.getStimuli();
+        int columnCount = stimulusResponseGroup.getMaxResponses();
+        for (Stimulus stimulus : allStimulus) {
+            final ArrayList<ColourData> colourList = new ArrayList<>();
+            List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
+            int averageLuminance = 0;
+            int validCount = 0;
+            // process the last and first
+            ColourData previousColour = responses.get(responses.size() - 1).getColour();
+            ColourData difference = previousColour.difference(responses.get(0).getColour());
+            // update the previous 
+            previousColour = responses.get(0).getColour();
+            colourList.add(previousColour);
+            // loop over all except the first which is already processed
+            for (int column = 1; column < columnCount; column++) {
+                final ColourData colour = responses.get(column).getColour();
+                colourList.add(colour);
+                if (colour == null) {
+                } else {
+                    validCount++;
+                    averageLuminance += colour.getLuminance();
+                    difference = difference.add(previousColour.difference(colour));
+                    previousColour = colour;
+                }
+            }
+            averageLuminance = averageLuminance / validCount;
+            float distance = difference.getLuminance() / ((255f + 255f + 255f) * columnCount);
+            scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
+        }
+        return scoreList;
     }
 
     public double getScore(Stimulus stimulus) {

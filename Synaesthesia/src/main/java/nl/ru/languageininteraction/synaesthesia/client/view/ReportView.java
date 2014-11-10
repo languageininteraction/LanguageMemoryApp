@@ -24,12 +24,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.List;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
 
 /**
  * @since Oct 14, 2014 10:57:45 AM (creation date)
@@ -53,21 +50,22 @@ public class ReportView extends SimpleView {
         outerPanel.add(html);
     }
 
-    public void showResults(UserResults userResults, ScoreCalculator scoreCalculator) {
-        for (StimuliGroup group : userResults.getStimuliGroups()) {
-            final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
-            final List<Stimulus> allStimulus = group.getStimuli();
-            int columnCount = stimulusResponseGroup.getMaxResponses();
+    public void showResults(ScoreCalculator scoreCalculator) {
+        for (StimuliGroup group : scoreCalculator.getStimuliGroups()) {
+            final List<ScoreData> calculatedScores = scoreCalculator.calculateScores(group);
+//            final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
+//            final List<Stimulus> allStimulus = group.getStimuli();
+            int columnCount = calculatedScores.get(0).getColourData().size();
             int row = 0;
             final FlexTable grid = new FlexTable();
             grid.setWidget(0, 0, new Label(group.getGroupLabel()));
-            grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
+//            grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
             row++;
-            for (Stimulus stimulus : allStimulus) {
-                List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
+            for (ScoreData scoreData : scoreCalculator.calculateScores(group)) {
+//                List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
                 for (int column = 0; column < columnCount; column++) {
-                    final Label label = new Label(stimulus.getValue());
-                    final ColourData colour = responses.get(column).getColour();
+                    final Label label = new Label(scoreData.getStimulus().getValue());
+                    final ColourData colour = scoreData.getColourData().get(column);
                     if (colour == null) {
                         label.getElement().setAttribute("style", "color: grey;background: none;");
                     } else {
@@ -79,7 +77,7 @@ public class ReportView extends SimpleView {
                 final HorizontalPanel bargraphOuter = new HorizontalPanel();
                 final HorizontalPanel bargraphInner = new HorizontalPanel();
                 bargraphOuter.setPixelSize(100, 10);
-                bargraphInner.setPixelSize((int) (100 * scoreCalculator.getScore(stimulus)), 10);
+                bargraphInner.setPixelSize((int) (100 * scoreData.getDistance()), 10);
                 bargraphOuter.setStyleName("bargraphOuter");
                 bargraphInner.setStyleName("bargraphInner");
                 bargraphOuter.add(bargraphInner);
