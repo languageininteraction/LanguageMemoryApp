@@ -51,10 +51,7 @@ public class Stimulus {
             return false;
         }
         final Stimulus other = (Stimulus) obj;
-        if (!Objects.equals(this.value, other.value)) {
-            return false;
-        }
-        return true;
+        return this.value.equals(other.value);
     }
 
 }

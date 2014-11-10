@@ -46,7 +46,7 @@ public class ColourData {
     }
 
     public int getLuminance() {
-        return red + green + blue;
+        return (red + green + blue) / 3;
     }
 
     public int getRed() {

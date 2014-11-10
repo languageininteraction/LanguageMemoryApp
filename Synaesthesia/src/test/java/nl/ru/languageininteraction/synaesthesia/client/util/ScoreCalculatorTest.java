@@ -18,11 +18,18 @@
 package nl.ru.languageininteraction.synaesthesia.client.util;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -33,27 +40,39 @@ public class ScoreCalculatorTest {
 
     private UserResults getUserResults(String userId) {
         final UserResults userResults = new UserResults();
-        final String resourcePath = "/nl/ru/languageininteraction/synaesthesia/client/util/testdata/" + userId;
+        final String resourcePath = "/nl/ru/languageininteraction/testdata/" + userId;
         System.out.println("resourcePath:" + resourcePath);
         final InputStream testDataStream = ScoreCalculatorTest.class.getClass().getResourceAsStream(resourcePath);
         Scanner scanner = new Scanner(testDataStream);
-        scanner.useDelimiter("[\t\r\n]*");
+        scanner.useDelimiter("\t");
+        
+        userResults.setMetadataValue("user", userId);
+        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
+        final ArrayList<Stimulus> stimulusList = new ArrayList<>();
+        userResults.addStimulusResponseGroup(new StimuliGroup("groupID", stimulusList), stimulusResponseGroup);
+
         while (scanner.hasNext()) {
             String user = scanner.next();
             System.out.print("\n user" + user);
+            assertEquals("1772837", user);
             String grapheme = scanner.next();
             System.out.print(" grapheme" + grapheme);
-            int trialNumber = scanner.nextInt();
-            System.out.print(" trialNumber" + trialNumber);
+            final Stimulus stimulus = new Stimulus(grapheme);
+            if (!stimulusList.contains(stimulus)) {
+                stimulusList.add(stimulus);
+            }
+//            int trialNumber = scanner.nextInt();
+//            System.out.print(" trialNumber" + trialNumber);
             String hexcolor = scanner.next();
             System.out.print(" hexcolor" + hexcolor);
             int decimalRed = scanner.nextInt();
             System.out.print(" decimalRed" + decimalRed);
             int decimalGreen = scanner.nextInt();
             System.out.print(" decimalGreen" + decimalGreen);
-            int decimalBlue = scanner.nextInt();
+            int decimalBlue = Integer.parseInt(scanner.nextLine().trim());
             System.out.print(" decimalBlue" + decimalBlue);
-            scanner.nextLine();
+            final ColourData colourData = (decimalRed == -1) ? null : new ColourData(decimalRed, decimalGreen, decimalBlue);
+            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(colourData, new Date(), 1000));
         }
         System.out.print("\n");
         scanner.close();
@@ -66,14 +85,29 @@ public class ScoreCalculatorTest {
     @Test
     public void testGetScore_Stimulus() {
         System.out.println("getScore");
-        getUserResults("syn1772837");
-        Stimulus stimulus = null;
-        ScoreCalculator instance = null;
-        double expResult = 0.0;
-        double result = instance.getScore(stimulus);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        final UserResults userResults = getUserResults("syn1772837");
+        final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
+        final List<ScoreData> calculatedScores = scoreCalculator.calculateScores(scoreCalculator.getStimuliGroups().toArray(new StimuliGroup[0])[0]);
+        int index = 0;
+        assertEquals("0", calculatedScores.get(index).getStimulus().getValue());
+        assertEquals(0.03, calculatedScores.get(index).getDistance(), 0.01);
+        assertEquals(207, calculatedScores.get(index).getAverageLuminance(), 0.01);
+        index += 3;
+        assertEquals("3", calculatedScores.get(index).getStimulus().getValue());
+        assertEquals(null, calculatedScores.get(index).getDistance());
+        assertEquals(189, calculatedScores.get(index).getAverageLuminance(), 0.01);
+        index += 3;
+        assertEquals("6", calculatedScores.get(index).getStimulus().getValue());
+        assertEquals(null, calculatedScores.get(index).getDistance());
+        assertEquals(0, calculatedScores.get(index).getAverageLuminance(), 0.01);
+        index += 4;
+        assertEquals("A", calculatedScores.get(index).getStimulus().getValue());
+        assertEquals(0.18, calculatedScores.get(index).getDistance(), 0.01);
+        assertEquals(112, calculatedScores.get(index).getAverageLuminance(), 0.01);
+        index += 4;
+        assertEquals("E", calculatedScores.get(index).getStimulus().getValue());
+        assertEquals(0.29, calculatedScores.get(index).getDistance(), 0.01);
+        assertEquals(129, calculatedScores.get(index).getAverageLuminance(), 0.01);
     }
 
     /**

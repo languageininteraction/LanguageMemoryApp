@@ -53,16 +53,13 @@ public class ReportView extends SimpleView {
     public void showResults(ScoreCalculator scoreCalculator) {
         for (StimuliGroup group : scoreCalculator.getStimuliGroups()) {
             final List<ScoreData> calculatedScores = scoreCalculator.calculateScores(group);
-//            final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
-//            final List<Stimulus> allStimulus = group.getStimuli();
             int columnCount = calculatedScores.get(0).getColourData().size();
             int row = 0;
             final FlexTable grid = new FlexTable();
             grid.setWidget(0, 0, new Label(group.getGroupLabel()));
-//            grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
+            grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
             row++;
             for (ScoreData scoreData : scoreCalculator.calculateScores(group)) {
-//                List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
                 for (int column = 0; column < columnCount; column++) {
                     final Label label = new Label(scoreData.getStimulus().getValue());
                     final ColourData colour = scoreData.getColourData().get(column);

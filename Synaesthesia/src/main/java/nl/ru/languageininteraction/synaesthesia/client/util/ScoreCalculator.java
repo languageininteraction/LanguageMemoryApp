@@ -55,26 +55,26 @@ public class ScoreCalculator {
             List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
             int averageLuminance = 0;
             int validCount = 0;
-            // process the last and first
+            // set the last as the previous to provide the correct overlap
             ColourData previousColour = responses.get(responses.size() - 1).getColour();
-            ColourData difference = previousColour.difference(responses.get(0).getColour());
-            // update the previous 
-            previousColour = responses.get(0).getColour();
-            colourList.add(previousColour);
+            ColourData difference = null;
             // loop over all except the first which is already processed
-            for (int column = 1; column < columnCount; column++) {
+            for (int column = 0; column < columnCount; column++) {
                 final ColourData colour = responses.get(column).getColour();
                 colourList.add(colour);
                 if (colour == null) {
                 } else {
                     validCount++;
                     averageLuminance += colour.getLuminance();
-                    difference = difference.add(previousColour.difference(colour));
-                    previousColour = colour;
+                    if (previousColour != null) {
+                        difference = (difference == null) ? previousColour.difference(colour) : difference.add(previousColour.difference(colour));
+                    }
+                    // update the previous only if the current colour is valid
+                    previousColour = (colour != null) ? colour : previousColour;
                 }
             }
-            averageLuminance = averageLuminance / validCount;
-            float distance = difference.getLuminance() / ((255f + 255f + 255f) * columnCount);
+            averageLuminance = (validCount > 0) ? averageLuminance / validCount : 0;
+            Float distance = (difference == null) ? null : difference.getLuminance() / (255f * columnCount);
             scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
         }
         return scoreList;

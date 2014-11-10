@@ -28,9 +28,9 @@ public class ScoreData {
     private final Stimulus stimulus;
     private final int averageLuminance;
     private final ArrayList<ColourData> colourData;
-    private final float distance;
+    private final Float distance;
 
-    public ScoreData(Stimulus stimulus, int averageLuminance, ArrayList<ColourData> colourData, float distance) {
+    public ScoreData(Stimulus stimulus, int averageLuminance, ArrayList<ColourData> colourData, Float distance) {
         this.stimulus = stimulus;
         this.averageLuminance = averageLuminance;
         this.colourData = colourData;
@@ -49,7 +49,7 @@ public class ScoreData {
         return colourData;
     }
 
-    public float getDistance() {
+    public Float getDistance() {
         return distance;
     }
 }
