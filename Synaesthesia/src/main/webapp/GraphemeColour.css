@@ -85,7 +85,7 @@ canvas {
     background: white;
     border-width: 3px;
     border-style: solid;
-    
+
 }
 
 .stimulusPanel {
@@ -114,17 +114,22 @@ canvas {
     margin-left: 69px;   
     margin-right: 69px;   
 }
+.resultsTableTitle {
+    font-size: 24pt;
+}
 
-.gwt-Label, .gwt-HTML, .headerLabel{  
-    color:rgb(255,255,255); 
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
+.gwt-Label, .gwt-HTML, .headerLabel {  
     font-size: 17pt;
-    line-height: 20pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;
     font-size: 16pt;
     line-height: 20pt;
     */
+}
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle {  
+    color:rgb(255,255,255); 
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
+    line-height: 20pt;
 }
 
 #widgetTag {

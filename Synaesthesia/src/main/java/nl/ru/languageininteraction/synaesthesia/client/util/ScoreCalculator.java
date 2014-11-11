@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -45,7 +46,7 @@ public class ScoreCalculator {
         return userResults.getStimuliGroups();
     }
 
-    public List<ScoreData> calculateScores(StimuliGroup group) {
+    public GroupScoreData calculateScores(StimuliGroup group) {
         ArrayList<ScoreData> scoreList = new ArrayList<>();
         final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
         final List<Stimulus> allStimulus = group.getStimuli();
@@ -77,28 +78,11 @@ public class ScoreCalculator {
             Float distance = (difference == null) ? null : difference.getLuminance() / (255f * columnCount);
             scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
         }
-        return scoreList;
-    }
-
-    public double getScore(Stimulus stimulus) {
-        tempScoreValue += 0.1;
-        tempScoreValue = (tempScoreValue > 1) ? 0 : tempScoreValue;
-        return tempScoreValue;
-    }
-
-    public double getScore() {
-        return 0.27;
-    }
-
-    public double getAccuracy() {
-        return 94.44;
-    }
-
-    public double getMeanReactionTime() {
-        return 1.33;
-    }
-
-    public double getReactionTimeDeviation() {
-        return 0.41;
+        // todo: fill these values
+        double score=0;
+        double accuracy=0;
+        double meanReactionTime=0;
+        double reactionTimeDeviation=0;
+        return new GroupScoreData(scoreList, score, accuracy, meanReactionTime, reactionTimeDeviation);
     }
 }

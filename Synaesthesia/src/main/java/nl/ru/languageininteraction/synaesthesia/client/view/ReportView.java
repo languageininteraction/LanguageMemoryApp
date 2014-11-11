@@ -22,9 +22,8 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import java.util.List;
-import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 
@@ -34,14 +33,10 @@ import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
  */
 public class ReportView extends SimpleView {
 
-    final private VerticalPanel resultsPanel;
     final VerticalPanel outerPanel;
 
     public ReportView() {
         outerPanel = new VerticalPanel();
-        resultsPanel = new VerticalPanel();
-        resultsPanel.setStylePrimaryName("resultsTablePanel");
-        outerPanel.add(resultsPanel);
         setContent(outerPanel);
     }
 
@@ -50,38 +45,37 @@ public class ReportView extends SimpleView {
         outerPanel.add(html);
     }
 
-    public void showResults(ScoreCalculator scoreCalculator) {
-        for (StimuliGroup group : scoreCalculator.getStimuliGroups()) {
-            final List<ScoreData> calculatedScores = scoreCalculator.calculateScores(group);
-            int columnCount = calculatedScores.get(0).getColourData().size();
-            int row = 0;
-            final FlexTable grid = new FlexTable();
-            grid.setWidget(0, 0, new Label(group.getGroupLabel()));
-            grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
-            row++;
-            for (ScoreData scoreData : scoreCalculator.calculateScores(group)) {
-                for (int column = 0; column < columnCount; column++) {
-                    final Label label = new Label(scoreData.getStimulus().getValue());
-                    final ColourData colour = scoreData.getColourData().get(column);
-                    if (colour == null) {
-                        label.getElement().setAttribute("style", "color: grey;background: none;");
-                    } else {
-                        String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
-                        label.getElement().setAttribute("style", "background:" + foreground + ";color:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
-                    }
-                    grid.setWidget(row, column, label);
+    public void showResults(StimuliGroup stimuliGroup, GroupScoreData calculatedScores) {
+        int columnCount = calculatedScores.getScoreDataList().get(0).getColourData().size();
+        int row = 0;
+        final FlexTable grid = new FlexTable();
+        grid.setStylePrimaryName("resultsTablePanel");
+        final Label titleLabel = new Label(stimuliGroup.getGroupLabel());titleLabel.setStylePrimaryName("resultsTableTitle");
+        grid.setWidget(0, 0, titleLabel);
+        grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
+        row++;
+        for (ScoreData scoreData : calculatedScores.getScoreDataList()) {
+            for (int column = 0; column < columnCount; column++) {
+                final Label label = new Label(scoreData.getStimulus().getValue());
+                final ColourData colour = scoreData.getColourData().get(column);
+                if (colour == null) {
+                    label.getElement().setAttribute("style", "color: grey;background: none;");
+                } else {
+                    String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
+                    label.getElement().setAttribute("style", "background:" + foreground + ";color:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
                 }
-                final HorizontalPanel bargraphOuter = new HorizontalPanel();
-                final HorizontalPanel bargraphInner = new HorizontalPanel();
-                bargraphOuter.setPixelSize(100, 10);
-                bargraphInner.setPixelSize((int) (100 * scoreData.getDistance()), 10);
-                bargraphOuter.setStyleName("bargraphOuter");
-                bargraphInner.setStyleName("bargraphInner");
-                bargraphOuter.add(bargraphInner);
-                grid.setWidget(row, columnCount, bargraphOuter);
-                row++;
+                grid.setWidget(row, column, label);
             }
-            resultsPanel.add(grid);
+            final HorizontalPanel bargraphOuter = new HorizontalPanel();
+            final HorizontalPanel bargraphInner = new HorizontalPanel();
+            bargraphOuter.setPixelSize(100, 10);
+            bargraphInner.setPixelSize((int) (100 * scoreData.getDistance()), 10);
+            bargraphOuter.setStyleName("bargraphOuter");
+            bargraphInner.setStyleName("bargraphInner");
+            bargraphOuter.add(bargraphInner);
+            grid.setWidget(row, columnCount, bargraphOuter);
+            row++;
         }
+        outerPanel.add(grid);
     }
 }

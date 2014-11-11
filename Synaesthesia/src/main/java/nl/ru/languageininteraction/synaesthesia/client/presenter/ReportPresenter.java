@@ -21,6 +21,8 @@ import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 
@@ -49,12 +51,15 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     @Override
     void setContent(AppEventListner appEventListner) {
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        ((ReportView) simpleView).showResults(scoreCalculator);
-        ((ReportView) simpleView).addText(messages.reportScreenScore(Double.toString(scoreCalculator.getScore())));
-        ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
-        ((ReportView) simpleView).addText(messages.reportScreenSCT());
-        ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(Double.toString(scoreCalculator.getAccuracy())));
-        ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(Double.toString(scoreCalculator.getMeanReactionTime()), Double.toString(scoreCalculator.getReactionTimeDeviation())));
+        for (StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
+            final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
+            ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
+            ((ReportView) simpleView).addText(messages.reportScreenScore(Double.toString(calculatedScores.getScore())));
+            ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
+            ((ReportView) simpleView).addText(messages.reportScreenSCT());
+            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(Double.toString(calculatedScores.getAccuracy())));
+            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(Double.toString(calculatedScores.getMeanReactionTime()), Double.toString(calculatedScores.getReactionTimeDeviation())));
+        }
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
 
     }
