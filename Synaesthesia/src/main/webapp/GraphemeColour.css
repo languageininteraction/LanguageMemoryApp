@@ -1,13 +1,13 @@
 .gwt-Button.stimulusButton {
     display: block;
     display: inline-block;
-    background-color:rgb(111,111,111);
-    padding: 5px 10px;
-    margin: 0 10px 10px 0;
+    background: white;
+    padding:  5px 10px;
+    /*margin: 0 10px 10px 0;*/
     color: black;
     text-decoration: none;
     cursor: pointer;
-    border-color: transparent;
+    border-color: rgb(111,111,111);;
     border-radius: 5px;
     outline: none;
 }
@@ -15,11 +15,11 @@
 .gwt-Button.nextButton {
     display: block;
     display: inline-block;
-    background: rgb(246,170,139);
+    background: white;
     color: black;
     text-decoration: none;
     cursor: pointer;
-    border-color: rgb(142,207,230);
+    border-color: rgb(0,158,200);
     border-radius: 15px;
     outline: none;
     width: 80%;
@@ -30,12 +30,12 @@
     /*background:rgb(246,170,139);*/
     display: block;
     display: inline-block;
-    background: rgb(246,170,139);
+    background: white;
     /*background: rgb(193,227,241);*/
     padding: 5px 10px;
     margin: 0 10px 10px 0;
     color: black;
-    border-color: rgb(142,207,230);
+    border-color: rgb(0,158,200);
     /*border-color: rgb(142,207,230);*/
     text-decoration: none;
     cursor: pointer;

@@ -70,8 +70,11 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int width;
     private final int barWidth;
     private final int stimulusTextHeight;
-    private final int buttonSize;
-    private final int selectedColourPanelSize;
+    private final int buttonHeight;
+    private final int buttonTextHeight;
+    private final int buttonWidth;
+    private final int selectedColourPanelHeight;
+    private final int selectedColourPanelWidth;
     private ColourData selectedColourData = null;
 
     public ColourPickerCanvasView() throws CanvasError {
@@ -83,17 +86,19 @@ public class ColourPickerCanvasView extends AbstractView {
         width = (int) (minClient * 0.8);
         barWidth = (int) (minClient * 0.1);
         stimulusTextHeight = (int) (minClient * 0.09);
-        selectedColourPanelSize = (int) (minClient * 0.25);
-        buttonSize = (int) (minClient * 0.2);
+        selectedColourPanelHeight = (int) (minClient * 0.25);
+        selectedColourPanelWidth = (int) (minClient * 0.47);
+        buttonTextHeight = (int) (minClient * 0.05);
+        buttonHeight = (int) (minClient * 0.1);
+        buttonWidth = (int) (minClient * 0.47);
         stimulusPanel = new VerticalPanel();
         stimulusPanel.addStyleName("stimulusPanel");
         outerGrid = new Grid(2, 2);
-        innerGrid = new Grid(3, 2);
+        innerGrid = new Grid(5, 2);
         pickerPanel = new Grid(1, 2);
         infoButton = new Button();
         infoButton.setStylePrimaryName("stimulusHelpButton");
         selectedColourPanel = new VerticalPanel();
-        selectedColourPanel.addStyleName("stimulusPanel");
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
@@ -120,8 +125,8 @@ public class ColourPickerCanvasView extends AbstractView {
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
             final Label selectedColourLabel = new Label("");
-            selectedColourLabel.setHeight(selectedColourPanelSize + "px");
-            selectedColourLabel.setWidth(selectedColourPanelSize * 1.6 + "px");
+            selectedColourLabel.setHeight(selectedColourPanelHeight + "px");
+            selectedColourLabel.setWidth(selectedColourPanelWidth + "px");
             selectedColourPanel.add(selectedColourLabel);
             mainCanvas.addClickHandler(new ClickHandler() {
 
@@ -317,9 +322,10 @@ public class ColourPickerCanvasView extends AbstractView {
 
     private Button getButton(String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
-        nextButton.setHeight(buttonSize + "px");
-        nextButton.setWidth(buttonSize + "px");
+        nextButton.setHeight(buttonHeight + "px");
+        nextButton.setWidth(buttonWidth + "px");
         nextButton.addStyleName("stimulusButton");
+        nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         nextButton.setEnabled(true);
         nextButton.addClickHandler(new ClickHandler() {
 
@@ -335,16 +341,16 @@ public class ColourPickerCanvasView extends AbstractView {
     protected void parentResized(int height, int width, String units) {
         if (height < width) {
             innerGrid.setWidget(0, 0, stimulusPanel);
-            innerGrid.setWidget(0, 1, rejectButton);
-            innerGrid.setWidget(1, 0, selectedColourPanel);
-            innerGrid.setWidget(1, 1, acceptButton);
-            innerGrid.setWidget(2, 0, progressLabel);
-            innerGrid.setWidget(2, 1, infoButton);
+            innerGrid.setWidget(1, 0, rejectButton);
+            innerGrid.setWidget(2, 0, selectedColourPanel);
+            innerGrid.setWidget(3, 0, acceptButton);
+            innerGrid.setWidget(4, 0, progressLabel);
+            innerGrid.setWidget(4, 1, infoButton);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
             innerGrid.setWidget(0, 0, stimulusPanel);
-            innerGrid.setWidget(0, 1, rejectButton);
-            innerGrid.setWidget(1, 0, selectedColourPanel);
+            innerGrid.setWidget(1, 0, rejectButton);
+            innerGrid.setWidget(0, 1, selectedColourPanel);
             innerGrid.setWidget(1, 1, acceptButton);
             innerGrid.setWidget(2, 0, progressLabel);
             innerGrid.setWidget(2, 1, infoButton);
