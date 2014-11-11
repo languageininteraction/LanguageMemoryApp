@@ -47,42 +47,54 @@ public class ScoreCalculator {
     }
 
     public GroupScoreData calculateScores(StimuliGroup group) {
+        double score = 0;
+        double accuracy = 0;
+        double totalValidReactionTime = 0;
+        double reactionTimeDeviation = 0;
+        int validResponseCount = 0;
         ArrayList<ScoreData> scoreList = new ArrayList<>();
         final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
         final List<Stimulus> allStimulus = group.getStimuli();
         int columnCount = stimulusResponseGroup.getMaxResponses();
         for (Stimulus stimulus : allStimulus) {
+            int totalReactionTime = 0;
             final ArrayList<ColourData> colourList = new ArrayList<>();
-            List<StimulusResponse> responses = stimulusResponseGroup.getResults(stimulus);
+            List<StimulusResponse> responseList = stimulusResponseGroup.getResults(stimulus);
             int averageLuminance = 0;
             int validCount = 0;
+            boolean isValid = true;
             // set the last as the previous to provide the correct overlap
-            ColourData previousColour = responses.get(responses.size() - 1).getColour();
+            ColourData previousColour = responseList.get(responseList.size() - 1).getColour();
             ColourData difference = null;
             // loop over all except the first which is already processed
             for (int column = 0; column < columnCount; column++) {
-                final ColourData colour = responses.get(column).getColour();
+                final StimulusResponse response = responseList.get(column);
+                final ColourData colour = response.getColour();
                 colourList.add(colour);
                 if (colour == null) {
+                    isValid = false;
                 } else {
                     validCount++;
+                    totalReactionTime += response.getDurationMs();
                     averageLuminance += colour.getLuminance();
                     if (previousColour != null) {
                         difference = (difference == null) ? previousColour.difference(colour) : difference.add(previousColour.difference(colour));
                     }
-                    // update the previous only if the current colour is valid
-                    previousColour = (colour != null) ? colour : previousColour;
+                    // update the previous with the current colour which is known to be valid
+                    previousColour = colour;
                 }
             }
             averageLuminance = (validCount > 0) ? averageLuminance / validCount : 0;
             Float distance = (difference == null) ? null : difference.getLuminance() / (255f * columnCount);
             scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
+            if (isValid) {
+                score += distance;
+                totalValidReactionTime += totalReactionTime;
+                validResponseCount++;
+            }
         }
-        // todo: fill these values
-        double score=0;
-        double accuracy=0;
-        double meanReactionTime=0;
-        double reactionTimeDeviation=0;
-        return new GroupScoreData(scoreList, score, accuracy, meanReactionTime, reactionTimeDeviation);
+        score = score / validResponseCount;
+        final double meaneactionTime = totalValidReactionTime / validResponseCount;
+        return new GroupScoreData(scoreList, score, accuracy, meaneactionTime, reactionTimeDeviation);
     }
 }
