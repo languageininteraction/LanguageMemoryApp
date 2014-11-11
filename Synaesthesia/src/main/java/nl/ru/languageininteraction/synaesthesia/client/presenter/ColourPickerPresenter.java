@@ -48,7 +48,9 @@ public class ColourPickerPresenter implements Presenter {
     private final StimuliGroup stimuliGroup;
     private Stimulus currentStimulus = null;
     private long startMs;
-    private int repeatCount;
+    private final int repeatCount;
+    private int shownSetCount;
+    private int shownCount = 0;
 
     public ColourPickerPresenter(RootPanel widgetTag, StimuliGroup stimuliGroup, UserResults userResults, int repeatCount) throws CanvasError {
         this.widgetTag = widgetTag;
@@ -62,8 +64,8 @@ public class ColourPickerPresenter implements Presenter {
 
     private void triggerEvent(final AppEventListner appEventListner, final ColourPickerCanvasView colourPickerCanvasView, final AppEventListner.ApplicationState nextState) {
         if (stimuli.isEmpty()) {
-            repeatCount--;
-            if (repeatCount > 0) {
+            shownSetCount++;
+            if (repeatCount > shownSetCount) {
                 this.stimuli.addAll(stimuliGroup.getStimuli());
             }
         }
@@ -73,7 +75,8 @@ public class ColourPickerPresenter implements Presenter {
             colourPickerCanvasView.setRandomColour();
             currentStimulus = stimuli.remove((int) (Math.random() * stimuli.size()));
             startMs = System.currentTimeMillis();
-            colourPickerCanvasView.setStimulus(currentStimulus, messages.stimulusscreenprogresstext(Integer.toString(maxStimuli - stimuli.size()), Integer.toString(maxStimuli)));
+            shownCount++;
+            colourPickerCanvasView.setStimulus(currentStimulus, messages.stimulusscreenprogresstext(Integer.toString(shownCount), Integer.toString(maxStimuli * repeatCount)));
         }
     }
 
