@@ -202,12 +202,17 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     public void setRandomColour() {
-        final int red = Random.nextInt(255);
-        final int green = Random.nextInt(255);
-        final int blue = Random.nextInt(255);
-        setHue(red, green, blue);
-        selectedColourData = new ColourData(red, green, blue);
-        selectedColourPanel.getElement().setAttribute("style", "background:rgb(" + red + "," + green + "," + blue + ")");
+        final double randomRad = Random.nextDouble() * 2;
+        final double red = (Math.sin(randomRad) * 128 + 127);
+        final double green = (Math.sin(randomRad - 1.667) * 128 + 127);
+        final double blue = (Math.sin(randomRad + 1.667) * 128 + 127);
+//        System.out.println("red:" + (red));
+//        System.out.println("green:" + (green));
+//        System.out.println("blue:" + (blue));
+//        System.out.println("red+green+blue:" + (red + green + blue));
+        setHue((int) red, (int) green, (int) blue);
+        selectedColourData = new ColourData((int) red, (int) green, (int) blue);
+        selectedColourPanel.getElement().setAttribute("style", "background:rgb(" + (int) red + "," + (int) green + "," + (int) blue + ")");
     }
 
     private void setHue(int red, int green, int blue) {
