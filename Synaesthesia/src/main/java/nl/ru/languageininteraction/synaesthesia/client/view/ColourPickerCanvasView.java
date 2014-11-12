@@ -85,7 +85,7 @@ public class ColourPickerCanvasView extends AbstractView {
         height = (int) (minClient * 0.9);
         width = (int) (minClient * 0.8);
         barWidth = (int) (minClient * 0.1);
-        stimulusTextHeight = (int) (minClient * 0.09);
+        stimulusTextHeight = (int) (minClient * 0.08);
         selectedColourPanelHeight = (int) (minClient * 0.25);
         selectedColourPanelWidth = (int) (minClient * 0.47);
         buttonTextHeight = (int) (minClient * 0.05);
