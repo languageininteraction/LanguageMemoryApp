@@ -42,7 +42,6 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(final AppEventListner appEventListner) {
-
         setUpLocaleOptions();
     }
 

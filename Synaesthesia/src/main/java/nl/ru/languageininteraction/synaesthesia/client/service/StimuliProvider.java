@@ -32,7 +32,7 @@ public class StimuliProvider {
 
     private final Stimuli stimuli = GWT.create(Stimuli.class);
 
-    public StimuliGroup[] getStimuli() throws StimulusError {
+    public StimuliGroup[] getStimuli() {
         return new StimuliGroup[]{
             new StimuliGroup(stimuli.stimuli1Label(), getStimulusArray(stimuli.stimuli1csv())),
             new StimuliGroup(stimuli.stimuli2Label(), getStimulusArray(stimuli.stimuli2csv())),

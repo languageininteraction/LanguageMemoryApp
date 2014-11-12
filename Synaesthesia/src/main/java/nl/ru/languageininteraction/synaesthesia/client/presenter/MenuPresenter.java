@@ -42,6 +42,7 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
     void setContent(final AppEventListner appEventListner) {
         setMenuOption(appEventListner, AppEventListner.ApplicationState.intro);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
@@ -51,7 +52,7 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
         setMenuOption(appEventListner, AppEventListner.ApplicationState.version);
     }
 
-    private void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState) {
+    protected void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState) {
         ((MenuView) simpleView).addMenuItem(applicationState.label, new PresenterEventListner() {
 
             @Override

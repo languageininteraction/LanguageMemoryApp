@@ -35,10 +35,12 @@ public interface AppEventListner {
         version(messages.versionMenuLabel()),
         intro(messages.introMenuLabel()),
         menu(messages.menuButton()),
-        metadata(messages.metadataMenuLabel()),
+        setuser(messages.setUserMenuLabel()),
+        adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         stimulus(messages.stimulusMenuLabel()),
         report(messages.reportMenuLabel()),
         feedback(messages.feedbackMenuLabel()),
+        metadata(messages.metadataMenuLabel()),
         registration(messages.registerMenuLabel()),
         moreinfo(messages.moreInfoMenuLabel()),
         end(messages.exitButton());

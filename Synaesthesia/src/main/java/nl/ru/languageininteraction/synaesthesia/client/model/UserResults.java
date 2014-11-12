@@ -30,6 +30,7 @@ public class UserResults {
 
     private final HashMap<String, String> metadataValues = new HashMap<>();
     private final HashMap<StimuliGroup, StimulusResponseGroup> results = new HashMap<>();
+    private StimuliGroup pendingStimuliGroup = null;
 
     public UserResults() {
     }
@@ -66,5 +67,13 @@ public class UserResults {
 
     public Set<String> getMetadataKeys() {
         return metadataValues.keySet();
+    }
+
+    public StimuliGroup getPendingStimuliGroup() {
+        return pendingStimuliGroup;
+    }
+
+    public void setPendingStimuliGroup(StimuliGroup pendingStimuliGroup) {
+        this.pendingStimuliGroup = pendingStimuliGroup;
     }
 }

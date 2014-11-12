@@ -21,7 +21,6 @@ import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
@@ -38,6 +37,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresent
 import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -56,15 +56,6 @@ public class AppController implements AppEventListner {
         this.widgetTag = widgetTag;
         stimuliProvider = new StimuliProvider();
         userResults = new LocalStorage().getStoredData();
-        try {
-            final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-            userResults.addDummyResults(stimuli[0]);
-            userResults.addDummyResults(stimuli[1]);
-            userResults.addDummyResults(stimuli[2]);
-        } catch (StimulusError error) {
-            logger.severe("failed to create dummy user results:");
-            logger.severe(error.getMessage());
-        }
     }
 
     @Override
@@ -93,10 +84,19 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, null, ApplicationState.stimulus);
                     break;
                 case stimulus:
-                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-                    this.presenter = new ColourPickerPresenter(widgetTag, stimuli[1], userResults, 3);
-                    presenter.setState(this, null, ApplicationState.report);
+                    if (userResults.getPendingStimuliGroup() == null) {
+                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
+                        presenter.setState(this, null, null);
+                    } else {
+                        this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
+                        presenter.setState(this, null, ApplicationState.stimulus);
+                    }
                     break;
+                case adddummyresults:
+                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
+                    userResults.addDummyResults(stimuli[0]);
+                    userResults.addDummyResults(stimuli[1]);
+                    userResults.addDummyResults(stimuli[2]);
                 case report:
                     this.presenter = new ReportPresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.feedback);
@@ -119,7 +119,7 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, ApplicationState.start, applicationState);
                     break;
             }
-        } catch (StimulusError | CanvasError error) {
+        } catch (CanvasError error) {
             logger.warning(error.getMessage());
             this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
             presenter.setState(this, ApplicationState.start, applicationState);

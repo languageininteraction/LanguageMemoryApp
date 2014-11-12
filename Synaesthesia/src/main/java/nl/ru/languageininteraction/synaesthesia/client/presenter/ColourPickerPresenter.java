@@ -52,9 +52,10 @@ public class ColourPickerPresenter implements Presenter {
     private int shownSetCount;
     private int shownCount = 0;
 
-    public ColourPickerPresenter(RootPanel widgetTag, StimuliGroup stimuliGroup, UserResults userResults, int repeatCount) throws CanvasError {
+    public ColourPickerPresenter(RootPanel widgetTag, UserResults userResults, int repeatCount) throws CanvasError {
         this.widgetTag = widgetTag;
-        this.stimuliGroup = stimuliGroup;
+        this.stimuliGroup = userResults.getPendingStimuliGroup();
+        userResults.setPendingStimuliGroup(null);
         this.stimuli = new ArrayList<>(stimuliGroup.getStimuli());
         this.userResults = userResults;
         this.repeatCount = repeatCount;
