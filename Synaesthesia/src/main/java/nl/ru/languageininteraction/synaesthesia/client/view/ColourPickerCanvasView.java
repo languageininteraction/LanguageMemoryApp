@@ -97,7 +97,8 @@ public class ColourPickerCanvasView extends AbstractView {
         innerGrid = new Grid(5, 2);
         pickerPanel = new Grid(1, 2);
         infoButton = new Button();
-        infoButton.setStylePrimaryName("stimulusHelpButton");
+        infoButton.addStyleName("stimulusHelpButton");
+        infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         mainCanvas = Canvas.createIfSupported();

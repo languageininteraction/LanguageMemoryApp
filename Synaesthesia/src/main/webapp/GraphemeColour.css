@@ -45,6 +45,12 @@
     width: 100%;
 }
 
+.gwt-Button.stimulusHelpButton {    
+    background: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
 .contentPanel {
     border-top-color: white;
     border-top-width: 1px;
@@ -66,12 +72,6 @@ canvas {
     border: grey;
     border-width: 1px;
     border-style: solid;
-}
-
-.stimulusHelpButton {
-    font-size: 17pt;
-    border-radius: 15px;
-    padding: 5px 10px;
 }
 
 .stimulusHelpText {
