@@ -1,11 +1,12 @@
 #mvn install
 cd target
-synquizname=synquiz-0.2.106-testing
+synquizname=synquiz-0.2-testing-SNAPSHOT
 rm -rf $synquizname-phonegap
 unzip $synquizname-phonegap.zip -d $synquizname-phonegap
 cd $synquizname-phonegap 
 cordova platform add ios
 cordova platform add android
+cordova plugin add https://github.com/danwilson/google-analytics-plugin.git
 
 splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
 echo $splashResourcesDir
@@ -40,6 +41,8 @@ echo "building"
 #cordova compile
 cordova build -release
 # cordova emulate android
+#cordova emulate ios --target="iPad"
+#cordova emulate ios --target="iPhone"
 
 # list the schemes available 
 #xcodebuild -list

@@ -25,6 +25,16 @@
         <!-- be added before this line.                -->
         <!--                                           -->
         <script type="text/javascript" language="javascript" src="GraphemeColour/GraphemeColour.nocache.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript">
+            function onLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+            function onDeviceReady() {
+                analytics.startTrackerWithId('UA-41988110-2');
+                analytics.trackView("start");
+            }
+        </script>
     </head>
 
     <!--                                           -->
@@ -32,7 +42,7 @@
     <!-- you can leave the body empty if you want  -->
     <!-- to create a completely dynamic UI.        -->
     <!--                                           -->
-    <body>        
+    <body onload="onLoad()">        
         <!-- OPTIONAL: include this if you want history support -->
         <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
 

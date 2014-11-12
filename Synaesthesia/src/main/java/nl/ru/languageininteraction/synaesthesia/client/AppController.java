@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client;
 
+import com.google.gwt.core.client.JavaScriptException;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -61,6 +62,7 @@ public class AppController implements AppEventListner {
     @Override
     public void requestApplicationState(ApplicationState applicationState) {
         try {
+            trackView(applicationState.name());
             switch (applicationState) {
                 case start:
                 case menu:
@@ -88,6 +90,7 @@ public class AppController implements AppEventListner {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
                         presenter.setState(this, null, null);
                     } else {
+                        trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
                         presenter.setState(this, null, ApplicationState.stimulus);
                     }
@@ -119,7 +122,7 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, ApplicationState.start, applicationState);
                     break;
             }
-        } catch (CanvasError error) {
+        } catch (JavaScriptException | CanvasError error) {
             logger.warning(error.getMessage());
             this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
             presenter.setState(this, ApplicationState.start, applicationState);
@@ -129,4 +132,12 @@ public class AppController implements AppEventListner {
     public void start() {
         requestApplicationState(AppEventListner.ApplicationState.start);
     }
+
+    public static native void trackView(String applicationState) /*-{
+     if($wnd.analytics) $wnd.analytics.trackView(applicationState);
+     }-*/;
+
+    public static native void trackEvent(String applicationState, String label, String value) /*-{
+     if($wnd.analytics) $wnd.analytics.trackEvent(applicationState, "view", label, value);
+     }-*/;
 }
