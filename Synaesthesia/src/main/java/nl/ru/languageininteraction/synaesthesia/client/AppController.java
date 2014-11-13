@@ -130,7 +130,12 @@ public class AppController implements AppEventListner {
     }
 
     public void start() {
+        setBackButtonAction();
         requestApplicationState(AppEventListner.ApplicationState.start);
+    }
+
+    public void backAction() {
+        requestApplicationState(ApplicationState.menu);
     }
 
     public static native void trackView(String applicationState) /*-{
@@ -139,5 +144,13 @@ public class AppController implements AppEventListner {
 
     public static native void trackEvent(String applicationState, String label, String value) /*-{
      if($wnd.analytics) $wnd.analytics.trackEvent(applicationState, "view", label, value);
+     }-*/;
+
+    private native void setBackButtonAction() /*-{
+     var appController = this;
+     $doc.addEventListener("backbutton", function(e){
+     e.preventDefault();
+     appController.@nl.ru.languageininteraction.synaesthesia.client.AppController::backAction()();
+     }, false);
      }-*/;
 }
