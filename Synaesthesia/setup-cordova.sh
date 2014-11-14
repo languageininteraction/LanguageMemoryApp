@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-0.2-testing-SNAPSHOT
+synquizname=synquiz-0.3.132-testing
 rm -rf $synquizname-phonegap
 unzip $synquizname-phonegap.zip -d $synquizname-phonegap
 cd $synquizname-phonegap 
@@ -40,7 +40,7 @@ echo "building"
 #cordova prepare
 #cordova compile
 cordova build -release
-# cordova emulate android
+# cordova emulate android 
 #cordova emulate ios --target="iPad"
 #cordova emulate ios --target="iPhone"
 
