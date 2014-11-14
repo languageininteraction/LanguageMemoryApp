@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
-import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.client.Stimuli;
@@ -33,7 +32,7 @@ public class StimuliProvider {
     private final Stimuli stimuli = GWT.create(Stimuli.class);
 
     public StimuliGroup getDefaultStimuli() {
-        return getStimuli()[0];
+        return getStimuli()[2];
     }
 
     public StimuliGroup[] getStimuli() {
