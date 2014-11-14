@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.i18n.client.NumberFormat;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -50,15 +51,16 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(AppEventListner appEventListner) {
+        final NumberFormat numberFormat = NumberFormat.getFormat("0.00");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         for (StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
-            ((ReportView) simpleView).addText(messages.reportScreenScore(Double.toString(calculatedScores.getScore())));
+            ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat.format(calculatedScores.getScore())));
             ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
             ((ReportView) simpleView).addText(messages.reportScreenSCT());
-            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(Double.toString(calculatedScores.getAccuracy())));
-            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(Double.toString(calculatedScores.getMeanReactionTime()), Double.toString(calculatedScores.getReactionTimeDeviation())));
+            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat.format(calculatedScores.getAccuracy())));
+            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat.format(calculatedScores.getMeanReactionTime()), numberFormat.format(calculatedScores.getReactionTimeDeviation())));
         }
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
 
