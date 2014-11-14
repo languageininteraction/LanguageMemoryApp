@@ -27,6 +27,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)
@@ -64,11 +65,11 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        addRegisterButton();
+        addRegisterButton(appEventListner);
     }
 
-    private void addRegisterButton() {
-        simpleView.setButton(messages.registerButton(), new PresenterEventListner() {
+    private void addRegisterButton(final AppEventListner appEventListner) {
+        simpleView.setButton(SimpleView.ButtonType.next, messages.registerButton(), new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
@@ -81,12 +82,19 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                     @Override
                     public void registrationFailed(Throwable exception) {
                         simpleView.setDisplayText("Registration failed. " + exception.getMessage());
-                        addRegisterButton();
+                        addRegisterButton(appEventListner);
                     }
 
                     @Override
                     public void registrationComplete() {
                         simpleView.setDisplayText("Registration complete.");
+                        simpleView.setButton(SimpleView.ButtonType.next, AppEventListner.ApplicationState.start.label, new PresenterEventListner() {
+
+                            @Override
+                            public void eventFired(Button button) {
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.start);
+                            }
+                        });
                     }
                 });
             }

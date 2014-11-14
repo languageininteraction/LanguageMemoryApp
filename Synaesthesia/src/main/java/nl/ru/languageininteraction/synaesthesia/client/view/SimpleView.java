@@ -36,6 +36,10 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
  */
 public class SimpleView extends AbstractView {
 
+    public enum ButtonType {
+
+        menu, back, next
+    }
     private final HorizontalPanel footerPanel;
     private final HorizontalPanel headerPanel;
     private final HorizontalPanel borderedContentPanel;
@@ -91,9 +95,9 @@ public class SimpleView extends AbstractView {
         scrollPanel.setWidget(new Anchor(label, target));
     }
 
-    public Button setButton(String buttonText, final PresenterEventListner presenterListerner) {
+    public Button setButton(ButtonType buttonType, String buttonText, final PresenterEventListner presenterListerner) {
         final Button nextButton = new Button(buttonText);
-        nextButton.addStyleName("nextButton");
+        nextButton.addStyleName(buttonType.name() + "Button");
         nextButton.setEnabled(true);
         footerPanel.add(nextButton);
         nextButton.addClickHandler(new ClickHandler() {
