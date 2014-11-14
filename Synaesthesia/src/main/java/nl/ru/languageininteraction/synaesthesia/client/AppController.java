@@ -39,6 +39,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresente
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.UserNamePresenter;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -57,6 +58,7 @@ public class AppController implements AppEventListner {
         this.widgetTag = widgetTag;
         stimuliProvider = new StimuliProvider();
         userResults = new LocalStorage().getStoredData();
+        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
     }
 
     @Override
@@ -64,7 +66,6 @@ public class AppController implements AppEventListner {
         try {
             trackView(applicationState.name());
             switch (applicationState) {
-                case start:
                 case menu:
                     this.presenter = new MenuPresenter(widgetTag);
                     presenter.setState(this, null, null);
@@ -77,18 +78,19 @@ public class AppController implements AppEventListner {
                     this.presenter = new VersionPresenter(widgetTag);
                     presenter.setState(this, null, null);
                     break;
+                case start:
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.metadata);
+                    presenter.setState(this, null, ApplicationState.setuser);
                     break;
-                case metadata:
-                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+                case setuser:
+                    this.presenter = new UserNamePresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.stimulus);
                     break;
                 case stimulus:
                     if (userResults.getPendingStimuliGroup() == null) {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
-                        presenter.setState(this, null, null);
+                        presenter.setState(this, ApplicationState.start, ApplicationState.report);
                     } else {
                         trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
@@ -106,16 +108,22 @@ public class AppController implements AppEventListner {
                     break;
                 case feedback:
                     this.presenter = new FeedbackPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.report, ApplicationState.registration);
+                    presenter.setState(this, ApplicationState.report, ApplicationState.metadata);
+                    break;
+                case metadata:
+                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+                    presenter.setState(this, null, ApplicationState.registration);
                     break;
                 case registration:
                     this.presenter = new RegisterPresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.moreinfo);
                     break;
                 case moreinfo:
-                case end:
                     this.presenter = new ScreenPresenter(widgetTag);
                     presenter.setState(this, ApplicationState.start, null);
+                    break;
+                case end:
+                    exitApplication();
                     break;
                 default:
                     this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
@@ -135,7 +143,7 @@ public class AppController implements AppEventListner {
     }
 
     public void backAction() {
-        requestApplicationState(ApplicationState.menu);
+        presenter.fireBackEvent();
     }
 
     public static native void trackView(String applicationState) /*-{
@@ -152,5 +160,9 @@ public class AppController implements AppEventListner {
      e.preventDefault();
      appController.@nl.ru.languageininteraction.synaesthesia.client.AppController::backAction()();
      }, false);
+     }-*/;
+
+    private native void exitApplication() /*-{
+     $doc.navigator.app.exitApp();
      }-*/;
 }

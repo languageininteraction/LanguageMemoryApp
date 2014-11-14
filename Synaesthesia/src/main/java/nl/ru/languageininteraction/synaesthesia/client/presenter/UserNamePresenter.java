@@ -17,51 +17,33 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
-import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 
 /**
- * @since Oct 21, 2014 11:50:56 AM (creation date)
+ * @since Nov 14, 2014 3:28:10 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MetadataPresenter extends AbstractPresenter implements Presenter {
+public class UserNamePresenter extends MetadataPresenter {
 
-    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
-    protected final UserResults userResults;
-
-    public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
-        super(widgetTag, new MetadataView());
-        this.userResults = userResults;
-    }
-
-    private void saveFields() {
-        for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
-            userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
-        }
-        new LocalStorage().storeData(userResults);
+    public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
+        super(widgetTag, userResults);
     }
 
     @Override
     void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.metadataScreenTitle(), titleBarListner);
+        simpleView.addTitle(messages.userNameScreenTitle(), titleBarListner);
     }
 
     @Override
     void setContent(AppEventListner appEventListner) {
-        ((MetadataView) simpleView).addText(messages.metadataScreenText());
-        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+        ((MetadataView) simpleView).addText(messages.userNameScreenText());
+        for (MetadataField metadataField : new MetadataField[]{metadataFieldProvider.metadataFieldArray[0]/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
             ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-    }
-
-    @Override
-    void pageClosing() {
-        saveFields();
     }
 }

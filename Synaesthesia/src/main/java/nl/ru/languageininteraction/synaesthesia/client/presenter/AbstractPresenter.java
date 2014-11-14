@@ -34,6 +34,7 @@ public abstract class AbstractPresenter implements Presenter {
     protected final Messages messages = GWT.create(Messages.class);
     protected final RootPanel widgetTag;
     final SimpleView simpleView;
+    private PresenterEventListner backEventListner = null;
 
     public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
@@ -44,17 +45,27 @@ public abstract class AbstractPresenter implements Presenter {
     public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
         if (prevState != null) {
-            simpleView.setButton(prevState.label, new PresenterEventListner() {
+            backEventListner = new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
                     pageClosing();
                     appEventListner.requestApplicationState(prevState);
                 }
-            });
+            };
+        } else {
+            backEventListner = new PresenterEventListner() {
+
+                @Override
+                public void eventFired(Button button) {
+                    pageClosing();
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+                }
+            };
         }
+        setTitle(backEventListner);
         if (nextState != null) {
-            simpleView.setButton(nextState.label, new PresenterEventListner() {
+            simpleView.setButton(SimpleView.ButtonType.next, nextState.label, new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
@@ -63,17 +74,16 @@ public abstract class AbstractPresenter implements Presenter {
                 }
             });
         }
-        setTitle(new PresenterEventListner() {
-
-            @Override
-            public void eventFired(Button button) {
-                pageClosing();
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
-            }
-        });
         setContent(appEventListner);
         simpleView.resizeView();
         widgetTag.add(simpleView);
+    }
+
+    @Override
+    public void fireBackEvent() {
+        if (backEventListner != null) {
+            backEventListner.eventFired(null);
+        }
     }
 
     abstract void pageClosing();

@@ -107,4 +107,8 @@ public class ColourPickerPresenter implements Presenter {
         colourPickerCanvasView.resizeView();
         widgetTag.add(colourPickerCanvasView);
     }
+
+    @Override
+    public void fireBackEvent() {
+    }
 }

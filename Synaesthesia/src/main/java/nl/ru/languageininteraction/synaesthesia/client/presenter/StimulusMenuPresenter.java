@@ -48,9 +48,15 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
 
     @Override
     void setContent(final AppEventListner appEventListner) {
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
         for (final StimuliGroup stimuliGroup : stimuliProvider.getStimuli()) {
-            ((MenuView) simpleView).addMenuItem(stimuliGroup.getGroupLabel(), new PresenterEventListner() {
+            final String buttonLabel;
+            if (userResults.getStimulusResponseGroup(stimuliGroup) != null) {
+                buttonLabel = messages.stimulusMenuDoneButton(stimuliGroup.getGroupLabel());
+            } else {
+                buttonLabel = messages.stimulusMenuNotDoneButton(stimuliGroup.getGroupLabel());
+            }
+            ((MenuView) simpleView).addMenuItem(buttonLabel, new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
@@ -59,7 +65,7 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
                 }
             });
         }
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
     }
 
     @Override
