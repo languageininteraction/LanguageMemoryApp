@@ -203,32 +203,46 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     public void setRandomColour() {
-        final double randomRad = Random.nextDouble() * 2;
-        final double red = (Math.sin(randomRad) * 128 + 127);
-        final double green = (Math.sin(randomRad - 1.667) * 128 + 127);
-        final double blue = (Math.sin(randomRad + 1.667) * 128 + 127);
-//        System.out.println("red:" + (red));
-//        System.out.println("green:" + (green));
-//        System.out.println("blue:" + (blue));
-//        System.out.println("red+green+blue:" + (red + green + blue));
-        setHue((int) red, (int) green, (int) blue);
+        final int randomHue = Random.nextInt(360);
+        setHue("hsl(" + randomHue + ",100%,50%)");
+        final int red = Random.nextInt(255);
+        final int green = Random.nextInt(255);
+        final int blue = Random.nextInt(255);
         selectedColourData = new ColourData((int) red, (int) green, (int) blue);
         selectedColourPanel.getElement().setAttribute("style", "background:rgb(" + (int) red + "," + (int) green + "," + (int) blue + ")");
     }
 
-    private void setHue(int red, int green, int blue) {
-        final Context2d mainContext2d = mainCanvas.getContext2d();
-        CanvasGradient linearColour = mainContext2d.createLinearGradient(0, 0, width, 0);
-        linearColour.addColorStop(1f, "white");
-        linearColour.addColorStop(0f, "rgb(" + red + "," + green + "," + blue + ")");
-        mainContext2d.setFillStyle(linearColour);
-        mainContext2d.fillRect(0, 0, width, height);
+    // todo: remove this if it proves unhelpful on samsung 4.2.2
+    private static boolean hueChangeInProgress = false;
 
-        CanvasGradient linearGrey = mainContext2d.createLinearGradient(0, 0, 0, height);
+    synchronized private void setHue(int red, int green, int blue) {
+        setHue("rgb(" + red + "," + green + "," + blue + ")");
+    }
+
+    synchronized private void setHue(String colourCss) {
+        // " Android clearRect / fillRect bug" ???
+        // GWT documentation: JavaScript interpreters are single-threaded, so while GWT silently accepts the synchronized keyword, it has no real effect.
+        // So we are using a simple boolean which should be adequate most of the time. We could use a timer call back, but we want to keep this simple.
+        // However the browser is probably only single threaded anyway.
+        if (hueChangeInProgress) {
+            return;
+        }
+        hueChangeInProgress = true;
+        final Context2d mainContext2dA = mainCanvas.getContext2d();
+        CanvasGradient linearColour = mainContext2dA.createLinearGradient(0, 0, width, 0);
+        linearColour.addColorStop(1f, "white");
+        linearColour.addColorStop(0f, colourCss);
+        mainContext2dA.setFillStyle(linearColour);
+        mainContext2dA.fillRect(0, 0, width, height);
+
+        // todo: remove the second context get if it proves unhelpful witht the samsung 4.2.2 issue
+        final Context2d mainContext2dB = mainCanvas.getContext2d();
+        CanvasGradient linearGrey = mainContext2dB.createLinearGradient(0, 0, 0, height);
         linearGrey.addColorStop(1f, "black");
         linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
-        mainContext2d.setFillStyle(linearGrey);
-        mainContext2d.fillRect(0, 0, width, height);
+        mainContext2dB.setFillStyle(linearGrey);
+        mainContext2dB.fillRect(0, 0, width, height);
+        hueChangeInProgress = false;
     }
 
     public ColourData getColour() {
