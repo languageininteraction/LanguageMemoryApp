@@ -51,16 +51,17 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(AppEventListner appEventListner) {
-        final NumberFormat numberFormat = NumberFormat.getFormat("0.00");
+        final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
+        final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         for (StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
-            ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat.format(calculatedScores.getScore())));
+            ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
             ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
             ((ReportView) simpleView).addText(messages.reportScreenSCT());
-            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat.format(calculatedScores.getAccuracy())));
-            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat.format(calculatedScores.getMeanReactionTime()), numberFormat.format(calculatedScores.getReactionTimeDeviation())));
+            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
+            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
         }
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
 
