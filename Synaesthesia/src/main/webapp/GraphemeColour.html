@@ -31,6 +31,7 @@
                 document.addEventListener("deviceready", onDeviceReady, false);
             }
             function onDeviceReady() {
+                navigator.splashscreen.hide();
                 analytics.startTrackerWithId('UA-41988110-2');
                 analytics.trackView("start");
             }

@@ -34,7 +34,7 @@
     
     <!-- enable the splash screen for android -->
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="100" />
+    <preference name="SplashScreenDelay" value="10000" />
     
     <access origin="*"/> <!-- allow local pages -->
 </widget>
