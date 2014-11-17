@@ -91,29 +91,42 @@ public class ScoreCalculatorTest {
         System.out.println("getScore");
         final UserResults userResults = getUserResults("syn1772837");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        final GroupScoreData calculatedScores = scoreCalculator.calculateScores(scoreCalculator.getStimuliGroups().toArray(new StimuliGroup[0])[1]);
+        final StimuliGroup[] stimuliGroupArray = scoreCalculator.getStimuliGroups().toArray(new StimuliGroup[0]);
+        final StimuliGroup lettersNumbersGroup = stimuliGroupArray[1];
+        assertEquals("LettersNumbers", lettersNumbersGroup.getGroupLabel());
+        final GroupScoreData lettersNumbersScores = scoreCalculator.calculateScores(lettersNumbersGroup);
         int index = 0;
-        assertEquals("0", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
+        assertEquals("0", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
 //        assertEquals(0.03, calculatedScores.get(index).getDistance(), 0.01);
-        assertEquals(207, calculatedScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        assertEquals(207, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 3;
-        assertEquals("3", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
-        assertEquals(null, calculatedScores.getScoreDataList().get(index).getDistance());
-        assertEquals(189, calculatedScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        assertEquals("3", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        assertEquals(null, lettersNumbersScores.getScoreDataList().get(index).getDistance());
+        assertEquals(189, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 3;
-        assertEquals("6", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
-        assertEquals(null, calculatedScores.getScoreDataList().get(index).getDistance());
-        assertEquals(0, calculatedScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        assertEquals("6", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        assertEquals(null, lettersNumbersScores.getScoreDataList().get(index).getDistance());
+        assertEquals(0, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 4;
-        assertEquals("A", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
+        assertEquals("A", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
 //        assertEquals(0.18, calculatedScores.get(index).getDistance(), 0.01);
-        assertEquals(112, calculatedScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        assertEquals(112, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 4;
-        assertEquals("E", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
+        assertEquals("E", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
 //        assertEquals(0.29, calculatedScores.get(index).getDistance(), 0.01);
-        assertEquals(129, calculatedScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        assertEquals(129, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
 
-        assertEquals(1.12, calculatedScores.getScore(), 0.001);
+        assertEquals(1.12, lettersNumbersScores.getScore(), 0.001);
+
+        final StimuliGroup chordsGroup = stimuliGroupArray[0];
+        assertEquals("Chords", chordsGroup.getGroupLabel());
+        final GroupScoreData chordsGroupScores = scoreCalculator.calculateScores(chordsGroup);
+        assertEquals(1.3285714285714, chordsGroupScores.getScore(), 0.001);
+
+        final StimuliGroup instrumentsGroup = stimuliGroupArray[2];
+        assertEquals("Instruments", instrumentsGroup.getGroupLabel());
+        final GroupScoreData instrumentsGroupScores = scoreCalculator.calculateScores(instrumentsGroup);
+        assertEquals(0.36, instrumentsGroupScores.getScore(), 0.001);
     }
 
     /**
