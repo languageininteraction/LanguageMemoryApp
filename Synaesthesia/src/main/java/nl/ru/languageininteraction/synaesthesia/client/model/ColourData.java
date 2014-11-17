@@ -33,18 +33,6 @@ public class ColourData {
         this.blue = blue;
     }
 
-    public ColourData add(ColourData other) {
-        return new ColourData(other.red + this.red, other.green + this.green, other.blue + this.blue);
-    }
-
-    public ColourData subtract(ColourData other) {
-        return new ColourData(other.red - this.red, other.green - this.green, other.blue - this.blue);
-    }
-
-    public ColourData difference(ColourData other) {
-        return new ColourData(Math.abs(other.red - this.red), Math.abs(other.green - this.green), Math.abs(other.blue - this.blue));
-    }
-
     public int getLuminance() {
         return (red + green + blue) / 3;
     }

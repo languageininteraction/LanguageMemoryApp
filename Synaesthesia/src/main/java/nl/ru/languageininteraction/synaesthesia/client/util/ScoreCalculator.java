@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
+import nl.ru.languageininteraction.synaesthesia.client.model.NormalisedColour;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -65,7 +66,7 @@ public class ScoreCalculator {
             boolean isValid = true;
             // set the last as the previous to provide the correct overlap
             ColourData previousColour = responseList.get(responseList.size() - 1).getColour();
-            ColourData difference = null;
+            NormalisedColour difference = null;
             final ArrayList<Double> timesList = new ArrayList<>();
             // loop over all except the first which is already processed
             for (int column = 0; column < columnCount; column++) {
@@ -81,14 +82,14 @@ public class ScoreCalculator {
                     totalReactionTime += durationMs;
                     averageLuminance += colour.getLuminance();
                     if (previousColour != null) {
-                        difference = (difference == null) ? previousColour.difference(colour) : difference.add(previousColour.difference(colour));
+                        difference = (difference == null) ? new NormalisedColour(previousColour).difference(new NormalisedColour(colour)) : difference.add(new NormalisedColour(previousColour).difference(new NormalisedColour(colour)));
                     }
                     // update the previous with the current colour which is known to be valid
                     previousColour = colour;
                 }
             }
             averageLuminance = (validCount > 0) ? averageLuminance / validCount : 0;
-            Float distance = (difference == null) ? null : difference.getLuminance() / (255f * columnCount);
+            Double distance = (difference == null) ? null : difference.getSum();
             scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
             if (isValid) {
                 score += distance;
