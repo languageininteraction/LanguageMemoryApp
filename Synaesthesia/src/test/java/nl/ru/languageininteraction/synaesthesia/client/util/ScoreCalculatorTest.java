@@ -46,14 +46,19 @@ public class ScoreCalculatorTest {
         scanner.useDelimiter("\t");
 
         userResults.setMetadataValue("user", userId);
-        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
-        final ArrayList<Stimulus> stimulusList = new ArrayList<>();
-        userResults.addStimulusResponseGroup(new StimuliGroup("groupID", stimulusList), stimulusResponseGroup);
-
+        ArrayList<Stimulus> stimulusList = null;
+        StimulusResponseGroup stimulusResponseGroup = null;
         while (scanner.hasNext()) {
             String user = scanner.next();
-            System.out.print("\n user" + user);
+            if (!"1772837".equals(user)) {
+                System.out.print("\n new group: " + user);
+                stimulusResponseGroup = new StimulusResponseGroup();
+                stimulusList = new ArrayList<>();
+                userResults.addStimulusResponseGroup(new StimuliGroup(user, stimulusList), stimulusResponseGroup);
+                user = scanner.next().trim();
+            }
             assertEquals("1772837", user);
+            System.out.print("\n user" + user);
             String grapheme = scanner.next();
             System.out.print(" grapheme" + grapheme);
             final Stimulus stimulus = new Stimulus(grapheme);
@@ -86,7 +91,7 @@ public class ScoreCalculatorTest {
         System.out.println("getScore");
         final UserResults userResults = getUserResults("syn1772837");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        final GroupScoreData calculatedScores = scoreCalculator.calculateScores(scoreCalculator.getStimuliGroups().toArray(new StimuliGroup[0])[0]);
+        final GroupScoreData calculatedScores = scoreCalculator.calculateScores(scoreCalculator.getStimuliGroups().toArray(new StimuliGroup[0])[1]);
         int index = 0;
         assertEquals("0", calculatedScores.getScoreDataList().get(index).getStimulus().getValue());
 //        assertEquals(0.03, calculatedScores.get(index).getDistance(), 0.01);
