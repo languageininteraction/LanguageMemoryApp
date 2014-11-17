@@ -50,12 +50,12 @@ public class ScoreCalculator {
         double score = 0;
         double accuracy = 0;
         double totalValidReactionTime = 0;
-        double reactionTimeDeviation = 0;
         int validResponseCount = 0;
         ArrayList<ScoreData> scoreList = new ArrayList<>();
         final StimulusResponseGroup stimulusResponseGroup = userResults.getStimulusResponseGroup(group);
         final List<Stimulus> allStimulus = group.getStimuli();
         int columnCount = stimulusResponseGroup.getMaxResponses();
+        final ArrayList<Double> validTimesList = new ArrayList<>();
         for (Stimulus stimulus : allStimulus) {
             int totalReactionTime = 0;
             final ArrayList<ColourData> colourList = new ArrayList<>();
@@ -66,6 +66,7 @@ public class ScoreCalculator {
             // set the last as the previous to provide the correct overlap
             ColourData previousColour = responseList.get(responseList.size() - 1).getColour();
             ColourData difference = null;
+            final ArrayList<Double> timesList = new ArrayList<>();
             // loop over all except the first which is already processed
             for (int column = 0; column < columnCount; column++) {
                 final StimulusResponse response = responseList.get(column);
@@ -75,7 +76,9 @@ public class ScoreCalculator {
                     isValid = false;
                 } else {
                     validCount++;
-                    totalReactionTime += response.getDurationMs();
+                    final double durationMs = response.getDurationMs();
+                    timesList.add(durationMs);
+                    totalReactionTime += durationMs;
                     averageLuminance += colour.getLuminance();
                     if (previousColour != null) {
                         difference = (difference == null) ? previousColour.difference(colour) : difference.add(previousColour.difference(colour));
@@ -90,11 +93,18 @@ public class ScoreCalculator {
             if (isValid) {
                 score += distance;
                 totalValidReactionTime += totalReactionTime;
+                validTimesList.addAll(timesList);
                 validResponseCount++;
             }
         }
         score = score / validResponseCount;
         final double meaneactionTime = totalValidReactionTime / validResponseCount;
+        double timeVarianceTemp = 0;
+        for (double validTime : validTimesList) {
+            timeVarianceTemp += (meaneactionTime - validTime) * (meaneactionTime - validTime);
+        }
+        final double variance = timeVarianceTemp / validResponseCount; // this is calculating the population standandard deviation, otherwise we would use (validResponseCount - 1)
+        final double reactionTimeDeviation = Math.sqrt(variance);
         return new GroupScoreData(scoreList, score, accuracy, meaneactionTime, reactionTimeDeviation);
     }
 }

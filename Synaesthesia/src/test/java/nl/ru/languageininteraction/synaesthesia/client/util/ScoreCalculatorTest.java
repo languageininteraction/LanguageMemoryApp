@@ -137,14 +137,9 @@ public class ScoreCalculatorTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-    /**
-     * Test of getMeanReactionTime method, of class ScoreCalculator.
-     */
-    @Test
-    public void testGetMeanReactionTime() {
-        System.out.println("getMeanReactionTime");
+    private GroupScoreData getGroupScoreData() {
         final UserResults userResults = new UserResults();
-        ScoreCalculator instance = new ScoreCalculator(userResults);
+        ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         final ArrayList<Stimulus> stimulusList = new ArrayList<Stimulus>();
         stimulusList.add(new Stimulus("A"));
         stimulusList.add(new Stimulus("B"));
@@ -161,22 +156,29 @@ public class ScoreCalculatorTest {
         stimulusResponseGroup.addResponse(stimulusList.get(5), new StimulusResponse(new ColourData(0, 0, 0), null, 500));
         final StimuliGroup stimuliGroup = new StimuliGroup("TestStimulusGroup", stimulusList);
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
-        double expResult = 888.333333;
-        final GroupScoreData calculatedScores = instance.calculateScores(stimuliGroup);
-        double result = calculatedScores.getMeanReactionTime();
-        assertEquals(expResult, result, 0.01);
+        return scoreCalculator.calculateScores(stimuliGroup);
     }
+
+    /**
+     * Test of getMeanReactionTime method, of class ScoreCalculator.
+     */
+    @Test
+    public void testGetMeanReactionTime() {
+        System.out.println("getMeanReactionTime");
+        double expResult = 888.333333;
+        double result = getGroupScoreData().getMeanReactionTime();
+        assertEquals(expResult, result, 0.001);
+    }
+
     /**
      * Test of getReactionTimeDeviation method, of class ScoreCalculator.
      */
-//    @Test
-//    public void testGetReactionTimeDeviation() {
-//        System.out.println("getReactionTimeDeviation");
-//        ScoreCalculator instance = null;
-//        double expResult = 0.0;
-//        double result = instance.getReactionTimeDeviation();
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetReactionTimeDeviation() {
+        System.out.println("getReactionTimeDeviation");
+//        double expResult = 509.34376; // standard deviation 
+        double expResult = 464.96511; // population standard deviation
+        double result = getGroupScoreData().getReactionTimeDeviation();
+        assertEquals(expResult, result, 0.001);
+    }
 }
