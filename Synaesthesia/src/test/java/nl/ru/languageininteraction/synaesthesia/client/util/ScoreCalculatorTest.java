@@ -140,16 +140,32 @@ public class ScoreCalculatorTest {
     /**
      * Test of getMeanReactionTime method, of class ScoreCalculator.
      */
-//    @Test
-//    public void testGetMeanReactionTime() {
-//        System.out.println("getMeanReactionTime");
-//        ScoreCalculator instance = null;
-//        double expResult = 0.0;
-//        double result = instance.getMeanReactionTime();
-//        assertEquals(expResult, result, 0.0);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetMeanReactionTime() {
+        System.out.println("getMeanReactionTime");
+        final UserResults userResults = new UserResults();
+        ScoreCalculator instance = new ScoreCalculator(userResults);
+        final ArrayList<Stimulus> stimulusList = new ArrayList<Stimulus>();
+        stimulusList.add(new Stimulus("A"));
+        stimulusList.add(new Stimulus("B"));
+        stimulusList.add(new Stimulus("C"));
+        stimulusList.add(new Stimulus("D"));
+        stimulusList.add(new Stimulus("E"));
+        stimulusList.add(new Stimulus("F"));
+        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
+        stimulusResponseGroup.addResponse(stimulusList.get(0), new StimulusResponse(new ColourData(0, 0, 0), null, 1500));
+        stimulusResponseGroup.addResponse(stimulusList.get(1), new StimulusResponse(new ColourData(0, 0, 0), null, 1234));
+        stimulusResponseGroup.addResponse(stimulusList.get(2), new StimulusResponse(new ColourData(0, 0, 0), null, 1000));
+        stimulusResponseGroup.addResponse(stimulusList.get(3), new StimulusResponse(new ColourData(0, 0, 0), null, 96));
+        stimulusResponseGroup.addResponse(stimulusList.get(4), new StimulusResponse(new ColourData(0, 0, 0), null, 1000));
+        stimulusResponseGroup.addResponse(stimulusList.get(5), new StimulusResponse(new ColourData(0, 0, 0), null, 500));
+        final StimuliGroup stimuliGroup = new StimuliGroup("TestStimulusGroup", stimulusList);
+        userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
+        double expResult = 888.333333;
+        final GroupScoreData calculatedScores = instance.calculateScores(stimuliGroup);
+        double result = calculatedScores.getMeanReactionTime();
+        assertEquals(expResult, result, 0.01);
+    }
     /**
      * Test of getReactionTimeDeviation method, of class ScoreCalculator.
      */
