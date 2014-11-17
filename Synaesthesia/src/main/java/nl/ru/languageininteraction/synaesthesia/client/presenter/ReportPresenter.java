@@ -64,7 +64,5 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
         }
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
-
     }
-
 }
