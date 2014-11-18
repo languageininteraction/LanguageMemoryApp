@@ -35,6 +35,10 @@ public class UserResults {
     public UserResults() {
     }
 
+    public void clearResults() {
+        results.clear();
+    }
+
     public void addDummyResults(StimuliGroup stimuliGroup) {
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         results.put(stimuliGroup, stimulusResponseGroup);

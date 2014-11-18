@@ -88,6 +88,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                     @Override
                     public void registrationComplete() {
                         simpleView.setDisplayText("Registration complete.");
+                        userResults.clearResults();
                         simpleView.setButton(SimpleView.ButtonType.next, AppEventListner.ApplicationState.start.label, new PresenterEventListner() {
 
                             @Override
