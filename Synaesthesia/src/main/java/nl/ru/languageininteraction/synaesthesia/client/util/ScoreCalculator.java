@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.NormalisedColour;
@@ -36,6 +37,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGro
  */
 public class ScoreCalculator {
 
+    private static final Logger logger = Logger.getLogger(ScoreCalculator.class.getName());
     double tempScoreValue = 0.5;
     private final UserResults userResults;
 
@@ -48,6 +50,7 @@ public class ScoreCalculator {
     }
 
     public GroupScoreData calculateScores(StimuliGroup group) {
+        System.out.println(group.getGroupLabel() + "<table>");
         double score = 0;
         double accuracy = 0;
         double totalValidReactionTime = 0;
@@ -58,6 +61,7 @@ public class ScoreCalculator {
         int columnCount = stimulusResponseGroup.getMaxResponses();
         final ArrayList<Double> validTimesList = new ArrayList<>();
         for (Stimulus stimulus : allStimulus) {
+            System.out.print("<tr><td>" + stimulus.getValue() + "</td>");
             int totalReactionTime = 0;
             final ArrayList<ColourData> colourList = new ArrayList<>();
             List<StimulusResponse> responseList = stimulusResponseGroup.getResults(stimulus);
@@ -76,6 +80,7 @@ public class ScoreCalculator {
                 if (colour == null) {
                     isValid = false;
                 } else {
+                    System.out.print("<td style=\"background:" + colour.getHexValue() + "\">" + colour.getHexValue() + "</td>");
                     validCount++;
                     final double durationMs = response.getDurationMs();
                     timesList.add(durationMs);
@@ -89,15 +94,20 @@ public class ScoreCalculator {
                 }
             }
             averageLuminance = (validCount > 0) ? averageLuminance / validCount : 0;
-            Double distance = (difference == null) ? null : difference.getSum();
+            Float distance = (isValid) ? difference.getSum() : null;
             scoreList.add(new ScoreData(stimulus, averageLuminance, colourList, distance));
             if (isValid) {
                 score += distance;
                 totalValidReactionTime += totalReactionTime;
                 validTimesList.addAll(timesList);
                 validResponseCount++;
+                System.out.println("<td><div style=\"background: black; width: " + (int) (distance * 10) + "px\" >&nbsp;</div>" + distance + "</td>");
+            } else {
+                System.out.println("<td>invalid</td>");
             }
+            System.out.println("<td>" + score + "</td></tr>");
         }
+        System.out.println("<tr><td>score: " + score / validResponseCount + "</td><td> = " + score + "/" + validResponseCount + "</td></tr>");
         score = score / validResponseCount;
         final double meaneactionTime = totalValidReactionTime / validResponseCount;
         double timeVarianceTemp = 0;
@@ -106,6 +116,7 @@ public class ScoreCalculator {
         }
         final double variance = timeVarianceTemp / validResponseCount; // this is calculating the population standandard deviation, otherwise we would use (validResponseCount - 1)
         final double reactionTimeDeviation = Math.sqrt(variance);
+        System.out.println("<tr><td>score: " + score + "</td><td>accuracy: " + accuracy + "</td></tr></table>");
         return new GroupScoreData(scoreList, score, accuracy, meaneactionTime, reactionTimeDeviation);
     }
 }

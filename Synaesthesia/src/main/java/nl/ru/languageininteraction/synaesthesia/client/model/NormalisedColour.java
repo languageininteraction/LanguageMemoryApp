@@ -23,11 +23,11 @@ package nl.ru.languageininteraction.synaesthesia.client.model;
  */
 public class NormalisedColour {
 
-    private final double red;
-    private final double green;
-    private final double blue;
+    private final float red;
+    private final float green;
+    private final float blue;
 
-    public NormalisedColour(double red, double green, double blue) {
+    public NormalisedColour(float red, float green, float blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -40,18 +40,22 @@ public class NormalisedColour {
     }
 
     public NormalisedColour add(NormalisedColour other) {
+        System.out.println("<td>+</td>");
         return new NormalisedColour(other.red + this.red, other.green + this.green, other.blue + this.blue);
     }
 
     public NormalisedColour subtract(NormalisedColour other) {
+        System.out.println("<td>-</td>");
         return new NormalisedColour(other.red - this.red, other.green - this.green, other.blue - this.blue);
     }
 
     public NormalisedColour difference(NormalisedColour other) {
+        System.out.println("<td>abs(r-r), abs(g-g), abs(b-b)</td>");
         return new NormalisedColour(Math.abs(other.red - this.red), Math.abs(other.green - this.green), Math.abs(other.blue - this.blue));
     }
 
-    public double getSum() {
+    public float getSum() {
+        System.out.println("<td>r+g+b</td>");
         return red + green + blue;
     }
 }

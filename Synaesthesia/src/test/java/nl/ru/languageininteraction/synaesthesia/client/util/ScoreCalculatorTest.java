@@ -28,6 +28,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -97,6 +98,7 @@ public class ScoreCalculatorTest {
         final GroupScoreData lettersNumbersScores = scoreCalculator.calculateScores(lettersNumbersGroup);
         int index = 0;
         assertEquals("0", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float score0 = lettersNumbersScores.getScoreDataList().get(index).getDistance();
 //        assertEquals(0.03, calculatedScores.get(index).getDistance(), 0.01);
         assertEquals(207, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 3;
@@ -109,14 +111,35 @@ public class ScoreCalculatorTest {
         assertEquals(0, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
         index += 4;
         assertEquals("A", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreA = lettersNumbersScores.getScoreDataList().get(index).getDistance();
 //        assertEquals(0.18, calculatedScores.get(index).getDistance(), 0.01);
         assertEquals(112, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
-        index += 4;
+        index += 2;
+        assertEquals("C", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreC = lettersNumbersScores.getScoreDataList().get(index).getDistance();
+        index += 2;
         assertEquals("E", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreE = lettersNumbersScores.getScoreDataList().get(index).getDistance();
 //        assertEquals(0.29, calculatedScores.get(index).getDistance(), 0.01);
         assertEquals(129, lettersNumbersScores.getScoreDataList().get(index).getAverageLuminance(), 0.01);
+        index += 3;
+        assertEquals("H", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreH = lettersNumbersScores.getScoreDataList().get(index).getDistance();
+        index += 5;
+        assertEquals("M", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreM = lettersNumbersScores.getScoreDataList().get(index).getDistance();
+        index += 6;
+        assertEquals("S", lettersNumbersScores.getScoreDataList().get(index).getStimulus().getValue());
+        float scoreS = lettersNumbersScores.getScoreDataList().get(index).getDistance();
+        assertEquals(1.12, lettersNumbersScores.getScore(), 0.003);
 
-        assertEquals(1.12, lettersNumbersScores.getScore(), 0.001);
+//        assertThat(scoreM,lessThan(score0));
+        Assert.assertTrue(score0 < scoreM);
+        Assert.assertTrue(scoreM < scoreC);
+        Assert.assertTrue(scoreC < scoreS);
+        Assert.assertTrue(scoreS < scoreH);
+        Assert.assertTrue(scoreH < scoreA);
+        Assert.assertTrue(scoreA < scoreE);
 
         final StimuliGroup chordsGroup = stimuliGroupArray[0];
         assertEquals("Chords", chordsGroup.getGroupLabel());
