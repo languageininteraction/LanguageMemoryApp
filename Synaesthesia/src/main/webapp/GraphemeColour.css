@@ -18,7 +18,7 @@
 .Android .gwt-Button.headerButton {
     display: none;
 }
-.iPhone .gwt-Button.headerButton {
+.gwt-Button.headerButton {
     position: relative;
     top: 5px;
     margin-left: 0px;
@@ -37,10 +37,11 @@
     height: 40px;
 }
 
-.iPhone .gwt-Label.headerIcon {
+.gwt-Label.headerIcon {
     display: none;
 }
 .Android .gwt-Label.headerIcon {
+    display: block;
     background: url("./images/icon.jpg");
     background-size: 50px 50px;
     background-repeat: no-repeat;
