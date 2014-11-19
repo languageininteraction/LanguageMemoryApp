@@ -52,6 +52,11 @@ public abstract class AbstractPresenter implements Presenter {
                     pageClosing();
                     appEventListner.requestApplicationState(prevState);
                 }
+
+                @Override
+                public String getLabel() {
+                    return prevState.label;
+                }
             };
         } else {
             backEventListner = new PresenterEventListner() {
@@ -61,16 +66,26 @@ public abstract class AbstractPresenter implements Presenter {
                     pageClosing();
                     appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
                 }
+
+                @Override
+                public String getLabel() {
+                    return AppEventListner.ApplicationState.menu.label;
+                }
             };
         }
         setTitle(backEventListner);
         if (nextState != null) {
-            simpleView.setButton(SimpleView.ButtonType.next, nextState.label, new PresenterEventListner() {
+            simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
                     pageClosing();
                     appEventListner.requestApplicationState(nextState);
+                }
+
+                @Override
+                public String getLabel() {
+                    return nextState.label;
                 }
             });
         }

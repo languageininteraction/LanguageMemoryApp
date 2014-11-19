@@ -49,7 +49,7 @@ public class MenuView extends SimpleView {
         outerPanel.add(html);
     }
 
-    public void addMenuItem(final String itemLabel, final PresenterEventListner menuItemListerner) {
+    public void addMenuItem(final PresenterEventListner menuItemListerner) {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("menuTable");
@@ -57,7 +57,7 @@ public class MenuView extends SimpleView {
             outerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
             outerPanel.add(flexTable);
         }
-        final Button menuButton = new Button(itemLabel);
+        final Button menuButton = new Button(menuItemListerner.getLabel());
         buttonsArray.add(menuButton);
         menuButton.addStyleName("menuButton");
         menuButton.setEnabled(true);

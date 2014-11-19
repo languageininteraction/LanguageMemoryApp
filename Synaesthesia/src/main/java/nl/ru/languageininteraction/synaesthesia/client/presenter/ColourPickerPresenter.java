@@ -86,20 +86,30 @@ public class ColourPickerPresenter implements Presenter {
         widgetTag.clear();
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
-        colourPickerCanvasView.setAcceptButton(messages.stimulusscreenselectbutton(), new PresenterEventListner() {
+        colourPickerCanvasView.setAcceptButton(new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(colourPickerCanvasView.getColour(), new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
+
+            @Override
+            public String getLabel() {
+                return messages.stimulusscreenselectbutton();
+            }
         });
-        colourPickerCanvasView.setRejectButton(messages.stimulusscreenrejectbutton(), new PresenterEventListner() {
+        colourPickerCanvasView.setRejectButton(new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(null, new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
+            }
+
+            @Override
+            public String getLabel() {
+                return messages.stimulusscreenrejectbutton();
             }
         });
         colourPickerCanvasView.setInstructions(messages.stimulusscreeninstructions(), messages.helpButtonChar());

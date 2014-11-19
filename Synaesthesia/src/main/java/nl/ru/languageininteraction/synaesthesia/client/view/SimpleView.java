@@ -69,13 +69,19 @@ public class SimpleView extends AbstractView {
     }
 
     public void addTitle(String label, final PresenterEventListner presenterListerner) {
-        final Image image = new Image("./images/icon.jpg");
-        image.setSize(50 + "px", 50 + "px");
+        final Label headerIcon = new Label();
+        headerIcon.addStyleName("headerIcon");
+
         final Label headerLabel = new Label(label);
         headerLabel.setStylePrimaryName("headerLabel");
         if (presenterListerner != null) {
-            final Label backLabel = new Label("<");
-            headerPanel.add(backLabel);
+            final Label headerArrow = new Label();
+            headerArrow.addStyleName("headerArrow");
+            headerPanel.add(headerArrow);
+
+            final Button headerButton = new Button(presenterListerner.getLabel());
+            headerButton.addStyleName("headerButton");
+            headerPanel.add(headerButton);
             final ClickHandler backHandler = new ClickHandler() {
 
                 @Override
@@ -83,11 +89,10 @@ public class SimpleView extends AbstractView {
                     presenterListerner.eventFired(null);
                 }
             };
-            backLabel.addClickHandler(backHandler);
-            image.addClickHandler(backHandler);
-            headerLabel.addClickHandler(backHandler);
+            headerIcon.addClickHandler(backHandler);
+            headerButton.addClickHandler(backHandler);
         }
-        headerPanel.add(image);
+        headerPanel.add(headerIcon);
         headerPanel.add(headerLabel);
     }
 
@@ -95,8 +100,8 @@ public class SimpleView extends AbstractView {
         scrollPanel.setWidget(new Anchor(label, target));
     }
 
-    public Button setButton(ButtonType buttonType, String buttonText, final PresenterEventListner presenterListerner) {
-        final Button nextButton = new Button(buttonText);
+    public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {
+        final Button nextButton = new Button(presenterListerner.getLabel());
         nextButton.addStyleName(buttonType.name() + "Button");
         nextButton.setEnabled(true);
         footerPanel.add(nextButton);

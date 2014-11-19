@@ -55,11 +55,16 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
     }
 
     protected void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState) {
-        ((MenuView) simpleView).addMenuItem(applicationState.label, new PresenterEventListner() {
+        ((MenuView) simpleView).addMenuItem(new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
                 appEventListner.requestApplicationState(applicationState);
+            }
+
+            @Override
+            public String getLabel() {
+                return applicationState.label;
             }
         });
     }

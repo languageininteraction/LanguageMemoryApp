@@ -25,5 +25,7 @@ import com.google.gwt.user.client.ui.Button;
  */
 public interface PresenterEventListner {
 
+    public String getLabel();
+
     public void eventFired(Button button);
 }

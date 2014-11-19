@@ -51,9 +51,9 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
 
     private void setUpLocaleOptions() {
         for (final String localeName : LocaleInfo.getAvailableLocaleNames()) {
-            String displayName = LocaleInfo.getLocaleNativeDisplayName(localeName);
+            final String displayName = LocaleInfo.getLocaleNativeDisplayName(localeName);
             if (displayName != null && !displayName.isEmpty()) {
-                ((MenuView) simpleView).addMenuItem(displayName, new PresenterEventListner() {
+                ((MenuView) simpleView).addMenuItem(new PresenterEventListner() {
 
                     @Override
                     public void eventFired(Button button) {
@@ -69,6 +69,11 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
                             updatedPathValue = queryString + separator + localeGet + localeName;
                         }
                         Window.Location.replace(Window.Location.getPath() + updatedPathValue);
+                    }
+
+                    @Override
+                    public String getLabel() {
+                        return displayName;
                     }
                 });
             }

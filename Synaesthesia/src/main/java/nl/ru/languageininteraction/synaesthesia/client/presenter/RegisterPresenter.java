@@ -69,7 +69,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
     }
 
     private void addRegisterButton(final AppEventListner appEventListner) {
-        simpleView.setButton(SimpleView.ButtonType.next, messages.registerButton(), new PresenterEventListner() {
+        simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
@@ -89,15 +89,26 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                     public void registrationComplete() {
                         simpleView.setDisplayText("Registration complete.");
                         userResults.clearResults();
-                        simpleView.setButton(SimpleView.ButtonType.next, AppEventListner.ApplicationState.start.label, new PresenterEventListner() {
+                        simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
 
                             @Override
                             public void eventFired(Button button) {
                                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.start);
                             }
+
+                            @Override
+                            public String getLabel() {
+                                return AppEventListner.ApplicationState.start.label;
+                            }
+
                         });
                     }
                 });
+            }
+
+            @Override
+            public String getLabel() {
+                return messages.registerButton();
             }
         });
     }

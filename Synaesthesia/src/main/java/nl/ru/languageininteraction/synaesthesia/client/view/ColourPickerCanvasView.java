@@ -332,16 +332,16 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.add(label);
     }
 
-    public void setAcceptButton(String buttonText, final PresenterEventListner presenterListerner) {
-        acceptButton = getButton(buttonText, presenterListerner);
+    public void setAcceptButton(final PresenterEventListner presenterListerner) {
+        acceptButton = getButton(presenterListerner);
     }
 
-    public void setRejectButton(String buttonText, final PresenterEventListner presenterListerner) {
-        rejectButton = getButton(buttonText, presenterListerner);
+    public void setRejectButton(final PresenterEventListner presenterListerner) {
+        rejectButton = getButton(presenterListerner);
     }
 
-    private Button getButton(String buttonText, final PresenterEventListner presenterListerner) {
-        final Button nextButton = new Button(buttonText);
+    private Button getButton(final PresenterEventListner presenterListerner) {
+        final Button nextButton = new Button(presenterListerner.getLabel());
         nextButton.setHeight(buttonHeight + "px");
         nextButton.setWidth(buttonWidth + "px");
         nextButton.addStyleName("stimulusButton");
