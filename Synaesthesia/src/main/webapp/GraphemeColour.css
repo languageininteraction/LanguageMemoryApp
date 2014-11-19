@@ -1,4 +1,8 @@
 .Android .gwt-Label.headerArrow {
+    margin-right: 10px;
+}
+
+.gwt-Label.headerArrow {
     width: 0; 
     height: 0; 
     position: relative;
@@ -10,7 +14,11 @@
     margin-right: 0px;
     cursor: pointer;
 }
+
 .Android .gwt-Button.headerButton {
+    display: none;
+}
+.iPhone .gwt-Button.headerButton {
     position: relative;
     top: 5px;
     margin-left: 0px;
@@ -29,6 +37,9 @@
     height: 40px;
 }
 
+.iPhone .gwt-Label.headerIcon {
+    display: none;
+}
 .Android .gwt-Label.headerIcon {
     background: url("./images/icon.jpg");
     background-size: 50px 50px;
@@ -36,6 +47,12 @@
     height: 50px;
     width:50px;
     border: none;
+    /*cursor: pointer;*/
+}
+
+.headerLabel {
+    padding: 10px 10px;
+    font-size: 30px;
 }
 
 .gwt-Button.stimulusButton {
@@ -136,10 +153,6 @@ canvas {
     background: black;
 }
 
-.headerLabel {
-    padding: 10px 10px;
-}
-
 .menuTable {
     padding: 10px 10px;
     margin: 10px 10px 10px 10px;
@@ -158,7 +171,7 @@ canvas {
     font-size: 24pt;
 }
 
-.gwt-Label, .gwt-HTML, .headerLabel {  
+.gwt-Label, .gwt-HTML {  
     font-size: 17pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;

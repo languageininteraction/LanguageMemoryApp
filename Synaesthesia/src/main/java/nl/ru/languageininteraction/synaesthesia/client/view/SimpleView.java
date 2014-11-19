@@ -89,8 +89,9 @@ public class SimpleView extends AbstractView {
                     presenterListerner.eventFired(null);
                 }
             };
-            headerIcon.addClickHandler(backHandler);
+            headerArrow.addClickHandler(backHandler);
             headerButton.addClickHandler(backHandler);
+            headerIcon.addClickHandler(backHandler);
         }
         headerPanel.add(headerIcon);
         headerPanel.add(headerLabel);

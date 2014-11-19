@@ -29,11 +29,17 @@
         <script type="text/javascript">
             function onLoad() {
                 document.addEventListener("deviceready", onDeviceReady, false);
+//                document.getElementById("widgetTag").className = "Android";
+//                document.getElementById("widgetTag").className = "iPhone";
             }
             function onDeviceReady() {
-                navigator.splashscreen.hide();
+                console.log("starting analytics");
                 analytics.startTrackerWithId('UA-41988110-2');
                 analytics.trackView("start");
+                console.log("splashscreen.hide");
+                navigator.splashscreen.hide();
+                console.log("setting device style name");
+                document.getElementById("widgetTag").className = device.platform;
             }
         </script>
     </head>
