@@ -77,7 +77,8 @@ public class MenuView extends SimpleView {
         super.parentResized(height, width, units);
         boolean portrate = height < width;
         final int rowPerColumn = (portrate) ? buttonsArray.size() / 2 : buttonsArray.size();
-        final int textHeight = (height / (3 + rowPerColumn)) / 3;
+        int textHeight = (height / (3 + rowPerColumn)) / 3;
+        textHeight = (textHeight > 30) ? 30 : textHeight;
         int row = 0;
         int col = 0;
         flexTable.removeAllRows();
