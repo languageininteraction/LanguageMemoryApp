@@ -30,9 +30,11 @@
             function onLoad() {
                 document.addEventListener("deviceready", onDeviceReady, false);
 //                document.getElementById("widgetTag").className = "Android";
-//                document.getElementById("widgetTag").className = "iPhone";
+//                document.getElementById("widgetTag").className = "iOS";
             }
             function onDeviceReady() {
+                StatusBar.hide(); // hide the status bar on iOS
+//                document.getElementById("platformTag").innerHTML = device.platform;
                 console.log("starting analytics");
                 analytics.startTrackerWithId('UA-41988110-2');
                 analytics.trackView("start");
@@ -61,6 +63,7 @@
         </div>
         </noscript>
         <!--<button onclick="document.dispatchEvent(new CustomEvent('backbutton', {'detail': 'simulated back button'}));">backbutton</button>-->
+        <!--<div id="platformTag"></div>-->
         <div id="widgetTag"></div>
     </body>
 </html>

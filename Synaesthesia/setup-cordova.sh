@@ -1,12 +1,14 @@
 #mvn install
 cd target
-synquizname=synquiz-0.3.132-testing
+synquizname=synquiz-0.3-testing-SNAPSHOT
 rm -rf $synquizname-phonegap
 unzip $synquizname-phonegap.zip -d $synquizname-phonegap
 cd $synquizname-phonegap 
 cordova platform add ios
 cordova platform add android
 cordova plugin add https://github.com/danwilson/google-analytics-plugin.git
+cordova plugin add org.apache.cordova.device
+cordova plugin add org.apache.cordova.statusbar
 
 splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
 echo $splashResourcesDir
