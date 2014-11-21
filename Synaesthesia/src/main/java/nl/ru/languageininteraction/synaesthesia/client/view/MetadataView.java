@@ -55,7 +55,7 @@ public class MetadataView extends SimpleView {
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, new Label(displayName));
         final TextBox textBox = new TextBox();
-        textBox.setText(existingValue);
+        textBox.setText((existingValue == null) ? "" : existingValue);
         flexTable.setWidget(rowCount, 1, textBox);
         fieldBoxes.put(fieldName, textBox);
     }

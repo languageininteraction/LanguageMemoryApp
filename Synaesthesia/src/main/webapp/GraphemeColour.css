@@ -13,6 +13,7 @@
     border-right:17px solid white;
     margin-right: 0px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .Android .gwt-Button.headerButton {

@@ -27,26 +27,27 @@ import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
  */
 public class LocalStorage {
 
-    private Storage stockstore = null;
+    private Storage dataStore = null;
     private static final String USER_RESULTS = "UserResults.";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
     public UserResults getStoredData() {
         UserResults userResults = new UserResults();
-        stockstore = Storage.getLocalStorageIfSupported();
-        if (stockstore != null) {
+        dataStore = Storage.getLocalStorageIfSupported();
+        if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                userResults.setMetadataValue(metadataField.getPostName(), stockstore.getItem(USER_RESULTS + metadataField.getPostName()));
+                final String storedValue = dataStore.getItem(USER_RESULTS + metadataField.getPostName());
+                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null) ? "" : storedValue);
             }
         }
         return userResults;
     }
 
     public void storeData(UserResults userResults) {
-        stockstore = Storage.getLocalStorageIfSupported();
-        if (stockstore != null) {
+        dataStore = Storage.getLocalStorageIfSupported();
+        if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                stockstore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
+                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
             }
         }
     }
