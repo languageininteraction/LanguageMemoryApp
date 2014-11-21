@@ -40,22 +40,22 @@ public class NormalisedColour {
     }
 
     public NormalisedColour add(NormalisedColour other) {
-        System.out.println("<td>+</td>");
+//        System.out.println("<td>+</td>");
         return new NormalisedColour(other.red + this.red, other.green + this.green, other.blue + this.blue);
     }
 
     public NormalisedColour subtract(NormalisedColour other) {
-        System.out.println("<td>-</td>");
+//        System.out.println("<td>-</td>");
         return new NormalisedColour(other.red - this.red, other.green - this.green, other.blue - this.blue);
     }
 
     public NormalisedColour difference(NormalisedColour other) {
-        System.out.println("<td>abs(r-r), abs(g-g), abs(b-b)</td>");
+//        System.out.println("<td>abs(" + other.red + "-" + this.red + "), abs(" + other.green + "-" + this.green + "), abs(" + other.blue + "-" + this.blue + ")</td>");
         return new NormalisedColour(Math.abs(other.red - this.red), Math.abs(other.green - this.green), Math.abs(other.blue - this.blue));
     }
 
     public float getSum() {
-        System.out.println("<td>r+g+b</td>");
+//        System.out.println("<td>" + red + "+" + green + "+" + blue + "</td>");
         return red + green + blue;
     }
 }
