@@ -333,8 +333,8 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.clear();
         final Label label = new Label(stimulus.getValue());
         final int length = stimulus.getValue().length();
-        final int stimulusSpecificHeight = (length > 3) ? stimulusTextHeight : (int) (stimulusTextHeight * 4.0 / length);
-        stimulusPanel.setHeight(stimulusSpecificHeight + "px");
+        final int stimulusSpecificHeight = (length > 3) ? stimulusTextHeight : (int) (stimulusTextHeight * 3.0 / length);
+        stimulusPanel.setHeight(stimulusTextHeight * 3 + "px");
         label.getElement().getStyle().setFontSize(stimulusSpecificHeight, Unit.PX);
         stimulusPanel.add(label);
     }
