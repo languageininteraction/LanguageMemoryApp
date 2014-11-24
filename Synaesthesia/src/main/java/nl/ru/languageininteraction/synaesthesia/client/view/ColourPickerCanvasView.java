@@ -40,6 +40,7 @@ import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -90,6 +91,7 @@ public class ColourPickerCanvasView extends AbstractView {
         buttonWidth = (int) (minClient * 0.47);
         stimulusPanel = new VerticalPanel();
         stimulusPanel.addStyleName("stimulusPanel");
+        stimulusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         outerGrid = new Grid(2, 2);
         innerGrid = new Grid(5, 2);
         pickerPanel = new Grid(1, 2);
@@ -330,7 +332,10 @@ public class ColourPickerCanvasView extends AbstractView {
         progressLabel.setText(progress);
         stimulusPanel.clear();
         final Label label = new Label(stimulus.getValue());
-        label.getElement().getStyle().setFontSize(stimulusTextHeight, Unit.PX);
+        final int length = stimulus.getValue().length();
+        final int stimulusSpecificHeight = (length > 3) ? stimulusTextHeight : (int) (stimulusTextHeight * 4.0 / length);
+        stimulusPanel.setHeight(stimulusSpecificHeight + "px");
+        label.getElement().getStyle().setFontSize(stimulusSpecificHeight, Unit.PX);
         stimulusPanel.add(label);
     }
 

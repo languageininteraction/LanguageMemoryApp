@@ -147,7 +147,9 @@ canvas {
 
 }
 
-.stimulusPanel {
+.stimulusPanel {    
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px 10px 40px 10px;
 }
 
