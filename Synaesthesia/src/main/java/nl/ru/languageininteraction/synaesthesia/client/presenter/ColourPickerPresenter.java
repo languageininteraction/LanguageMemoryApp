@@ -113,8 +113,8 @@ public class ColourPickerPresenter implements Presenter {
             }
         });
         colourPickerCanvasView.setInstructions(messages.stimulusscreeninstructions(), messages.helpButtonChar());
-        triggerEvent(appEventListner, colourPickerCanvasView, nextState);
         colourPickerCanvasView.resizeView();
+        triggerEvent(appEventListner, colourPickerCanvasView, nextState);
         widgetTag.add(colourPickerCanvasView);
     }
 

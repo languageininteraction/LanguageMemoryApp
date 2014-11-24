@@ -66,9 +66,9 @@ public class ColourPickerCanvasView extends AbstractView {
     private Button acceptButton = null;
     private Button rejectButton = null;
     private final Label progressLabel;
-    private final int height;
-    private final int width;
-    private final int barWidth;
+    private int canvasHeight;
+    private int canvasWidth;
+    private String currentHueCss;
     private final int stimulusTextHeight;
     private final int buttonHeight;
     private final int buttonTextHeight;
@@ -82,9 +82,6 @@ public class ColourPickerCanvasView extends AbstractView {
         final int clientHeight = Window.getClientHeight();
         final int clientWidth = Window.getClientWidth();
         final int minClient = (clientHeight > clientWidth) ? clientWidth : clientHeight;
-        height = (int) (minClient * 0.9);
-        width = (int) (minClient * 0.8);
-        barWidth = (int) (minClient * 0.1);
         stimulusTextHeight = (int) (minClient * 0.08);
         selectedColourPanelHeight = (int) (minClient * 0.25);
         selectedColourPanelWidth = (int) (minClient * 0.47);
@@ -107,21 +104,6 @@ public class ColourPickerCanvasView extends AbstractView {
         if (mainCanvas == null || hueCanvas == null) {
             throw new CanvasError("Failed to create a canvas for the stimulus screen.");
         } else {
-            mainCanvas.setCoordinateSpaceHeight(height);
-            mainCanvas.setCoordinateSpaceWidth(width);
-            mainCanvas.setSize(width + "px", height + "px");
-            hueCanvas.setCoordinateSpaceHeight(height);
-            hueCanvas.setCoordinateSpaceWidth(barWidth);
-            hueCanvas.setSize(barWidth + "px", height + "px");
-            final Context2d hueContext2d = hueCanvas.getContext2d();
-
-            CanvasGradient hueGradient = hueContext2d.createLinearGradient(0, 0, 0, height);
-            for (int stop = 0; stop <= 10; stop++) {
-                hueGradient.addColorStop(stop * 0.1f, "hsl(" + 36 * stop + ",100%,50%);");
-            }
-            hueContext2d.setFillStyle(hueGradient);
-            hueContext2d.fillRect(0, 0, barWidth, height);
-
             pickerPanel.setCellPadding(5);
             pickerPanel.setWidget(0, 0, mainCanvas);
             pickerPanel.setWidget(0, 1, hueCanvas);
@@ -202,6 +184,25 @@ public class ColourPickerCanvasView extends AbstractView {
         add(outerGrid);
     }
 
+    private void sizeAndPaintCanvases(final int canvasHeight, final int canvasWidth, final int barWidth) {
+        this.canvasHeight = canvasHeight;
+        this.canvasWidth = canvasWidth;
+        mainCanvas.setCoordinateSpaceHeight(canvasHeight);
+        mainCanvas.setCoordinateSpaceWidth(canvasWidth);
+        mainCanvas.setSize(canvasWidth + "px", canvasHeight + "px");
+        hueCanvas.setCoordinateSpaceHeight(canvasHeight);
+        hueCanvas.setCoordinateSpaceWidth(barWidth);
+        hueCanvas.setSize(barWidth + "px", canvasHeight + "px");
+        final Context2d hueContext2d = hueCanvas.getContext2d();
+
+        CanvasGradient hueGradient = hueContext2d.createLinearGradient(0, 0, 0, canvasHeight);
+        for (int stop = 0; stop <= 10; stop++) {
+            hueGradient.addColorStop(stop * 0.1f, "hsl(" + 36 * stop + ",100%,50%);");
+        }
+        hueContext2d.setFillStyle(hueGradient);
+        hueContext2d.fillRect(0, 0, barWidth, canvasHeight);
+    }
+
     public void setRandomColour() {
         final int randomHue = Random.nextInt(360);
         setHue("hsl(" + randomHue + ",100%,50%)");
@@ -220,6 +221,7 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     synchronized private void setHue(String colourCss) {
+        currentHueCss = colourCss;
         // " Android clearRect / fillRect bug" ???
         // GWT documentation: JavaScript interpreters are single-threaded, so while GWT silently accepts the synchronized keyword, it has no real effect.
         // So we are using a simple boolean which should be adequate most of the time. We could use a timer call back, but we want to keep this simple.
@@ -229,19 +231,19 @@ public class ColourPickerCanvasView extends AbstractView {
         }
         hueChangeInProgress = true;
         final Context2d mainContext2dA = mainCanvas.getContext2d();
-        CanvasGradient linearColour = mainContext2dA.createLinearGradient(0, 0, width, 0);
+        CanvasGradient linearColour = mainContext2dA.createLinearGradient(0, 0, canvasWidth, 0);
         linearColour.addColorStop(1f, "white");
         linearColour.addColorStop(0f, colourCss);
         mainContext2dA.setFillStyle(linearColour);
-        mainContext2dA.fillRect(0, 0, width, height);
+        mainContext2dA.fillRect(0, 0, canvasWidth, canvasHeight);
 
         // todo: remove the second context get if it proves unhelpful witht the samsung 4.2.2 issue
         final Context2d mainContext2dB = mainCanvas.getContext2d();
-        CanvasGradient linearGrey = mainContext2dB.createLinearGradient(0, 0, 0, height);
+        CanvasGradient linearGrey = mainContext2dB.createLinearGradient(0, 0, 0, canvasHeight);
         linearGrey.addColorStop(1f, "black");
         linearGrey.addColorStop(0f, "rgba(0,0,0,0);");
         mainContext2dB.setFillStyle(linearGrey);
-        mainContext2dB.fillRect(0, 0, width, height);
+        mainContext2dB.fillRect(0, 0, canvasWidth, canvasHeight);
         hueChangeInProgress = false;
     }
 
@@ -360,6 +362,11 @@ public class ColourPickerCanvasView extends AbstractView {
     @Override
     protected void parentResized(int height, int width, String units) {
         if (height < width) {
+            int resizedHeight = (int) (height - 50);
+            int resizedBarWidth = (int) (resizedHeight * 0.1);
+            int resizedWidth = (int) (width - 50) - resizedBarWidth - buttonWidth - buttonHeight; // buttonHeight is used to allow for the info button
+            sizeAndPaintCanvases(resizedHeight, resizedWidth, resizedBarWidth);
+            setHue(currentHueCss);
             innerGrid.setWidget(0, 0, stimulusPanel);
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(2, 0, selectedColourPanel);
@@ -368,6 +375,11 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(4, 1, infoButton);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
+            int resizedWidth = (int) (width * 0.9 - 50);
+            int resizedBarWidth = (int) (width * 0.1);
+            int resizedHeight = height - 50 - selectedColourPanelHeight - buttonHeight - buttonHeight;
+            sizeAndPaintCanvases(resizedHeight, resizedWidth, resizedBarWidth);
+            setHue(currentHueCss);
             innerGrid.setWidget(0, 0, stimulusPanel);
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(0, 1, selectedColourPanel);
