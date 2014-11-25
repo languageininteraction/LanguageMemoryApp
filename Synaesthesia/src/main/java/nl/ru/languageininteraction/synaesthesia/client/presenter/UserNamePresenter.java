@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -67,10 +66,6 @@ public class UserNamePresenter extends MetadataPresenter {
 
     @Override
     void setContent(AppEventListner appEventListner) {
-        final Storage localStorage = Storage.getLocalStorageIfSupported();
-        if (localStorage != null) {
-            ((MetadataView) simpleView).addText(localStorage.getLength() + "");
-        }
         final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
         if (userNameValue != null && !userNameValue.isEmpty()) {
             ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));
