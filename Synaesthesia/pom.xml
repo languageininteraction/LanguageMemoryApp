@@ -182,7 +182,7 @@
                     <encoding>UTF-8</encoding>
                     <finalName>${project.build.finalName}</finalName>
                     <descriptors>
-                        <descriptor>src/main/phonegap/phonegap-assembly.xml</descriptor>
+                        <descriptor>src/main/cordova/cordova-assembly.xml</descriptor>
                         <!--<descriptor>src/main/chromeapp/chromeapp-assembly.xml</descriptor>-->
                     </descriptors>
                     <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
