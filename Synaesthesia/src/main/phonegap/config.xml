@@ -22,7 +22,7 @@
     <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
     <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
     <preference name="prerendered-icon"           value="true" />           <!-- ios: if icon is prerendered, iOS will not apply it's gloss to the app's icon on the user's home screen -->
-<!--    <preference name="ios-statusbarstyle"         value="black-translucent" />    ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar 
+    <!--    <preference name="ios-statusbarstyle"         value="black-translucent" />    ios: black-translucent will appear black because the PhoneGap webview doesn't go beneath the status bar 
     <preference name="StatusBarOverlaysWebView" value="false" />-->
     <preference name="detect-data-types"          value="true" />           <!-- ios: controls whether data types (such as phone no. and dates) are automatically turned into links by the system -->
     <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
@@ -30,7 +30,8 @@
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
     <preference name="android-minSdkVersion"      value="7" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
-
+    <!--<preference name="EnableViewportScale" value="true" />-->
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <icon src="images/icon.png" />
     
     <!-- enable the splash screen for android -->

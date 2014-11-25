@@ -60,6 +60,10 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         }
     }
 
+    public void focusFirstTextBox() {
+        ((MetadataView) simpleView).focusFirstTextBox();
+    }
+
     @Override
     void pageClosing() {
         saveFields();

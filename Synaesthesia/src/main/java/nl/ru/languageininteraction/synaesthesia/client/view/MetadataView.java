@@ -34,6 +34,7 @@ public class MetadataView extends SimpleView {
     final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
     final private HashMap<String, TextBox> fieldBoxes;
+    private TextBox firstTextBox = null;
 
     public MetadataView() {
         outerPanel = new VerticalPanel();
@@ -58,6 +59,15 @@ public class MetadataView extends SimpleView {
         textBox.setText((existingValue == null) ? "" : existingValue);
         flexTable.setWidget(rowCount, 1, textBox);
         fieldBoxes.put(fieldName, textBox);
+        if (firstTextBox == null) {
+            firstTextBox = textBox;
+        }
+    }
+
+    public void focusFirstTextBox() {
+        if (firstTextBox != null) {
+            firstTextBox.setFocus(true);
+        }
     }
 
     public Set<String> getFieldNames() {

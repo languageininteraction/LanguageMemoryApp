@@ -38,6 +38,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresent
 import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterDisabledPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.UserNamePresenter;
 
@@ -67,6 +68,7 @@ public class AppController implements AppEventListner {
             trackView(applicationState.name());
             switch (applicationState) {
                 case menu:
+                    userResults.setPendingStimuliGroup(null);
                     this.presenter = new MenuPresenter(widgetTag);
                     presenter.setState(this, null, null);
                     break;
@@ -86,6 +88,7 @@ public class AppController implements AppEventListner {
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.stimulus);
+                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case stimulus:
                     if (userResults.getPendingStimuliGroup() == null) {
@@ -113,10 +116,16 @@ public class AppController implements AppEventListner {
                 case metadata:
                     this.presenter = new MetadataPresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.registration);
+                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case registration:
-                    this.presenter = new RegisterPresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.moreinfo);
+                    if (userResults.getStimuliGroups().isEmpty()) {
+                        this.presenter = new RegisterDisabledPresenter(widgetTag);
+                        presenter.setState(this, null, ApplicationState.stimulus);
+                    } else {
+                        this.presenter = new RegisterPresenter(widgetTag, userResults);
+                        presenter.setState(this, null, ApplicationState.moreinfo);
+                    }
                     break;
                 case moreinfo:
                     this.presenter = new ScreenPresenter(widgetTag);

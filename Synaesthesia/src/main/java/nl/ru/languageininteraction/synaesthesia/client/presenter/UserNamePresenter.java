@@ -30,6 +30,8 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
  */
 public class UserNamePresenter extends MetadataPresenter {
 
+    final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
+
     public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, userResults);
     }
@@ -42,7 +44,7 @@ public class UserNamePresenter extends MetadataPresenter {
     @Override
     void setContent(AppEventListner appEventListner) {
         ((MetadataView) simpleView).addText(messages.userNameScreenText());
-        for (MetadataField metadataField : new MetadataField[]{metadataFieldProvider.metadataFieldArray[0]/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
+        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
             ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
     }
