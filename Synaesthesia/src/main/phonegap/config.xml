@@ -31,7 +31,7 @@
     <preference name="android-minSdkVersion"      value="7" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
     <!--<preference name="EnableViewportScale" value="true" />-->
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" /><!-- it is unconfirmed if this preference is required for the keybard to show correctly -->
     <icon src="images/icon.png" />
     
     <!-- enable the splash screen for android -->
