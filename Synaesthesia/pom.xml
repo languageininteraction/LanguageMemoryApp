@@ -7,10 +7,10 @@
     <!-- POM file generated with GWT webAppCreator -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.ru.languageininteraction</groupId>
-    <artifactId>synquiz</artifactId>
+    <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
     <version>0.3.152-testing</version>
-    <name>SynQuiz</name>
+    <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
         <url>https://www.languageininteraction.nl</url>
