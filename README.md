@@ -7,15 +7,12 @@ This project was started by merging the SynQuiz project as follows:
 
 Added all the files from SynQuiz as a basis for this project. Hopefully all the history will be kept and any updates can be pulled as required.
 This was done with:
-git remote add synquizmaster https://github.com/languageininteraction/GraphemeColourSynaesthesiaApp.git
-git fetch synquizmaster
-git checkout -b synquizmaster synquizmaster/master
+git remote add synquizremote https://github.com/languageininteraction/GraphemeColourSynaesthesiaApp.git
+git fetch synquizremote
+git checkout -b synquiz synquizremote/master
 git checkout master                
-git merge synquizmaster
+git merge synquiz
 
-But also some additional changes were pulled in before the actual merge:
-git checkout synquizmaster
-git pull
-git checkout master 
+Then resolve any conflicts and push.
 
-Perhaps the branch name and the remote name could have been better chosen: synquizremote and synquiz might have been better choices.
+This process will leave all the synquiz tags and branches in the local copy. So it might be preferable to delete the checkout after this process and clone a fresh copy. This way human errors are less likely when pushing subsequent work. Subsequent merges can then be done by following the exact procedure again.
