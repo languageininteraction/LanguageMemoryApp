@@ -1,9 +1,9 @@
 #mvn install
 cd target
-synquizname=synquiz-0.3-testing-SNAPSHOT
-rm -rf $synquizname-phonegap
-unzip $synquizname-phonegap.zip -d $synquizname-phonegap
-cd $synquizname-phonegap 
+synquizname=synquiz-0.3.160-testing
+rm -rf $synquizname-cordova
+unzip $synquizname-cordova.zip -d $synquizname-cordova
+cd $synquizname-cordova
 cordova platform add ios
 cordova platform add android
 cordova plugin add https://github.com/danwilson/google-analytics-plugin.git

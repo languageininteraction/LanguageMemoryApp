@@ -1,6 +1,6 @@
 <assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
-    <id>phonegap</id>
+    <id>cordova</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -33,7 +33,7 @@
             <filtered>false</filtered>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/src/main/phonegap</directory>
+            <directory>${basedir}/src/main/cordova</directory>
             <includes>
                 <include>config.xml</include>
             </includes>  
