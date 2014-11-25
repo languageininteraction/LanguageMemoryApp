@@ -17,11 +17,14 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.storage.client.Storage;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 
 /**
@@ -30,6 +33,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
  */
 public class UserNamePresenter extends MetadataPresenter {
 
+    private boolean isNewUser = true;
     final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
 
     public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
@@ -43,9 +47,55 @@ public class UserNamePresenter extends MetadataPresenter {
 
     @Override
     void setContent(AppEventListner appEventListner) {
+        final Storage localStorage = Storage.getLocalStorageIfSupported();
+        if (localStorage != null) {
+            ((MetadataView) simpleView).addText(localStorage.getLength() + "");
+        }
+        final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
+        if (userNameValue != null && !userNameValue.isEmpty()) {
+            ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));
+            ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
+
+                @Override
+                public String getLabel() {
+                    return messages.userNameScreenExistingButton(userNameValue);
+                }
+
+                @Override
+                public void eventFired(Button button) {
+                    isNewUser = false;
+                    ((MetadataView) simpleView).setFieldValue(firstNameField.getPostName(), userNameValue);
+                    nextEventListner.eventFired(button);
+                }
+            });
+        }
         ((MetadataView) simpleView).addText(messages.userNameScreenText());
-        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
-            ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+//        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
+        ((MetadataView) simpleView).addField(firstNameField.getPostName(), firstNameField.getFieldLabel(), "");
+//        }
+        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return messages.userNameScreenCreateButton();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                isNewUser = true;
+                nextEventListner.eventFired(button);
+            }
+        });
+    }
+
+    @Override
+    protected void saveFields() {
+        if (isNewUser) {
+            userResults.clearResults();
+            userResults.clearMetadata();
+            new LocalStorage().clear();
+            super.saveFields();
         }
     }
+
 }

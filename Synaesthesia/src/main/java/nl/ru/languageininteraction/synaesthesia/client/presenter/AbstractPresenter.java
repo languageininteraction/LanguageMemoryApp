@@ -35,6 +35,7 @@ public abstract class AbstractPresenter implements Presenter {
     protected final RootPanel widgetTag;
     final SimpleView simpleView;
     private PresenterEventListner backEventListner = null;
+    protected PresenterEventListner nextEventListner = null;
 
     public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
@@ -75,7 +76,7 @@ public abstract class AbstractPresenter implements Presenter {
         }
         setTitle(backEventListner);
         if (nextState != null) {
-            simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
+            nextEventListner = new PresenterEventListner() {
 
                 @Override
                 public void eventFired(Button button) {
@@ -87,7 +88,8 @@ public abstract class AbstractPresenter implements Presenter {
                 public String getLabel() {
                     return nextState.label;
                 }
-            });
+            };
+            simpleView.setButton(SimpleView.ButtonType.next, nextEventListner);
         }
         setContent(appEventListner);
         simpleView.resizeView();
