@@ -50,7 +50,8 @@ public class ReportView extends SimpleView {
         int row = 0;
         final FlexTable grid = new FlexTable();
         grid.setStylePrimaryName("resultsTablePanel");
-        final Label titleLabel = new Label(stimuliGroup.getGroupLabel());titleLabel.setStylePrimaryName("resultsTableTitle");
+        final Label titleLabel = new Label(stimuliGroup.getGroupLabel());
+        titleLabel.setStylePrimaryName("resultsTableTitle");
         grid.setWidget(0, 0, titleLabel);
         grid.getFlexCellFormatter().setColSpan(0, 0, columnCount + 1);
         row++;
@@ -61,7 +62,7 @@ public class ReportView extends SimpleView {
                 if (colour == null) {
                     label.getElement().setAttribute("style", "color: grey;background: none;");
                 } else {
-                    String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "black" : "white";
+                    String foreground = (colour.getRed() + colour.getGreen() + colour.getBlue() > 128 * 3) ? "#A9A9A9" : "#D3D3D3";
                     label.getElement().setAttribute("style", "background:" + foreground + ";color:rgb(" + colour.getRed() + "," + colour.getGreen() + "," + colour.getBlue() + ")");
                 }
                 grid.setWidget(row, column, label);
@@ -69,7 +70,7 @@ public class ReportView extends SimpleView {
             final HorizontalPanel bargraphOuter = new HorizontalPanel();
             final HorizontalPanel bargraphInner = new HorizontalPanel();
             bargraphOuter.setPixelSize(100, 10);
-            bargraphInner.setPixelSize((int) (100 * scoreData.getDistance()), 10);
+            bargraphInner.setPixelSize((int) (100.0 / 6 * scoreData.getDistance()), 10);
             bargraphOuter.setStyleName("bargraphOuter");
             bargraphInner.setStyleName("bargraphInner");
             bargraphOuter.add(bargraphInner);
