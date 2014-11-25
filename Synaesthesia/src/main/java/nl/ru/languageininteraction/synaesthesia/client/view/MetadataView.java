@@ -17,6 +17,9 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -24,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)
@@ -38,6 +42,7 @@ public class MetadataView extends SimpleView {
 
     public MetadataView() {
         outerPanel = new VerticalPanel();
+        outerPanel.setWidth("100%");
         setContent(outerPanel);
         fieldBoxes = new HashMap<>();
     }
@@ -45,6 +50,20 @@ public class MetadataView extends SimpleView {
     public void addText(String textString) {
         HTML html = new HTML(textString);
         outerPanel.add(html);
+    }
+
+    public void addOptionButton(final PresenterEventListner presenterListerner) {
+        final Button nextButton = new Button(presenterListerner.getLabel());
+        nextButton.addStyleName("optionButton");
+        nextButton.setEnabled(true);
+        outerPanel.add(nextButton);
+        nextButton.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                presenterListerner.eventFired(nextButton);
+            }
+        });
     }
 
     public void addField(final String fieldName, final String displayName, final String existingValue) {
@@ -72,6 +91,10 @@ public class MetadataView extends SimpleView {
 
     public Set<String> getFieldNames() {
         return fieldBoxes.keySet();
+    }
+
+    public void setFieldValue(String fieldName, String fieldValue) {
+        fieldBoxes.get(fieldName).setValue(fieldValue);
     }
 
     public String getFieldValue(String fieldName) {

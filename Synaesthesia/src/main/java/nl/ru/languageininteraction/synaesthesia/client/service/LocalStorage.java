@@ -43,6 +43,13 @@ public class LocalStorage {
         return userResults;
     }
 
+    public void clear() {
+        dataStore = Storage.getLocalStorageIfSupported();
+        if (dataStore != null) {
+            dataStore.clear();
+        }
+    }
+
     public void storeData(UserResults userResults) {
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {

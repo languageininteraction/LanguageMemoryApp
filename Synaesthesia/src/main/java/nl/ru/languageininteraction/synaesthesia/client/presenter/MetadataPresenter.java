@@ -40,14 +40,14 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         this.userResults = userResults;
     }
 
-    private void saveFields() {
+    protected void saveFields() {
         for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
             userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
         }
         new LocalStorage().storeData(userResults);
     }
-
-    @Override
+ 
+   @Override
     void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.metadataScreenTitle(), titleBarListner);
     }

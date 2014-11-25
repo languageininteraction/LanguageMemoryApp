@@ -39,6 +39,10 @@ public class UserResults {
         results.clear();
     }
 
+    public void clearMetadata() {
+        metadataValues.clear();
+    }
+
     public void addDummyResults(StimuliGroup stimuliGroup) {
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         results.put(stimuliGroup, stimulusResponseGroup);
