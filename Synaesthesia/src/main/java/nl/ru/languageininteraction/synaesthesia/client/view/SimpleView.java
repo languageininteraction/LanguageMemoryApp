@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -79,7 +78,7 @@ public class SimpleView extends AbstractView {
             headerArrow.addStyleName("headerArrow");
             headerPanel.add(headerArrow);
 
-            final Button headerButton = new Button(presenterListerner.getLabel());
+            final Label headerButton = new Label(presenterListerner.getLabel());
             headerButton.addStyleName("headerButton");
             headerPanel.add(headerButton);
             final ClickHandler backHandler = new ClickHandler() {

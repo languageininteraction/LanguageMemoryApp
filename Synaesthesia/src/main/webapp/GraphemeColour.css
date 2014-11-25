@@ -13,15 +13,16 @@
     border-right:17px solid white;
     margin-right: 0px;
     cursor: pointer;
-    z-index: 1;
+    /*z-index: 1;*/
 }
 
-.Android .gwt-Button.headerButton {
+.Android .gwt-Label.headerButton {
     display: none;
 }
-.gwt-Button.headerButton {
+.gwt-Label.headerButton {
     position: relative;
     top: 5px;
+    padding: 5px;
     margin-left: 0px;
     display: block;
     display: inline-block;
@@ -35,7 +36,7 @@
     /*    border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;*/
     outline: none;
-    height: 40px;
+    height: 30px;
 }
 
 .gwt-Label.headerIcon {
