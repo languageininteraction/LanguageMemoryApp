@@ -1,0 +1,251 @@
+.Android .gwt-Label.headerArrow {
+    margin-right: 10px;
+}
+
+.gwt-Label.headerArrow {
+    width: 0; 
+    height: 0; 
+    position: relative;
+    top: 9px;
+    left:5px;
+    border-top: 15px solid transparent;
+    border-bottom: 17px solid transparent; 
+    border-right:17px solid white;
+    margin-right: 0px;
+    cursor: pointer;
+    /*z-index: 1;*/
+}
+
+.Android .gwt-Label.headerButton {
+    display: none;
+}
+.gwt-Label.headerButton {
+    position: relative;
+    top: 5px;
+    padding: 5px;
+    margin-left: 0px;
+    display: block;
+    display: inline-block;
+    background: white;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgb(0,158,200);
+    border: none;
+    border-radius: 15px;
+    /*    border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;*/
+    outline: none;
+    height: 30px;
+}
+
+.gwt-Label.headerIcon {
+    display: none;
+}
+.Android .gwt-Label.headerIcon {
+    display: block;
+    background: url("./images/icon.jpg");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    height: 50px;
+    width:50px;
+    border: none;
+    /*cursor: pointer;*/
+}
+
+.headerLabel {
+    padding: 10px 10px;
+    font-size: 30px;
+}
+
+.gwt-Button.stimulusButton {
+    display: block;
+    display: inline-block;
+    background: white;
+    padding:  5px 10px;
+    /*margin: 0 10px 10px 0;*/
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgb(111,111,111);;
+    border-radius: 5px;
+    outline: none;
+}
+
+.gwt-Button.nextButton {
+    display: block;
+    display: inline-block;
+    background: white;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    border-color: rgb(0,158,200);
+    border-radius: 15px;
+    outline: none;
+    width: 80%;
+    height: 40px;
+}
+
+.gwt-Button.menuButton {
+    /*background:rgb(246,170,139);*/
+    display: block;
+    display: inline-block;
+    background: white;
+    /*background: rgb(193,227,241);*/
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    color: black;
+    border-color: rgb(0,158,200);
+    /*border-color: rgb(142,207,230);*/
+    text-decoration: none;
+    cursor: pointer;
+    /*border-color: transparent;*/
+    border-radius: 15px;
+    outline: none;
+    width: 100%;
+}
+
+.gwt-Button.stimulusHelpButton {    
+    background: white;
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.contentPanel {
+    border-top-color: white;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.bargraphInner {
+    background-color:rgb(246,170,139);
+}
+
+.bargraphOuter {
+    border: rgb(111,111,111);
+    border-width: 1px;
+    border-style: solid;
+}
+
+canvas {
+    outline: none;
+    border: grey;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.stimulusHelpText {
+    font-size: 17pt;
+    color: black;
+    padding: 10px 10px 10px 10px;
+}
+
+.stimulusHelpPanel {
+    border: rgb(111,111,111); 
+    background: white;
+    border-width: 3px;
+    border-style: solid;
+
+}
+
+.stimulusPanel {    
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 10px 40px 10px;
+}
+
+.stimulusScreen {
+    background: black;
+}
+
+.menuTable {
+    padding: 10px 10px;
+    margin: 10px 10px 10px 10px;
+    border-color: rgb(142,207,230);
+    border-radius: 15px;
+    /*background: rgb(193,227,241);*/
+    outline: none;
+    border-width: 1px;
+    border-style: solid;
+}
+.gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable {
+    margin-left: 10%;   
+    margin-right: 10%;   
+}
+.resultsTableTitle {
+    font-size: 24pt;
+}
+
+.gwt-Label, .gwt-HTML {  
+    font-size: 17pt;
+    /*    
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 16pt;
+    line-height: 20pt;
+    */
+}
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle {  
+    color:rgb(255,255,255); 
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
+    line-height: 20pt;
+}
+
+#widgetTag {
+    height: 100%;
+    background-color:rgb(0,158,200);
+    background: -webkit-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
+}
+
+/*
+Language in Interaction uses a fixed color sequence. 
+The main colors are blue and red, with shades derivative thereof. 
+In addition, black, gray and white are used.
+*/
+.PMS632 {background-color:rgb(0,158,200);}
+.PMS632-50 {background-color:rgb(142,207,230);}
+.PMS632-30 {background-color:rgb(193,227,241);}
+.PMS1788 {background-color:rgb(239,43,45);}
+.PMS1788-50 {background-color:rgb(246,170,139);}
+.zwart {background-color:rgb(0,0,0);}
+.zwart-50 {background-color:rgb(111,111,111);}
+.wit {background-color:rgb(255,255,255);}
+
+/*
+It may happen that there are additional colors are needed. 
+Alongside are a series of colors that fit well with the main colors of Language in Interaction.
+These colors may be also used in secondary colors (preferably in the percentages of 50% and 30%).
+*/
+/*
+#PMS 7447 r108 g99 b154
+#PMS 3405 r0 g164 b122
+#PMS 613 r199 g178 b0
+
+#PMS 411 r104 g85 b70
+#PMS 506 r139 g34 b31
+#PMS 506
+r239 g123 b16
+*/
+
+/*
+COLOUR BACKGROUND 
+In order to suggest, more depth use can be made of a color gradient.
+*/
+
+/*PMS 632 - 50% r142 g207 b230 to PMS 632 r0 g158 b200 */
+.gradientPMS632-632-50 {
+    height: 100%;
+    background: -webkit-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
+}
+
+/*
+wit
+r255 g255 b255
+to
+PMS 632 - 50% r142 g207 b230
+*/
