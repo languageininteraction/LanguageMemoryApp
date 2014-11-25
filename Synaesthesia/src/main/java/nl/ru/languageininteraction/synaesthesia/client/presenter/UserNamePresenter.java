@@ -36,8 +36,28 @@ public class UserNamePresenter extends MetadataPresenter {
     private boolean isNewUser = true;
     final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
 
+    private PresenterEventListner nextEventListner = null;
+
     public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, userResults);
+    }
+
+    @Override
+    public void setState(final AppEventListner appEventListner, AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
+        super.setState(appEventListner, prevState, null);
+        nextEventListner = new PresenterEventListner() {
+
+            @Override
+            public void eventFired(Button button) {
+                pageClosing();
+                appEventListner.requestApplicationState(nextState);
+            }
+
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+        };
     }
 
     @Override

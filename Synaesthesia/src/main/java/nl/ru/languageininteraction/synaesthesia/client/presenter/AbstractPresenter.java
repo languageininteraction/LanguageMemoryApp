@@ -35,7 +35,7 @@ public abstract class AbstractPresenter implements Presenter {
     protected final RootPanel widgetTag;
     final SimpleView simpleView;
     private PresenterEventListner backEventListner = null;
-    protected PresenterEventListner nextEventListner = null;
+    private PresenterEventListner nextEventListner = null;
 
     public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
