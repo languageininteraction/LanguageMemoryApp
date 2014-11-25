@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
-    <version>0.3.152-testing</version>
+    <version>0.3.160-testing</version>
     <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
@@ -182,7 +182,7 @@
                     <encoding>UTF-8</encoding>
                     <finalName>${project.build.finalName}</finalName>
                     <descriptors>
-                        <descriptor>src/main/phonegap/phonegap-assembly.xml</descriptor>
+                        <descriptor>src/main/cordova/cordova-assembly.xml</descriptor>
                         <!--<descriptor>src/main/chromeapp/chromeapp-assembly.xml</descriptor>-->
                     </descriptors>
                     <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
