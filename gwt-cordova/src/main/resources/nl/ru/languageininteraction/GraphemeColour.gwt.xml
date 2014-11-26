@@ -24,7 +24,7 @@
     <entry-point class='nl.ru.languageininteraction.synaesthesia.client.GraphemeColour' />
 
     <!-- Specify the paths for translatable code                    -->
-    <source path='client' />
-    <source path='shared' />
+    <source path='synaesthesia' />
+    <source path='language' />
 
 </module>

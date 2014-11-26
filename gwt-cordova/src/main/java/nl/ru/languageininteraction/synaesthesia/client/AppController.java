@@ -32,6 +32,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.ColourPickerPre
 import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterPresenter;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
+import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
@@ -81,6 +82,9 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, null, null);
                     break;
                 case start:
+                    this.presenter = new MapPresenter(widgetTag);
+                    presenter.setState(this, null, null);
+                    break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
                     presenter.setState(this, null, ApplicationState.setuser);
