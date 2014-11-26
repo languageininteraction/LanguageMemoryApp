@@ -46,14 +46,14 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         }
         new LocalStorage().storeData(userResults);
     }
- 
-   @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+
+    @Override
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.metadataScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(AppEventListner appEventListner) {
+    protected void setContent(AppEventListner appEventListner) {
         ((MetadataView) simpleView).addText(messages.metadataScreenText());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
@@ -65,7 +65,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
         saveFields();
     }
 }

@@ -37,12 +37,12 @@ public class VersionPresenter extends AbstractPresenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.versionScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
@@ -52,6 +52,6 @@ public class VersionPresenter extends AbstractPresenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 }

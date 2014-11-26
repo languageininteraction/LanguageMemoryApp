@@ -33,16 +33,16 @@ public class RegisterDisabledPresenter extends AbstractPresenter implements Pres
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.registerScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.registerDisabledScreenText());
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 }

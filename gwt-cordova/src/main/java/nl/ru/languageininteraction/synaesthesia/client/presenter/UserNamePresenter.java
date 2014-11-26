@@ -60,12 +60,12 @@ public class UserNamePresenter extends MetadataPresenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.userNameScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(AppEventListner appEventListner) {
+    protected void setContent(AppEventListner appEventListner) {
         final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
         if (userNameValue != null && !userNameValue.isEmpty()) {
             ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));

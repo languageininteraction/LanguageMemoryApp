@@ -144,12 +144,12 @@ public class ScoreCalculatorTest {
         final StimuliGroup chordsGroup = stimuliGroupArray[0];
         assertEquals("Chords", chordsGroup.getGroupLabel());
         final GroupScoreData chordsGroupScores = scoreCalculator.calculateScores(chordsGroup);
-        assertEquals(1.3285714285714, chordsGroupScores.getScore(), 0.001);
+        assertEquals(1.8568627138932545, chordsGroupScores.getScore(), 0.001);
 
         final StimuliGroup instrumentsGroup = stimuliGroupArray[2];
         assertEquals("Instruments", instrumentsGroup.getGroupLabel());
         final GroupScoreData instrumentsGroupScores = scoreCalculator.calculateScores(instrumentsGroup);
-        assertEquals(0.36, instrumentsGroupScores.getScore(), 0.001);
+        assertEquals(0.7225490137934685, instrumentsGroupScores.getScore(), 0.001);
     }
 
     /**

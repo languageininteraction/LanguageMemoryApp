@@ -36,17 +36,17 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.localeScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         setUpLocaleOptions();
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 
     private void setUpLocaleOptions() {
