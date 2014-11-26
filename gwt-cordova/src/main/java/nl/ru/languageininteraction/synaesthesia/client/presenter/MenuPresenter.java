@@ -34,12 +34,12 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.menuScreenTitle(), null);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         setMenuOption(appEventListner, AppEventListner.ApplicationState.start);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.intro);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
@@ -70,6 +70,6 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 }

@@ -42,12 +42,12 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.stimulusMenuTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
         for (final StimuliGroup stimuliGroup : stimuliProvider.getStimuli()) {
             final String buttonLabel;
@@ -75,6 +75,6 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 }

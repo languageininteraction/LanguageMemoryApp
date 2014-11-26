@@ -33,16 +33,16 @@ public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.moreInfoScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(AppEventListner appEventListner) {
+    protected void setContent(AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.moreInfoScreenText());
     }
 }

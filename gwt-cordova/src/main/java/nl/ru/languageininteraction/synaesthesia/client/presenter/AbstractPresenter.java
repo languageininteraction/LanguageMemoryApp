@@ -33,7 +33,7 @@ public abstract class AbstractPresenter implements Presenter {
 
     protected final Messages messages = GWT.create(Messages.class);
     protected final RootPanel widgetTag;
-    final SimpleView simpleView;
+    final protected SimpleView simpleView;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
 
@@ -103,9 +103,9 @@ public abstract class AbstractPresenter implements Presenter {
         }
     }
 
-    abstract void pageClosing();
+    protected abstract void pageClosing();
 
-    abstract void setTitle(PresenterEventListner titleBarListner);
+    protected abstract void setTitle(PresenterEventListner titleBarListner);
 
-    abstract void setContent(final AppEventListner appEventListner);
+    protected abstract void setContent(final AppEventListner appEventListner);
 }

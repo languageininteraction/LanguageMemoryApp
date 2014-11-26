@@ -33,16 +33,16 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.userfeedbackscreentitle(), titleBarListner);
     }
 
     @Override
-    void setContent(final AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.userfeedbackscreentext());
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 }

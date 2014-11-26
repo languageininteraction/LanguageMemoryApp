@@ -41,16 +41,16 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    void pageClosing() {
+    protected void pageClosing() {
     }
 
     @Override
-    void setTitle(PresenterEventListner titleBarListner) {
+    protected void setTitle(PresenterEventListner titleBarListner) {
         ((ReportView) simpleView).addTitle(messages.reportScreenTitle(), titleBarListner);
     }
 
     @Override
-    void setContent(AppEventListner appEventListner) {
+    protected void setContent(AppEventListner appEventListner) {
         final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
         final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
