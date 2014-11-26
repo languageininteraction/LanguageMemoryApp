@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
-    <version>0.3.169-testing</version>
+    <version>1.0.3-testing</version>
     <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
@@ -147,8 +147,8 @@
                     <verbose>true</verbose>
                     <vcsType>git</vcsType>
                     <allowSnapshots>true</allowSnapshots>
-                    <majorVersion>0</majorVersion>
-                    <minorVersion>3</minorVersion>
+                    <majorVersion>1</majorVersion>
+                    <minorVersion>0</minorVersion>
                     <buildType>testing</buildType>
                     <propertiesPrefix>application</propertiesPrefix>
                     <shortVersionModule></shortVersionModule>
