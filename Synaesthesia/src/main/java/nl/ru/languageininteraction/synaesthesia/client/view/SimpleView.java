@@ -96,8 +96,11 @@ public class SimpleView extends AbstractView {
         headerPanel.add(headerLabel);
     }
 
+    @Deprecated
     public void addLink(String label, String target) {
-        scrollPanel.setWidget(new Anchor(label, target));
+        // offering a link which allows a separate html page to be loaded creates a state where the user can not go back and therefore can do nothing after that point.
+        // Also loading external pages is a security issue and should be done with care.
+        //scrollPanel.setWidget(new Anchor(label, target));
     }
 
     public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {
