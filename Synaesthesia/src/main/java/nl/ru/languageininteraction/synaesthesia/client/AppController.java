@@ -27,7 +27,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ReportPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.FeedbackPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.ScreenPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.MoreInfoPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ColourPickerPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterPresenter;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -128,7 +128,7 @@ public class AppController implements AppEventListner {
                     }
                     break;
                 case moreinfo:
-                    this.presenter = new ScreenPresenter(widgetTag);
+                    this.presenter = new MoreInfoPresenter(widgetTag);
                     presenter.setState(this, ApplicationState.start, null);
                     break;
                 case end:

@@ -28,11 +28,9 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ScreenPresenter extends AbstractPresenter implements Presenter {
+public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
-    private final Messages messages = GWT.create(Messages.class);
-
-    public ScreenPresenter(RootPanel widgetTag) {
+    public MoreInfoPresenter(RootPanel widgetTag) {
         super(widgetTag, new MenuView());
     }
 
