@@ -17,12 +17,10 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
@@ -31,7 +29,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
 public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
     public MoreInfoPresenter(RootPanel widgetTag) {
-        super(widgetTag, new MenuView());
+        super(widgetTag, new SimpleView());
     }
 
     @Override
