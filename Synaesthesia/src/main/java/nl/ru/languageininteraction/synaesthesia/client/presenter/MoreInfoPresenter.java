@@ -43,6 +43,6 @@ public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     void setContent(AppEventListner appEventListner) {
-        simpleView.addLink("StyleTestPage", "StyleTestPage.html");
+        simpleView.setDisplayText(messages.moreInfoScreenText());
     }
 }
