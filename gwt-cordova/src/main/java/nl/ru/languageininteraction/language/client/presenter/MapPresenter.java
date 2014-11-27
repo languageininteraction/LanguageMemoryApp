@@ -64,6 +64,7 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
 //        for (String item : items) {
 //            builder.appendEscaped(item).appendHtmlConstant("<br/>");
 //        }
+        builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<svg width='600' height='300' id='ocean'>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='250' y='150' height='5px' width='5px' fill='blue'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='255' y='170' height='5px' width='5px' fill='blue'/>"));
@@ -76,8 +77,8 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
         builder.append(SafeHtmlUtils.fromTrustedString("<rect id='africa' x='100' y='110' height='88px' width='88px' fill='green'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<rect id='australia' x='400' y='100' height='88px' width='88px' fill='green'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<rect id='newzealand' x='500' y='150' height='20px' width='10px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<line id='horizontal' x1='0' y1='100' x2='600' y2='100' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<line id='vertical' x1='100' y1='0' x2='100' y2='200' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<line id='horizontal' class='overlay' x1='0' y1='100' x2='600' y2='100' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<line id='vertical' class='overlay' x1='100' y1='0' x2='100' y2='200' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
         final HTML html = new HTML(builder.toSafeHtml());
         html.addClickHandler(new ClickHandler() {
