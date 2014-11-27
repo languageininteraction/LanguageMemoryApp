@@ -97,7 +97,7 @@
                     <runTarget>GraphemeColour.html</runTarget>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <i18nMessagesBundles>
-                        <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Messages</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Messages</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.MetadataFields</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Stimuli</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.ServiceLocations</i18nMessagesBundle>
