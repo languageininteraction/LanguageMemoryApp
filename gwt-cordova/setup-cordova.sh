@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-0.3.169-testing
+synquizname=languagememorygame-0.1-testing-SNAPSHOT
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
@@ -11,11 +11,11 @@ cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.statusbar
 cordova plugin add org.apache.cordova.splashscreen
 
-splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
+splashResourcesDir="./platforms/ios/LanguageMemory/Resources/splash/"
 echo $splashResourcesDir
 splashImage="images/splash.png" #"images/splash.gif" "images/icon.jpg"
 echo $splashImage
-#file ./platforms/ios/SynQuiz/Resources/splash/*
+#file ./platforms/ios/LanguageMemory/Resources/splash/*
 
 echo "making 9 patch splash images"
 convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
@@ -72,7 +72,7 @@ cordova build -release
 #xcodebuild -scheme YOURSCHEMENAME -project MyApp.xcodeproj -alltargets -sdk iphoneos7.0 PROVISIONING_PROFILE="PROFILE_UUID.mobileprovision" -configuration Release
 
 #echo "launching xcode"
-#open platforms/ios/SynQuiz.xcodeproj
+#open platforms/ios/LanguageMemory.xcodeproj
 
 # generate the IPA
 #cd platforms/ios/CordovaLib/
@@ -82,13 +82,13 @@ cordova build -release
 
 #cd ..
 #pwd
-#xcodebuild -alltargets -project SynQuiz.xcodeproj -sdk iphoneos -configuration Release
-#xcodebuild -scheme SynQuiz -project SynQuiz.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -alltargets -project LanguageMemory.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -scheme LanguageMemory -project LanguageMemory.xcodeproj -sdk iphoneos -configuration Release
 #cd build/Release-iphoneos
 cd platforms/ios/
 cd build/emulator
 pwd
-xcrun -sdk iphoneos PackageApplication -v "$(pwd)/SynQuiz.app" -o "$(pwd)/$synquizname.ipa"
+xcrun -sdk iphoneos PackageApplication -v "$(pwd)/LanguageMemory.app" -o "$(pwd)/$synquizname.ipa"
 
 # validate the results
 xcrun -verbose -sdk iphoneos Validation "$(pwd)/$synquizname.ipa"
