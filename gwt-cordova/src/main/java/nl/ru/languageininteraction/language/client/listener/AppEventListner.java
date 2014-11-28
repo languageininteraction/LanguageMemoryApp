@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.listener;
 
 import com.google.gwt.core.client.GWT;
-import nl.ru.languageininteraction.synaesthesia.client.Messages;
+import nl.ru.languageininteraction.language.client.Messages;
 
 /**
  * @since Oct 8, 2014 11:01:07 AM (creation date)
