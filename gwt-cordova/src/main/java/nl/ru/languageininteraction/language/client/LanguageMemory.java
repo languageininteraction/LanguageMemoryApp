@@ -1,7 +1,8 @@
-package nl.ru.languageininteraction.synaesthesia.client;
+package nl.ru.languageininteraction.language.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.AppController;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

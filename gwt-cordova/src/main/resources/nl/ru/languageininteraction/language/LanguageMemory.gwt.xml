@@ -21,10 +21,10 @@
     <set-property-fallback name="locale" value="en"/>
     
     <!-- Specify the app entry point class.                         -->
-    <entry-point class='nl.ru.languageininteraction.synaesthesia.client.LanguageMemory' />
+    <entry-point class='nl.ru.languageininteraction.language.client.LanguageMemory' />
 
     <!-- Specify the paths for translatable code                    -->
-    <source path='synaesthesia' />
-    <source path='language' />
+    <source path='client' />
+    <!--<source path='language' />-->
 
 </module>
