@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.i18n.client.NumberFormat;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;

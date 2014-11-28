@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
