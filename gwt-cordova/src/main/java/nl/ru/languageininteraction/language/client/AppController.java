@@ -23,7 +23,6 @@ import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ReportPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.FeedbackPresenter;
@@ -33,6 +32,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterPresent
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
+import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;

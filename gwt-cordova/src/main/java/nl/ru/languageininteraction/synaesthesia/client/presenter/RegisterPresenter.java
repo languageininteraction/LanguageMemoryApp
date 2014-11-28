@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.user.client.ui.Button;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import com.google.gwt.user.client.ui.RootPanel;
