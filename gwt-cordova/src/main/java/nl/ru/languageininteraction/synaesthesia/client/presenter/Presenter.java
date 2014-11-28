@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 
 /**
  * @since Oct 10, 2014 10:05:41 AM (creation date)

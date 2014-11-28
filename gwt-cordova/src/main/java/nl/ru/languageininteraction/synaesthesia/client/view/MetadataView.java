@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)

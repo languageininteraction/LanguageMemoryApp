@@ -20,8 +20,8 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
-import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**

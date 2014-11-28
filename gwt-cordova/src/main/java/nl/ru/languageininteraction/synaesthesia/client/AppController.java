@@ -21,7 +21,7 @@ import com.google.gwt.core.client.JavaScriptException;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
-import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;

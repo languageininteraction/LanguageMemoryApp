@@ -46,7 +46,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 

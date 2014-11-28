@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 
 /**
  * @since Oct 31, 2014 11:36:28 AM (creation date)
