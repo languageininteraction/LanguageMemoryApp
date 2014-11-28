@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>GraphemeColour.html</welcome-file>
+    <welcome-file>LanguageMemory.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

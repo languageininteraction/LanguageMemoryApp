@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='GraphemeColour'>
-    <!--<stylesheet src='../GraphemeColour.css' />-->
+<module rename-to='LanguageMemory'>
+    <!--<stylesheet src='../LanguageMemory.css' />-->
     <!-- Inherit the core Web Toolkit stuff.                        -->
     <inherits name='com.google.gwt.user.User' />
 
@@ -21,7 +21,7 @@
     <set-property-fallback name="locale" value="en"/>
     
     <!-- Specify the app entry point class.                         -->
-    <entry-point class='nl.ru.languageininteraction.synaesthesia.client.GraphemeColour' />
+    <entry-point class='nl.ru.languageininteraction.synaesthesia.client.LanguageMemory' />
 
     <!-- Specify the paths for translatable code                    -->
     <source path='synaesthesia' />

@@ -94,7 +94,7 @@
                 <!-- Plugin configuration. There are many available options, see 
                 gwt-maven-plugin documentation at codehaus.org -->
                 <configuration>
-                    <runTarget>GraphemeColour.html</runTarget>
+                    <runTarget>LanguageMemory.html</runTarget>
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <i18nMessagesBundles>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Messages</i18nMessagesBundle>

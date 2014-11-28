@@ -17,7 +17,7 @@
             <goal>gwt:debug</goal>
         </goals>
         <properties>
-            <runTarget>GraphemeColour.html</runTarget>
+            <runTarget>LanguageMemory.html</runTarget>
         </properties>
         <activatedProfiles>
             <activatedProfile>dev</activatedProfile>
