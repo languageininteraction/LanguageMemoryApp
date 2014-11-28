@@ -17,31 +17,13 @@
  */
 package nl.ru.languageininteraction.language.client;
 
-import com.google.gwt.core.client.JavaScriptException;
-import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
-import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.IntroPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.ReportPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.FeedbackPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.MoreInfoPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.ColourPickerPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterPresenter;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.ErrorPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterDisabledPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
-import nl.ru.languageininteraction.synaesthesia.client.presenter.UserNamePresenter;
+import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
+import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -53,101 +35,102 @@ public class AppController implements AppEventListner {
 
     private final RootPanel widgetTag;
     private Presenter presenter;
-    private final UserResults userResults;
-    private final StimuliProvider stimuliProvider;
+//    private final UserResults userResults;
+//    private final StimuliProvider stimuliProvider;
 
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
-        stimuliProvider = new StimuliProvider();
-        userResults = new LocalStorage().getStoredData();
-        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
+//        stimuliProvider = new StimuliProvider();
+//        userResults = new LocalStorage().getStoredData();
+//        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
     }
 
     @Override
     public void requestApplicationState(ApplicationState applicationState) {
-        try {
-            trackView(applicationState.name());
-            switch (applicationState) {
-                case menu:
-                    userResults.setPendingStimuliGroup(null);
-                    this.presenter = new MenuPresenter(widgetTag);
-                    presenter.setState(this, null, null);
-                    break;
-                case locale:
-                    this.presenter = new LocalePresenter(widgetTag);
-                    presenter.setState(this, null, null);
-                    break;
-                case version:
-                    this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, null, null);
-                    break;
-                case start:
-                    this.presenter = new MapPresenter(widgetTag);
-                    presenter.setState(this, null, null);
-                    break;
-                case intro:
-                    this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.setuser);
-                    break;
-                case setuser:
-                    this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.stimulus);
-                    ((MetadataPresenter) presenter).focusFirstTextBox();
-                    break;
-                case stimulus:
-                    if (userResults.getPendingStimuliGroup() == null) {
-                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
-                        presenter.setState(this, ApplicationState.start, ApplicationState.report);
-                    } else {
-                        trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
-                        this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
-                        presenter.setState(this, null, ApplicationState.stimulus);
-                    }
-                    break;
-                case adddummyresults:
-                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
-                    userResults.addDummyResults(stimuli[0]);
-                    userResults.addDummyResults(stimuli[1]);
-                    userResults.addDummyResults(stimuli[2]);
-                case report:
-                    this.presenter = new ReportPresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.feedback);
-                    break;
-                case feedback:
-                    this.presenter = new FeedbackPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.report, ApplicationState.metadata);
-                    break;
-                case metadata:
-                    this.presenter = new MetadataPresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.registration);
-                    ((MetadataPresenter) presenter).focusFirstTextBox();
-                    break;
-                case registration:
-                    if (userResults.getStimuliGroups().isEmpty()) {
-                        this.presenter = new RegisterDisabledPresenter(widgetTag);
-                        presenter.setState(this, null, ApplicationState.stimulus);
-                    } else {
-                        this.presenter = new RegisterPresenter(widgetTag, userResults);
-                        presenter.setState(this, null, ApplicationState.moreinfo);
-                    }
-                    break;
-                case moreinfo:
-                    this.presenter = new MoreInfoPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.start, null);
-                    break;
-                case end:
-                    exitApplication();
-                    break;
-                default:
-                    this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
-                    presenter.setState(this, ApplicationState.start, applicationState);
-                    break;
-            }
-        } catch (JavaScriptException | CanvasError error) {
-            logger.warning(error.getMessage());
-            this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
-            presenter.setState(this, ApplicationState.start, applicationState);
+//        try {
+        trackView(applicationState.name());
+        switch (applicationState) {
+//                case menu:
+//                    userResults.setPendingStimuliGroup(null);
+//                    this.presenter = new MenuPresenter(widgetTag);
+//                    presenter.setState(this, null, null);
+//                    break;
+//                case locale:
+//                    this.presenter = new LocalePresenter(widgetTag);
+//                    presenter.setState(this, null, null);
+//                    break;
+            case version:
+                this.presenter = new VersionPresenter(widgetTag);
+                presenter.setState(this, ApplicationState.map, null);
+                break;
+            case start:
+            case map:
+                this.presenter = new MapPresenter(widgetTag);
+                presenter.setState(this, ApplicationState.version, null);
+                break;
+//                case intro:
+//                    this.presenter = new IntroPresenter(widgetTag);
+//                    presenter.setState(this, null, ApplicationState.setuser);
+//                    break;
+//                case setuser:
+//                    this.presenter = new UserNamePresenter(widgetTag, userResults);
+//                    presenter.setState(this, null, ApplicationState.stimulus);
+//                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    break;
+//                case stimulus:
+//                    if (userResults.getPendingStimuliGroup() == null) {
+//                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
+//                        presenter.setState(this, ApplicationState.start, ApplicationState.report);
+//                    } else {
+//                        trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
+//                        this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
+//                        presenter.setState(this, null, ApplicationState.stimulus);
+//                    }
+//                    break;
+//                case adddummyresults:
+//                    final StimuliGroup[] stimuli = stimuliProvider.getStimuli();
+//                    userResults.addDummyResults(stimuli[0]);
+//                    userResults.addDummyResults(stimuli[1]);
+//                    userResults.addDummyResults(stimuli[2]);
+//                case report:
+//                    this.presenter = new ReportPresenter(widgetTag, userResults);
+//                    presenter.setState(this, null, ApplicationState.feedback);
+//                    break;
+//                case feedback:
+//                    this.presenter = new FeedbackPresenter(widgetTag);
+//                    presenter.setState(this, ApplicationState.report, ApplicationState.metadata);
+//                    break;
+//                case metadata:
+//                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+//                    presenter.setState(this, null, ApplicationState.registration);
+//                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    break;
+//                case registration:
+//                    if (userResults.getStimuliGroups().isEmpty()) {
+//                        this.presenter = new RegisterDisabledPresenter(widgetTag);
+//                        presenter.setState(this, null, ApplicationState.stimulus);
+//                    } else {
+//                        this.presenter = new RegisterPresenter(widgetTag, userResults);
+//                        presenter.setState(this, null, ApplicationState.moreinfo);
+//                    }
+//                    break;
+//                case moreinfo:
+//                    this.presenter = new MoreInfoPresenter(widgetTag);
+//                    presenter.setState(this, ApplicationState.start, null);
+//                    break;
+            case end:
+                exitApplication();
+                break;
+            default:
+                this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
+                presenter.setState(this, ApplicationState.start, applicationState);
+                break;
         }
+//        } catch (JavaScriptException | CanvasError error) {
+//            logger.warning(error.getMessage());
+//            this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
+//            presenter.setState(this, ApplicationState.start, applicationState);
+//        }
     }
 
     public void start() {
@@ -171,7 +154,7 @@ public class AppController implements AppEventListner {
      var appController = this;
      $doc.addEventListener("backbutton", function(e){
      e.preventDefault();
-     appController.@nl.ru.languageininteraction.synaesthesia.client.AppController::backAction()();
+     appController.@nl.ru.languageininteraction.language.client.AppController::backAction()();
      }, false);
      }-*/;
 

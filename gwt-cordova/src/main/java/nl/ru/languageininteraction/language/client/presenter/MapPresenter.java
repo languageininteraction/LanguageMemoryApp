@@ -50,7 +50,7 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     public void setTitle(PresenterEventListner titleBarListner) {
-
+        simpleView.addTitle(messages.mapScreenTitle(), titleBarListner);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
             }
         });
         verticalPanel.add(html);
-        verticalPanel.add(new HTML(builder.toSafeHtml()));
+//        verticalPanel.add(new HTML(builder.toSafeHtml()));
         simpleView.setContent(verticalPanel);
     }
 }
