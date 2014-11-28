@@ -37,6 +37,7 @@ import nl.ru.languageininteraction.synaesthesia.client.presenter.LocalePresenter
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterDisabledPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
@@ -87,8 +88,12 @@ public class AppController implements AppEventListner {
                     break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.stimulus);
+                    presenter.setState(this, null, ApplicationState.instructions);
                     ((MetadataPresenter) presenter).focusFirstTextBox();
+                    break;
+                case instructions:
+                    this.presenter = new InstructionsPresenter(widgetTag);
+                    presenter.setState(this, null, ApplicationState.stimulus);
                     break;
                 case stimulus:
                     if (userResults.getPendingStimuliGroup() == null) {
@@ -110,7 +115,7 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, null, ApplicationState.feedback);
                     break;
                 case feedback:
-                    this.presenter = new FeedbackPresenter(widgetTag);
+                    this.presenter = new FeedbackPresenter(widgetTag, userResults);
                     presenter.setState(this, ApplicationState.report, ApplicationState.metadata);
                     break;
                 case metadata:

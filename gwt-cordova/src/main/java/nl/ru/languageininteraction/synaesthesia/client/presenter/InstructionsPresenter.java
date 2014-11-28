@@ -20,34 +20,26 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class FeedbackPresenter extends AbstractPresenter implements Presenter {
+public class InstructionsPresenter extends AbstractPresenter implements Presenter {
 
-    private final UserResults userResults;
-
-    public FeedbackPresenter(RootPanel widgetTag, UserResults userResults) {
+    public InstructionsPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
-        this.userResults = userResults;
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.userfeedbackscreentitle(), titleBarListner);
+        simpleView.addTitle(messages.instructionscreenTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
-        } else {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
-        }
+        simpleView.setDisplayText(messages.instructionscreentext());
     }
 
     @Override
