@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
  * @since Oct 28, 2014 3:32:10 PM (creation date)

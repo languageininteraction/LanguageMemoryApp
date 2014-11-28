@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)

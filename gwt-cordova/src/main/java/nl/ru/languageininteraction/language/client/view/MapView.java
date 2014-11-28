@@ -17,8 +17,6 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
-
 /**
  * @since Nov 26, 2014 4:11:13 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>

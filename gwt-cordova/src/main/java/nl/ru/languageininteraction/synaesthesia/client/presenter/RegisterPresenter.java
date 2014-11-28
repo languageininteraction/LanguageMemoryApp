@@ -29,7 +29,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)

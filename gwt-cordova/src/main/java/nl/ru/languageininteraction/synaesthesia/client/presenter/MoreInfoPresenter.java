@@ -22,7 +22,7 @@ import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)

@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import nl.ru.languageininteraction.language.client.view.AbstractView;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.CanvasGradient;
 import com.google.gwt.canvas.dom.client.Context2d;
