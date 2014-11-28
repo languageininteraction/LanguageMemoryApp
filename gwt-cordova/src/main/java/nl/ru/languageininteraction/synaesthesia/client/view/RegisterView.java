@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -42,7 +43,7 @@ public class RegisterView extends SimpleView {
     }
 
     public void addText(String textString) {
-        HTML html = new HTML(textString);
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
         outerPanel.add(html);
     }
 
@@ -54,6 +55,6 @@ public class RegisterView extends SimpleView {
         }
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, new Label(displayName));
-        flexTable.setWidget(rowCount, 1, new HTML(value));
+        flexTable.setWidget(rowCount, 1, new HTML(new SafeHtmlBuilder().appendEscapedLines(value).toSafeHtml()));
     }
 }

@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -48,7 +49,7 @@ public class MetadataView extends SimpleView {
     }
 
     public void addText(String textString) {
-        HTML html = new HTML(textString);
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
         outerPanel.add(html);
     }
 

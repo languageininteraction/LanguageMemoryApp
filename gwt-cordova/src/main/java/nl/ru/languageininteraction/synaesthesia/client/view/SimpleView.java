@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -63,7 +63,7 @@ public class SimpleView extends AbstractView {
     }
 
     public void setDisplayText(String text) {
-        final HTML html = new HTML(text);
+        final HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(text).toSafeHtml());
         scrollPanel.setWidget(html);
     }
 
