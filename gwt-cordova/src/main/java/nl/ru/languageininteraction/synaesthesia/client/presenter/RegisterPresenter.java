@@ -17,9 +17,14 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.synaesthesia.client.InformationSheet;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
@@ -35,6 +40,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
  */
 public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
+    protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final UserResults userResults;
     private AppEventListner.ApplicationState nextState;
@@ -65,11 +71,22 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        addRegisterButton(appEventListner);
+        ((RegisterView) simpleView).addLink(messages.informationSheetLink(), informationSheet.informationSheetPdf());
+        final CheckBox agreementCheckBox = ((RegisterView) simpleView).addCheckBox(messages.informationSheetCheckBox());
+        final Button registerButton = addRegisterButton(appEventListner);
+        agreementCheckBox.setValue(false);
+        registerButton.setEnabled(false);
+        agreementCheckBox.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                registerButton.setEnabled(agreementCheckBox.getValue());
+            }
+        });
     }
 
-    private void addRegisterButton(final AppEventListner appEventListner) {
-        simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
+    private Button addRegisterButton(final AppEventListner appEventListner) {
+        final Button registerButton = simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
 
             @Override
             public void eventFired(Button button) {
@@ -111,5 +128,6 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                 return messages.registerButton();
             }
         });
+        return registerButton;
     }
 }

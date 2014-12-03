@@ -102,6 +102,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Stimuli</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.ServiceLocations</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Version</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.InformationSheet</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>
