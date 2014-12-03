@@ -17,35 +17,34 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
- * @since Oct 22, 2014 3:00:25 PM (creation date)
+ * @since Dec 3, 2014 10:46:31 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ErrorPresenter extends AbstractPresenter implements Presenter {
+public class AutotypRegionsMapScreen extends AbstractPresenter implements Presenter {
 
-    private final String errorMessage;
-
-    public ErrorPresenter(RootPanel widgetTag, String errorMessage) {
+    public AutotypRegionsMapScreen(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
-        this.errorMessage = errorMessage;
-    }
-
-    @Override
-    protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.errorScreenTitle(), titleBarListner);
-    }
-
-    @Override
-    protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.errorScreenText(errorMessage));
     }
 
     @Override
     protected void pageClosing() {
     }
+
+    @Override
+    protected void setTitle(PresenterEventListner titleBarListner) {
+    }
+
+    @Override
+    protected void setContent(AppEventListner appEventListner) {
+        simpleView.setContent(new ScrollPanel(new Image("./images/AutotypRegions_pointsEdited7.svg")));
+    }
+
 }

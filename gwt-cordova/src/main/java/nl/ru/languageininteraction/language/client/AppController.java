@@ -20,6 +20,8 @@ package nl.ru.languageininteraction.language.client;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
+import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
+import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
@@ -66,7 +68,15 @@ public class AppController implements AppEventListner {
             case start:
             case map:
                 this.presenter = new MapPresenter(widgetTag);
-                presenter.setState(this, ApplicationState.version, null);
+                presenter.setState(this, ApplicationState.version, ApplicationState.autotyp_regions);
+                break;
+            case autotyp_regions:
+                this.presenter = new AutotypRegionsMapScreen(widgetTag);
+                presenter.setState(this, ApplicationState.version, ApplicationState.alien);
+                break;
+            case alien:
+                this.presenter = new AlienScreen(widgetTag);
+                presenter.setState(this, ApplicationState.version, ApplicationState.map);
                 break;
 //                case intro:
 //                    this.presenter = new IntroPresenter(widgetTag);

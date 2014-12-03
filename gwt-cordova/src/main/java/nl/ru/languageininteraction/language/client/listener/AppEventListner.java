@@ -39,6 +39,8 @@ public interface AppEventListner {
         adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         stimulus(messages.stimulusMenuLabel()),
         map(messages.mapMenuLabel()),
+        autotyp_regions("AutotypRegions"),
+        alien("Alien"),
         report(messages.reportMenuLabel()),
         feedback(messages.feedbackMenuLabel()),
         metadata(messages.metadataMenuLabel()),
