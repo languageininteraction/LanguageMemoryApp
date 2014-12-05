@@ -58,6 +58,18 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
                 return nextState.label;
             }
         };
+        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return saveEventListner.getLabel();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                saveEventListner.eventFired(button);
+            }
+        });
     }
 
     protected void saveFields() {
@@ -78,18 +90,6 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return messages.userNameScreenCreateButton();
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                saveEventListner.eventFired(button);
-            }
-        });
     }
 
     public void focusFirstTextBox() {
