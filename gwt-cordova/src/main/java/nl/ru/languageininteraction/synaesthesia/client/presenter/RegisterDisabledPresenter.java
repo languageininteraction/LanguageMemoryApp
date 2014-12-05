@@ -41,8 +41,4 @@ public class RegisterDisabledPresenter extends AbstractPresenter implements Pres
     protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.registerDisabledScreenText());
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

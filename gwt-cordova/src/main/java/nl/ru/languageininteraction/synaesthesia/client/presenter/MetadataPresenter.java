@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -34,10 +35,29 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     protected final UserResults userResults;
+    protected PresenterEventListner saveEventListner = null;
 
     public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MetadataView());
         this.userResults = userResults;
+    }
+
+    @Override
+    public void setState(final AppEventListner appEventListner, AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
+        super.setState(appEventListner, prevState, null);
+        saveEventListner = new PresenterEventListner() {
+
+            @Override
+            public void eventFired(Button button) {
+                saveFields();
+                appEventListner.requestApplicationState(nextState);
+            }
+
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+        };
     }
 
     protected void saveFields() {
@@ -58,14 +78,21 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
+        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return messages.userNameScreenCreateButton();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                saveEventListner.eventFired(button);
+            }
+        });
     }
 
     public void focusFirstTextBox() {
         ((MetadataView) simpleView).focusFirstTextBox();
-    }
-
-    @Override
-    protected void pageClosing() {
-        saveFields();
     }
 }

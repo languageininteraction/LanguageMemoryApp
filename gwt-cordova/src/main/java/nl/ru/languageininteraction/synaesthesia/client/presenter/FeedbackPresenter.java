@@ -49,8 +49,4 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
             simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
         }
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

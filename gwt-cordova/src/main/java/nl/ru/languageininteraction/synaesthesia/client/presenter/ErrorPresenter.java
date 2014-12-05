@@ -44,8 +44,4 @@ public class ErrorPresenter extends AbstractPresenter implements Presenter {
     protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.errorScreenText(errorMessage));
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

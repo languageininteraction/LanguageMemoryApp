@@ -68,8 +68,4 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
             }
         });
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }
