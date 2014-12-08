@@ -68,14 +68,16 @@ public class ReportView extends SimpleView {
                 }
                 grid.setWidget(row, column, label);
             }
-            final HorizontalPanel bargraphOuter = new HorizontalPanel();
-            final HorizontalPanel bargraphInner = new HorizontalPanel();
-            bargraphOuter.setPixelSize(100, 10);
-            bargraphInner.setPixelSize((int) (100.0 / 6 * scoreData.getDistance()), 10);
-            bargraphOuter.setStyleName("bargraphOuter");
-            bargraphInner.setStyleName("bargraphInner");
-            bargraphOuter.add(bargraphInner);
-            grid.setWidget(row, columnCount, bargraphOuter);
+            if (scoreData.getDistance() != null) {
+                final HorizontalPanel bargraphOuter = new HorizontalPanel();
+                final HorizontalPanel bargraphInner = new HorizontalPanel();
+                bargraphOuter.setPixelSize(100, 10);
+                bargraphInner.setPixelSize((int) (100.0 / 6 * scoreData.getDistance()), 10);
+                bargraphOuter.setStyleName("bargraphOuter");
+                bargraphInner.setStyleName("bargraphInner");
+                bargraphOuter.add(bargraphInner);
+                grid.setWidget(row, columnCount, bargraphOuter);
+            }
             row++;
         }
         outerPanel.add(grid);
