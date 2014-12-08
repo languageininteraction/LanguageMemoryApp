@@ -41,8 +41,4 @@ public class InstructionsPresenter extends AbstractPresenter implements Presente
     protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.instructionscreentext());
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

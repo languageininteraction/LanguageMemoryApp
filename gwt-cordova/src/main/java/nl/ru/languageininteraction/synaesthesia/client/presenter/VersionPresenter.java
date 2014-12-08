@@ -50,8 +50,4 @@ public class VersionPresenter extends AbstractPresenter {
                 + "Compile Date: " + version.compileDate() + "<BR>"
                 + "Last Commit Date: " + version.lastCommitDate());
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

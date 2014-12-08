@@ -41,10 +41,6 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    protected void pageClosing() {
-    }
-
-    @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
         ((ReportView) simpleView).addTitle(messages.reportScreenTitle(), titleBarListner);
     }
