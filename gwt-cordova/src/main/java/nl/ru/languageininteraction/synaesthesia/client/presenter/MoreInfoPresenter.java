@@ -29,18 +29,20 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
+
     protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
+
     public MoreInfoPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.moreInfoScreenTitle(), titleBarListner);
+        simpleView.addTitle(informationSheet.informationSheetTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
-        simpleView.setDisplayText(informationSheet.informationSheetText());        
+        simpleView.setDisplayText(informationSheet.informationSheetText());
     }
 }
