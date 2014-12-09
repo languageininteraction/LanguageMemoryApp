@@ -62,12 +62,24 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    protected void setContent(AppEventListner appEventListner) {
+    protected void setContent(final AppEventListner appEventListner) {
         ((RegisterView) simpleView).addText(messages.registerScreenText());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
             ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
         }
-        ((RegisterView) simpleView).addLink(messages.informationSheetLink(), informationSheet.informationSheetPdf());
+        ((RegisterView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return messages.informationSheetLink();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.moreinfo);
+            }
+        });
+        ((RegisterView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
         final CheckBox agreementCheckBox = ((RegisterView) simpleView).addCheckBox(messages.informationSheetCheckBox());
         final Button registerButton = addRegisterButton(appEventListner);
         agreementCheckBox.setValue(false);

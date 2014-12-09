@@ -129,12 +129,12 @@ public class AppController implements AppEventListner {
                         presenter.setState(this, null, ApplicationState.stimulus);
                     } else {
                         this.presenter = new RegisterPresenter(widgetTag, userResults);
-                        presenter.setState(this, null, ApplicationState.moreinfo);
+                        presenter.setState(this, null, ApplicationState.start);
                     }
                     break;
                 case moreinfo:
                     this.presenter = new MoreInfoPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.start, null);
+                    presenter.setState(this, ApplicationState.registration, null);
                     break;
                 case end:
                     exitApplication();

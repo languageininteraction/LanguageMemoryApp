@@ -26,6 +26,7 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView.ButtonType;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)
@@ -58,7 +59,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
                 return nextState.label;
             }
         };
-        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
+        ((MetadataView) simpleView).setButton(ButtonType.next, new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -73,6 +74,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     }
 
     protected void saveFields() {
+        // todo: this should validate the fields, eg blank user name should throw and invalid email should throw
         for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
             userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
         }

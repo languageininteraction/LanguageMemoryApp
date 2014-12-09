@@ -22,11 +22,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
 /**
  * @since Oct 21, 2014 5:15:19 PM (creation date)
@@ -75,6 +77,7 @@ public class RegisterView extends SimpleView {
                 Window.open(target, "_system", "");
             }
         });
+        anchor.addStyleName("pageLink");
     }
 
     public CheckBox addCheckBox(String label) {
@@ -83,4 +86,17 @@ public class RegisterView extends SimpleView {
         return checkBox;
     }
 
+    public void addOptionButton(final PresenterEventListner presenterListerner) {
+        final Button nextButton = new Button(presenterListerner.getLabel());
+        nextButton.addStyleName("optionButton");
+        nextButton.setEnabled(true);
+        outerPanel.add(nextButton);
+        nextButton.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                presenterListerner.eventFired(nextButton);
+            }
+        });
+    }
 }

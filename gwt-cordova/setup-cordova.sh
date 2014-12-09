@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-1.0.12-testing
+synquizname=synquiz-1.0.22-testing
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
@@ -10,6 +10,7 @@ cordova plugin add https://github.com/danwilson/google-analytics-plugin.git
 cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.statusbar
 cordova plugin add org.apache.cordova.splashscreen
+cordova plugin add org.apache.cordova.inappbrowser
 
 splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
 echo $splashResourcesDir
@@ -59,9 +60,9 @@ echo "building"
 #cordova prepare
 #cordova compile
 cordova build -release
-#cordova emulate android 
 #cordova emulate ios --target="iPad"
 #cordova emulate ios --target="iPhone"
+#cordova emulate android 
 
 # list the schemes available 
 #xcodebuild -list
