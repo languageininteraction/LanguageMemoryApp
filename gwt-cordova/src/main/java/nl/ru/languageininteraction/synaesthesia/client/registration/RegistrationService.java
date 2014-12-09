@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
+import nl.ru.languageininteraction.synaesthesia.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser;
 
@@ -40,6 +41,7 @@ public class RegistrationService {
     private static final Logger logger = Logger.getLogger(RegistrationService.class.getName());
     final private ServiceLocations serviceLocations = GWT.create(ServiceLocations.class);
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
+    private final Version version = GWT.create(Version.class);
 
     public void submitRegistration(UserResults userResults, RegistrationListener registrationListener) {
         final String registratinoUrl = serviceLocations.registrationUrl();
@@ -56,6 +58,7 @@ public class RegistrationService {
         if (stringBuilder.length() > 0) {
             stringBuilder.append("&");
         }
+        stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
         String restultsData = URL.encodeQueryString(new ResultsSerialiser().serialise(userResults, mateadataFields.postName_email()));
         stringBuilder.append("quiz_results=").append(restultsData);
         try {
