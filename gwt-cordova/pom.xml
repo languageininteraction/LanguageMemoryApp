@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
-    <version>1.0.22-testing</version>
+    <version>1.0.24-testing</version>
     <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
@@ -19,7 +19,7 @@
         <netbeans.hint.license>gpl20</netbeans.hint.license>
         <plugin.license.copyrightYear>2014</plugin.license.copyrightYear>
         <!-- Convenience property to set the GWT version -->
-        <gwtVersion>2.6.1</gwtVersion>
+        <gwtVersion>2.7.0</gwtVersion>
         <!-- GWT needs at least java 1.5 -->
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -80,7 +80,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>2.6.1</version>
+                <version>${gwtVersion}</version>
                 <executions>
                     <execution>
                         <goals>

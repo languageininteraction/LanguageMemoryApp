@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
@@ -30,8 +31,9 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 public class ResultsSerialiser {
 
 //    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
-    public String serialise(UserResults userResults, String postName_email) {
+    public String serialise(UserResults userResults, String postName_email, String reportDateFormat) {
         StringBuilder stringBuilder = new StringBuilder();
+        final DateTimeFormat format = DateTimeFormat.getFormat(reportDateFormat);
         for (StimuliGroup stimuliGroup : userResults.getStimuliGroups()) {
             StimulusResponseGroup responseGroup = userResults.getStimulusResponseGroup(stimuliGroup);
             for (Stimulus stimulus : stimuliGroup.getStimuli()) {
@@ -42,7 +44,7 @@ public class ResultsSerialiser {
                     stringBuilder.append("\t");
                     stringBuilder.append(stimulus.getValue());
                     stringBuilder.append("\t");
-                    stringBuilder.append(response.getTime());
+                    stringBuilder.append(format.format(response.getTime()));
                     stringBuilder.append("\t");
                     stringBuilder.append(response.getDurationMs());
                     stringBuilder.append("\t");

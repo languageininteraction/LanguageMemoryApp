@@ -43,7 +43,7 @@ public class RegistrationService {
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final Version version = GWT.create(Version.class);
 
-    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener) {
+    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener, String reportDateFormat) {
         final String registratinoUrl = serviceLocations.registrationUrl();
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -59,7 +59,9 @@ public class RegistrationService {
             stringBuilder.append("&");
         }
         stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
-        String restultsData = URL.encodeQueryString(new ResultsSerialiser().serialise(userResults, mateadataFields.postName_email()));
+        String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
+        stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
+        String restultsData = URL.encodeQueryString(new ResultsSerialiser().serialise(userResults, mateadataFields.postName_email(), reportDateFormat));
         stringBuilder.append("quiz_results=").append(restultsData);
         try {
             builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));

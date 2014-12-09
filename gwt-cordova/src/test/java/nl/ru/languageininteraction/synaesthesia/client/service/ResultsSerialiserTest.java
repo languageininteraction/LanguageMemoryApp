@@ -111,7 +111,7 @@ public class ResultsSerialiserTest {
                 + "postName@email	test-group-2	f2	Thu Jan 01 03:46:39 CET 1970	141.0	#ffff00	255	255	0\n"
                 + "postName@email	test-group-2	f2	Thu Jan 01 01:00:33 CET 1970	121.0	#ff00ff	255	0	255\n"
                 + "postName@email	test-group-2	f2	Thu Jan 01 01:01:51 CET 1970	12.0	#00ffff	0	255	255\n";
-        String result = instance.serialise(userResults, postName_email);
+        String result = instance.serialise(userResults, postName_email, "yyyy-MM-dd HH:mm:ss vvvv");
         assertEquals(expResult, result);
     }
 

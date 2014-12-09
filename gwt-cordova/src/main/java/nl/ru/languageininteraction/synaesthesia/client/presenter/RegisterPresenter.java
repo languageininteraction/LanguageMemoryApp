@@ -128,7 +128,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
                         });
                     }
-                });
+                }, messages.reportDateFormat());
             }
 
             @Override
