@@ -74,7 +74,12 @@ public class ResultsSerialiserTest {
             stimulusResponseGroup2.addResponse(stimulus, new StimulusResponse(new ColourData(255, 0, 255), new Date(33333), 121));
             stimulusResponseGroup2.addResponse(stimulus, new StimulusResponse(new ColourData(0, 255, 255), new Date(111111), 12));
         }
-        ResultsSerialiser instance = new ResultsSerialiser();
+        ResultsSerialiser instance = new ResultsSerialiser() {
+            @Override
+            protected String formatDate(Date date) {
+                return date.toString();
+            }
+        };
         String expResult = "postName@email	test-group-1	a1	Thu Jan 01 01:02:03 CET 1970	23.0	#ffffff	255	255	255\n"
                 + "postName@email	test-group-1	a1	Thu Jan 01 01:00:12 CET 1970	21.0	#000000	0	0	0\n"
                 + "postName@email	test-group-1	a1	Thu Jan 01 01:02:03 CET 1970	20.0	#807f7e	128	127	126\n"
@@ -111,7 +116,7 @@ public class ResultsSerialiserTest {
                 + "postName@email	test-group-2	f2	Thu Jan 01 03:46:39 CET 1970	141.0	#ffff00	255	255	0\n"
                 + "postName@email	test-group-2	f2	Thu Jan 01 01:00:33 CET 1970	121.0	#ff00ff	255	0	255\n"
                 + "postName@email	test-group-2	f2	Thu Jan 01 01:01:51 CET 1970	12.0	#00ffff	0	255	255\n";
-        String result = instance.serialise(userResults, postName_email, "yyyy-MM-dd HH:mm:ss vvvv");
+        String result = instance.serialise(userResults, postName_email);
         assertEquals(expResult, result);
     }
 
