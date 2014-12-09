@@ -40,10 +40,10 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.start);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.start);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.intro);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
