@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -62,7 +63,7 @@ public class SimpleView extends AbstractView {
     }
 
     public void setDisplayText(String text) {
-        final HTML html = new HTML(text);
+        final HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(text).toSafeHtml());
         scrollPanel.setWidget(html);
     }
 
@@ -93,13 +94,6 @@ public class SimpleView extends AbstractView {
         }
         headerPanel.add(headerIcon);
         headerPanel.add(headerLabel);
-    }
-
-    @Deprecated
-    public void addLink(String label, String target) {
-        // offering a link which allows a separate html page to be loaded creates a state where the user can not go back and therefore can do nothing after that point.
-        // Also loading external pages is a security issue and should be done with care.
-        //scrollPanel.setWidget(new Anchor(label, target));
     }
 
     public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {

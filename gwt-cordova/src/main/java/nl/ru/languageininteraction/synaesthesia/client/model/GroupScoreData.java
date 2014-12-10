@@ -26,12 +26,12 @@ import java.util.List;
 public class GroupScoreData {
 
     private final List<ScoreData> scoreDataList;
-    private final double score;
+    private final float score;
     private final double accuracy;
     private final double meanReactionTime;
     private final double reactionTimeDeviation;
 
-    public GroupScoreData(List<ScoreData> scoreDataList, double score, double accuracy, double meanReactionTime, double ReactionTimeDeviation) {
+    public GroupScoreData(List<ScoreData> scoreDataList, float score, double accuracy, double meanReactionTime, double ReactionTimeDeviation) {
         this.scoreDataList = scoreDataList;
         this.score = score;
         this.accuracy = accuracy;

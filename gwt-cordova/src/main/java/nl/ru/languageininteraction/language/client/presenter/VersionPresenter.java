@@ -46,12 +46,8 @@ public class VersionPresenter extends AbstractPresenter {
         simpleView.setDisplayText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
-                + version.projectVersion() + "<BR>"
-                + "Compile Date: " + version.compileDate() + "<BR>"
+                + version.projectVersion() + "\n"
+                + "Compile Date: " + version.compileDate() + "\n"
                 + "Last Commit Date: " + version.lastCommitDate());
-    }
-
-    @Override
-    protected void pageClosing() {
     }
 }

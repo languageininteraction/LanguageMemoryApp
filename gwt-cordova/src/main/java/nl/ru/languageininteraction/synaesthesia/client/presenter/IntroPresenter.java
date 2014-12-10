@@ -43,8 +43,4 @@ public class IntroPresenter extends AbstractPresenter implements Presenter {
     protected void setContent(final AppEventListner appEventListner) {
         simpleView.setDisplayText(messages.introductionscreentext());
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

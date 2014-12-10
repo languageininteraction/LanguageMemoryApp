@@ -30,21 +30,19 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
+    protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
+
     public MoreInfoPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 
     @Override
-    protected void pageClosing() {
-    }
-
-    @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.moreInfoScreenTitle(), titleBarListner);
+        simpleView.addTitle(informationSheet.informationSheetTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.moreInfoScreenText());
+        simpleView.setDisplayText(informationSheet.informationSheetText());
     }
 }

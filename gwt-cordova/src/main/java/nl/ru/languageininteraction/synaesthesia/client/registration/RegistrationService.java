@@ -24,10 +24,13 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.i18n.shared.DateTimeFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
+import nl.ru.languageininteraction.synaesthesia.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser;
 
@@ -40,8 +43,9 @@ public class RegistrationService {
     private static final Logger logger = Logger.getLogger(RegistrationService.class.getName());
     final private ServiceLocations serviceLocations = GWT.create(ServiceLocations.class);
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
+    private final Version version = GWT.create(Version.class);
 
-    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener) {
+    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener, final String reportDateFormat) {
         final String registratinoUrl = serviceLocations.registrationUrl();
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -56,7 +60,17 @@ public class RegistrationService {
         if (stringBuilder.length() > 0) {
             stringBuilder.append("&");
         }
-        String restultsData = URL.encodeQueryString(new ResultsSerialiser().serialise(userResults, mateadataFields.postName_email()));
+        stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
+        String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
+        stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
+        String restultsData = URL.encodeQueryString(new ResultsSerialiser() {
+            final DateTimeFormat format = DateTimeFormat.getFormat(reportDateFormat);
+
+            @Override
+            protected String formatDate(Date date) {
+                return format.format(date);
+            }
+        }.serialise(userResults, mateadataFields.postName_email()));
         stringBuilder.append("quiz_results=").append(restultsData);
         try {
             builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));

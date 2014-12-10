@@ -51,7 +51,7 @@ public class ScoreCalculator {
 
     public GroupScoreData calculateScores(StimuliGroup group) {
 //        System.out.println(group.getGroupLabel() + "<table>");
-        double score = 0;
+        float score = 0;
         double accuracy = 0;
         double totalValidReactionTime = 0;
         int validResponseCount = 0;

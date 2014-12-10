@@ -30,8 +30,11 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
-    public FeedbackPresenter(RootPanel widgetTag) {
+    private final UserResults userResults;
+
+    public FeedbackPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new SimpleView());
+        this.userResults = userResults;
     }
 
     @Override
@@ -41,10 +44,10 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.userfeedbackscreentext());
-    }
-
-    @Override
-    protected void pageClosing() {
+        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
+            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
+        } else {
+            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
+        }
     }
 }

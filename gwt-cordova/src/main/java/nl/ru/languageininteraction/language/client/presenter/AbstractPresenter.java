@@ -51,7 +51,6 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired(Button button) {
-                    pageClosing();
                     appEventListner.requestApplicationState(prevState);
                 }
 
@@ -65,7 +64,6 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired(Button button) {
-                    pageClosing();
                     appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
                 }
 
@@ -81,7 +79,6 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired(Button button) {
-                    pageClosing();
                     appEventListner.requestApplicationState(nextState);
                 }
 
@@ -103,8 +100,6 @@ public abstract class AbstractPresenter implements Presenter {
             backEventListner.eventFired(null);
         }
     }
-
-    protected abstract void pageClosing();
 
     protected abstract void setTitle(PresenterEventListner titleBarListner);
 

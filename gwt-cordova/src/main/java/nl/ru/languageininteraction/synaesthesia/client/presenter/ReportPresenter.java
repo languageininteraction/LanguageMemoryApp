@@ -17,13 +17,15 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
-import nl.ru.languageininteraction.language.client.presenter.Presenter;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
 import com.google.gwt.user.client.ui.RootPanel;
-import nl.ru.languageininteraction.language.client.listener.AppEventListner;
-import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import java.util.Date;
+import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
@@ -35,15 +37,12 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
  */
 public class ReportPresenter extends AbstractPresenter implements Presenter {
 
+    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final UserResults userResults;
 
     public ReportPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new ReportView());
         this.userResults = userResults;
-    }
-
-    @Override
-    protected void pageClosing() {
     }
 
     @Override
@@ -53,6 +52,8 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
+        StringBuilder stringBuilder = new StringBuilder();
+        final DateTimeFormat format = DateTimeFormat.getFormat(messages.reportDateFormat());
         final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
         final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
@@ -60,11 +61,22 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
             ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
-            ((ReportView) simpleView).addText(messages.reportScreenPostScoreText());
+            userResults.updateBestScore(calculatedScores.getScore());
             ((ReportView) simpleView).addText(messages.reportScreenSCT());
             ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
             ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
+            stringBuilder.append(userResults.getMetadataValue(mateadataFields.postName_firstname()));
+            stringBuilder.append("\t");
+            stringBuilder.append(format.format(new Date()));
+            stringBuilder.append("\t");
+            stringBuilder.append(calculatedScores.getScore());
+            stringBuilder.append("\t");
+            stringBuilder.append(calculatedScores.getMeanReactionTime());
+            stringBuilder.append("\t");
+            stringBuilder.append(calculatedScores.getReactionTimeDeviation());
+            stringBuilder.append("\n");
         }
+        userResults.setScoreLog(stringBuilder.toString());
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
     }
 }

@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
+import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
@@ -27,7 +28,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
  * @since Oct 31, 2014 3:48:38 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ResultsSerialiser {
+public abstract class ResultsSerialiser {
 
 //    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     public String serialise(UserResults userResults, String postName_email) {
@@ -42,7 +43,7 @@ public class ResultsSerialiser {
                     stringBuilder.append("\t");
                     stringBuilder.append(stimulus.getValue());
                     stringBuilder.append("\t");
-                    stringBuilder.append(response.getTime());
+                    stringBuilder.append(formatDate(response.getTime()));
                     stringBuilder.append("\t");
                     stringBuilder.append(response.getDurationMs());
                     stringBuilder.append("\t");
@@ -59,4 +60,6 @@ public class ResultsSerialiser {
         }
         return stringBuilder.toString();
     }
+
+    protected abstract String formatDate(Date date);
 }

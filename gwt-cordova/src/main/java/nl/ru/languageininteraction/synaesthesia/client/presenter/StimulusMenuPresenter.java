@@ -74,8 +74,4 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
         }
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
     }
-
-    @Override
-    protected void pageClosing() {
-    }
 }

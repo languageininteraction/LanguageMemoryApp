@@ -79,7 +79,7 @@
 
 .gwt-CheckBox.optionButton, .gwt-Button.optionButton {
     padding: 10px 10px 10px 10px;
-    margin: 10px 10px 60px 10%;
+    margin: 10px 10px 10px 10%;
     border-radius: 15px;
     /*background: rgb(193,227,241);*/
     outline: none;
@@ -192,7 +192,7 @@ canvas {
     border-width: 1px;
     border-style: solid;
 }
-.gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox {
+.gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
     margin-left: 10%;   
     margin-right: 10%;   
 }
@@ -200,7 +200,7 @@ canvas {
     font-size: 24pt;
 }
 
-.gwt-Label, .gwt-HTML, .gwt-CheckBox {  
+.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink {  
     font-size: 17pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -208,7 +208,7 @@ canvas {
     line-height: 20pt;
     */
 }
-.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox {  
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink {  
     color:rgb(255,255,255); 
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
     line-height: 20pt;

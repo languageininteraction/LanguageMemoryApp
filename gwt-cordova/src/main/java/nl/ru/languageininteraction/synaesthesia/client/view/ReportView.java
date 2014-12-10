@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -42,7 +43,7 @@ public class ReportView extends SimpleView {
     }
 
     public void addText(String textString) {
-        HTML html = new HTML(textString);
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
         outerPanel.add(html);
     }
 
@@ -68,14 +69,16 @@ public class ReportView extends SimpleView {
                 }
                 grid.setWidget(row, column, label);
             }
-            final HorizontalPanel bargraphOuter = new HorizontalPanel();
-            final HorizontalPanel bargraphInner = new HorizontalPanel();
-            bargraphOuter.setPixelSize(100, 10);
-            bargraphInner.setPixelSize((int) (100.0 / 6 * scoreData.getDistance()), 10);
-            bargraphOuter.setStyleName("bargraphOuter");
-            bargraphInner.setStyleName("bargraphInner");
-            bargraphOuter.add(bargraphInner);
-            grid.setWidget(row, columnCount, bargraphOuter);
+            if (scoreData.getDistance() != null) {
+                final HorizontalPanel bargraphOuter = new HorizontalPanel();
+                final HorizontalPanel bargraphInner = new HorizontalPanel();
+                bargraphOuter.setPixelSize(100, 10);
+                bargraphInner.setPixelSize((int) (100.0 / 6 * scoreData.getDistance()), 10);
+                bargraphOuter.setStyleName("bargraphOuter");
+                bargraphInner.setStyleName("bargraphInner");
+                bargraphOuter.add(bargraphInner);
+                grid.setWidget(row, columnCount, bargraphOuter);
+            }
             row++;
         }
         outerPanel.add(grid);

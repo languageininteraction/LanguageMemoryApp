@@ -47,10 +47,6 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
         setUpLocaleOptions();
     }
 
-    @Override
-    protected void pageClosing() {
-    }
-
     private void setUpLocaleOptions() {
         for (final String localeName : LocaleInfo.getAvailableLocaleNames()) {
             final String displayName = LocaleInfo.getLocaleNativeDisplayName(localeName);

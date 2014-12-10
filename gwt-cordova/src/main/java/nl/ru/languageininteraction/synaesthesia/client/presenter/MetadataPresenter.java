@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
+import com.google.gwt.user.client.ui.Button;
 import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
@@ -27,6 +27,7 @@ import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView.ButtonType;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)
@@ -36,13 +37,45 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     protected final UserResults userResults;
+    protected PresenterEventListner saveEventListner = null;
 
     public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MetadataView());
         this.userResults = userResults;
     }
 
+    @Override
+    public void setState(final AppEventListner appEventListner, AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
+        super.setState(appEventListner, prevState, null);
+        saveEventListner = new PresenterEventListner() {
+
+            @Override
+            public void eventFired(Button button) {
+                saveFields();
+                appEventListner.requestApplicationState(nextState);
+            }
+
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+        };
+        ((MetadataView) simpleView).setButton(ButtonType.next, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return saveEventListner.getLabel();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                saveEventListner.eventFired(button);
+            }
+        });
+    }
+
     protected void saveFields() {
+        // todo: this should validate the fields, eg blank user name should throw and invalid email should throw
         for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
             userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
         }
@@ -64,10 +97,5 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
     public void focusFirstTextBox() {
         ((MetadataView) simpleView).focusFirstTextBox();
-    }
-
-    @Override
-    protected void pageClosing() {
-        saveFields();
     }
 }
