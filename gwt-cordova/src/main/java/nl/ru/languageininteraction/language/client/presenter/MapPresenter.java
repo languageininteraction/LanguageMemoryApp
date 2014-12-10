@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,8 +28,10 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import nl.ru.languageininteraction.language.client.AutotypRegions;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
@@ -38,6 +41,8 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
 public class MapPresenter extends AbstractPresenter implements Presenter {
 
     final VerticalPanel verticalPanel = new VerticalPanel();
+    protected final AutotypRegions autotypRegions = GWT.create(AutotypRegions.class);
+    private static final SvgTemplate SVG_TEMPLATE = GWT.create(SvgTemplate.class);
 
     public MapPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
@@ -59,17 +64,41 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
 //        }
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<svg width='600' height='300' id='ocean'>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='250' y='150' height='5px' width='5px' fill='blue'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='255' y='170' height='5px' width='5px' fill='blue'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='10' y='160' height='5px' width='5px' fill='blue'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='30' y='150' height='5px' width='5px' fill='blue'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='20' y='150' height='5px' width='5px' fill='blue'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='continent' x='0' y='10'height='88px' width='88px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='asia' x='250' y='50' height='88px' width='88px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='europe' x='150' y='10' height='88px' width='88px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='africa' x='100' y='110' height='88px' width='88px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='australia' x='400' y='100' height='88px' width='88px' fill='green'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='newzealand' x='500' y='150' height='20px' width='10px' fill='green'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<g transform=\"scale(0.3) translate(-530.12891,-80.597617)\">"));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idIndic(), autotypRegions.styleIndic(), autotypRegions.dataIndic()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idBasinandPlains(), autotypRegions.styleBasinandPlains(), autotypRegions.dataBasinandPlains()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idAlaskaOregon(), autotypRegions.styleAlaskaOregon(), autotypRegions.dataAlaskaOregon()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idCalifornia(), autotypRegions.styleCalifornia(), autotypRegions.dataCalifornia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idMesoamerica(), autotypRegions.styleMesoamerica(), autotypRegions.dataMesoamerica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idSESouthAmerica(), autotypRegions.styleSESouthAmerica(), autotypRegions.dataSESouthAmerica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idNESouthAmerica(), autotypRegions.styleNESouthAmerica(), autotypRegions.dataNESouthAmerica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idAndean(), autotypRegions.styleAndean(), autotypRegions.dataAndean()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idNAustralia(), autotypRegions.styleNAustralia(), autotypRegions.dataNAustralia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idGreenland(), autotypRegions.styleGreenland(), autotypRegions.dataGreenland()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idSAustralia(), autotypRegions.styleSAustralia(), autotypRegions.dataSAustralia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idNAfrica(), autotypRegions.styleNAfrica(), autotypRegions.dataNAfrica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idSAfrica(), autotypRegions.styleSAfrica(), autotypRegions.dataSAfrica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idGreaterMesopotamia(), autotypRegions.styleGreaterMesopotamia(), autotypRegions.dataGreaterMesopotamia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idInnerAsia(), autotypRegions.styleInnerAsia(), autotypRegions.dataInnerAsia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idEurope(), autotypRegions.styleEurope(), autotypRegions.dataEurope()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idSoutheast_Asia(), autotypRegions.styleSoutheast_Asia(), autotypRegions.dataSoutheast_Asia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idNorthCoastAsia(), autotypRegions.styleNorthCoastAsia(), autotypRegions.dataNorthCoastAsia()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idENorthAmerica(), autotypRegions.styleENorthAmerica(), autotypRegions.dataENorthAmerica()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idPapua(), autotypRegions.stylePapua(), autotypRegions.dataPapua()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idAfricanSavanah(), autotypRegions.styleAfricanSavanah(), autotypRegions.dataAfricanSavanah()));
+        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.idOceania(), autotypRegions.styleOceania(), autotypRegions.dataOceania()));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='250' y='150' height='5px' width='5px' fill='blue'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='255' y='170' height='5px' width='5px' fill='blue'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='10' y='160' height='5px' width='5px' fill='blue'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='30' y='150' height='5px' width='5px' fill='blue'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='island' x='20' y='150' height='5px' width='5px' fill='blue'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='continent' x='0' y='10'height='88px' width='88px' fill='green'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='asia' x='250' y='50' height='88px' width='88px' fill='green'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='europe' x='150' y='10' height='88px' width='88px' fill='green'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='africa' x='100' y='110' height='88px' width='88px' fill='green'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='australia' x='400' y='100' height='88px' width='88px' fill='green'/>"));
+//        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='newzealand' x='500' y='150' height='20px' width='10px' fill='green'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("</g>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<line id='horizontal' class='overlay' x1='0' y1='100' x2='600' y2='100' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("<line id='vertical' class='overlay' x1='100' y1='0' x2='100' y2='200' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));

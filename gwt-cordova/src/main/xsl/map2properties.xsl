@@ -20,17 +20,27 @@
 </xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
             <xsl:text>style</xsl:text>
-            <xsl:value-of select="@inkscape:label"/>
+            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
             <xsl:text>=</xsl:text>
             <xsl:value-of select="svg:path/@style"/>
             <xsl:text>
 </xsl:text>
             <xsl:text>data</xsl:text>
-            <xsl:value-of select="@inkscape:label"/>
+            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
             <xsl:text>=</xsl:text>
             <xsl:value-of select="svg:path/@d"/>
             <xsl:text>
+</xsl:text>
+            <xsl:text>id</xsl:text>
+            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+            <!--<xsl:value-of select="@inkscape:label"/>-->
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+            <xsl:text>
 </xsl:text> 
+        </xsl:for-each>
+        <xsl:for-each select="svg:svg/svg:g[svg:path]">
+#        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.id<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>(), autotypRegions.style<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>(), autotypRegions.data<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>()));
         </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

@@ -102,6 +102,14 @@
                         </transformationSet>
                     </transformationSets>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <!--this dependancy is  required to get a version 2 parser so that string replace is available-->
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>saxon</artifactId>
+                        <version>8.7</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <!-- GWT Maven Plugin -->
             <plugin>
