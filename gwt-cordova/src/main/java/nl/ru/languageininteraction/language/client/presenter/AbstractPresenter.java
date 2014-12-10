@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
-import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;

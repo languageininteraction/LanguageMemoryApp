@@ -15,32 +15,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.presenter;
+package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
+import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
- * @since Dec 3, 2014 10:46:31 AM (creation date)
+ * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class AutotypRegionsMapScreen extends AbstractPresenter implements Presenter {
+public class InstructionsPresenter extends AbstractPresenter implements Presenter {
 
-    public AutotypRegionsMapScreen(RootPanel widgetTag) {
+    public InstructionsPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.instructionscreenTitle(), titleBarListner);
     }
 
     @Override
-    protected void setContent(AppEventListner appEventListner) {
-        simpleView.setContent(new ScrollPanel(new Image("./images/AutotypRegions_pointsEdited7.svg")));
+    protected void setContent(final AppEventListner appEventListner) {
+        simpleView.setDisplayText(messages.instructionscreentext());
     }
-
 }

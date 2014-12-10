@@ -30,19 +30,17 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
-    protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
-
     public MoreInfoPresenter(RootPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(informationSheet.informationSheetTitle(), titleBarListner);
+        simpleView.addTitle(messages.moreInfoScreenTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
-        simpleView.setDisplayText(informationSheet.informationSheetText());
+        simpleView.setDisplayText(messages.moreInfoScreenText());
     }
 }

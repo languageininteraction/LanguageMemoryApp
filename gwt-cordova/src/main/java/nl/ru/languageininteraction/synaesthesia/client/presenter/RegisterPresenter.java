@@ -26,9 +26,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import com.google.gwt.user.client.ui.RootPanel;
-import nl.ru.languageininteraction.synaesthesia.client.InformationSheet;
-import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
@@ -44,7 +41,7 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
-    protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
+    //protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final UserResults userResults;
     private AppEventListner.ApplicationState nextState;

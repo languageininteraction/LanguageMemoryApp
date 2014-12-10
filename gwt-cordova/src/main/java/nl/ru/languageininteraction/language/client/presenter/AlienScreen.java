@@ -35,10 +35,6 @@ public class AlienScreen extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    protected void pageClosing() {
-    }
-
-    @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
     }
 

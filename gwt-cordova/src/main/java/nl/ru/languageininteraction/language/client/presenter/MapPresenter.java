@@ -44,11 +44,6 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
     }
 
     @Override
-    public void pageClosing() {
-
-    }
-
-    @Override
     public void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.mapScreenTitle(), titleBarListner);
     }

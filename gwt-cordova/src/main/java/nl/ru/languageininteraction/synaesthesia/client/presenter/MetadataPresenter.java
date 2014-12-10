@@ -23,11 +23,12 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
+import nl.ru.languageininteraction.language.client.view.SimpleView.ButtonType;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView.ButtonType;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)
