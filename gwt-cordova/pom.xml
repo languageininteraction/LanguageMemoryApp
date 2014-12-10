@@ -197,6 +197,25 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>src/mapdata</dir>
+                            <stylesheet>src/main/xsl/map2properties.xsl</stylesheet>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <pluginRepositories>
