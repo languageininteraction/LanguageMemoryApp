@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.53-testing</version>
+    <version>0.1.55-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -76,6 +76,33 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>src/mapdata</dir>
+                            <stylesheet>src/main/xsl/map2properties.xsl</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                    <targetExtension>.properties</targetExtension>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
+                    </transformationSets>
+                </configuration>
+            </plugin>
             <!-- GWT Maven Plugin -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -102,6 +129,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Stimuli</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.ServiceLocations</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Version</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.AutotypRegions</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>
@@ -196,26 +224,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>xml-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>transform</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <transformationSets>
-                        <transformationSet>
-                            <dir>src/mapdata</dir>
-                            <stylesheet>src/main/xsl/map2properties.xsl</stylesheet>
-                        </transformationSet>
-                    </transformationSets>
-                </configuration>
-            </plugin>
+            </plugin>            
         </plugins>
     </build>
     <pluginRepositories>
