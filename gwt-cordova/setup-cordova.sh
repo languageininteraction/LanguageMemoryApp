@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-1.0.22-testing
+synquizname=synquiz-1.0.26-testing
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
@@ -11,6 +11,7 @@ cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.statusbar
 cordova plugin add org.apache.cordova.splashscreen
 cordova plugin add org.apache.cordova.inappbrowser
+cordova plugin add https://github.com/leecrossley/cordova-plugin-social-message.git
 
 splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
 echo $splashResourcesDir

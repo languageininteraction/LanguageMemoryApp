@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.user.client.ui.Button;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.Date;
@@ -30,6 +31,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.service.SocialMediaPost;
 
 /**
  * @since Oct 14, 2014 10:57:39 AM (creation date)
@@ -57,7 +59,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
         final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        for (StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
+        for (final StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
             ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
@@ -75,6 +77,30 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             stringBuilder.append("\t");
             stringBuilder.append(calculatedScores.getReactionTimeDeviation());
             stringBuilder.append("\n");
+            ((ReportView) simpleView).addOptionButton(new PresenterEventListner() {
+
+                @Override
+                public String getLabel() {
+                    return messages.socialPostButtonText();
+                }
+
+                @Override
+                public void eventFired(Button button) {
+                    new SocialMediaPost().postText(messages.socialMediaPostText(numberFormat2.format(calculatedScores.getScore()), "(this precentage is not calculated yet) 100", stimuliGroup.getGroupLabel()));
+                }
+            });
+            ((ReportView) simpleView).addOptionButton(new PresenterEventListner() {
+
+                @Override
+                public String getLabel() {
+                    return messages.socialPostButtonText() + " image (no actual image)";
+                }
+
+                @Override
+                public void eventFired(Button button) {
+                    new SocialMediaPost().postImage(messages.socialMediaPostText(numberFormat2.format(calculatedScores.getScore()), "(this precentage is not calculated yet) 100", stimuliGroup.getGroupLabel()), messages.socialMediaPostImage(stimuliGroup.getGroupLabel(), numberFormat2.format(calculatedScores.getScore())));
+                }
+            });
         }
         userResults.setScoreLog(stringBuilder.toString());
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
