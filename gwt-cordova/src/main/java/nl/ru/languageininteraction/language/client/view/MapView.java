@@ -24,10 +24,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.AutotypRegions;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 
 /**
@@ -37,12 +40,66 @@ import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 public class MapView extends SimpleView {
 
     final VerticalPanel verticalPanel = new VerticalPanel();
+    private float zoomFactor = 1f;
+    private int height;
+    private int width;
+    private String units;
 
     protected final AutotypRegions autotypRegions = GWT.create(AutotypRegions.class);
     private static final SvgTemplate SVG_TEMPLATE = GWT.create(SvgTemplate.class);
 
     public void addZoom() {
+        setButton(ButtonType.menu, new PresenterEventListner() {
 
+            @Override
+            public String getLabel() {
+                return "-";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+//                final Element svgElement = Document.get().getElementById("zoomableGroup");
+                zoomFactor *= 0.5;
+//                svgElement.setAttribute("transform", "scale(" + zoomFactor + ")");
+                final Element svgElement = Document.get().getElementById("ocean");
+                if (svgElement != null) {
+                    svgElement.setAttribute("width", Float.toString(width * zoomFactor));
+                    svgElement.setAttribute("height", Float.toString(height * zoomFactor));
+                    Document.get().getElementById("zoomableGroup").setAttribute("transform", "scale(" + zoomFactor + ")");
+                }
+            }
+        });
+        setButton(ButtonType.menu, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "+";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+//                final Element svgElement = Document.get().getElementById("zoomableGroup");
+                zoomFactor *= 1.5;
+//                svgElement.setAttribute("transform", "scale(" + zoomFactor + ")");
+                final Element svgElement = Document.get().getElementById("ocean");
+                if (svgElement != null) {
+                    svgElement.setAttribute("width", Float.toString(width * zoomFactor));
+                    svgElement.setAttribute("height", Float.toString(height * zoomFactor));
+                    Document.get().getElementById("zoomableGroup").setAttribute("transform", "scale(" + zoomFactor + ")");
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+        super.parentResized(height, width, units);
+//        final Element svgElement = Document.get().getElementById("ocean");
+//        if (svgElement != null) {
+//            svgElement.setAttribute("width", width + units);
+//            svgElement.setAttribute("height", height + units);
+//        }
+//   
     }
 
     public void addMap() {
@@ -53,9 +110,12 @@ public class MapView extends SimpleView {
 //        for (String item : items) {
 //            builder.appendEscaped(item).appendHtmlConstant("<br/>");
 //        }
+        height = Window.getClientHeight();
+        width = Window.getClientWidth();
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<svg width='600' height='300' id='ocean'>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<g transform=\"scale(0.3)\">"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<svg id='ocean' height='" + height + "px' width='" + width + "px' >"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<g id='zoomableGroup'>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<g transform='scale(0.3)'>"));
         builder.append(SVG_TEMPLATE.groupTag(autotypRegions.idIndic(), autotypRegions.transformIndic()));
         builder.append(SVG_TEMPLATE.pathTag(autotypRegions.transformpath97259(), autotypRegions.stylepath97259(), autotypRegions.datapath97259()));
         builder.append(SVG_TEMPLATE.groupTagEnd());
@@ -162,8 +222,9 @@ public class MapView extends SimpleView {
 //        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='australia' x='400' y='100' height='88px' width='88px' fill='green'/>"));
 //        builder.append(SafeHtmlUtils.fromTrustedString("<rect id='newzealand' x='500' y='150' height='20px' width='10px' fill='green'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("</g>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<line id='horizontal' class='overlay' x1='0' y1='100' x2='600' y2='100' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<line id='vertical' class='overlay' x1='100' y1='0' x2='100' y2='200' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("</g>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<line id='horizontal' class='overlay' x1='0' y1='100' x2='" + width + "' y2='100' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<line id='vertical' class='overlay' x1='100' y1='0' x2='100' y2='" + height + "' style='stroke:rgb(255,0,0);stroke-width:2'/>"));
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
         final HTML html = new HTML(builder.toSafeHtml());
         html.addClickHandler(new ClickHandler() {
@@ -184,8 +245,10 @@ public class MapView extends SimpleView {
                 final int relativeY = event.getRelativeY(svgElement);
                 horizontalLine.setAttribute("y1", String.valueOf(relativeY));
                 horizontalLine.setAttribute("y2", String.valueOf(relativeY));
+                horizontalLine.setAttribute("x2", String.valueOf(width));
                 verticalLine.setAttribute("x1", String.valueOf(relativeX));
                 verticalLine.setAttribute("x2", String.valueOf(relativeX));
+                verticalLine.setAttribute("y2", String.valueOf(height));
             }
         });
         verticalPanel.add(html);
