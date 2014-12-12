@@ -43,7 +43,7 @@ public class MetadataView extends SimpleView {
 
     public MetadataView() {
         outerPanel = new VerticalPanel();
-        outerPanel.setWidth("100%");
+        //outerPanel.setWidth("100%");
         setContent(outerPanel);
         fieldBoxes = new HashMap<>();
     }

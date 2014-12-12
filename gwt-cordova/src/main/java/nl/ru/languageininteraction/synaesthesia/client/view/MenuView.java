@@ -54,7 +54,7 @@ public class MenuView extends SimpleView {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("menuTable");
-            outerPanel.setWidth("100%");
+            outerPanel.setStylePrimaryName("menuOuter");
             outerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
             outerPanel.add(flexTable);
         }

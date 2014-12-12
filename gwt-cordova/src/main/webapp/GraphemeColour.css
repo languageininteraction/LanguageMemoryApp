@@ -141,6 +141,16 @@
     border-top-style: solid;
 }
 
+.contentBody, .menuOuter {
+    margin-top: 50px;    
+    margin-bottom: -50px;    
+    margin-left: 10%;   
+    margin-right: 10%;   
+}
+
+.menuOuter {
+    width: 80%;
+}
 .bargraphInner {
     background-color:rgb(246,170,139);
 }
@@ -184,23 +194,19 @@ canvas {
 
 .menuTable {
     padding: 10px 10px;
-    margin: 10px 10px 10px 10px;
     border-color: rgb(142,207,230);
     border-radius: 15px;
-    /*background: rgb(193,227,241);*/
     outline: none;
     border-width: 1px;
     border-style: solid;
 }
 .gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
-    margin-left: 10%;   
-    margin-right: 10%;   
 }
 .resultsTableTitle {
     font-size: 24pt;
 }
 
-.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink {  
+.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody {  
     font-size: 17pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -208,7 +214,7 @@ canvas {
     line-height: 20pt;
     */
 }
-.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink {  
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {  
     color:rgb(255,255,255); 
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
     line-height: 20pt;

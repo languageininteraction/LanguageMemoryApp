@@ -59,11 +59,13 @@ public class SimpleView extends AbstractView {
     }
 
     public void setContent(Panel panel) {
+        panel.setStylePrimaryName("contentBody");
         scrollPanel.setWidget(panel);
     }
 
     public void setDisplayText(String text) {
         final HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(text).toSafeHtml());
+        html.setStylePrimaryName("contentBody");
         scrollPanel.setWidget(html);
     }
 
