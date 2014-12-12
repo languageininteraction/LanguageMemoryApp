@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.55-testing</version>
+    <version>0.1.57-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -91,7 +91,7 @@
                 <configuration>
                     <transformationSets>
                         <transformationSet>
-                            <dir>src/mapdata</dir>
+                            <dir>src/main/mapdata</dir>
                             <stylesheet>src/main/xsl/map2properties.xsl</stylesheet>
                             <fileMappers>
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
