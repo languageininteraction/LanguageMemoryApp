@@ -59,6 +59,10 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
                 return nextState.label;
             }
         };
+        addNextButton();
+    }
+
+    protected void addNextButton() {
         ((MetadataView) simpleView).setButton(ButtonType.next, new PresenterEventListner() {
 
             @Override

@@ -88,6 +88,11 @@ public class UserNamePresenter extends MetadataPresenter {
     }
 
     @Override
+    protected void addNextButton() {
+        // this screen should not have a next button
+    }
+
+    @Override
     protected void saveFields() {
         if (isNewUser) {
             userResults.clearResults();
