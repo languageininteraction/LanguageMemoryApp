@@ -71,6 +71,19 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public String getLabel() {
+                return messages.editMetadataLabel();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.metadata);
+            }
+        });
+
+        ((RegisterView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
                 return messages.informationSheetLink();
             }
 
