@@ -63,7 +63,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     }
 
     protected void addNextButton() {
-        ((MetadataView) simpleView).setButton(ButtonType.next, new PresenterEventListner() {
+        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
