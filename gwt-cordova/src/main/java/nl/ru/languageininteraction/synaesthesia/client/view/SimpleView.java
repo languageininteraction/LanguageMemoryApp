@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
 /**
@@ -41,20 +42,22 @@ public class SimpleView extends AbstractView {
     }
     private final HorizontalPanel footerPanel;
     private final HorizontalPanel headerPanel;
-    private final HorizontalPanel borderedContentPanel;
+    private final VerticalPanel borderedContentPanel;
     private final ScrollPanel scrollPanel;
 
     public SimpleView() {
         headerPanel = new HorizontalPanel();
         headerPanel.setStylePrimaryName("headerPanel");
         footerPanel = new HorizontalPanel();
-        borderedContentPanel = new HorizontalPanel();
+        borderedContentPanel = new VerticalPanel();
         borderedContentPanel.setStylePrimaryName("contentPanel");
         footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         addNorth(headerPanel, 50);
-        addSouth(footerPanel, 50);
+//        addSouth(footerPanel, 50);
         scrollPanel = new ScrollPanel();
         borderedContentPanel.add(scrollPanel);
+        borderedContentPanel.add(footerPanel);
+        footerPanel.setVisible(false);
         add(borderedContentPanel);
     }
 
@@ -99,6 +102,7 @@ public class SimpleView extends AbstractView {
     }
 
     public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {
+        footerPanel.setVisible(true);
         final Button nextButton = new Button(presenterListerner.getLabel());
         nextButton.addStyleName(buttonType.name() + "Button");
         nextButton.setEnabled(true);
@@ -115,12 +119,17 @@ public class SimpleView extends AbstractView {
 
     public void removeButton(Button button) {
         footerPanel.remove(button);
+        footerPanel.setVisible(footerPanel.getWidgetCount() > 0);
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
         footerPanel.setWidth(width + "px");
         scrollPanel.setWidth(width + "px");
-        scrollPanel.setHeight(height - 50 - 50 + "px");
+        if (footerPanel.getWidgetCount() > 0) {
+            scrollPanel.setHeight(height - 50 - 50 + "px");
+        } else {
+            scrollPanel.setHeight(height - 50 + "px");
+        }
     }
 }

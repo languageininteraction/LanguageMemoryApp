@@ -71,7 +71,7 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
                     public String getLabel() {
                         return displayName;
                     }
-                });
+                }, true);
             }
         }
     }

@@ -41,7 +41,7 @@ public class ResultsSerialiserTest {
     @Test
     public void testSerialise() throws StimulusError {
         System.out.println("serialise");
-        UserResults userResults = new UserResults();
+        UserResults userResults = new UserResults(new StimuliGroup(null, null));
         final String postName_email = "postName_email";
         userResults.setMetadataValue(postName_email, "postName@email");
         final ArrayList<Stimulus> arrayList1 = new ArrayList<>();

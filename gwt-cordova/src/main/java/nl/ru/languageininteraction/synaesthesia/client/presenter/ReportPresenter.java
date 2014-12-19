@@ -92,5 +92,11 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         }
         userResults.setScoreLog(stringBuilder.toString());
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
+        
+        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
+            ((ReportView) simpleView).addText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
+        } else {
+            ((ReportView) simpleView).addText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
+        }
     }
 }

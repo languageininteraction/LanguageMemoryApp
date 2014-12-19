@@ -43,10 +43,6 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
-        } else {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
-        }
+        
     }
 }

@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.service;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import com.google.gwt.storage.client.Storage;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
+import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -31,8 +32,8 @@ public class LocalStorage {
     private static final String USER_RESULTS = "UserResults.";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
-    public UserResults getStoredData() {
-        UserResults userResults = new UserResults();
+    public UserResults getStoredData(StimuliGroup defaultStimuliGroup) {
+        UserResults userResults = new UserResults(defaultStimuliGroup);
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {

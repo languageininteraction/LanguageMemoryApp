@@ -39,7 +39,7 @@ import org.junit.Test;
 public class ScoreCalculatorTest {
 
     private UserResults getUserResults(String userId) {
-        final UserResults userResults = new UserResults();
+        final UserResults userResults = new UserResults(new StimuliGroup(null, null));
         final String resourcePath = "/nl/ru/languageininteraction/testdata/" + userId;
         System.out.println("resourcePath:" + resourcePath);
         final InputStream testDataStream = ScoreCalculatorTest.class.getClass().getResourceAsStream(resourcePath);
@@ -179,7 +179,7 @@ public class ScoreCalculatorTest {
 //        fail("The test case is a prototype.");
 //    }
     private GroupScoreData getGroupScoreData() {
-        final UserResults userResults = new UserResults();
+        final UserResults userResults = new UserResults(new StimuliGroup(null, null));
         ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         final ArrayList<Stimulus> stimulusList = new ArrayList<Stimulus>();
         stimulusList.add(new Stimulus("A"));

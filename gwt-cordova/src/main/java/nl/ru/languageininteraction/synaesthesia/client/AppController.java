@@ -59,8 +59,8 @@ public class AppController implements AppEventListner {
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
         stimuliProvider = new StimuliProvider();
-        userResults = new LocalStorage().getStoredData();
-        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
+        userResults = new LocalStorage().getStoredData(stimuliProvider.getDefaultStimuli());
+//        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class AppController implements AppEventListner {
             switch (applicationState) {
                 case menu:
                     userResults.setPendingStimuliGroup(null);
-                    this.presenter = new MenuPresenter(widgetTag);
+                    this.presenter = new MenuPresenter(widgetTag, userResults);
                     presenter.setState(this, null, null);
                     break;
                 case locale:
@@ -88,7 +88,7 @@ public class AppController implements AppEventListner {
                     break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.instructions);
+                    presenter.setState(this, null, ApplicationState.stimulus);
                     ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case instructions:
@@ -98,11 +98,11 @@ public class AppController implements AppEventListner {
                 case stimulus:
                     if (userResults.getPendingStimuliGroup() == null) {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
-                        presenter.setState(this, ApplicationState.start, ApplicationState.report);
+                        presenter.setState(this, null, null);
                     } else {
                         trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
-                        presenter.setState(this, null, ApplicationState.stimulus);
+                        presenter.setState(this, null, ApplicationState.report);
                     }
                     break;
                 case adddummyresults:
@@ -112,7 +112,11 @@ public class AppController implements AppEventListner {
                     userResults.addDummyResults(stimuli[2]);
                 case report:
                     this.presenter = new ReportPresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.feedback);
+                    if (userResults.canRegister()) {
+                        presenter.setState(this, null, ApplicationState.metadata);
+                    } else {
+                        presenter.setState(this, null, ApplicationState.stimulus);
+                    }
                     break;
                 case feedback:
                     this.presenter = new FeedbackPresenter(widgetTag, userResults);
