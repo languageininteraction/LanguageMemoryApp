@@ -139,8 +139,10 @@
 
 .gwt-Button.stimulusHelpButton {    
     background: white;
-    border-radius: 15px;
+    border-radius: 25px;
     padding: 5px 10px;
+    height: 51px;
+    width: 51px;
 }
 
 .contentPanel {
