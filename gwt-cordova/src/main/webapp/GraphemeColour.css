@@ -77,7 +77,7 @@
 
 .gwt-CheckBox.optionButton, .gwt-Button.optionButton {
     padding: 0px 10px 0px 10px;
-    margin: 10px 10px 10px 10%;
+    margin: 10px 10px 10px 0;
     border-radius: 15px;
     /*background: rgb(193,227,241);*/
     outline: none;
@@ -92,6 +92,7 @@
     border-color: rgb(0,158,200);
     outline: none;
     height: 40px;
+    width: 100%;
 }
 
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
