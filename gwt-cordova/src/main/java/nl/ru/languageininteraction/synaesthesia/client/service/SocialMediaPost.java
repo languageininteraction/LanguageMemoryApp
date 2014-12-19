@@ -24,34 +24,16 @@ package nl.ru.languageininteraction.synaesthesia.client.service;
 public class SocialMediaPost {
 
     public native void postText(String postText) /*-{
-     var message = {
-     text: postText
-     };
-     $wnd.socialmessage.send(message);
+     $wnd.plugins.socialsharing.share(postText);
      }-*/;
 
-    public native void makeEmail(String postSubject, String postText) /*-{
-     var message = {
-     subject: postSubject,
-     text: postText,
-     activityTypes: ["Mail"]
-     };
-     $wnd.socialmessage.send(message);
+    // message, subject, image and link
+    public native void postImageAndLink(String postText, String postSubject, String imagePath, String linkUrl) /*-{
+     $wnd.plugins.socialsharing.share(postText, postSubject, imagePath, linkUrl);
      }-*/;
 
-    public native void postImage(String postText, String imageUrl) /*-{
-     var message = {
-     image: imageUrl,
-     text: postText
-     };
-     $wnd.socialmessage.send(message);
-     }-*/;
-
-    public native void postUrl(String postText, String locationUrl) /*-{
-     var message = {
-     url: locationUrl,
-     text: postText
-     };
-     $wnd.socialmessage.send(message);
+    //'www/images/icon.png'
+    public native void postImage(String postText, String postSubject, String imagePath) /*-{
+     $wnd.plugins.socialsharing.share(postText, postSubject, imagePath)
      }-*/;
 }
