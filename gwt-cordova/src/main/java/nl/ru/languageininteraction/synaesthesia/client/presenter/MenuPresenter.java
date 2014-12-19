@@ -48,7 +48,7 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
         setMenuOption(appEventListner, AppEventListner.ApplicationState.intro, true);
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults, true);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults, true);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.report, !userResults.getStimuliGroups().isEmpty());
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, userResults.canRegister());
