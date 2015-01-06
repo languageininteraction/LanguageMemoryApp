@@ -24,12 +24,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
             
-            // generated with svg2java.xsl
+// generated with svg2java.xsl
 public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder implements com.google.gwt.i18n.client.Messages {
 
     private static final SvgTemplate SVG_TEMPLATE = GWT.create(SvgTemplate.class);
     private static final </xsl:text><xsl:value-of select="$classname" /><xsl:text> SVG_DATA = GWT.create(</xsl:text><xsl:value-of select="$classname" /><xsl:text>.class);
-    
 </xsl:text>
 <!--<xsl:for-each select="svg:svg/svg:g[svg:path]">
     <xsl:text>
@@ -58,17 +57,19 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     </xsl:for-each>
 </xsl:for-each>-->
         <xsl:text>
-            public void getSvg(SafeHtmlBuilder builder) {
-        </xsl:text>
+    public void getSvg(SafeHtmlBuilder builder) {
+</xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
-            builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>(),SVG_DATA.transform<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>()));
+<xsl:text>        builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(),SVG_DATA.transform</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>()));
+</xsl:text>
             <xsl:for-each select="svg:path">
-                builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform<xsl:value-of select="@id"/>(), SVG_DATA.style<xsl:value-of select="@id"/>(), SVG_DATA.data<xsl:value-of select="@id"/>()));
+<xsl:text>        builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="@id"/><xsl:text>()));
+</xsl:text>
             </xsl:for-each>
-            builder.append(SVG_TEMPLATE.groupTagEnd());
+<xsl:text>        builder.append(SVG_TEMPLATE.groupTagEnd());
+</xsl:text>
         </xsl:for-each>
-        <xsl:text>
-    }
+        <xsl:text>    }
 }</xsl:text>
     </xsl:template>
 </xsl:stylesheet>
