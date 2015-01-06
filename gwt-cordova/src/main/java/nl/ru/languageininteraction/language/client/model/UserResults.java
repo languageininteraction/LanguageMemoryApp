@@ -21,7 +21,6 @@ import com.google.gwt.user.client.Random;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
-import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 
 /**
  * @since Oct 14, 2014 1:11:22 PM (creation date)

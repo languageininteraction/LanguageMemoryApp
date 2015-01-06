@@ -20,7 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.service;
 import java.util.ArrayList;
 import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.exception.StimulusError;
-import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.language.client.model.ColourData;
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.language.client.model.Stimulus;
 import nl.ru.languageininteraction.language.client.model.StimulusResponse;

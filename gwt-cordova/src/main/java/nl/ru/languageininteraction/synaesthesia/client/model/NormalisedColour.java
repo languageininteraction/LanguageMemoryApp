@@ -17,6 +17,8 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.model;
 
+import nl.ru.languageininteraction.language.client.model.ColourData;
+
 /**
  * @since Nov 17, 2014 5:52:52 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>

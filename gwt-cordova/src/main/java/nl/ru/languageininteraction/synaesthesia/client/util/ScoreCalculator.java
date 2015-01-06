@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
-import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.language.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.NormalisedColour;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;

@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
+import nl.ru.languageininteraction.language.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.language.client.model.Stimulus;

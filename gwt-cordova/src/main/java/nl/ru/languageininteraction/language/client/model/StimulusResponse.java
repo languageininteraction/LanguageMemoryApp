@@ -18,7 +18,6 @@
 package nl.ru.languageininteraction.language.client.model;
 
 import java.util.Date;
-import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 
 /**
  * @since Oct 14, 2014 1:23:24 PM (creation date)
