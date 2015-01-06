@@ -25,7 +25,7 @@ import nl.ru.languageininteraction.language.client.listener.PresenterEventListne
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
-import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
+import nl.ru.languageininteraction.language.client.view.MenuView;
 
 /**
  * @since Nov 11, 2014 11:43:00 AM (creation date)

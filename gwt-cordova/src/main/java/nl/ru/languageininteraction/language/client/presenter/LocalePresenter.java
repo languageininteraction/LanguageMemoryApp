@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
+import nl.ru.languageininteraction.language.client.view.MenuView;
 
 /**
  * @since Oct 31, 2014 10:58:32 AM (creation date)
