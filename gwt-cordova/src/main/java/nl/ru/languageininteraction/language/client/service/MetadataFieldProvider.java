@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.service;
 
 import com.google.gwt.core.client.GWT;
-import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
+import nl.ru.languageininteraction.language.client.MetadataFields;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 
 /**

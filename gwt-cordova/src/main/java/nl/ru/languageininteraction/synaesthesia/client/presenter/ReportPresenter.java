@@ -27,7 +27,7 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
-import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
+import nl.ru.languageininteraction.language.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
