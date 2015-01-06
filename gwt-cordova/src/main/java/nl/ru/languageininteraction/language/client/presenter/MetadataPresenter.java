@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
-import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
+import nl.ru.languageininteraction.language.client.view.MetadataView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
