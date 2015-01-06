@@ -34,11 +34,12 @@ public interface AppEventListner {
         locale(messages.localeMenuLabel()),
         version(messages.versionMenuLabel()),
         intro(messages.introMenuLabel()),
-//        instructions(messages.instructionsMenuLabel()),
+        //        instructions(messages.instructionsMenuLabel()),
         menu(messages.menuButton()),
         setuser(messages.setUserMenuLabel()),
         adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         stimulus(messages.stimulusMenuLabel()),
+        match("match"),
         map(messages.mapMenuLabel()),
         autotyp_regions("AutotypRegions"),
         alien("Alien"),

@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.63-testing</version>
+    <version>0.1.81-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -110,6 +110,17 @@
                             </fileMappers>
                             <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
                         </transformationSet>
+                        <transformationSet>
+                            <dir>src/main/svg/graphics</dir>
+                            <stylesheet>src/main/xsl/svg2java.xsl</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>\.svg$</pattern>
+                                    <replacement>Builder.java</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
                     </transformationSets>
                 </configuration>
                 <dependencies>
@@ -143,12 +154,13 @@
                     <hostedWebapp>${webappDirectory}</hostedWebapp>
                     <i18nMessagesBundles>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Messages</i18nMessagesBundle>
-                        <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.MetadataFields</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MetadataFields</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.Stimuli</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.synaesthesia.client.ServiceLocations</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Version</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.AutotypRegions</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage1</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>

@@ -20,70 +20,55 @@
     <xsl:template match="/">
         <xsl:text>package nl.ru.languageininteraction.language.client;
             
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
             
             // generated with svg2java.xsl
-public abstract class </xsl:text><xsl:value-of select="$classname" /><xsl:text> extends com.google.gwt.i18n.client.Messages {
+public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder implements com.google.gwt.i18n.client.Messages {
 
     private static final SvgTemplate SVG_TEMPLATE = GWT.create(SvgTemplate.class);
+    private static final </xsl:text><xsl:value-of select="$classname" /><xsl:text> SVG_DATA = GWT.create(</xsl:text><xsl:value-of select="$classname" /><xsl:text>.class);
     
 </xsl:text>
-<xsl:for-each select="svg:svg/svg:g[svg:path]">
+<!--<xsl:for-each select="svg:svg/svg:g[svg:path]">
+    <xsl:text>
+    @DefaultMessage("</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>"<xsl:text>)
+    @Key("id</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>")
+    abstract public String id</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>();
+        
+    @DefaultMessage("</xsl:text><xsl:value-of select="@transform"/>"<xsl:text>)
+    @Key("data</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>")
+    abstract public String transform</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>();
+</xsl:text>
     <xsl:for-each select="svg:path">    
     <xsl:text>
     @DefaultMessage("</xsl:text><xsl:value-of select="@style"/>"<xsl:text>)
     @Key("style</xsl:text><xsl:value-of select="@id"/><xsl:text>")
-    String style</xsl:text><xsl:value-of select="@id"/><xsl:text>();
+    abstract public String style</xsl:text><xsl:value-of select="@id"/><xsl:text>();
         
     @DefaultMessage("</xsl:text><xsl:value-of select="@data"/>"<xsl:text>)
     @Key("data</xsl:text><xsl:value-of select="@id"/><xsl:text>")
-    String data</xsl:text><xsl:value-of select="@id"/><xsl:text>();
+    abstract public String data</xsl:text><xsl:value-of select="@id"/><xsl:text>();
         
+    @DefaultMessage("</xsl:text><xsl:value-of select="@transform"/>"<xsl:text>)
+    @Key("data</xsl:text><xsl:value-of select="@id"/><xsl:text>")
+    abstract public String transform</xsl:text><xsl:value-of select="@id"/><xsl:text>();
 </xsl:text>
     </xsl:for-each>
-</xsl:for-each>
-<!--            <xsl:text>
-</xsl:text>
-            <xsl:text>data</xsl:text>
-            <xsl:value-of select="@id"/>
-            <xsl:text>=</xsl:text>
-            <xsl:value-of select="@d"/>
-            <xsl:text>
-</xsl:text>
-            <xsl:text>transform</xsl:text>
-            <xsl:value-of select="@id"/>
-            <xsl:text>=</xsl:text>
-            <xsl:value-of select="@transform"/>
-            <xsl:text>
-</xsl:text>
+</xsl:for-each>-->
+        <xsl:text>
+            public void getSvg(SafeHtmlBuilder builder) {
+        </xsl:text>
+        <xsl:for-each select="svg:svg/svg:g[svg:path]">
+            builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>(),SVG_DATA.transform<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>()));
+            <xsl:for-each select="svg:path">
+                builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform<xsl:value-of select="@id"/>(), SVG_DATA.style<xsl:value-of select="@id"/>(), SVG_DATA.data<xsl:value-of select="@id"/>()));
             </xsl:for-each>
-            <xsl:text>transform</xsl:text>
-            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
-            <xsl:text>=</xsl:text>
-            <xsl:value-of select="@transform"/>
-            <xsl:text>
-</xsl:text>
-            <xsl:text>id</xsl:text>
-            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
-            <xsl:value-of select="@inkscape:label"/>
-            <xsl:text>=</xsl:text>
-            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
-            <xsl:text>
-</xsl:text> 
+            builder.append(SVG_TEMPLATE.groupTagEnd());
         </xsl:for-each>
-        
--->
-<xsl:text>
-public void getSvg(SafeHtmlBuilder builder) {
-    </xsl:text>
-<xsl:for-each select="svg:svg/svg:g[svg:path]">
-        builder.append(SVG_TEMPLATE.groupTag(id<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>(),transform<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>()));
-<xsl:for-each select="svg:path">
-        builder.append(SVG_TEMPLATE.pathTag(transform<xsl:value-of select="@id"/>(), style<xsl:value-of select="@id"/>(), data<xsl:value-of select="@id"/>()));
-</xsl:for-each>
-        builder.append(SVG_TEMPLATE.groupTagEnd());
-        </xsl:for-each>
-<xsl:text>
+        <xsl:text>
+    }
 }</xsl:text>
     </xsl:template>
 </xsl:stylesheet>

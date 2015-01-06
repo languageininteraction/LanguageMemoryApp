@@ -22,10 +22,17 @@ import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
 import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
-import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
+import nl.ru.languageininteraction.language.client.presenter.MatchLanguagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
+import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
+import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
+import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
+import nl.ru.languageininteraction.language.client.presenter.MetadataPresenter;
+import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -37,13 +44,13 @@ public class AppController implements AppEventListner {
 
     private final RootPanel widgetTag;
     private Presenter presenter;
-//    private final UserResults userResults;
+    private final UserResults userResults;
 //    private final StimuliProvider stimuliProvider;
 
     public AppController(RootPanel widgetTag) {
         this.widgetTag = widgetTag;
 //        stimuliProvider = new StimuliProvider();
-//        userResults = new LocalStorage().getStoredData();
+        userResults = new LocalStorage().getStoredData();
 //        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
     }
 
@@ -57,15 +64,18 @@ public class AppController implements AppEventListner {
 //                    this.presenter = new MenuPresenter(widgetTag);
 //                    presenter.setState(this, null, null);
 //                    break;
-//                case locale:
-//                    this.presenter = new LocalePresenter(widgetTag);
-//                    presenter.setState(this, null, null);
-//                    break;
+            case locale:
+                this.presenter = new LocalePresenter(widgetTag);
+                presenter.setState(this, null, null);
+                break;
             case version:
                 this.presenter = new VersionPresenter(widgetTag);
-                presenter.setState(this, ApplicationState.map, null);
+                presenter.setState(this, ApplicationState.match, null);
                 break;
-            case start:
+            case match:
+                this.presenter = new MatchLanguagePresenter(widgetTag);
+                presenter.setState(this, ApplicationState.version, ApplicationState.map);
+                break;
             case map:
                 this.presenter = new MapPresenter(widgetTag);
                 presenter.setState(this, ApplicationState.version, ApplicationState.autotyp_regions);
@@ -78,15 +88,16 @@ public class AppController implements AppEventListner {
                 this.presenter = new AlienScreen(widgetTag);
                 presenter.setState(this, ApplicationState.version, ApplicationState.map);
                 break;
-//                case intro:
-//                    this.presenter = new IntroPresenter(widgetTag);
-//                    presenter.setState(this, null, ApplicationState.setuser);
-//                    break;
-//                case setuser:
-//                    this.presenter = new UserNamePresenter(widgetTag, userResults);
-//                    presenter.setState(this, null, ApplicationState.stimulus);
-//                    ((MetadataPresenter) presenter).focusFirstTextBox();
-//                    break;
+            case start:
+            case intro:
+                this.presenter = new IntroPresenter(widgetTag);
+                presenter.setState(this, null, ApplicationState.setuser);
+                break;
+            case setuser:
+                this.presenter = new UserNamePresenter(widgetTag, userResults);
+                presenter.setState(this, null, ApplicationState.match);
+                ((MetadataPresenter) presenter).focusFirstTextBox();
+                break;
 //                case stimulus:
 //                    if (userResults.getPendingStimuliGroup() == null) {
 //                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
