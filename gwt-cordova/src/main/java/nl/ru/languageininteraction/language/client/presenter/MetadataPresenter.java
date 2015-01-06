@@ -28,7 +28,7 @@ import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.language.client.view.SimpleView.ButtonType;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
-import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 
 /**
  * @since Oct 21, 2014 11:50:56 AM (creation date)
