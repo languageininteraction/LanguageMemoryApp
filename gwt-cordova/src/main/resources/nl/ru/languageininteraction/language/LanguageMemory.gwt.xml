@@ -24,7 +24,8 @@
     <entry-point class='nl.ru.languageininteraction.language.client.LanguageMemory' />
 
     <!-- Specify the paths for translatable code                    -->
-    <source path='client' />
+     <source path='client' />
+    <!--<source path='synaesthesia' />-->
     <!--<source path='language' />-->
 
 </module>
