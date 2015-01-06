@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.language.client.service;
 
 import com.google.gwt.core.client.GWT;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
-import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
+import nl.ru.languageininteraction.language.client.model.MetadataField;
 
 /**
  * @since Oct 31, 2014 4:15:00 PM (creation date)
