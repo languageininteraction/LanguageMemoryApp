@@ -15,11 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client.service;
+package nl.ru.languageininteraction.language.client.service;
 
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import com.google.gwt.storage.client.Storage;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
+import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
