@@ -25,11 +25,11 @@ import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.NormalisedColour;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
-import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
+import nl.ru.languageininteraction.language.client.model.StimuliGroup;
+import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.model.Stimulus;
+import nl.ru.languageininteraction.language.client.model.StimulusResponse;
+import nl.ru.languageininteraction.language.client.model.StimulusResponseGroup;
 
 /**
  * @since Oct 21, 2014 4:49:43 PM (creation date)

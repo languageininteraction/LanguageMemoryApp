@@ -29,9 +29,9 @@ import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.model.UserResults;
 
 /**
  * @since Oct 14, 2014 10:57:39 AM (creation date)

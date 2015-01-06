@@ -28,11 +28,11 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
-import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGroup;
+import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.model.StimuliGroup;
+import nl.ru.languageininteraction.language.client.model.Stimulus;
+import nl.ru.languageininteraction.language.client.model.StimulusResponse;
+import nl.ru.languageininteraction.language.client.model.StimulusResponseGroup;
 
 /**
  * @since Oct 10, 2014 9:52:25 AM (creation date)

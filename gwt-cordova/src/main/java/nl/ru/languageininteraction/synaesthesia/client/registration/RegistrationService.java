@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.ServiceLocations;
-import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser;
 
 /**

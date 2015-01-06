@@ -15,43 +15,37 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client.model;
+package nl.ru.languageininteraction.language.client.model;
 
-import java.util.Objects;
+import java.util.Date;
+import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 
 /**
- * @since Oct 14, 2014 1:17:57 PM (creation date)
+ * @since Oct 14, 2014 1:23:24 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class Stimulus {
+public class StimulusResponse {
 
-    private final String value;
+    private final ColourData colour;
+    private final Date time;
+    private final double durationMs;
 
-    public Stimulus(String value) {
-        this.value = value;
+    public StimulusResponse(ColourData colour, Date time, double durationMs) {
+        this.colour = colour;
+        this.time = time;
+        this.durationMs = durationMs;
     }
 
-    public String getValue() {
-        return value;
+    public ColourData getColour() {
+        return colour;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.value);
-        return hash;
+    public Date getTime() {
+        return time;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Stimulus other = (Stimulus) obj;
-        return this.value.equals(other.value);
+    public double getDurationMs() {
+        return durationMs;
     }
 
 }

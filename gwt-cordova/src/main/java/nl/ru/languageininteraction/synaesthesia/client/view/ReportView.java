@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
-import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
+import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 
 /**
  * @since Oct 14, 2014 10:57:45 AM (creation date)
