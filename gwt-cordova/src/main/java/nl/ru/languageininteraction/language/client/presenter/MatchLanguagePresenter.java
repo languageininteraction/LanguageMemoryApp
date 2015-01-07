@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
@@ -28,7 +29,7 @@ import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
  */
 public class MatchLanguagePresenter extends AbstractPresenter implements Presenter {
 
-    public MatchLanguagePresenter(RootPanel widgetTag) {
+    public MatchLanguagePresenter(RootPanel widgetTag) throws AudioException {
         super(widgetTag, new MatchLanguageView());
     }
 

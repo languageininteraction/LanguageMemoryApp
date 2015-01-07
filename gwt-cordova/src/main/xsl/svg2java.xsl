@@ -30,13 +30,13 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     private static final SvgTemplate SVG_TEMPLATE = GWT.create(SvgTemplate.class);
     private static final </xsl:text><xsl:value-of select="$classname" /><xsl:text> SVG_DATA = GWT.create(</xsl:text><xsl:value-of select="$classname" /><xsl:text>.class);
 
-    enum SvgGroupStates {
+    public enum SvgGroupStates {
         </xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
             <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>,
         </xsl:text>
         </xsl:for-each>
-        <xsl:text>
+        <xsl:text>end
     }
 </xsl:text>
 <!--<xsl:for-each select="svg:svg/svg:g[svg:path]">

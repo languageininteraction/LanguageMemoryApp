@@ -43,14 +43,23 @@ public class AudioPlayer {
     }
 
     public void playSampleAudio1() {
+        sampleAudio1.setCurrentTime(0);
         sampleAudio1.play();
     }
 
     public void playSampleAudio2() {
+        sampleAudio2.setCurrentTime(0);
         sampleAudio2.play();
     }
 
     public void playSampleAudio3() {
+        sampleAudio3.setCurrentTime(0);
         sampleAudio3.play();
+    }
+
+    public void stopAll() {
+        sampleAudio1.pause();
+        sampleAudio2.pause();
+        sampleAudio3.pause();
     }
 }

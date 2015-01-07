@@ -27,6 +27,9 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
+import nl.ru.languageininteraction.language.client.MatchLanguageBuilder.SvgGroupStates;
+import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
  * @since Nov 26, 2014 4:11:13 PM (creation date)
@@ -37,6 +40,11 @@ public class MatchLanguageView extends SimpleView {
     final VerticalPanel verticalPanel = new VerticalPanel();
     private int height;
     private int width;
+    private final AudioPlayer audioPlayer;
+
+    public MatchLanguageView() throws AudioException {
+        this.audioPlayer = new AudioPlayer();
+    }
 
     protected final MatchLanguageBuilder matchLanguageBuilder = new MatchLanguageBuilder();
 
@@ -62,8 +70,30 @@ public class MatchLanguageView extends SimpleView {
             public void onClick(ClickEvent event) {
                 final Element targetElement = Element.as(event.getNativeEvent().getEventTarget());
                 final Element parentElement = targetElement.getParentElement();
-                if (!parentElement.getId().isEmpty()) {
-                    label.setText(parentElement.getId());
+                final String elementId = parentElement.getId();
+                if (!elementId.isEmpty()) {
+                    label.setText(elementId);
+                    SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
+                    switch (svgGroup) {
+                        case TargetButton:
+                            audioPlayer.playSampleAudio1();
+                            break;
+                        case SampleButton1:
+                            audioPlayer.playSampleAudio2();
+                            break;
+                        case SampleButton2:
+                            audioPlayer.playSampleAudio3();
+                            break;
+                        case SampleButton3:
+                            audioPlayer.playSampleAudio1();
+                            break;
+                        case SampleButton4:
+                            audioPlayer.playSampleAudio2();
+                            break;
+                        case SampleButton5:
+                            audioPlayer.playSampleAudio3();
+                            break;
+                    }
                 } else {
                     label.setText(targetElement.getId());
                 }

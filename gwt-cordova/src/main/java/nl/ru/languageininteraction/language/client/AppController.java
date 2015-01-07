@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.language.client;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import com.google.gwt.user.client.ui.RootPanel;
 import java.util.logging.Logger;
+import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
 import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
@@ -56,48 +57,48 @@ public class AppController implements AppEventListner {
 
     @Override
     public void requestApplicationState(ApplicationState applicationState) {
-//        try {
-        trackView(applicationState.name());
-        switch (applicationState) {
+        try {
+            trackView(applicationState.name());
+            switch (applicationState) {
 //                case menu:
 //                    userResults.setPendingStimuliGroup(null);
 //                    this.presenter = new MenuPresenter(widgetTag);
 //                    presenter.setState(this, null, null);
 //                    break;
-            case locale:
-                this.presenter = new LocalePresenter(widgetTag);
-                presenter.setState(this, null, null);
-                break;
-            case version:
-                this.presenter = new VersionPresenter(widgetTag);
-                presenter.setState(this, ApplicationState.match, null);
-                break;
-            case match:
-                this.presenter = new MatchLanguagePresenter(widgetTag);
-                presenter.setState(this, ApplicationState.version, ApplicationState.map);
-                break;
-            case map:
-                this.presenter = new MapPresenter(widgetTag);
-                presenter.setState(this, ApplicationState.version, ApplicationState.autotyp_regions);
-                break;
-            case autotyp_regions:
-                this.presenter = new AutotypRegionsMapScreen(widgetTag);
-                presenter.setState(this, ApplicationState.version, ApplicationState.alien);
-                break;
-            case alien:
-                this.presenter = new AlienScreen(widgetTag);
-                presenter.setState(this, ApplicationState.version, ApplicationState.map);
-                break;
-            case start:
-            case intro:
-                this.presenter = new IntroPresenter(widgetTag);
-                presenter.setState(this, null, ApplicationState.setuser);
-                break;
-            case setuser:
-                this.presenter = new UserNamePresenter(widgetTag, userResults);
-                presenter.setState(this, null, ApplicationState.match);
-                ((MetadataPresenter) presenter).focusFirstTextBox();
-                break;
+                case locale:
+                    this.presenter = new LocalePresenter(widgetTag);
+                    presenter.setState(this, null, null);
+                    break;
+                case version:
+                    this.presenter = new VersionPresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.match, null);
+                    break;
+                case match:
+                    this.presenter = new MatchLanguagePresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.map);
+                    break;
+                case map:
+                    this.presenter = new MapPresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.autotyp_regions);
+                    break;
+                case autotyp_regions:
+                    this.presenter = new AutotypRegionsMapScreen(widgetTag);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.alien);
+                    break;
+                case alien:
+                    this.presenter = new AlienScreen(widgetTag);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.map);
+                    break;
+                case start:
+                case intro:
+                    this.presenter = new IntroPresenter(widgetTag);
+                    presenter.setState(this, null, ApplicationState.setuser);
+                    break;
+                case setuser:
+                    this.presenter = new UserNamePresenter(widgetTag, userResults);
+                    presenter.setState(this, null, ApplicationState.match);
+                    ((MetadataPresenter) presenter).focusFirstTextBox();
+                    break;
 //                case stimulus:
 //                    if (userResults.getPendingStimuliGroup() == null) {
 //                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
@@ -139,19 +140,19 @@ public class AppController implements AppEventListner {
 //                    this.presenter = new MoreInfoPresenter(widgetTag);
 //                    presenter.setState(this, ApplicationState.start, null);
 //                    break;
-            case end:
-                exitApplication();
-                break;
-            default:
-                this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
-                presenter.setState(this, ApplicationState.start, applicationState);
-                break;
+                case end:
+                    exitApplication();
+                    break;
+                default:
+                    this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
+                    presenter.setState(this, ApplicationState.start, applicationState);
+                    break;
+            }
+        } catch (AudioException error) {
+            logger.warning(error.getMessage());
+            this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
+            presenter.setState(this, ApplicationState.start, applicationState);
         }
-//        } catch (JavaScriptException | CanvasError error) {
-//            logger.warning(error.getMessage());
-//            this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
-//            presenter.setState(this, ApplicationState.start, applicationState);
-//        }
     }
 
     public void start() {
