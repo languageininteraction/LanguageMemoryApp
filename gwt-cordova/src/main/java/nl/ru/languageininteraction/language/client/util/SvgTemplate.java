@@ -27,11 +27,19 @@ import com.google.gwt.safehtml.shared.SafeHtml;
  */
 public interface SvgTemplate extends SafeHtmlTemplates {
 
+    enum Visibility {
+
+        hidden, visible
+    }
+
     @Template("<svg>{0}</svg>")
     SafeHtml svgTag(SafeHtml svgBody);
 
     @Template("<g id=\"{0}\" transform=\"{1}\">")
     SafeHtml groupTag(String id, String transform);
+
+    @Template("<g id=\"{0}\" transform=\"{1}\" style=\"visibility:{2}\">")
+    SafeHtml groupTag(String id, String transform, Visibility visibility);
 
     @Template("</g>")
     SafeHtml groupTagEnd();

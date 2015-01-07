@@ -28,6 +28,7 @@ import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.language.client.presenter.MatchLanguagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
@@ -79,11 +80,15 @@ public class AppController implements AppEventListner {
                     break;
                 case map:
                     this.presenter = new MapPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.autotyp_regions);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.moreinfo);
+                    break;
+                case moreinfo:
+                    this.presenter = new InstructionsPresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.map, ApplicationState.autotyp_regions);
                     break;
                 case autotyp_regions:
                     this.presenter = new AutotypRegionsMapScreen(widgetTag);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.alien);
+                    presenter.setState(this, ApplicationState.moreinfo, ApplicationState.alien);
                     break;
                 case alien:
                     this.presenter = new AlienScreen(widgetTag);

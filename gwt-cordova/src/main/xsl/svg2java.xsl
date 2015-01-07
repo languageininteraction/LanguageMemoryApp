@@ -36,7 +36,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
             <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>,
         </xsl:text>
         </xsl:for-each>
-        <xsl:text>end
+        <xsl:text>diagram // the diagram entry is used to identify the svg root element
     }
 </xsl:text>
 <!--<xsl:for-each select="svg:svg/svg:g[svg:path]">
@@ -69,16 +69,28 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     public void getSvg(SafeHtmlBuilder builder) {
 </xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
-<xsl:text>        builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(),SVG_DATA.transform</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>()));
+<xsl:text>        getSvg</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(builder, SvgTemplate.Visibility.visible);
+</xsl:text>
+        </xsl:for-each>
+        <xsl:text>    }
+</xsl:text>
+        <xsl:for-each select="svg:svg/svg:g[svg:path]">
+<xsl:text>
+    public void getSvg</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(SafeHtmlBuilder builder, SvgTemplate.Visibility visibility) {
+        builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text>
+<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+<xsl:text>(),SVG_DATA.transform</xsl:text>
+<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+<xsl:text>(), visibility));
 </xsl:text>
             <xsl:for-each select="svg:path">
 <xsl:text>        builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="@id"/><xsl:text>()));
 </xsl:text>
             </xsl:for-each>
 <xsl:text>        builder.append(SVG_TEMPLATE.groupTagEnd());
+    }
 </xsl:text>
         </xsl:for-each>
-        <xsl:text>    }
-}</xsl:text>
+        <xsl:text>}</xsl:text>
     </xsl:template>
 </xsl:stylesheet>

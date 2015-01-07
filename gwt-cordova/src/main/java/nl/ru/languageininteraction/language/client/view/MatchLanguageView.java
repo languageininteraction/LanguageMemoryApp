@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -30,6 +31,7 @@ import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 
 /**
  * @since Nov 26, 2014 4:11:13 PM (creation date)
@@ -60,8 +62,28 @@ public class MatchLanguageView extends SimpleView {
         height = Window.getClientHeight();
         width = Window.getClientWidth();
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<svg id='ocean' height='" + height + "px' width='" + width + "px' >"));
-        matchLanguageBuilder.getSvg(builder);
+        builder.append(SafeHtmlUtils.fromTrustedString("<svg id='" + SvgGroupStates.diagram.name() + "' height='" + height + "px' width='" + width + "px' >"));
+//        matchLanguageBuilder.getSvg(builder);
+//        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
         final HTML html = new HTML(builder.toSafeHtml());
         html.addClickHandler(new ClickHandler() {
@@ -77,21 +99,66 @@ public class MatchLanguageView extends SimpleView {
                     switch (svgGroup) {
                         case TargetButton:
                             audioPlayer.playSampleAudio1();
+                            showGroup(SvgGroupStates.ChoiceArrow1);
+                            showGroup(SvgGroupStates.ChoiceArrow2);
+                            showGroup(SvgGroupStates.ChoiceArrow3);
+                            showGroup(SvgGroupStates.ChoiceArrow4);
+                            showGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.SampleButton1);
+                            showGroup(SvgGroupStates.SampleButton2);
+                            showGroup(SvgGroupStates.SampleButton3);
+                            showGroup(SvgGroupStates.SampleButton4);
+                            showGroup(SvgGroupStates.SampleButton5);
                             break;
                         case SampleButton1:
                             audioPlayer.playSampleAudio2();
+                            showGroup(SvgGroupStates.ChoiceArrow1);
+                            hideGroup(SvgGroupStates.ChoiceArrow2);
+                            hideGroup(SvgGroupStates.ChoiceArrow3);
+                            hideGroup(SvgGroupStates.ChoiceArrow4);
+                            hideGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.IncorrectButton);
+                            showGroup(SvgGroupStates.CorrectButton);
                             break;
                         case SampleButton2:
                             audioPlayer.playSampleAudio3();
+                            hideGroup(SvgGroupStates.ChoiceArrow1);
+                            showGroup(SvgGroupStates.ChoiceArrow2);
+                            hideGroup(SvgGroupStates.ChoiceArrow3);
+                            hideGroup(SvgGroupStates.ChoiceArrow4);
+                            hideGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.IncorrectButton);
+                            showGroup(SvgGroupStates.CorrectButton);
                             break;
                         case SampleButton3:
                             audioPlayer.playSampleAudio1();
+                            hideGroup(SvgGroupStates.ChoiceArrow1);
+                            hideGroup(SvgGroupStates.ChoiceArrow2);
+                            showGroup(SvgGroupStates.ChoiceArrow3);
+                            hideGroup(SvgGroupStates.ChoiceArrow4);
+                            hideGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.IncorrectButton);
+                            showGroup(SvgGroupStates.CorrectButton);
                             break;
                         case SampleButton4:
                             audioPlayer.playSampleAudio2();
+                            hideGroup(SvgGroupStates.ChoiceArrow1);
+                            hideGroup(SvgGroupStates.ChoiceArrow2);
+                            hideGroup(SvgGroupStates.ChoiceArrow3);
+                            showGroup(SvgGroupStates.ChoiceArrow4);
+                            hideGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.IncorrectButton);
+                            showGroup(SvgGroupStates.CorrectButton);
                             break;
                         case SampleButton5:
                             audioPlayer.playSampleAudio3();
+                            hideGroup(SvgGroupStates.ChoiceArrow1);
+                            hideGroup(SvgGroupStates.ChoiceArrow2);
+                            hideGroup(SvgGroupStates.ChoiceArrow3);
+                            hideGroup(SvgGroupStates.ChoiceArrow4);
+                            showGroup(SvgGroupStates.ChoiceArrow5);
+                            showGroup(SvgGroupStates.IncorrectButton);
+                            showGroup(SvgGroupStates.CorrectButton);
                             break;
                     }
                 } else {
@@ -101,5 +168,13 @@ public class MatchLanguageView extends SimpleView {
         });
         verticalPanel.add(html);
         setContent(verticalPanel);
+    }
+
+    private void showGroup(SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
+    }
+
+    private void hideGroup(SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
     }
 }
