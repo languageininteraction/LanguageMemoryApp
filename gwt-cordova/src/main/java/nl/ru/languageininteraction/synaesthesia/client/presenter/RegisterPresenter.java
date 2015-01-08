@@ -92,7 +92,6 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.moreinfo);
             }
         });
-        ((RegisterView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
         final CheckBox agreementCheckBox = ((RegisterView) simpleView).addCheckBox(messages.informationSheetCheckBox());
         final Button registerButton = addRegisterButton(appEventListner);
         agreementCheckBox.setValue(false);

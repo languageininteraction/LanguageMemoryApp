@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.synaesthesia.client.view.ComplexView;
 
 /**
  * @since Oct 29, 2014 4:42:44 PM (creation date)
@@ -33,7 +33,7 @@ public class VersionPresenter extends AbstractPresenter {
     private final Version version = GWT.create(Version.class);
 
     public VersionPresenter(RootPanel widgetTag) {
-        super(widgetTag, new SimpleView());
+        super(widgetTag, new ComplexView());
     }
 
     @Override
@@ -43,7 +43,8 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText("Version: " + version.majorVersion() + "."
+        ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
+        ((ComplexView) simpleView).addText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
                 + version.projectVersion() + "\n"

@@ -23,10 +23,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
@@ -34,21 +32,10 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
  * @since Oct 31, 2014 11:36:28 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MenuView extends SimpleView {
+public class MenuView extends ComplexView {
 
     final private ArrayList<Button> buttonsArray = new ArrayList<>();
-    final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
-
-    public MenuView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
-    }
 
     public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
         if (flexTable == null) {
@@ -100,5 +87,4 @@ public class MenuView extends SimpleView {
             }
         }
     }
-
 }

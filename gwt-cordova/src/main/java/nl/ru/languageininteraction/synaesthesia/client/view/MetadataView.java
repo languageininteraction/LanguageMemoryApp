@@ -17,54 +17,24 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MetadataView extends SimpleView {
+public class MetadataView extends ComplexView {
 
-    final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
     final private HashMap<String, TextBox> fieldBoxes;
     private TextBox firstTextBox = null;
 
     public MetadataView() {
-        outerPanel = new VerticalPanel();
-        //outerPanel.setWidth("100%");
-        setContent(outerPanel);
         fieldBoxes = new HashMap<>();
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
-    }
-
-    public void addOptionButton(final PresenterEventListner presenterListerner) {
-        final Button nextButton = new Button(presenterListerner.getLabel());
-        nextButton.addStyleName("optionButton");
-        nextButton.setEnabled(true);
-        outerPanel.add(nextButton);
-        nextButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                presenterListerner.eventFired(nextButton);
-            }
-        });
     }
 
     public void addField(final String fieldName, final String displayName, final String existingValue) {

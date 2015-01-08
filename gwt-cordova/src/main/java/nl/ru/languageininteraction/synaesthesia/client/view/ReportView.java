@@ -17,16 +17,9 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.synaesthesia.client.model.ScoreData;
@@ -36,19 +29,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
  * @since Oct 14, 2014 10:57:45 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ReportView extends SimpleView {
-
-    final VerticalPanel outerPanel;
-
-    public ReportView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
-    }
+public class ReportView extends ComplexView {
 
     public void showResults(StimuliGroup stimuliGroup, GroupScoreData calculatedScores) {
         int columnCount = calculatedScores.getScoreDataList().get(0).getColourData().size();
@@ -85,19 +66,5 @@ public class ReportView extends SimpleView {
             row++;
         }
         outerPanel.add(grid);
-    }
-
-    public void addOptionButton(final PresenterEventListner presenterListerner) {
-        final Button nextButton = new Button(presenterListerner.getLabel());
-        nextButton.addStyleName("optionButton");
-        nextButton.setEnabled(true);
-        outerPanel.add(nextButton);
-        nextButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                presenterListerner.eventFired(nextButton);
-            }
-        });
     }
 }
