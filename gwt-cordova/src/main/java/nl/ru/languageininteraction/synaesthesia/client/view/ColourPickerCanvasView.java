@@ -326,6 +326,14 @@ public class ColourPickerCanvasView extends AbstractView {
                 infoButton.setEnabled(false);
             }
         });
+        instructionsLabel.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                popupPanel.hide();
+                infoButton.setEnabled(true);
+            }
+        });
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {
