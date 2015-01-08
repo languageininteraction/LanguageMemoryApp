@@ -143,6 +143,7 @@
     padding: 5px 10px;
     height: 51px;
     width: 51px;
+    float: right;
 }
 
 .contentPanel {

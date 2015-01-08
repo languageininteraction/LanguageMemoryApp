@@ -95,7 +95,7 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.addStyleName("stimulusPanel");
         stimulusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         outerGrid = new Grid(2, 2);
-        innerGrid = new Grid(5, 2);
+        innerGrid = new Grid(6, 2);
         pickerPanel = new Grid(1, 2);
         progressPanel = new Grid(1, 2);
         progressPanel.setWidth("100%");
@@ -404,8 +404,9 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(2, 0, selectedColourPanel);
             innerGrid.setWidget(3, 0, acceptButton);
             innerGrid.setWidget(4, 0, progressLabel);
-            innerGrid.setWidget(4, 1, infoButton);
-            innerGrid.setWidget(5, 0, quitButton);
+            progressPanel.setWidget(0, 1, infoButton);
+            progressPanel.setWidget(0, 0, quitButton);
+            innerGrid.setWidget(5, 0, progressPanel);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
             int resizedWidth = (int) (width * 0.9 - 50);
