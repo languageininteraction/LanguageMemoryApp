@@ -61,7 +61,7 @@
     font-size: 30px;
 }
 
-.gwt-Button.stimulusButton {
+.gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
     background: white;
@@ -95,7 +95,7 @@
     width: 100%;
 }
 
-.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     /* prevent text selection on the buttons */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -215,9 +215,13 @@ canvas {
 .resultsTableTitle {
     font-size: 24pt;
 }
+.gwt-Label.stimulusProgressLabel {
+    text-align: center;
+    /*width: 100%;*/
+}
 
 .gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody,
-.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -230,7 +234,7 @@ canvas {
     line-height: 20pt;
 } 
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, 
-.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
 {  
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
 }

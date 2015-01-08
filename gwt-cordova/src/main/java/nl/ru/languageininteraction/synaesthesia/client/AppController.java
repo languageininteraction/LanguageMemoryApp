@@ -102,7 +102,7 @@ public class AppController implements AppEventListner {
                     } else {
                         trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
-                        presenter.setState(this, null, ApplicationState.report);
+                        presenter.setState(this, ApplicationState.menu, ApplicationState.report);
                     }
                     break;
                 case adddummyresults:
