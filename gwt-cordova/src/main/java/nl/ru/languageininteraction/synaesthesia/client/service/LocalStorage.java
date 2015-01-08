@@ -38,7 +38,7 @@ public class LocalStorage {
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
                 final String storedValue = dataStore.getItem(USER_RESULTS + metadataField.getPostName());
-                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null) ? "" : storedValue);
+                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null || "undefined".equals(storedValue)) ? "" : storedValue);
             }
         }
         return userResults;
