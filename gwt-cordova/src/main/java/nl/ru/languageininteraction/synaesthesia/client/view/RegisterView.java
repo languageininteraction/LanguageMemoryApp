@@ -50,6 +50,7 @@ public class RegisterView extends ComplexView {
 
     public CheckBox addCheckBox(String label) {
         final CheckBox checkBox = new CheckBox(new SafeHtmlBuilder().appendEscapedLines(label).toSafeHtml());
+        checkBox.addStyleName("optionCheckBox");
         outerPanel.add(checkBox);
         return checkBox;
     }
