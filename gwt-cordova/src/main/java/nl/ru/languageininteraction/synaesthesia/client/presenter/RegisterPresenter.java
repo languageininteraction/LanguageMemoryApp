@@ -22,8 +22,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
-import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.InformationSheet;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -45,7 +45,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
     private final UserResults userResults;
     private AppEventListner.ApplicationState nextState;
 
-    public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
+    public RegisterPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new RegisterView());
         this.userResults = userResults;
     }

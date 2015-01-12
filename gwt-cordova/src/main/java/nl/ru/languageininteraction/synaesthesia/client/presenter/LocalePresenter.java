@@ -20,7 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
@@ -31,7 +31,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.MenuView;
  */
 public class LocalePresenter extends AbstractPresenter implements Presenter {
 
-    public LocalePresenter(RootPanel widgetTag) {
+    public LocalePresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new MenuView());
     }
 

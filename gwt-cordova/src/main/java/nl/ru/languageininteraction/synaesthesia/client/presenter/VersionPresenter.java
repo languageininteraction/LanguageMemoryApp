@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -32,7 +32,7 @@ public class VersionPresenter extends AbstractPresenter {
 
     private final Version version = GWT.create(Version.class);
 
-    public VersionPresenter(RootPanel widgetTag) {
+    public VersionPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new ComplexView());
     }
 

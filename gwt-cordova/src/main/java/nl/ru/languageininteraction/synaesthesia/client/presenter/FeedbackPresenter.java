@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -31,7 +31,7 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     private final UserResults userResults;
 
-    public FeedbackPresenter(RootPanel widgetTag, UserResults userResults) {
+    public FeedbackPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new SimpleView());
         this.userResults = userResults;
     }

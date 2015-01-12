@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-1.0.46-testing
+synquizname=synquiz-1.0.64-testing
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
@@ -13,6 +13,10 @@ cordova plugin add org.apache.cordova.splashscreen
 cordova plugin add org.apache.cordova.inappbrowser
 # (this plugin did not function correctly) cordova plugin add https://github.com/leecrossley/cordova-plugin-social-message.git
 cordova plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git #cordova plugin add nl.x-services.plugins.socialsharing
+#cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git # this provides events for keyboard hide and show which are needed to resize the app window area
+#cordova plugin add https://github.com/etiennea/phonegap-keyboard.git
+#cordova plugin install org.apache.cordova.labs.keyboard
+cordova plugin add https://github.com/GetJobber/cordova-plugin-keyboard.git
 
 splashResourcesDir="./platforms/ios/SynQuiz/Resources/splash/"
 echo $splashResourcesDir
@@ -74,8 +78,11 @@ cordova build -release
 #xcrun -sdk iphoneos PackageApplication -v "build/Release-iphoneos/MyApp.app" -o "build/Release-iphoneos/MyApp.ipa" --sign "iPhone Distribution: NAME (ID)" --embed "PROFILE_UUID.mobileprovision"
 #xcodebuild -scheme YOURSCHEMENAME -project MyApp.xcodeproj -alltargets -sdk iphoneos7.0 PROVISIONING_PROFILE="PROFILE_UUID.mobileprovision" -configuration Release
 
-#echo "launching xcode"
-#open platforms/ios/SynQuiz.xcodeproj
+#echo "installing on Android"
+#adb install target/*-testing-cordova/platforms/android/ant-build/CordovaApp-release.apk
+
+echo "launching xcode"
+open platforms/ios/SynQuiz.xcodeproj&
 
 # generate the IPA
 #cd platforms/ios/CordovaLib/

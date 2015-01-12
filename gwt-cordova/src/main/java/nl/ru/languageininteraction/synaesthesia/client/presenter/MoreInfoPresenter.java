@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.InformationSheet;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -32,7 +32,7 @@ public class MoreInfoPresenter extends AbstractPresenter implements Presenter {
 
     protected final InformationSheet informationSheet = GWT.create(InformationSheet.class);
 
-    public MoreInfoPresenter(RootPanel widgetTag) {
+    public MoreInfoPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 

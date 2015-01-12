@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
@@ -35,7 +35,7 @@ public class UserNamePresenter extends MetadataPresenter {
     private boolean isNewUser = true;
     final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
 
-    public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
+    public UserNamePresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, userResults);
     }
 

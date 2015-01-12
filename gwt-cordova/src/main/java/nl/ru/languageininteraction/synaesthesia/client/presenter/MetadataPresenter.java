@@ -18,8 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.view.MetadataView;
-import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -37,7 +37,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     protected final UserResults userResults;
     protected PresenterEventListner saveEventListner = null;
 
-    public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
+    public MetadataPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MetadataView());
         this.userResults = userResults;
     }

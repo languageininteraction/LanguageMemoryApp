@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
@@ -28,7 +28,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
  */
 public class RegisterDisabledPresenter extends AbstractPresenter implements Presenter {
 
-    public RegisterDisabledPresenter(RootPanel widgetTag) {
+    public RegisterDisabledPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 

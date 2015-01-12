@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
@@ -35,7 +35,7 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
     private final StimuliProvider stimuliProvider;
     private final UserResults userResults;
 
-    public StimulusMenuPresenter(RootPanel widgetTag, StimuliProvider stimuliProvider, UserResults userResults) {
+    public StimulusMenuPresenter(RootLayoutPanel widgetTag, StimuliProvider stimuliProvider, UserResults userResults) {
         super(widgetTag, userResults);
         this.stimuliProvider = stimuliProvider;
         this.userResults = userResults;

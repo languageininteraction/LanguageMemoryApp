@@ -21,8 +21,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
-import com.google.gwt.user.client.ui.RootPanel;
 import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.MetadataFields;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -42,7 +42,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final UserResults userResults;
 
-    public ReportPresenter(RootPanel widgetTag, UserResults userResults) {
+    public ReportPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new ReportView());
         this.userResults = userResults;
     }

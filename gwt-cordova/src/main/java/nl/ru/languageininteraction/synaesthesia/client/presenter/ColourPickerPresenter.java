@@ -20,7 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import nl.ru.languageininteraction.synaesthesia.client.view.ColourPickerCanvasView;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.ArrayList;
 import java.util.Date;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -40,7 +40,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponseGro
 public class ColourPickerPresenter implements Presenter {
 
     private final Messages messages = GWT.create(Messages.class);
-    private final RootPanel widgetTag;
+    private final RootLayoutPanel widgetTag;
     private final ArrayList<Stimulus> stimuli;
     private final int maxStimuli;
     private final UserResults userResults;
@@ -52,7 +52,7 @@ public class ColourPickerPresenter implements Presenter {
     private int shownSetCount;
     private int shownCount = 0;
 
-    public ColourPickerPresenter(RootPanel widgetTag, UserResults userResults, int repeatCount) throws CanvasError {
+    public ColourPickerPresenter(RootLayoutPanel widgetTag, UserResults userResults, int repeatCount) throws CanvasError {
         this.widgetTag = widgetTag;
         this.stimuliGroup = userResults.getPendingStimuliGroup();
         userResults.setPendingStimuliGroup(null);
@@ -132,5 +132,9 @@ public class ColourPickerPresenter implements Presenter {
 
     @Override
     public void fireBackEvent() {
+    }
+
+    @Override
+    public void fireResizeEvent() {
     }
 }

@@ -26,6 +26,8 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 public interface Presenter {
 
     void setState(AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState);
-    
+
     void fireBackEvent();
+
+    void fireResizeEvent();
 }

@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -32,12 +32,12 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 public abstract class AbstractPresenter implements Presenter {
 
     protected final Messages messages = GWT.create(Messages.class);
-    protected final RootPanel widgetTag;
+    protected final RootLayoutPanel widgetTag;
     final protected SimpleView simpleView;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
 
-    public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
+    public AbstractPresenter(RootLayoutPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
         this.simpleView = simpleView;
     }
@@ -98,6 +98,11 @@ public abstract class AbstractPresenter implements Presenter {
         if (backEventListner != null) {
             backEventListner.eventFired(null);
         }
+    }
+
+    @Override
+    public void fireResizeEvent() {
+        simpleView.resizeView();
     }
 
     protected abstract void setTitle(PresenterEventListner titleBarListner);
