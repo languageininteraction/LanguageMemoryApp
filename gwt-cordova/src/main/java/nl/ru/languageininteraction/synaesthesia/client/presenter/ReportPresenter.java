@@ -63,6 +63,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
             ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
+            ((ReportView) simpleView).addText(messages.userfeedbackscreentext());
             userResults.updateBestScore(calculatedScores.getScore());
 //            ((ReportView) simpleView).addText(messages.reportScreenSCT());
 //            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
@@ -92,11 +93,16 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         }
         userResults.setScoreLog(stringBuilder.toString());
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
-        
+
         if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
-            ((ReportView) simpleView).addText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext1());
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext2());
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext3());
         } else {
-            ((ReportView) simpleView).addText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext1());
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext2());
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext3());
         }
+        ((ReportView) simpleView).addPadding();
     }
 }
