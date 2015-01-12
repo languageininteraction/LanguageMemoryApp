@@ -66,12 +66,13 @@ public class UserNamePresenter extends MetadataPresenter {
                 }
             });
         }
-        ((MetadataView) simpleView).addText("");
-        ((MetadataView) simpleView).addText("");
+        ((MetadataView) simpleView).addPadding();
+        ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addText(messages.userNameScreenText());
 //        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
         ((MetadataView) simpleView).addField(firstNameField.getPostName(), firstNameField.getFieldLabel(), "");
-//        }
+//        }        
+        ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
             @Override
@@ -85,8 +86,8 @@ public class UserNamePresenter extends MetadataPresenter {
                 saveEventListner.eventFired(button);
             }
         });
-        ((MetadataView) simpleView).addText("");
-        ((MetadataView) simpleView).addText("");
+        ((MetadataView) simpleView).addPadding();
+        ((MetadataView) simpleView).addPadding();
     }
 
     @Override

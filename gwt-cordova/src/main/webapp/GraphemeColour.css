@@ -243,7 +243,7 @@ canvas {
     /*width: 100%;*/
 }
 
-.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody,
+.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .gwt-TextBox,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
     /*    
