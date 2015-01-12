@@ -49,6 +49,16 @@ public class ComplexView extends SimpleView {
         outerPanel.add(html);
     }
 
+    public void addHighlightedText(String textString) {
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
+        html.addStyleName("highlightedText");
+        outerPanel.add(html);
+    }
+
+    public void addPadding() {
+        outerPanel.add(new HTML("&nbsp;"));
+    }
+
     public void addLink(String label, final String target) {
         final Anchor anchor = new Anchor(new SafeHtmlBuilder().appendEscapedLines(label).toSafeHtml());
         // this link relies on the org.apache.cordova.inappbrowser which offers secure viewing of external html pages and handles user navigation such as back navigation.
