@@ -404,8 +404,8 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(2, 0, selectedColourPanel);
             innerGrid.setWidget(3, 0, acceptButton);
             innerGrid.setWidget(4, 0, progressLabel);
-            progressPanel.setWidget(0, 1, infoButton);
-            progressPanel.setWidget(0, 0, quitButton);
+            progressPanel.setWidget(0, 0, infoButton);
+            progressPanel.setWidget(0, 1, quitButton);
             innerGrid.setWidget(5, 0, progressPanel);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
@@ -420,8 +420,8 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 1, acceptButton);
             progressPanel.setWidget(0, 1, progressLabel);
             innerGrid.setWidget(2, 0, progressPanel);
-            innerGrid.setWidget(2, 1, infoButton);
-            progressPanel.setWidget(0, 0, quitButton);
+            innerGrid.setWidget(2, 1, quitButton);
+            progressPanel.setWidget(0, 0, infoButton);
             outerGrid.setWidget(1, 0, innerGrid);
         }
     }
