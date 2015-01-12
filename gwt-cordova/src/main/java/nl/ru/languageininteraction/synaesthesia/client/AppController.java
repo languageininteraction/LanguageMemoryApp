@@ -83,9 +83,9 @@ public class AppController implements AppEventListner {
                     break;
                 case start:
                 case intro:
-                    this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.setuser);
-                    break;
+//                    this.presenter = new IntroPresenter(widgetTag);
+//                    presenter.setState(this, null, ApplicationState.setuser);
+//                    break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.stimulus);
