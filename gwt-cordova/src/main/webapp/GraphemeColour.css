@@ -111,10 +111,11 @@
     border: none;
 }*/
 
-.gwt-Button.nextButton:active, .gwt-Button.menuButton:active, .gwt-Button.optionButton:active, .gwt-Label.headerButton:active, 
-.gwt-Button.nextButton:hover, .gwt-Button.menuButton:hover, .gwt-Button.optionButton:hover, .gwt-Label.headerButton:hover {
+/*.gwt-Button.nextButton:hover, .gwt-Button.menuButton:hover, .gwt-Button.optionButton:hover, .gwt-Label.headerButton:hover, */
+.gwt-Button.nextButton:active, .gwt-Button.menuButton:active, .gwt-Button.optionButton:active, .gwt-Label.headerButton:active {
     /*background:rgb(0,158,200);*/
-    background:rgb(246,170,139);
+    /*background:rgb(246,170,139);*/
+    background:lightgrey;
     border: none;
 }
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
@@ -154,12 +155,17 @@
     width: 100%;
 }
 
-.gwt-Button.stimulusHelpButton {
+.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton {
     border-radius: 25px;
     padding: 5px 10px;
     height: 51px;
     width: 51px;
+}
+.gwt-Button.stimulusQuitButton {
     float: right;
+}
+.gwt-Button.stimulusHelpButton {
+    float: left;
 }
 
 .contentPanel {
@@ -246,6 +252,12 @@ canvas {
     line-height: 20pt;
     */
 }
+
+.gwt-HTML.highlightedText {
+    font-weight: bold; 
+   /*text-transform: uppercase;*/
+}
+
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {
     color:rgb(255,255,255);  
     line-height: 20pt;
