@@ -34,11 +34,11 @@ public class IntroPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
+        
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.introductionscreentext());
+        
     }
 }
