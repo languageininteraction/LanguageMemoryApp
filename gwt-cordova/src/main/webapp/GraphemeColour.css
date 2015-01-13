@@ -90,8 +90,8 @@
     height: 40px;
     width: 100%;
 }
-//stimulusScreen
-.gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
+
+.stimulusScreen, .menuTable, .gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     /* prevent text selection on the buttons */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -255,7 +255,7 @@ canvas {
 
 .gwt-HTML.highlightedText {
     font-weight: bold; 
-   /*text-transform: uppercase;*/
+    /*text-transform: uppercase;*/
 }
 
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {
