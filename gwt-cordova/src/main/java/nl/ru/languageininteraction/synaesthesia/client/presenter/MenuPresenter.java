@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -32,7 +32,7 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
 
     protected final UserResults userResults;
 
-    public MenuPresenter(RootPanel widgetTag, UserResults userResults) {
+    public MenuPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MenuView());
         this.userResults = userResults;
     }
@@ -51,8 +51,9 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults, true);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.report, !userResults.getStimuliGroups().isEmpty());
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, userResults.canRegister());
-//        setMenuOption(appEventListner, AppEventListner.ApplicationState.registration);
+          setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, userResults.canRegister());
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, true);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.registration, true);
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.moreinfo);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.locale, true);
         setMenuOption(appEventListner, AppEventListner.ApplicationState.version, true);

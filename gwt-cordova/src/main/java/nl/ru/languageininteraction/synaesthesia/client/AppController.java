@@ -87,14 +87,16 @@ public class AppController implements AppEventListner {
 //                    break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.stimulus);
+                    presenter.setState(this, null, ApplicationState.stimulusselect);
                     ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case instructions:
+                    // the user gets here via the stimulus menu
                     this.presenter = new InstructionsPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.stimulus);
+                    presenter.setState(this, null, ApplicationState.stimulusshow);
                     break;
-                case stimulus:
+                case stimulusshow:
+                case stimulusselect:
                     if (userResults.getPendingStimuliGroup() == null) {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
                         presenter.setState(this, null, null);
@@ -114,7 +116,7 @@ public class AppController implements AppEventListner {
                     if (userResults.canRegister()) {
                         presenter.setState(this, null, ApplicationState.metadata);
                     } else {
-                        presenter.setState(this, null, ApplicationState.stimulus);
+                        presenter.setState(this, null, ApplicationState.stimulusselect);
                     }
                     break;
                 case feedback:
@@ -129,10 +131,10 @@ public class AppController implements AppEventListner {
                 case registration:
                     if (userResults.getStimuliGroups().isEmpty()) {
                         this.presenter = new RegisterDisabledPresenter(widgetTag);
-                        presenter.setState(this, null, ApplicationState.stimulus);
+                        presenter.setState(this, null, ApplicationState.stimulusselect);
                     } else {
                         this.presenter = new RegisterPresenter(widgetTag, userResults);
-                        presenter.setState(this, null, ApplicationState.start);
+                        presenter.setState(this, null, ApplicationState.version);
                     }
                     break;
                 case moreinfo:

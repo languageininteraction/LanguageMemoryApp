@@ -38,7 +38,8 @@ public interface AppEventListner {
         menu(messages.menuButton()),
         setuser(messages.setUserMenuLabel()),
         adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
-        stimulus(messages.stimulusMenuLabel()),
+        stimulusshow(messages.stimulusShowMenuLabel()),
+        stimulusselect(messages.stimulusSelectMenuLabel()),
         report(messages.reportMenuLabel()),
         feedback(messages.feedbackMenuLabel()),
         metadata(messages.metadataMenuLabel()),
