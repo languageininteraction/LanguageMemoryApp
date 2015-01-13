@@ -19,6 +19,8 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
@@ -68,6 +70,15 @@ public class ComplexView extends SimpleView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                Window.open(target, "_system", "");
+            }
+        });
+        anchor.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 Window.open(target, "_system", "");
             }
         });
@@ -83,6 +94,15 @@ public class ComplexView extends SimpleView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                presenterListerner.eventFired(nextButton);
+            }
+        });
+        nextButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 presenterListerner.eventFired(nextButton);
             }
         });

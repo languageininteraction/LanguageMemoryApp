@@ -318,6 +318,15 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                quitListerner.eventFired(quitButton);
+            }
+        });
+        quitButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 quitListerner.eventFired(quitButton);
             }
         });
@@ -341,6 +350,16 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                popupPanel.center();
+                infoButton.setEnabled(false);
+            }
+        });
+        infoButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 popupPanel.center();
                 infoButton.setEnabled(false);
             }
@@ -349,6 +368,16 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                popupPanel.hide();
+                infoButton.setEnabled(true);
+            }
+        });
+        instructionsLabel.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 popupPanel.hide();
                 infoButton.setEnabled(true);
             }
@@ -385,6 +414,15 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                presenterListerner.eventFired(nextButton);
+            }
+        });
+        nextButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 presenterListerner.eventFired(nextButton);
             }
         });

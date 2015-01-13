@@ -20,6 +20,8 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -53,6 +55,15 @@ public class MenuView extends ComplexView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                menuItemListerner.eventFired(menuButton);
+            }
+        });
+        menuButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 menuItemListerner.eventFired(menuButton);
             }
         });

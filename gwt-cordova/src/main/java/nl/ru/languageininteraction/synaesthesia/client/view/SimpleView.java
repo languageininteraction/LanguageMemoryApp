@@ -19,6 +19,8 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -90,12 +92,24 @@ public class SimpleView extends AbstractView {
 
                 @Override
                 public void onClick(ClickEvent event) {
+                    event.preventDefault();
                     presenterListerner.eventFired(null);
                 }
             };
             headerArrow.addClickHandler(backHandler);
             headerButton.addClickHandler(backHandler);
             headerIcon.addClickHandler(backHandler);
+            final TouchEndHandler touchEndHandler = new TouchEndHandler() {
+
+                @Override
+                public void onTouchEnd(TouchEndEvent event) {
+                    event.preventDefault();
+                    presenterListerner.eventFired(null);
+                }
+            };
+            headerArrow.addTouchEndHandler(touchEndHandler);
+            headerButton.addTouchEndHandler(touchEndHandler);
+            headerIcon.addTouchEndHandler(touchEndHandler);
         }
         headerPanel.add(headerIcon);
         headerPanel.add(headerLabel);
@@ -107,10 +121,19 @@ public class SimpleView extends AbstractView {
         nextButton.addStyleName(buttonType.name() + "Button");
         nextButton.setEnabled(true);
         footerPanel.add(nextButton);
+        nextButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                presenterListerner.eventFired(nextButton);
+            }
+        });
         nextButton.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
                 presenterListerner.eventFired(nextButton);
             }
         });

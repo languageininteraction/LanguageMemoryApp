@@ -88,7 +88,7 @@ public class AppController implements AppEventListner {
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.stimulusselect);
-                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case instructions:
                     // the user gets here via the stimulus menu
@@ -127,7 +127,7 @@ public class AppController implements AppEventListner {
                 case metadata:
                     this.presenter = new MetadataPresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.registration);
-                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case registration:
                     if (userResults.getStimuliGroups().isEmpty()) {

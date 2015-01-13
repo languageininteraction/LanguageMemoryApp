@@ -20,6 +20,8 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -101,6 +103,17 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                agreementCheckBox.setValue(!agreementCheckBox.getValue());
+                registerButton.setEnabled(agreementCheckBox.getValue());
+            }
+        });
+        agreementCheckBox.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                agreementCheckBox.setValue(!agreementCheckBox.getValue());
                 registerButton.setEnabled(agreementCheckBox.getValue());
             }
         });
