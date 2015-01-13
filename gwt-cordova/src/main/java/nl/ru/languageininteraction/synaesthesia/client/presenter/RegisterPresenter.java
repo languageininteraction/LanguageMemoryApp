@@ -131,12 +131,12 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
                             @Override
                             public void eventFired(Button button) {
-                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.start);
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
                             }
 
                             @Override
                             public String getLabel() {
-                                return AppEventListner.ApplicationState.start.label;
+                                return AppEventListner.ApplicationState.version.label;
                             }
 
                         });
