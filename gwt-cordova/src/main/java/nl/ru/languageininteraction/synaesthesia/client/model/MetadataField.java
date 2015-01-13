@@ -17,6 +17,9 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.model;
 
+import java.util.Objects;
+import nl.ru.languageininteraction.synaesthesia.client.exception.MetadataFieldException;
+
 /**
  * @since Oct 31, 2014 4:15:16 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
@@ -26,11 +29,15 @@ public class MetadataField {
     private final String postName;
     private final String fieldLabel;
     private final String controlledVocabulary;
+    private final String controlledRegex;
+    private final String controlledMessage;
 
-    public MetadataField(String postName, String fieldLabel, String controlledVocabulary) {
+    public MetadataField(String postName, String fieldLabel, String controlledVocabulary, String controlledRegex, String controlledMessage) {
         this.postName = postName;
         this.fieldLabel = fieldLabel;
         this.controlledVocabulary = controlledVocabulary;
+        this.controlledRegex = controlledRegex;
+        this.controlledMessage = controlledMessage;
     }
 
     public String getPostName() {
@@ -45,4 +52,31 @@ public class MetadataField {
         return controlledVocabulary;
     }
 
+    public void validateValue(String value) throws MetadataFieldException {
+        if (controlledRegex == null) {
+            return;
+        }
+        if (value == null || !value.matches(controlledRegex)) {
+            throw new MetadataFieldException(this);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.postName);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MetadataField other = (MetadataField) obj;
+        return true;
+    }
 }

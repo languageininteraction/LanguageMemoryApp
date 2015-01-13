@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import java.util.HashMap;
 import java.util.Set;
+import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)
@@ -30,25 +31,26 @@ import java.util.Set;
 public class MetadataView extends ComplexView {
 
     private FlexTable flexTable = null;
-    final private HashMap<String, TextBox> fieldBoxes;
+    final private HashMap<MetadataField, TextBox> fieldBoxes;
     private TextBox firstTextBox = null;
 
     public MetadataView() {
         fieldBoxes = new HashMap<>();
     }
 
-    public void addField(final String fieldName, final String displayName, final String existingValue) {
+    public void addField(final MetadataField metadataField, final String existingValue) {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("metadataTable");
             outerPanel.add(flexTable);
         }
         final int rowCount = flexTable.getRowCount();
-        flexTable.setWidget(rowCount, 0, new Label(displayName));
+        flexTable.setWidget(rowCount, 0, new Label(metadataField.getFieldLabel()));
         final TextBox textBox = new TextBox();
+        textBox.setStylePrimaryName("metadataOK");
         textBox.setText((existingValue == null) ? "" : existingValue);
         flexTable.setWidget(rowCount, 1, textBox);
-        fieldBoxes.put(fieldName, textBox);
+        fieldBoxes.put(metadataField, textBox);
         if (firstTextBox == null) {
             firstTextBox = textBox;
         }
@@ -60,15 +62,25 @@ public class MetadataView extends ComplexView {
         }
     }
 
-    public Set<String> getFieldNames() {
+    public Set<MetadataField> getFieldNames() {
         return fieldBoxes.keySet();
     }
 
-    public void setFieldValue(String fieldName, String fieldValue) {
-        fieldBoxes.get(fieldName).setValue(fieldValue);
+    public void setFieldValue(MetadataField metadataField, String fieldValue) {
+        fieldBoxes.get(metadataField).setValue(fieldValue);
     }
 
-    public String getFieldValue(String fieldName) {
-        return fieldBoxes.get(fieldName).getValue();
+    public String getFieldValue(MetadataField metadataField) {
+        return fieldBoxes.get(metadataField).getValue();
+    }
+
+    public void showFieldError(MetadataField metadataField) {
+        fieldBoxes.get(metadataField).setStylePrimaryName("metadataError");
+    }
+
+    public void clearErrors() {
+        for (TextBox textBox : fieldBoxes.values()) {
+            textBox.setStylePrimaryName("metadataOK");
+        }
     }
 }

@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import nl.ru.languageininteraction.synaesthesia.client.exception.MetadataFieldException;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
@@ -61,7 +62,7 @@ public class UserNamePresenter extends MetadataPresenter {
                 @Override
                 public void eventFired(Button button) {
                     isNewUser = false;
-                    ((MetadataView) simpleView).setFieldValue(firstNameField.getPostName(), userNameValue);
+                    ((MetadataView) simpleView).setFieldValue(firstNameField, userNameValue);
                     saveEventListner.eventFired(button);
                 }
             });
@@ -70,7 +71,7 @@ public class UserNamePresenter extends MetadataPresenter {
         ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addText(messages.userNameScreenText());
 //        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
-        ((MetadataView) simpleView).addField(firstNameField.getPostName(), firstNameField.getFieldLabel(), "");
+        ((MetadataView) simpleView).addField(firstNameField, "");
 //        }        
         ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
@@ -96,7 +97,7 @@ public class UserNamePresenter extends MetadataPresenter {
     }
 
     @Override
-    protected void saveFields() {
+    protected void saveFields() throws MetadataFieldException {
         if (isNewUser) {
             userResults.clearResults();
             userResults.clearMetadata();
