@@ -33,9 +33,12 @@ public class MetadataView extends ComplexView {
     private FlexTable flexTable = null;
     final private HashMap<MetadataField, TextBox> fieldBoxes;
     private TextBox firstTextBox = null;
+    private final Label errorText;
 
     public MetadataView() {
         fieldBoxes = new HashMap<>();
+        errorText = new Label();
+//        errorText.setStylePrimaryName("metadataErrorMessage");
     }
 
     public void addField(final MetadataField metadataField, final String existingValue) {
@@ -75,12 +78,21 @@ public class MetadataView extends ComplexView {
     }
 
     public void showFieldError(MetadataField metadataField) {
-        fieldBoxes.get(metadataField).setStylePrimaryName("metadataError");
+        final TextBox fieldBox = fieldBoxes.get(metadataField);
+        fieldBox.setStylePrimaryName("metadataError");
+        errorText.setText(metadataField.getControlledMessage());
+        for (int rowCounter = 0; rowCounter < flexTable.getRowCount(); rowCounter++) {
+            if (fieldBox.equals(flexTable.getWidget(rowCounter, 1))) {
+                flexTable.setWidget(rowCounter, 2, errorText);
+                break;
+            }
+        }
     }
 
     public void clearErrors() {
         for (TextBox textBox : fieldBoxes.values()) {
             textBox.setStylePrimaryName("metadataOK");
         }
+        flexTable.remove(errorText);
     }
 }

@@ -52,6 +52,10 @@ public class MetadataField {
         return controlledVocabulary;
     }
 
+    public String getControlledMessage() {
+        return controlledMessage;
+    }
+
     public void validateValue(String value) throws MetadataFieldException {
         if (controlledRegex == null) {
             return;

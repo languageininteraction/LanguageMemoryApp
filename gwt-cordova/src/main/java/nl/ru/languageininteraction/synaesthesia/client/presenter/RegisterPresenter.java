@@ -103,8 +103,10 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public void onClick(ClickEvent event) {
-                event.preventDefault();
-                agreementCheckBox.setValue(!agreementCheckBox.getValue());
+//                event.preventDefault();
+//                event.stopPropagation();
+                // on chrome the check box is changed before this code is reached
+//                agreementCheckBox.setValue(!registerButton.isEnabled());
                 registerButton.setEnabled(agreementCheckBox.getValue());
             }
         });
