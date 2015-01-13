@@ -111,6 +111,7 @@ public class AppController implements AppEventListner {
                     userResults.addDummyResults(stimuli[0]);
                     userResults.addDummyResults(stimuli[1]);
                     userResults.addDummyResults(stimuli[2]);
+                    userResults.addDummyResults(stimuli[3]);
                 case report:
                     this.presenter = new ReportPresenter(widgetTag, userResults);
                     if (userResults.canRegister()) {
