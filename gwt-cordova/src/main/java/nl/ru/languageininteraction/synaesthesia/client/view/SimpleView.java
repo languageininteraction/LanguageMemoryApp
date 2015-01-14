@@ -145,6 +145,10 @@ public class SimpleView extends AbstractView {
         footerPanel.setVisible(footerPanel.getWidgetCount() > 0);
     }
 
+    protected void scrollToPosition(int position) {
+        scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + position - scrollPanel.getAbsoluteTop());
+    }
+
     @Override
     protected void parentResized(int height, int width, String units) {
         footerPanel.setWidth(width + "px");

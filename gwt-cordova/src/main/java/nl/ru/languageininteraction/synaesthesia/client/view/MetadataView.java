@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
@@ -34,10 +35,12 @@ public class MetadataView extends ComplexView {
     final private HashMap<MetadataField, TextBox> fieldBoxes;
     private TextBox firstTextBox = null;
     private final Label errorText;
+    private final VerticalPanel keyboardPadding;
 
     public MetadataView() {
         fieldBoxes = new HashMap<>();
         errorText = new Label();
+        keyboardPadding = new VerticalPanel();
 //        errorText.setStylePrimaryName("metadataErrorMessage");
     }
 
@@ -52,6 +55,13 @@ public class MetadataView extends ComplexView {
         final TextBox textBox = new TextBox();
         textBox.setStylePrimaryName("metadataOK");
         textBox.setText((existingValue == null) ? "" : existingValue);
+//        textBox.addFocusHandler(new FocusHandler() {
+//
+//            @Override
+//            public void onFocus(FocusEvent event) {
+//                scrollToPosition(textBox.getAbsoluteTop());
+//            }
+//        });
         flexTable.setWidget(rowCount, 1, textBox);
         fieldBoxes.put(metadataField, textBox);
         if (firstTextBox == null) {
@@ -94,5 +104,16 @@ public class MetadataView extends ComplexView {
             textBox.setStylePrimaryName("metadataOK");
         }
         flexTable.remove(errorText);
+    }
+
+    public void addKeyboardPadding() {
+        outerPanel.add(keyboardPadding);
+        keyboardPadding.add(new Label(""));
+    }
+
+    @Override
+    protected void parentResized(int height, int width, String units) {
+        super.parentResized(height, width, units);
+        keyboardPadding.setHeight(height * 0.8 + units);
     }
 }
