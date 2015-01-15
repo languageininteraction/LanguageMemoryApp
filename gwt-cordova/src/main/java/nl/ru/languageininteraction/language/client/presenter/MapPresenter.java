@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.view.MapView;
@@ -28,7 +28,7 @@ import nl.ru.languageininteraction.language.client.view.MapView;
  */
 public class MapPresenter extends AbstractPresenter implements Presenter {
 
-    public MapPresenter(RootPanel widgetTag) {
+    public MapPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new MapView());
     }
 

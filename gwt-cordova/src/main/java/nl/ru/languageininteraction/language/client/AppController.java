@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client;
 
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
@@ -35,6 +35,7 @@ import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
+import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -44,15 +45,15 @@ public class AppController implements AppEventListner {
 
     private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
-    private final RootPanel widgetTag;
+    private final RootLayoutPanel widgetTag;
     private Presenter presenter;
     private final UserResults userResults;
-//    private final StimuliProvider stimuliProvider;
+    private final StimuliProvider stimuliProvider;
 
-    public AppController(RootPanel widgetTag) {
+    public AppController(RootLayoutPanel widgetTag) {
         this.widgetTag = widgetTag;
-//        stimuliProvider = new StimuliProvider();
-        userResults = new LocalStorage().getStoredData();
+        stimuliProvider = new StimuliProvider();
+        userResults = new LocalStorage().getStoredData(stimuliProvider.getDefaultStimuli());
 //        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
     }
 
@@ -163,10 +164,15 @@ public class AppController implements AppEventListner {
     public void start() {
         setBackButtonAction();
         requestApplicationState(AppEventListner.ApplicationState.start);
+        addKeyboardEvents();
     }
 
     public void backAction() {
         presenter.fireBackEvent();
+    }
+
+    public void resizeAction() {
+        presenter.fireResizeEvent();
     }
 
     public static native void trackView(String applicationState) /*-{
@@ -183,6 +189,20 @@ public class AppController implements AppEventListner {
      e.preventDefault();
      appController.@nl.ru.languageininteraction.language.client.AppController::backAction()();
      }, false);
+     }-*/;
+
+    private native void addKeyboardEvents() /*-{
+     var appController = this;
+     if($wnd.Keyboard) {
+     $wnd.Keyboard.onshow = function () {
+     $doc.getElementById("platformTag").innerHTML = "Keyboard.onshow GWT called";
+     appController.@nl.ru.languageininteraction.language.client.AppController::resizeAction()();
+     }
+     $wnd.Keyboard.onhide = function () {
+     $doc.getElementById("platformTag").innerHTML = "Keyboard.onhide GWT called";
+     appController.@nl.ru.languageininteraction.language.client.AppController::resizeAction()();
+     }
+     }
      }-*/;
 
     private native void exitApplication() /*-{

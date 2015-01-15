@@ -33,6 +33,7 @@ import nl.ru.languageininteraction.synaesthesia.client.model.GroupScoreData;
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.util.ScoreCalculator;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.service.SocialMediaPost;
 
 /**
  * @since Oct 14, 2014 10:57:39 AM (creation date)
@@ -96,13 +97,13 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
 
         if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
-            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext1());
-            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext2());
-            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext3());
+//            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext1());
+//            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext2());
+//            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext3());
         } else {
-            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext1());
-            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext2());
-            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext3());
+//            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext1());
+//            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext2());
+//            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext3());
         }
         ((ReportView) simpleView).addPadding();
     }

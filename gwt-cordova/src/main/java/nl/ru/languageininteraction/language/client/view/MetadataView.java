@@ -17,18 +17,14 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import nl.ru.languageininteraction.language.client.view.SimpleView;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
-import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.MetadataField;
+import nl.ru.languageininteraction.synaesthesia.client.view.ComplexView;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)

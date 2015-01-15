@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
@@ -30,7 +30,7 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class AutotypRegionsMapScreen extends AbstractPresenter implements Presenter {
 
-    public AutotypRegionsMapScreen(RootPanel widgetTag) {
+    public AutotypRegionsMapScreen(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 

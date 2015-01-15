@@ -17,12 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
-import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
-import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.view.MenuView;

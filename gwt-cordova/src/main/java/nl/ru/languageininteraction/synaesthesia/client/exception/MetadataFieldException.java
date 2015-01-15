@@ -17,7 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.exception;
 
-import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
+import nl.ru.languageininteraction.language.client.model.MetadataField;
 
 /**
  * @since Jan 13, 2015 3:21:11 PM (creation date)

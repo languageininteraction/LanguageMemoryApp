@@ -17,13 +17,13 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import nl.ru.languageininteraction.language.client.view.SimpleView;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import nl.ru.languageininteraction.synaesthesia.client.view.ComplexView;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;

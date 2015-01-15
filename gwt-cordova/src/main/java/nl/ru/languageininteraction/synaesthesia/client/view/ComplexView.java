@@ -27,7 +27,8 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
  * @since Jan 8, 2015 5:01:05 PM (creation date)
@@ -35,7 +36,7 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
  */
 public class ComplexView extends SimpleView {
 
-    final VerticalPanel outerPanel;
+    final protected VerticalPanel outerPanel;
 
     public ComplexView() {
         outerPanel = new VerticalPanel();
