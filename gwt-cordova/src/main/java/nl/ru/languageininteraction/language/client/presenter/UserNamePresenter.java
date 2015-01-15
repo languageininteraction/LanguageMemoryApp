@@ -25,7 +25,7 @@ import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.view.MetadataView;
-import nl.ru.languageininteraction.synaesthesia.client.exception.MetadataFieldException;
+import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 
 /**
  * @since Nov 14, 2014 3:28:10 PM (creation date)

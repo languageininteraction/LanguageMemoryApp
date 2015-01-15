@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.model;
 
 import java.util.Objects;
-import nl.ru.languageininteraction.synaesthesia.client.exception.MetadataFieldException;
+import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 
 /**
  * @since Oct 31, 2014 4:15:16 PM (creation date)
