@@ -28,6 +28,7 @@ import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.language.client.presenter.MatchLanguagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.presenter.GuessRoundPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
@@ -73,7 +74,11 @@ public class AppController implements AppEventListner {
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.match, null);
+                    presenter.setState(this, ApplicationState.guess, null);
+                    break;
+                case guess:
+                    this.presenter = new GuessRoundPresenter(widgetTag, new AudioPlayer());
+                    presenter.setState(this, ApplicationState.version, ApplicationState.match);
                     break;
                 case match:
                     this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer());
@@ -102,7 +107,7 @@ public class AppController implements AppEventListner {
                     break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.match);
+                    presenter.setState(this, null, ApplicationState.guess);
 //                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
 //                case stimulus:

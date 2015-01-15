@@ -24,18 +24,18 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.view.AbstractSvgView;
-import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
+import nl.ru.languageininteraction.language.client.view.GuessRoundView;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MatchLanguagePresenter extends AbstractPresenter implements Presenter {
+public class GuessRoundPresenter extends AbstractPresenter implements Presenter {
 
     final AudioPlayer audioPlayer;
 
-    public MatchLanguagePresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
-        super(widgetTag, new MatchLanguageView(audioPlayer));
+    public GuessRoundPresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
+        super(widgetTag, new GuessRoundView(audioPlayer));
         this.audioPlayer = audioPlayer;
     }
 

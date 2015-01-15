@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.150-testing</version>
+    <version>0.1.152-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -160,6 +160,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Version</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.AutotypRegions</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.GuessRound</i18nMessagesBundle>
 <!--                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage1</i18nMessagesBundle>-->
                     </i18nMessagesBundles>
                 </configuration>

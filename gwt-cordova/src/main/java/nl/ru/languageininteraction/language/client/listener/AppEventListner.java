@@ -39,7 +39,8 @@ public interface AppEventListner {
         setuser(messages.setUserMenuLabel()),
         adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         stimulus(messages.stimulusMenuLabel()),
-        match("match"),
+        guess("Guess"),
+        match("Match"),
         map(messages.mapMenuLabel()),
         autotyp_regions("AutotypRegions"),
         alien("Alien"),

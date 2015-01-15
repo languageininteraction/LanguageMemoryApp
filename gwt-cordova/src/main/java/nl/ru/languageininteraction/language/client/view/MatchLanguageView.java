@@ -18,16 +18,7 @@
 package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.safehtml.shared.SafeHtmlUtils;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
@@ -38,38 +29,16 @@ import nl.ru.languageininteraction.language.client.util.SvgTemplate;
  * @since Nov 26, 2014 4:11:13 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MatchLanguageView extends SimpleView {
+public class MatchLanguageView extends AbstractSvgView {
 
-    final VerticalPanel verticalPanel = new VerticalPanel();
-    private int height;
-    private int width;
-    private final AudioPlayer audioPlayer;
-
-    public MatchLanguageView(final AudioPlayer audioPlayer) throws AudioException {
-        this.audioPlayer = audioPlayer;
+    public MatchLanguageView(AudioPlayer audioPlayer) throws AudioException {
+        super(audioPlayer);
     }
-
     protected final MatchLanguageBuilder matchLanguageBuilder = new MatchLanguageBuilder();
 
     @Override
-    protected void parentResized(int height, int width, String units) {
-        final Element diagramElement = DOM.getElementById(SvgGroupStates.diagram.name());
-        if (diagramElement != null) {
-            diagramElement.setAttribute("height", height - HEADER_SIZE * 2 + units);
-            diagramElement.setAttribute("width", width + units);
-        }
-        super.parentResized(height, width, units);
-    }
-
-    public void setupScreen() {
-//        final Label label = new Label("clicked labels show here");
-//        verticalPanel.add(label);
-        SafeHtmlBuilder builder = new SafeHtmlBuilder();
-        height = Window.getClientHeight();
-        width = Window.getClientWidth();
-        builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
-        builder.append(SafeHtmlUtils.fromTrustedString("<svg id='" + SvgGroupStates.diagram.name() + "' height='" + height + "px' width='" + width + "px' >"));
-//        matchLanguageBuilder.getSvg(builder);
+    protected void getSvg(SafeHtmlBuilder builder) {
+        //        matchLanguageBuilder.getSvg(builder);
 //        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
         matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
@@ -90,27 +59,10 @@ public class MatchLanguageView extends SimpleView {
         matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.hidden);
 //        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
 //        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
-        builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
-        final HTML html = new HTML(builder.toSafeHtml());
-        html.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                performClick(Element.as(event.getNativeEvent().getEventTarget()));
-            }
-        });
-        html.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                performClick(Element.as(event.getNativeEvent().getEventTarget()));
-            }
-        });
-        verticalPanel.add(html);
-        setContent(verticalPanel);
     }
 
-    private void performClick(final Element targetElement) {
+    @Override
+    protected void performClick(final Element targetElement) {
 
         final Element parentElement = targetElement.getParentElement();
         final String elementId = parentElement.getId();
@@ -186,33 +138,4 @@ public class MatchLanguageView extends SimpleView {
 //            label.setText(targetElement.getId());
         }
     }
-
-    private void showGroup(SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
-    }
-
-    private void hideGroup(SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
-    }
-//    private void showGroup(SvgGroupStates group) {
-////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
-//        SafeHtmlBuilder builder = new SafeHtmlBuilder();
-//        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.visible);
-////        final HTML html = new HTML(builder.toSafeHtml());
-//        DOM.getElementById(SvgGroupStates.diagram.name()).setInnerSafeHtml(builder.toSafeHtml());
-//    }
-//
-//    private void hideGroup(SvgGroupStates group) {
-////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
-//        DOM.getElementById(SvgGroupStates.ChoiceArrow2.name()).removeFromParent();
-//    }
 }
