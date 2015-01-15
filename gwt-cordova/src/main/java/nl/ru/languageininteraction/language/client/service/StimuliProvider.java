@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.language.client.service;
 
 import com.google.gwt.core.client.GWT;
 import java.util.ArrayList;
-import nl.ru.languageininteraction.synaesthesia.client.Stimuli;
+import nl.ru.languageininteraction.language.client.Stimuli;
 import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 import nl.ru.languageininteraction.language.client.model.Stimulus;
 
