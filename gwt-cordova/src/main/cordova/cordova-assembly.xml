@@ -33,6 +33,17 @@
             <filtered>false</filtered>
         </fileSet>
         <fileSet>
+            <directory>${project.build.directory}/${project.build.finalName}</directory>
+            <includes>
+                <include>/media/**</include>
+            </includes> 
+            <excludes>
+                <exclude>/media/*.sh</exclude>
+            </excludes> 
+            <outputDirectory>/www</outputDirectory>
+            <filtered>false</filtered>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/src/main/cordova</directory>
             <includes>
                 <include>config.xml</include>
