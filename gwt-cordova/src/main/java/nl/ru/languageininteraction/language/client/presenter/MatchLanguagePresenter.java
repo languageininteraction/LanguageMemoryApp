@@ -17,10 +17,12 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
 
 /**
@@ -29,13 +31,28 @@ import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
  */
 public class MatchLanguagePresenter extends AbstractPresenter implements Presenter {
 
-    public MatchLanguagePresenter(RootPanel widgetTag) throws AudioException {
-        super(widgetTag, new MatchLanguageView());
+    final AudioPlayer audioPlayer;
+
+    public MatchLanguagePresenter(RootPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
+        super(widgetTag, new MatchLanguageView(audioPlayer));
+        this.audioPlayer = audioPlayer;
     }
 
     @Override
-    public void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.mapScreenTitle(), titleBarListner);
+    public void setTitle(final PresenterEventListner titleBarListner) {
+        simpleView.addTitle(messages.mapScreenTitle(), new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return titleBarListner.getLabel();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                audioPlayer.stopAll();
+                titleBarListner.eventFired(button);
+            }
+        });
     }
 
     @Override

@@ -32,8 +32,8 @@ import nl.ru.languageininteraction.language.client.presenter.InstructionsPresent
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
-import nl.ru.languageininteraction.language.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
+import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
 
 /**
@@ -75,7 +75,7 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, ApplicationState.match, null);
                     break;
                 case match:
-                    this.presenter = new MatchLanguagePresenter(widgetTag);
+                    this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer());
                     presenter.setState(this, ApplicationState.version, ApplicationState.map);
                     break;
                 case map:
@@ -102,7 +102,7 @@ public class AppController implements AppEventListner {
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
                     presenter.setState(this, null, ApplicationState.match);
-                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
 //                case stimulus:
 //                    if (userResults.getPendingStimuliGroup() == null) {

@@ -44,8 +44,8 @@ public class MatchLanguageView extends SimpleView {
     private int width;
     private final AudioPlayer audioPlayer;
 
-    public MatchLanguageView() throws AudioException {
-        this.audioPlayer = new AudioPlayer();
+    public MatchLanguageView(final AudioPlayer audioPlayer) throws AudioException {
+        this.audioPlayer = audioPlayer;
     }
 
     protected final MatchLanguageBuilder matchLanguageBuilder = new MatchLanguageBuilder();
@@ -98,7 +98,6 @@ public class MatchLanguageView extends SimpleView {
                     SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
                     switch (svgGroup) {
                         case TargetButton:
-                            audioPlayer.playSampleAudio1();
                             showGroup(SvgGroupStates.ChoiceArrow1);
                             showGroup(SvgGroupStates.ChoiceArrow2);
                             showGroup(SvgGroupStates.ChoiceArrow3);
@@ -109,9 +108,9 @@ public class MatchLanguageView extends SimpleView {
                             showGroup(SvgGroupStates.SampleButton3);
                             showGroup(SvgGroupStates.SampleButton4);
                             showGroup(SvgGroupStates.SampleButton5);
+                            audioPlayer.playSampleAudio1();
                             break;
                         case SampleButton1:
-                            audioPlayer.playSampleAudio2();
                             showGroup(SvgGroupStates.ChoiceArrow1);
                             hideGroup(SvgGroupStates.ChoiceArrow2);
                             hideGroup(SvgGroupStates.ChoiceArrow3);
@@ -119,9 +118,9 @@ public class MatchLanguageView extends SimpleView {
                             hideGroup(SvgGroupStates.ChoiceArrow5);
                             showGroup(SvgGroupStates.IncorrectButton);
                             showGroup(SvgGroupStates.CorrectButton);
+                            audioPlayer.playSampleAudio2();
                             break;
                         case SampleButton2:
-                            audioPlayer.playSampleAudio3();
                             hideGroup(SvgGroupStates.ChoiceArrow1);
                             showGroup(SvgGroupStates.ChoiceArrow2);
                             hideGroup(SvgGroupStates.ChoiceArrow3);
@@ -129,9 +128,9 @@ public class MatchLanguageView extends SimpleView {
                             hideGroup(SvgGroupStates.ChoiceArrow5);
                             showGroup(SvgGroupStates.IncorrectButton);
                             showGroup(SvgGroupStates.CorrectButton);
+                            audioPlayer.playSampleAudio3();
                             break;
                         case SampleButton3:
-                            audioPlayer.playSampleAudio1();
                             hideGroup(SvgGroupStates.ChoiceArrow1);
                             hideGroup(SvgGroupStates.ChoiceArrow2);
                             showGroup(SvgGroupStates.ChoiceArrow3);
@@ -139,9 +138,9 @@ public class MatchLanguageView extends SimpleView {
                             hideGroup(SvgGroupStates.ChoiceArrow5);
                             showGroup(SvgGroupStates.IncorrectButton);
                             showGroup(SvgGroupStates.CorrectButton);
+                            audioPlayer.playSampleAudio1();
                             break;
                         case SampleButton4:
-                            audioPlayer.playSampleAudio2();
                             hideGroup(SvgGroupStates.ChoiceArrow1);
                             hideGroup(SvgGroupStates.ChoiceArrow2);
                             hideGroup(SvgGroupStates.ChoiceArrow3);
@@ -149,9 +148,9 @@ public class MatchLanguageView extends SimpleView {
                             hideGroup(SvgGroupStates.ChoiceArrow5);
                             showGroup(SvgGroupStates.IncorrectButton);
                             showGroup(SvgGroupStates.CorrectButton);
+                            audioPlayer.playSampleAudio2();
                             break;
                         case SampleButton5:
-                            audioPlayer.playSampleAudio3();
                             hideGroup(SvgGroupStates.ChoiceArrow1);
                             hideGroup(SvgGroupStates.ChoiceArrow2);
                             hideGroup(SvgGroupStates.ChoiceArrow3);
@@ -159,6 +158,7 @@ public class MatchLanguageView extends SimpleView {
                             showGroup(SvgGroupStates.ChoiceArrow5);
                             showGroup(SvgGroupStates.IncorrectButton);
                             showGroup(SvgGroupStates.CorrectButton);
+                            audioPlayer.playSampleAudio3();
                             break;
                     }
                 } else {
@@ -177,4 +177,25 @@ public class MatchLanguageView extends SimpleView {
     private void hideGroup(SvgGroupStates group) {
         DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
     }
+//    private void showGroup(SvgGroupStates group) {
+////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
+//        SafeHtmlBuilder builder = new SafeHtmlBuilder();
+//        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.visible);
+////        final HTML html = new HTML(builder.toSafeHtml());
+//        DOM.getElementById(SvgGroupStates.diagram.name()).setInnerSafeHtml(builder.toSafeHtml());
+//    }
+//
+//    private void hideGroup(SvgGroupStates group) {
+////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
+//        DOM.getElementById(SvgGroupStates.ChoiceArrow2.name()).removeFromParent();
+//    }
 }

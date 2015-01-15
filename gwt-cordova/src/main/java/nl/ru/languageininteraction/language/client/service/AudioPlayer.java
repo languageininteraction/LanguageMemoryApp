@@ -26,40 +26,36 @@ import nl.ru.languageininteraction.language.client.exception.AudioException;
  */
 public class AudioPlayer {
 
-    private final Audio sampleAudio1;
-    private final Audio sampleAudio2;
-    private final Audio sampleAudio3;
+    private final Audio audioPlayer;
 
     public AudioPlayer() throws AudioException {
-        sampleAudio1 = Audio.createIfSupported();
-        sampleAudio2 = Audio.createIfSupported();
-        sampleAudio3 = Audio.createIfSupported();
-        if (sampleAudio1 == null || sampleAudio2 == null || sampleAudio3 == null) {
+        audioPlayer = Audio.createIfSupported();
+        if (audioPlayer == null) {
             throw new AudioException("audio not supportered");
         }
-        sampleAudio1.setSrc("media/Sample1.wav");
-        sampleAudio2.setSrc("media/Sample2.wav");
-        sampleAudio3.setSrc("media/Sample3.wav");
     }
 
     public void playSampleAudio1() {
-        sampleAudio1.setCurrentTime(0);
-        sampleAudio1.play();
+        audioPlayer.setSrc("media/Sample1.wav");
+        audioPlayer.setCurrentTime(0);
+        audioPlayer.play();
     }
 
     public void playSampleAudio2() {
-        sampleAudio2.setCurrentTime(0);
-        sampleAudio2.play();
+        audioPlayer.setSrc("media/Sample2.wav");
+        audioPlayer.setCurrentTime(0);
+        audioPlayer.play();
     }
 
     public void playSampleAudio3() {
-        sampleAudio3.setCurrentTime(0);
-        sampleAudio3.play();
+        audioPlayer.setSrc("media/Sample3.wav");
+        audioPlayer.setCurrentTime(0);
+        audioPlayer.play();
     }
 
     public void stopAll() {
-        sampleAudio1.pause();
-        sampleAudio2.pause();
-        sampleAudio3.pause();
+        audioPlayer.pause();
+        audioPlayer.setCurrentTime(0);
+        audioPlayer.play();
     }
 }
