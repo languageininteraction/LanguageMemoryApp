@@ -93,6 +93,10 @@ public class UserResults {
         this.pendingStimuliGroup = pendingStimuliGroup;
     }
 
+    public void deleteStimuliGroupResults(StimuliGroup stimuliGroup) {
+        results.remove(stimuliGroup);
+    }
+
     public Double getBestScore() {
         return bestScore;
     }

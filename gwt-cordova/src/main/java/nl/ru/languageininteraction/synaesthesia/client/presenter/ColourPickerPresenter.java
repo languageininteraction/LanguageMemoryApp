@@ -122,6 +122,8 @@ public class ColourPickerPresenter implements Presenter {
 
             @Override
             public void eventFired(Button button) {
+                // delete the uncomplete test results
+                userResults.deleteStimuliGroupResults(stimuliGroup);
                 appEventListner.requestApplicationState(prevState);
             }
         });
