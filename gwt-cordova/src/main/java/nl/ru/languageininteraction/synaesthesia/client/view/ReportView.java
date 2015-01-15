@@ -20,7 +20,6 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -33,19 +32,7 @@ import nl.ru.languageininteraction.language.client.model.StimuliGroup;
  * @since Oct 14, 2014 10:57:45 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class ReportView extends SimpleView {
-
-    final VerticalPanel outerPanel;
-
-    public ReportView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
-    }
+public class ReportView extends ComplexView {
 
     public void showResults(StimuliGroup stimuliGroup, GroupScoreData calculatedScores) {
         int columnCount = calculatedScores.getScoreDataList().get(0).getColourData().size();

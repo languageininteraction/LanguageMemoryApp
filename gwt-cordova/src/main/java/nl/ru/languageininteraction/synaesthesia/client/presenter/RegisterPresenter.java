@@ -24,6 +24,7 @@ import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import com.google.gwt.user.client.ui.RootPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
@@ -46,7 +47,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
     private final UserResults userResults;
     private AppEventListner.ApplicationState nextState;
 
-    public RegisterPresenter(RootPanel widgetTag, UserResults userResults) {
+    public RegisterPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new RegisterView());
         this.userResults = userResults;
     }
@@ -72,6 +73,19 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public String getLabel() {
+                return messages.editMetadataLabel();
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.metadata);
+            }
+        });
+
+        ((RegisterView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
                 return messages.informationSheetLink();
             }
 
@@ -80,8 +94,8 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.moreinfo);
             }
         });
-        ((RegisterView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
-        final CheckBox agreementCheckBox = ((RegisterView) simpleView).addCheckBox(messages.informationSheetCheckBox());
+        ((RegisterView) simpleView).addText(messages.informationSheetCheckBox());
+        final CheckBox agreementCheckBox = ((RegisterView) simpleView).addCheckBox("");
         final Button registerButton = addRegisterButton(appEventListner);
         agreementCheckBox.setValue(false);
         registerButton.setEnabled(false);
@@ -89,6 +103,19 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public void onClick(ClickEvent event) {
+//                event.preventDefault();
+//                event.stopPropagation();
+                // on chrome the check box is changed before this code is reached
+//                agreementCheckBox.setValue(!registerButton.isEnabled());
+                registerButton.setEnabled(agreementCheckBox.getValue());
+            }
+        });
+        agreementCheckBox.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                agreementCheckBox.setValue(!agreementCheckBox.getValue());
                 registerButton.setEnabled(agreementCheckBox.getValue());
             }
         });
@@ -119,12 +146,12 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
                             @Override
                             public void eventFired(Button button) {
-                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.start);
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
                             }
 
                             @Override
                             public String getLabel() {
-                                return AppEventListner.ApplicationState.start.label;
+                                return AppEventListner.ApplicationState.version.label;
                             }
 
                         });

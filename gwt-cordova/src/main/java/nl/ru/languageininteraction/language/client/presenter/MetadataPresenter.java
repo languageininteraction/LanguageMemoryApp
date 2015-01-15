@@ -40,7 +40,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     protected final UserResults userResults;
     protected PresenterEventListner saveEventListner = null;
 
-    public MetadataPresenter(RootPanel widgetTag, UserResults userResults) {
+    public MetadataPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MetadataView());
         this.userResults = userResults;
     }
@@ -52,8 +52,13 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
             @Override
             public void eventFired(Button button) {
-                saveFields();
-                appEventListner.requestApplicationState(nextState);
+                try {
+                    ((MetadataView) simpleView).clearErrors();
+                    saveFields();
+                    appEventListner.requestApplicationState(nextState);
+                } catch (MetadataFieldException exception) {
+                    ((MetadataView) simpleView).showFieldError(exception.getMetadataField());
+                }
             }
 
             @Override
@@ -61,7 +66,12 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
                 return nextState.label;
             }
         };
-        ((MetadataView) simpleView).setButton(ButtonType.next, new PresenterEventListner() {
+        addNextButton();
+        ((MetadataView) simpleView).addKeyboardPadding();
+    }
+
+    protected void addNextButton() {
+        ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -75,10 +85,11 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         });
     }
 
-    protected void saveFields() {
-        // todo: this should validate the fields, eg blank user name should throw and invalid email should throw
-        for (String fieldName : ((MetadataView) simpleView).getFieldNames()) {
-            userResults.setMetadataValue(fieldName, ((MetadataView) simpleView).getFieldValue(fieldName));
+    protected void saveFields() throws MetadataFieldException {
+        for (MetadataField fieldName : ((MetadataView) simpleView).getFieldNames()) {
+            String fieldString = ((MetadataView) simpleView).getFieldValue(fieldName);
+            fieldName.validateValue(fieldString);
+            userResults.setMetadataValue(fieldName.getPostName(), fieldString);
         }
         new LocalStorage().storeData(userResults);
     }
@@ -92,7 +103,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     protected void setContent(AppEventListner appEventListner) {
         ((MetadataView) simpleView).addText(messages.metadataScreenText());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            ((MetadataView) simpleView).addField(metadataField.getPostName(), metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+            ((MetadataView) simpleView).addField(metadataField, userResults.getMetadataValue(metadataField.getPostName()));
         }
     }
 

@@ -30,7 +30,7 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class InstructionsPresenter extends AbstractPresenter implements Presenter {
 
-    public InstructionsPresenter(RootPanel widgetTag) {
+    public InstructionsPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 

@@ -31,13 +31,13 @@ public class LocalStorage {
     private static final String USER_RESULTS = "UserResults.";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
-    public UserResults getStoredData() {
-        UserResults userResults = new UserResults();
+    public UserResults getStoredData(StimuliGroup defaultStimuliGroup) {
+        UserResults userResults = new UserResults(defaultStimuliGroup);
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
                 final String storedValue = dataStore.getItem(USER_RESULTS + metadataField.getPostName());
-                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null) ? "" : storedValue);
+                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null || "undefined".equals(storedValue)) ? "" : storedValue);
             }
         }
         return userResults;

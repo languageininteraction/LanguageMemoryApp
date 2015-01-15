@@ -25,7 +25,7 @@
         <fileSet>
             <directory>${project.build.directory}/${project.build.finalName}</directory>
             <includes>
-                <include>/images/icon.jpg</include>
+                <include>/images/icon.png</include>
                 <include>*.*</include>
                 <include>/LanguageMemory/**</include>
             </includes>  

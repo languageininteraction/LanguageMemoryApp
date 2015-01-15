@@ -35,17 +35,19 @@ public class UserNamePresenter extends MetadataPresenter {
     private boolean isNewUser = true;
     final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
 
-    public UserNamePresenter(RootPanel widgetTag, UserResults userResults) {
+    public UserNamePresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, userResults);
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.userNameScreenTitle(), titleBarListner);
+        simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
+        ((MetadataView) simpleView).addText(messages.introductionscreentext());
+        ((MetadataView) simpleView).addPadding();
         final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
         if (userNameValue != null && !userNameValue.isEmpty()) {
             ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));
@@ -59,17 +61,18 @@ public class UserNamePresenter extends MetadataPresenter {
                 @Override
                 public void eventFired(Button button) {
                     isNewUser = false;
-                    ((MetadataView) simpleView).setFieldValue(firstNameField.getPostName(), userNameValue);
+                    ((MetadataView) simpleView).setFieldValue(firstNameField, userNameValue);
                     saveEventListner.eventFired(button);
                 }
             });
         }
-        ((MetadataView) simpleView).addText("");
-        ((MetadataView) simpleView).addText("");
+        ((MetadataView) simpleView).addPadding();
+        ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addText(messages.userNameScreenText());
 //        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
-        ((MetadataView) simpleView).addField(firstNameField.getPostName(), firstNameField.getFieldLabel(), "");
-//        }
+        ((MetadataView) simpleView).addField(firstNameField, "");
+//        }        
+        ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
             @Override
@@ -83,12 +86,17 @@ public class UserNamePresenter extends MetadataPresenter {
                 saveEventListner.eventFired(button);
             }
         });
-        ((MetadataView) simpleView).addText("");
-        ((MetadataView) simpleView).addText("");
+        ((MetadataView) simpleView).addPadding();
+        ((MetadataView) simpleView).addPadding();
     }
 
     @Override
-    protected void saveFields() {
+    protected void addNextButton() {
+        // this screen should not have a next button
+    }
+
+    @Override
+    protected void saveFields() throws MetadataFieldException {
         if (isNewUser) {
             userResults.clearResults();
             userResults.clearMetadata();

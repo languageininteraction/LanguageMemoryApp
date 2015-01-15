@@ -17,12 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -35,24 +30,14 @@ import nl.ru.languageininteraction.language.client.listener.PresenterEventListne
  * @since Oct 21, 2014 5:15:19 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class RegisterView extends SimpleView {
+public class RegisterView extends ComplexView {
 
-    final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
 
-    public RegisterView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
-    }
-
+    @Override
     public void clearGui() {
-        outerPanel.clear();
+        super.clearGui();
         flexTable = null;
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
     }
 
     public void addField(final String displayName, final String value) {
@@ -66,38 +51,10 @@ public class RegisterView extends SimpleView {
         flexTable.setWidget(rowCount, 1, new HTML(new SafeHtmlBuilder().appendEscapedLines(value).toSafeHtml()));
     }
 
-    public void addLink(String label, final String target) {
-        final Anchor anchor = new Anchor(new SafeHtmlBuilder().appendEscapedLines(label).toSafeHtml());
-        // this link relies on the org.apache.cordova.inappbrowser which offers secure viewing of external html pages and handles user navigation such as back navigation.
-        // in this case the link will be opend in the system browser rather than in the cordova application.
-        outerPanel.add(anchor);
-        anchor.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                Window.open(target, "_system", "");
-            }
-        });
-        anchor.addStyleName("pageLink");
-    }
-
     public CheckBox addCheckBox(String label) {
         final CheckBox checkBox = new CheckBox(new SafeHtmlBuilder().appendEscapedLines(label).toSafeHtml());
+        checkBox.addStyleName("optionCheckBox");
         outerPanel.add(checkBox);
         return checkBox;
-    }
-
-    public void addOptionButton(final PresenterEventListner presenterListerner) {
-        final Button nextButton = new Button(presenterListerner.getLabel());
-        nextButton.addStyleName("optionButton");
-        nextButton.setEnabled(true);
-        outerPanel.add(nextButton);
-        nextButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                presenterListerner.eventFired(nextButton);
-            }
-        });
     }
 }

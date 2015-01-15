@@ -15,19 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.presenter;
-
-import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+package nl.ru.languageininteraction.synaesthesia.client.service;
 
 /**
- * @since Oct 10, 2014 10:05:41 AM (creation date)
+ * @since Dec 11, 2014 3:47:25 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface Presenter {
+public class SocialMediaPost {
 
-    void setState(AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState);
+    public native void postText(String postText) /*-{
+     $wnd.plugins.socialsharing.share(postText);
+     }-*/;
 
-    void fireBackEvent();
+    // message, subject, image and link
+    public native void postImageAndLink(String postText, String postSubject, String imagePath, String linkUrl) /*-{
+     $wnd.plugins.socialsharing.share(postText, postSubject, imagePath, linkUrl);
+     }-*/;
 
-    void fireResizeEvent();
+    //'www/images/icon.png'
+    public native void postImage(String postText, String postSubject, String imagePath) /*-{
+     $wnd.plugins.socialsharing.share(postText, postSubject, imagePath)
+     }-*/;
 }

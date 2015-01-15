@@ -36,8 +36,8 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
     private final StimuliProvider stimuliProvider;
     private final UserResults userResults;
 
-    public StimulusMenuPresenter(RootPanel widgetTag, StimuliProvider stimuliProvider, UserResults userResults) {
-        super(widgetTag);
+    public StimulusMenuPresenter(RootLayoutPanel widgetTag, StimuliProvider stimuliProvider, UserResults userResults) {
+        super(widgetTag, userResults);
         this.stimuliProvider = stimuliProvider;
         this.userResults = userResults;
     }
@@ -62,15 +62,14 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
                 @Override
                 public void eventFired(Button button) {
                     userResults.setPendingStimuliGroup(stimuliGroup);
-                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.stimulus);
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.instructions);
                 }
 
                 @Override
                 public String getLabel() {
                     return buttonLabel;
                 }
-
-            });
+            }, true);
         }
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
     }

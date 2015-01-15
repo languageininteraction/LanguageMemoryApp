@@ -32,12 +32,12 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
 public abstract class AbstractPresenter implements Presenter {
 
     protected final Messages messages = GWT.create(Messages.class);
-    protected final RootPanel widgetTag;
+    protected final RootLayoutPanel widgetTag;
     final protected SimpleView simpleView;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
 
-    public AbstractPresenter(RootPanel widgetTag, SimpleView simpleView) {
+    public AbstractPresenter(RootLayoutPanel widgetTag, SimpleView simpleView) {
         this.widgetTag = widgetTag;
         this.simpleView = simpleView;
     }
@@ -98,6 +98,11 @@ public abstract class AbstractPresenter implements Presenter {
         if (backEventListner != null) {
             backEventListner.eventFired(null);
         }
+    }
+
+    @Override
+    public void fireResizeEvent() {
+        simpleView.resizeView();
     }
 
     protected abstract void setTitle(PresenterEventListner titleBarListner);

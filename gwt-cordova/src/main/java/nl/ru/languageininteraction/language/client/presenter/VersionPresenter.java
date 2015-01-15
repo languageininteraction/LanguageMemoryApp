@@ -32,8 +32,8 @@ public class VersionPresenter extends AbstractPresenter {
 
     private final Version version = GWT.create(Version.class);
 
-    public VersionPresenter(RootPanel widgetTag) {
-        super(widgetTag, new SimpleView());
+    public VersionPresenter(RootLayoutPanel widgetTag) {
+        super(widgetTag, new ComplexView());
     }
 
     @Override
@@ -43,7 +43,8 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText("Version: " + version.majorVersion() + "."
+        ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
+        ((ComplexView) simpleView).addText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
                 + version.projectVersion() + "\n"

@@ -31,8 +31,11 @@ import nl.ru.languageininteraction.language.client.view.MenuView;
  */
 public class MenuPresenter extends AbstractPresenter implements Presenter {
 
-    public MenuPresenter(RootPanel widgetTag) {
+    protected final UserResults userResults;
+
+    public MenuPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new MenuView());
+        this.userResults = userResults;
     }
 
     @Override
@@ -43,20 +46,21 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
     @Override
     protected void setContent(final AppEventListner appEventListner) {
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.start);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.intro);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.intro, true);
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.setuser);
 //        setMenuOption(appEventListner, AppEventListner.ApplicationState.stimulus);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.report);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.registration);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.moreinfo);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.locale);
-        setMenuOption(appEventListner, AppEventListner.ApplicationState.version);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.adddummyresults, true);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.report, !userResults.getStimuliGroups().isEmpty());
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.feedback);
+          setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, userResults.canRegister());
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.metadata, true);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.registration, true);
+//        setMenuOption(appEventListner, AppEventListner.ApplicationState.moreinfo);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.locale, true);
+        setMenuOption(appEventListner, AppEventListner.ApplicationState.version, true);
     }
 
-    protected void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState) {
+    protected void setMenuOption(final AppEventListner appEventListner, final AppEventListner.ApplicationState applicationState, final boolean menuEnabled) {
         ((MenuView) simpleView).addMenuItem(new PresenterEventListner() {
 
             @Override
@@ -68,6 +72,6 @@ public class MenuPresenter extends AbstractPresenter implements Presenter {
             public String getLabel() {
                 return applicationState.label;
             }
-        });
+        }, menuEnabled);
     }
 }

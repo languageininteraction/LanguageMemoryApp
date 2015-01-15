@@ -20,8 +20,9 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.view.ReportView;
-import com.google.gwt.user.client.ui.RootPanel;
 import java.util.Date;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
@@ -42,7 +43,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     private final UserResults userResults;
 
-    public ReportPresenter(RootPanel widgetTag, UserResults userResults) {
+    public ReportPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new ReportView());
         this.userResults = userResults;
     }
@@ -59,14 +60,15 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
         final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
-        for (StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
+        for (final StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
             ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
+            ((ReportView) simpleView).addText(messages.userfeedbackscreentext());
             userResults.updateBestScore(calculatedScores.getScore());
-            ((ReportView) simpleView).addText(messages.reportScreenSCT());
-            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
-            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
+//            ((ReportView) simpleView).addText(messages.reportScreenSCT());
+//            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
+//            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
             stringBuilder.append(userResults.getMetadataValue(mateadataFields.postName_firstname()));
             stringBuilder.append("\t");
             stringBuilder.append(format.format(new Date()));
@@ -77,8 +79,31 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             stringBuilder.append("\t");
             stringBuilder.append(calculatedScores.getReactionTimeDeviation());
             stringBuilder.append("\n");
+            ((ReportView) simpleView).addOptionButton(new PresenterEventListner() {
+
+                @Override
+                public String getLabel() {
+                    return messages.socialPostButtonText();
+                }
+
+                @Override
+                public void eventFired(Button button) {
+                    new SocialMediaPost().postImageAndLink(messages.socialMediaPostText(numberFormat2.format(calculatedScores.getScore()), "(this precentage is not calculated yet) 100", stimuliGroup.getGroupLabel()), messages.socialMediaPostSubject(), messages.socialMediaPostImage(), messages.socialMediaPostUrl()); //stimuliGroup.getGroupLabel(), numberFormat2.format(calculatedScores.getScore())
+                }
+            });
         }
         userResults.setScoreLog(stringBuilder.toString());
         ((ReportView) simpleView).addText(messages.reportScreenPostSCTtext());
+
+        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext1());
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext2());
+            ((ReportView) simpleView).addHighlightedText(messages.positiveresultscreentext3());
+        } else {
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext1());
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext2());
+            ((ReportView) simpleView).addHighlightedText(messages.negativeresultscreentext3());
+        }
+        ((ReportView) simpleView).addPadding();
     }
 }

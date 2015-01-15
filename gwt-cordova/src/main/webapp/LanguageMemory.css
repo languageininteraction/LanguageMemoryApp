@@ -30,16 +30,12 @@
     margin-left: 0px;
     display: block;
     display: inline-block;
-    background: white;
     color: black;
     text-decoration: none;
-    cursor: pointer;
-    border-color: rgb(0,158,200);
-    border: none;
+    /*border-color: rgb(0,158,200);*/
     border-radius: 15px;
     /*    border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;*/
-    outline: none;
     height: 30px;
 }
 
@@ -48,7 +44,7 @@
 }
 .Android .gwt-Label.headerIcon {
     display: block;
-    background: url("./images/icon.jpg");
+    background: url("./images/icon.png");
     background-size: 50px 50px;
     background-repeat: no-repeat;
     height: 50px;
@@ -62,47 +58,79 @@
     font-size: 30px;
 }
 
-.gwt-Button.stimulusButton {
+.gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
-    background: white;
     padding:  5px 10px;
     /*margin: 0 10px 10px 0;*/
     color: black;
     text-decoration: none;
-    cursor: pointer;
     border-color: rgb(111,111,111);;
     border-radius: 5px;
     outline: none;
 }
+.gwt-CheckBox.optionCheckBox input {    
+    height: 40px;
+    width: 40px;
+}
 
-
-.gwt-CheckBox.optionButton, .gwt-Button.optionButton {
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10%;
+.gwt-Button.optionButton {
+    padding: 0px 10px 0px 10px;
+    margin: 10px 10px 10px 0;
     border-radius: 15px;
     /*background: rgb(193,227,241);*/
     outline: none;
-    border-width: 1px;
-    border-style: solid;
     display: block;
     display: inline-block;
-    background: white;
     color: black;
     text-decoration: none;
     cursor: pointer;
     border-color: rgb(0,158,200);
     outline: none;
     height: 40px;
+    width: 100%;
 }
 
+#widgetTag, .stimulusScreen, .menuTable, .gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
+    /* prevent text selection on the buttons */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* end prevent text selection on the buttons */
+}
+
+.gwt-Button.stimulusHelpButton:active, .gwt-Button.stimulusQuitButton:active, .gwt-Button.stimulusButton:active, .gwt-Button.stimulusHelpButton:hover, .gwt-Button.stimulusQuitButton:hover, .gwt-Button.stimulusButton:hover {
+    background:lightgrey;
+    border: none;
+}
+
+/*.gwt-Button.nextButton:disabled, .gwt-Button.menuButton:disabled, .gwt-Button.optionButton:disabled, .gwt-Label.headerButton:disabled {
+    border: none;
+}*/
+
+/*.gwt-Button.nextButton:hover, .gwt-Button.menuButton:hover, .gwt-Button.optionButton:hover, .gwt-Label.headerButton:hover, */
+.gwt-Button.nextButton:active, .gwt-Button.menuButton:active, .gwt-Button.optionButton:active, .gwt-Label.headerButton:active {
+    /*background:rgb(0,158,200);*/
+    /*background:rgb(246,170,139);*/
+    background:lightgrey;
+    border: none;
+}
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
+    cursor: pointer;
+    border-width: 0px;
+    border-style: none;
+    border: none;
+    outline: none;
+    background: white;
+}
 .gwt-Button.nextButton {
     display: block;
     display: inline-block;
-    background: white;
     color: black;
     text-decoration: none;
-    cursor: pointer;
     border-color: rgb(0,158,200);
     border-radius: 15px;
     outline: none;
@@ -114,7 +142,6 @@
     /*background:rgb(246,170,139);*/
     display: block;
     display: inline-block;
-    background: white;
     /*background: rgb(193,227,241);*/
     padding: 5px 10px;
     margin: 0 10px 10px 0;
@@ -122,17 +149,23 @@
     border-color: rgb(0,158,200);
     /*border-color: rgb(142,207,230);*/
     text-decoration: none;
-    cursor: pointer;
     /*border-color: transparent;*/
     border-radius: 15px;
     outline: none;
     width: 100%;
 }
 
-.gwt-Button.stimulusHelpButton {    
-    background: white;
-    border-radius: 15px;
+.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton {
+    border-radius: 25px;
     padding: 5px 10px;
+    height: 51px;
+    width: 51px;
+}
+.gwt-Button.stimulusQuitButton {
+    float: right;
+}
+.gwt-Button.stimulusHelpButton {
+    float: left;
 }
 
 .contentPanel {
@@ -141,6 +174,16 @@
     border-top-style: solid;
 }
 
+.contentBody, .menuOuter {
+    margin-top: 50px;    
+    margin-bottom: -50px;    
+    margin-left: 10%;   
+    margin-right: 10%;   
+}
+
+.menuOuter {
+    width: 80%;
+}
 .bargraphInner {
     background-color:rgb(246,170,139);
 }
@@ -184,23 +227,28 @@ canvas {
 
 .menuTable {
     padding: 10px 10px;
-    margin: 10px 10px 10px 10px;
     border-color: rgb(142,207,230);
     border-radius: 15px;
-    /*background: rgb(193,227,241);*/
     outline: none;
     border-width: 1px;
     border-style: solid;
 }
 .gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
-    margin-left: 10%;   
-    margin-right: 10%;   
 }
 .resultsTableTitle {
     font-size: 24pt;
 }
+.gwt-Label.stimulusProgressLabel {
+    text-align: center;
+    /*width: 100%;*/
+}
 
-.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink {  
+.metadataError {
+    background: rgb(246,170,139);
+}
+
+.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK,
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
     /*    
     font-family: Georgia, Times, "Times New Roman", serif;
@@ -208,10 +256,20 @@ canvas {
     line-height: 20pt;
     */
 }
-.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink {  
-    color:rgb(255,255,255); 
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
+
+.gwt-HTML.highlightedText {
+    font-weight: bold; 
+    /*text-transform: uppercase;*/
+}
+
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {
+    color:rgb(255,255,255);  
     line-height: 20pt;
+} 
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, 
+.gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
+{  
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
 }
 
 #widgetTag {

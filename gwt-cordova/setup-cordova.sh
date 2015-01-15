@@ -11,6 +11,12 @@ cordova plugin add org.apache.cordova.device
 cordova plugin add org.apache.cordova.statusbar
 cordova plugin add org.apache.cordova.splashscreen
 cordova plugin add org.apache.cordova.inappbrowser
+# (this plugin did not function correctly) cordova plugin add https://github.com/leecrossley/cordova-plugin-social-message.git
+cordova plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git #cordova plugin add nl.x-services.plugins.socialsharing
+#cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git # this provides events for keyboard hide and show which are needed to resize the app window area
+#cordova plugin add https://github.com/etiennea/phonegap-keyboard.git
+#cordova plugin install org.apache.cordova.labs.keyboard
+cordova plugin add https://github.com/GetJobber/cordova-plugin-keyboard.git
 
 splashResourcesDir="./platforms/ios/LanguageMemory/Resources/splash/"
 echo $splashResourcesDir
@@ -26,6 +32,9 @@ convert -background none images/LiI_logo_rgb.jpg -resize 150x150 -matte -borderc
 
 echo "making iOS splash images"
 #convert -resize 640x1136^ -gravity center -extent 640x1136 -quality 100 $splashImage $splashResourcesDir/Default-568h@2x~iphone.png
+convert -resize 1334x1334^ -gravity center -extent 750x1334 -quality 100 $splashImage $splashResourcesDir/Default-667h.png
+convert -resize 2208x2208^ -gravity center -extent 1242x2208 -quality 100 $splashImage $splashResourcesDir/Default-736h.png
+convert -crop +0-100 -resize 2208x2208^ -gravity center -extent 2208x1242 -quality 100 $splashImage $splashResourcesDir/Default-Landscape-736h.png
 convert -resize 1136x1136^ -gravity center -extent 640x1136 -quality 100 $splashImage $splashResourcesDir/Default-568h@2x~iphone.png
 convert -resize 2048x2048^ -gravity center -extent 2048x1536 -quality 100 $splashImage $splashResourcesDir/Default-Landscape@2x~ipad.png
 convert -resize 1024x1024^ -gravity center -extent 1024x768 -quality 100 $splashImage $splashResourcesDir/Default-Landscape~ipad.png
@@ -44,10 +53,10 @@ echo "making Android splash images"
 #cp platforms/splash150x150.9.png platforms/android/res/drawable-port-mdpi/screen.png
 #cp platforms/splash320x320.9.png platforms/android/res/drawable-port-xhdpi/screen.png
 
-convert -resize 800x480^ -gravity center -extent 800x480 -quality 100 $splashImage platforms/android/res/drawable-land-hdpi/screen.png
-convert -resize 320x200^ -gravity center -extent 320x200 -quality 100 $splashImage platforms/android/res/drawable-land-ldpi/screen.png
-convert -resize 480x320^ -gravity center -extent 480x320 -quality 100 $splashImage platforms/android/res/drawable-land-mdpi/screen.png
-convert -resize 1280x720^ -gravity center -extent 1280x720 -quality 100 $splashImage platforms/android/res/drawable-land-xhdpi/screen.png
+convert -crop +0-100 -resize 800x480^ -gravity center -extent 800x480 -quality 100 $splashImage platforms/android/res/drawable-land-hdpi/screen.png
+convert -crop +0-50 -resize 320x200^ -gravity center -extent 320x200 -quality 100 $splashImage platforms/android/res/drawable-land-ldpi/screen.png
+convert -crop +0-50 -resize 480x320^ -gravity center -extent 480x320 -quality 100 $splashImage platforms/android/res/drawable-land-mdpi/screen.png
+convert -crop +0-100 -resize 1280x720^ -gravity center -extent 1280x720 -quality 100 $splashImage platforms/android/res/drawable-land-xhdpi/screen.png
 convert -resize 480x800^ -gravity center -extent 480x800 -quality 100 $splashImage platforms/android/res/drawable-port-hdpi/screen.png
 convert -resize 200x320^ -gravity center -extent 200x320 -quality 100 $splashImage platforms/android/res/drawable-port-ldpi/screen.png
 convert -resize 320x480^ -gravity center -extent 320x480 -quality 100 $splashImage platforms/android/res/drawable-port-mdpi/screen.png
@@ -72,6 +81,11 @@ cordova build -release
 #xcrun -sdk iphoneos PackageApplication -v "build/Release-iphoneos/MyApp.app" -o "build/Release-iphoneos/MyApp.ipa" --sign "iPhone Distribution: NAME (ID)" --embed "PROFILE_UUID.mobileprovision"
 #xcodebuild -scheme YOURSCHEMENAME -project MyApp.xcodeproj -alltargets -sdk iphoneos7.0 PROVISIONING_PROFILE="PROFILE_UUID.mobileprovision" -configuration Release
 
+#echo "installing on Android"
+#adb install target/*-testing-cordova/platforms/android/ant-build/CordovaApp-release.apk
+
+echo "launching xcode"
+open platforms/ios/SynQuiz.xcodeproj&
 #echo "launching xcode"
 #open platforms/ios/LanguageMemory.xcodeproj
 

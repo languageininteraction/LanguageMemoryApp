@@ -29,13 +29,13 @@ public class MetadataFieldProvider {
 
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     public final MetadataField[] metadataFieldArray = new MetadataField[]{
-        new MetadataField(mateadataFields.postName_firstname(), mateadataFields.registrationField_firstname(), null),
-        new MetadataField(mateadataFields.postName_lastname(), mateadataFields.postName_lastname(), null),
-        new MetadataField(mateadataFields.postName_age(), mateadataFields.postName_age(), null),
-        new MetadataField(mateadataFields.postName_country(), mateadataFields.postName_country(), null),
-        new MetadataField(mateadataFields.postName_language(), mateadataFields.postName_language(), null),
-        new MetadataField(mateadataFields.postName_ethnicity(), mateadataFields.postName_ethnicity(), mateadataFields.fieldValues_ethnicity()),
-        new MetadataField(mateadataFields.postName_gender(), mateadataFields.postName_gender(), mateadataFields.fieldValues_gender()),
-        new MetadataField(mateadataFields.postName_email(), mateadataFields.postName_email(), null)
+        new MetadataField(mateadataFields.postName_firstname(), mateadataFields.registrationField_firstname(), null, mateadataFields.controlledRegex_firstname(), mateadataFields.controlledMessage_firstname()),
+        new MetadataField(mateadataFields.postName_lastname(), mateadataFields.registrationField_lastname(), null, null, null),
+        new MetadataField(mateadataFields.postName_age(), mateadataFields.registrationField_age(), null, null, null),
+        new MetadataField(mateadataFields.postName_country(), mateadataFields.registrationField_country(), null, null, null),
+        new MetadataField(mateadataFields.postName_language(), mateadataFields.registrationField_language(), null, null, null),
+        new MetadataField(mateadataFields.postName_ethnicity(), mateadataFields.registrationField_ethnicity(), mateadataFields.fieldValues_ethnicity(), null, null),
+        new MetadataField(mateadataFields.postName_gender(), mateadataFields.registrationField_gender(), mateadataFields.fieldValues_gender(), null, null),
+        new MetadataField(mateadataFields.postName_email(), mateadataFields.registrationField_email(), null, mateadataFields.controlledRegex_email(), mateadataFields.controlledMessage_email())
     };
 }

@@ -33,7 +33,7 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     private final UserResults userResults;
 
-    public FeedbackPresenter(RootPanel widgetTag, UserResults userResults) {
+    public FeedbackPresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, new SimpleView());
         this.userResults = userResults;
     }
@@ -45,10 +45,6 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        if (userResults.getBestScore() <= Float.parseFloat(messages.positiveresultsThreshold())) {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.positiveresultscreentext());
-        } else {
-            simpleView.setDisplayText(messages.userfeedbackscreentext() + "\n" + messages.negativeresultscreentext());
-        }
+        
     }
 }

@@ -30,7 +30,7 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class RegisterDisabledPresenter extends AbstractPresenter implements Presenter {
 
-    public RegisterDisabledPresenter(RootPanel widgetTag) {
+    public RegisterDisabledPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 

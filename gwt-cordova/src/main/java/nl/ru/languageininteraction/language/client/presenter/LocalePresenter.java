@@ -33,7 +33,7 @@ import nl.ru.languageininteraction.language.client.view.MenuView;
  */
 public class LocalePresenter extends AbstractPresenter implements Presenter {
 
-    public LocalePresenter(RootPanel widgetTag) {
+    public LocalePresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new MenuView());
     }
 
@@ -73,7 +73,7 @@ public class LocalePresenter extends AbstractPresenter implements Presenter {
                     public String getLabel() {
                         return displayName;
                     }
-                });
+                }, true);
             }
         }
     }

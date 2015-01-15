@@ -33,8 +33,10 @@ public class UserResults {
     private StimuliGroup pendingStimuliGroup = null;
     private Double bestScore = null;
     private String scoreLog = "";
+    private final StimuliGroup defaultStimuliGroup;
 
-    public UserResults() {
+    public UserResults(StimuliGroup defaultStimuliGroup) {
+        this.defaultStimuliGroup = defaultStimuliGroup;
     }
 
     public void clearResults() {
@@ -53,6 +55,10 @@ public class UserResults {
             stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
             stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
         }
+    }
+
+    public boolean canRegister() {
+        return results.containsKey(defaultStimuliGroup);
     }
 
     public Set<StimuliGroup> getStimuliGroups() {

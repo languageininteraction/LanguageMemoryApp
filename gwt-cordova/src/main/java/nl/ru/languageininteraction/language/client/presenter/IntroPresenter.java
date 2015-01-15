@@ -30,17 +30,17 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
  */
 public class IntroPresenter extends AbstractPresenter implements Presenter {
 
-    public IntroPresenter(RootPanel widgetTag) {
+    public IntroPresenter(RootLayoutPanel widgetTag) {
         super(widgetTag, new SimpleView());
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
+        
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.introductionscreentext());
+        
     }
 }

@@ -21,13 +21,13 @@ import nl.ru.languageininteraction.language.client.view.SimpleView;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 
@@ -35,38 +35,36 @@ import nl.ru.languageininteraction.language.client.listener.PresenterEventListne
  * @since Oct 31, 2014 11:36:28 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MenuView extends SimpleView {
+public class MenuView extends ComplexView {
 
     final private ArrayList<Button> buttonsArray = new ArrayList<>();
-    final VerticalPanel outerPanel;
     private FlexTable flexTable = null;
 
-    public MenuView() {
-        outerPanel = new VerticalPanel();
-        setContent(outerPanel);
-    }
-
-    public void addText(String textString) {
-        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
-        outerPanel.add(html);
-    }
-
-    public void addMenuItem(final PresenterEventListner menuItemListerner) {
+    public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("menuTable");
-            outerPanel.setWidth("100%");
+            outerPanel.setStylePrimaryName("menuOuter");
             outerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
             outerPanel.add(flexTable);
         }
-        final Button menuButton = new Button(menuItemListerner.getLabel());
+        final Button menuButton = new Button(new SafeHtmlBuilder().appendEscapedLines(menuItemListerner.getLabel()).toSafeHtml());
         buttonsArray.add(menuButton);
         menuButton.addStyleName("menuButton");
-        menuButton.setEnabled(true);
+        menuButton.setEnabled(menuEnabled);
         menuButton.addClickHandler(new ClickHandler() {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                menuItemListerner.eventFired(menuButton);
+            }
+        });
+        menuButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 menuItemListerner.eventFired(menuButton);
             }
         });
@@ -101,5 +99,4 @@ public class MenuView extends SimpleView {
             }
         }
     }
-
 }

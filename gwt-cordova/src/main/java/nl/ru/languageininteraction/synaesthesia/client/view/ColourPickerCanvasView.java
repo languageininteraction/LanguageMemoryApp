@@ -62,9 +62,11 @@ public class ColourPickerCanvasView extends AbstractView {
     private final Grid outerGrid;
     private final Grid innerGrid;
     private final Grid pickerPanel;
+    private final Grid progressPanel;
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
     private final Button infoButton;
+    private final Button quitButton;
     private Button acceptButton = null;
     private Button rejectButton = null;
     private final Label progressLabel;
@@ -94,13 +96,19 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusPanel.addStyleName("stimulusPanel");
         stimulusPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         outerGrid = new Grid(2, 2);
-        innerGrid = new Grid(5, 2);
+        innerGrid = new Grid(6, 2);
         pickerPanel = new Grid(1, 2);
+        progressPanel = new Grid(1, 2);
+        progressPanel.setWidth("100%");
         infoButton = new Button();
         infoButton.addStyleName("stimulusHelpButton");
         infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
+        quitButton = new Button();
+        quitButton.addStyleName("stimulusQuitButton");
+        quitButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
+        progressLabel.addStyleName("stimulusProgressLabel");
         mainCanvas = Canvas.createIfSupported();
         hueCanvas = Canvas.createIfSupported();
 
@@ -305,6 +313,26 @@ public class ColourPickerCanvasView extends AbstractView {
         setHue(red, green, blue);
     }
 
+    public void setQuitButton(final PresenterEventListner quitListerner) {
+        quitButton.setText(quitListerner.getLabel());
+        quitButton.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                event.preventDefault();
+                quitListerner.eventFired(quitButton);
+            }
+        });
+        quitButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                quitListerner.eventFired(quitButton);
+            }
+        });
+    }
+
     public void setInstructions(final String instructions, final String infoButtonChar) {
         final Label instructionsLabel = new Label(instructions);
         final PopupPanel popupPanel = new PopupPanel(true);
@@ -323,8 +351,36 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
                 popupPanel.center();
                 infoButton.setEnabled(false);
+            }
+        });
+        infoButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                popupPanel.center();
+                infoButton.setEnabled(false);
+            }
+        });
+        instructionsLabel.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                event.preventDefault();
+                popupPanel.hide();
+                infoButton.setEnabled(true);
+            }
+        });
+        instructionsLabel.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
+                popupPanel.hide();
+                infoButton.setEnabled(true);
             }
         });
     }
@@ -359,6 +415,15 @@ public class ColourPickerCanvasView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
+                presenterListerner.eventFired(nextButton);
+            }
+        });
+        nextButton.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 presenterListerner.eventFired(nextButton);
             }
         });
@@ -378,7 +443,9 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(2, 0, selectedColourPanel);
             innerGrid.setWidget(3, 0, acceptButton);
             innerGrid.setWidget(4, 0, progressLabel);
-            innerGrid.setWidget(4, 1, infoButton);
+            progressPanel.setWidget(0, 0, infoButton);
+            progressPanel.setWidget(0, 1, quitButton);
+            innerGrid.setWidget(5, 0, progressPanel);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
             int resizedWidth = (int) (width * 0.9 - 50);
@@ -390,8 +457,10 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(0, 1, selectedColourPanel);
             innerGrid.setWidget(1, 1, acceptButton);
-            innerGrid.setWidget(2, 0, progressLabel);
-            innerGrid.setWidget(2, 1, infoButton);
+            progressPanel.setWidget(0, 1, progressLabel);
+            innerGrid.setWidget(2, 0, progressPanel);
+            innerGrid.setWidget(2, 1, quitButton);
+            progressPanel.setWidget(0, 0, infoButton);
             outerGrid.setWidget(1, 0, innerGrid);
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Language In Interaction
+ * Copyright (C) 2015 Language In Interaction
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,19 +15,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.presenter;
+package nl.ru.languageininteraction.synaesthesia.client.exception;
 
-import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 
 /**
- * @since Oct 10, 2014 10:05:41 AM (creation date)
+ * @since Jan 13, 2015 3:21:11 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface Presenter {
+public class MetadataFieldException extends Exception {
 
-    void setState(AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState);
+    final private MetadataField metadataField;
 
-    void fireBackEvent();
+    public MetadataFieldException(MetadataField metadataField) {
+        this.metadataField = metadataField;
+    }
 
-    void fireResizeEvent();
+    public MetadataField getMetadataField() {
+        return metadataField;
+    }
 }

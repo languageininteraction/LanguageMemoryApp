@@ -17,7 +17,7 @@
 
     <!-- Other module inherits                                      -->
     <inherits name="com.google.gwt.i18n.I18N" />
-    <extend-property name="locale" values="en,nl,de,fr" />
+    <extend-property name="locale" values="en,nl,de" />
     <set-property-fallback name="locale" value="en"/>
     
     <!-- Specify the app entry point class.                         -->
