@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.language.client.presenter;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.view.MetadataView;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
 
 /**
@@ -34,11 +35,11 @@ public class IntroPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        
+        simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        
+        simpleView.setDisplayText(messages.introductionscreentext());
     }
 }

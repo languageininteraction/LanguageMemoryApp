@@ -54,7 +54,7 @@ public class SimpleView extends AbstractView {
         borderedContentPanel = new VerticalPanel();
         borderedContentPanel.setStylePrimaryName("contentPanel");
         footerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        addNorth(headerPanel, 50);
+        addNorth(headerPanel, HEADER_SIZE);
 //        addSouth(footerPanel, 50);
         scrollPanel = new ScrollPanel();
         borderedContentPanel.add(scrollPanel);
@@ -154,9 +154,10 @@ public class SimpleView extends AbstractView {
         footerPanel.setWidth(width + "px");
         scrollPanel.setWidth(width + "px");
         if (footerPanel.getWidgetCount() > 0) {
-            scrollPanel.setHeight(height - 50 - 50 + "px");
+            scrollPanel.setHeight(height - HEADER_SIZE - HEADER_SIZE + "px");
         } else {
-            scrollPanel.setHeight(height - 50 + "px");
+            scrollPanel.setHeight(height - HEADER_SIZE + "px");
         }
     }
+    protected static final int HEADER_SIZE = 50;
 }

@@ -20,12 +20,13 @@ package nl.ru.languageininteraction.language.client.view;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder.SvgGroupStates;
@@ -52,12 +53,17 @@ public class MatchLanguageView extends SimpleView {
 
     @Override
     protected void parentResized(int height, int width, String units) {
+        final Element diagramElement = DOM.getElementById(SvgGroupStates.diagram.name());
+        if (diagramElement != null) {
+            diagramElement.setAttribute("height", height - HEADER_SIZE * 2 + units);
+            diagramElement.setAttribute("width", width + units);
+        }
         super.parentResized(height, width, units);
     }
 
     public void setupScreen() {
-        final Label label = new Label("clicked labels show here");
-        verticalPanel.add(label);
+//        final Label label = new Label("clicked labels show here");
+//        verticalPanel.add(label);
         SafeHtmlBuilder builder = new SafeHtmlBuilder();
         height = Window.getClientHeight();
         width = Window.getClientWidth();
@@ -90,84 +96,95 @@ public class MatchLanguageView extends SimpleView {
 
             @Override
             public void onClick(ClickEvent event) {
-                final Element targetElement = Element.as(event.getNativeEvent().getEventTarget());
-                final Element parentElement = targetElement.getParentElement();
-                final String elementId = parentElement.getId();
-                if (!elementId.isEmpty()) {
-                    label.setText(elementId);
-                    SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
-                    switch (svgGroup) {
-                        case TargetButton:
-                            showGroup(SvgGroupStates.ChoiceArrow1);
-                            showGroup(SvgGroupStates.ChoiceArrow2);
-                            showGroup(SvgGroupStates.ChoiceArrow3);
-                            showGroup(SvgGroupStates.ChoiceArrow4);
-                            showGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.SampleButton1);
-                            showGroup(SvgGroupStates.SampleButton2);
-                            showGroup(SvgGroupStates.SampleButton3);
-                            showGroup(SvgGroupStates.SampleButton4);
-                            showGroup(SvgGroupStates.SampleButton5);
-                            audioPlayer.playSampleAudio1();
-                            break;
-                        case SampleButton1:
-                            showGroup(SvgGroupStates.ChoiceArrow1);
-                            hideGroup(SvgGroupStates.ChoiceArrow2);
-                            hideGroup(SvgGroupStates.ChoiceArrow3);
-                            hideGroup(SvgGroupStates.ChoiceArrow4);
-                            hideGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.IncorrectButton);
-                            showGroup(SvgGroupStates.CorrectButton);
-                            audioPlayer.playSampleAudio2();
-                            break;
-                        case SampleButton2:
-                            hideGroup(SvgGroupStates.ChoiceArrow1);
-                            showGroup(SvgGroupStates.ChoiceArrow2);
-                            hideGroup(SvgGroupStates.ChoiceArrow3);
-                            hideGroup(SvgGroupStates.ChoiceArrow4);
-                            hideGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.IncorrectButton);
-                            showGroup(SvgGroupStates.CorrectButton);
-                            audioPlayer.playSampleAudio3();
-                            break;
-                        case SampleButton3:
-                            hideGroup(SvgGroupStates.ChoiceArrow1);
-                            hideGroup(SvgGroupStates.ChoiceArrow2);
-                            showGroup(SvgGroupStates.ChoiceArrow3);
-                            hideGroup(SvgGroupStates.ChoiceArrow4);
-                            hideGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.IncorrectButton);
-                            showGroup(SvgGroupStates.CorrectButton);
-                            audioPlayer.playSampleAudio1();
-                            break;
-                        case SampleButton4:
-                            hideGroup(SvgGroupStates.ChoiceArrow1);
-                            hideGroup(SvgGroupStates.ChoiceArrow2);
-                            hideGroup(SvgGroupStates.ChoiceArrow3);
-                            showGroup(SvgGroupStates.ChoiceArrow4);
-                            hideGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.IncorrectButton);
-                            showGroup(SvgGroupStates.CorrectButton);
-                            audioPlayer.playSampleAudio2();
-                            break;
-                        case SampleButton5:
-                            hideGroup(SvgGroupStates.ChoiceArrow1);
-                            hideGroup(SvgGroupStates.ChoiceArrow2);
-                            hideGroup(SvgGroupStates.ChoiceArrow3);
-                            hideGroup(SvgGroupStates.ChoiceArrow4);
-                            showGroup(SvgGroupStates.ChoiceArrow5);
-                            showGroup(SvgGroupStates.IncorrectButton);
-                            showGroup(SvgGroupStates.CorrectButton);
-                            audioPlayer.playSampleAudio3();
-                            break;
-                    }
-                } else {
-                    label.setText(targetElement.getId());
-                }
+                performClick(Element.as(event.getNativeEvent().getEventTarget()));
+            }
+        });
+        html.addTouchEndHandler(new TouchEndHandler() {
+
+            @Override
+            public void onTouchEnd(TouchEndEvent event) {
+                performClick(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
         verticalPanel.add(html);
         setContent(verticalPanel);
+    }
+
+    private void performClick(final Element targetElement) {
+
+        final Element parentElement = targetElement.getParentElement();
+        final String elementId = parentElement.getId();
+        if (!elementId.isEmpty()) {
+//            label.setText(elementId);
+            SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
+            switch (svgGroup) {
+                case TargetButton:
+                    showGroup(SvgGroupStates.ChoiceArrow1);
+                    showGroup(SvgGroupStates.ChoiceArrow2);
+                    showGroup(SvgGroupStates.ChoiceArrow3);
+                    showGroup(SvgGroupStates.ChoiceArrow4);
+                    showGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.SampleButton1);
+                    showGroup(SvgGroupStates.SampleButton2);
+                    showGroup(SvgGroupStates.SampleButton3);
+                    showGroup(SvgGroupStates.SampleButton4);
+                    showGroup(SvgGroupStates.SampleButton5);
+                    audioPlayer.playSampleAudio1();
+                    break;
+                case SampleButton1:
+                    showGroup(SvgGroupStates.ChoiceArrow1);
+                    hideGroup(SvgGroupStates.ChoiceArrow2);
+                    hideGroup(SvgGroupStates.ChoiceArrow3);
+                    hideGroup(SvgGroupStates.ChoiceArrow4);
+                    hideGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.IncorrectButton);
+                    showGroup(SvgGroupStates.CorrectButton);
+                    audioPlayer.playSampleAudio2();
+                    break;
+                case SampleButton2:
+                    hideGroup(SvgGroupStates.ChoiceArrow1);
+                    showGroup(SvgGroupStates.ChoiceArrow2);
+                    hideGroup(SvgGroupStates.ChoiceArrow3);
+                    hideGroup(SvgGroupStates.ChoiceArrow4);
+                    hideGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.IncorrectButton);
+                    showGroup(SvgGroupStates.CorrectButton);
+                    audioPlayer.playSampleAudio3();
+                    break;
+                case SampleButton3:
+                    hideGroup(SvgGroupStates.ChoiceArrow1);
+                    hideGroup(SvgGroupStates.ChoiceArrow2);
+                    showGroup(SvgGroupStates.ChoiceArrow3);
+                    hideGroup(SvgGroupStates.ChoiceArrow4);
+                    hideGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.IncorrectButton);
+                    showGroup(SvgGroupStates.CorrectButton);
+                    audioPlayer.playSampleAudio1();
+                    break;
+                case SampleButton4:
+                    hideGroup(SvgGroupStates.ChoiceArrow1);
+                    hideGroup(SvgGroupStates.ChoiceArrow2);
+                    hideGroup(SvgGroupStates.ChoiceArrow3);
+                    showGroup(SvgGroupStates.ChoiceArrow4);
+                    hideGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.IncorrectButton);
+                    showGroup(SvgGroupStates.CorrectButton);
+                    audioPlayer.playSampleAudio2();
+                    break;
+                case SampleButton5:
+                    hideGroup(SvgGroupStates.ChoiceArrow1);
+                    hideGroup(SvgGroupStates.ChoiceArrow2);
+                    hideGroup(SvgGroupStates.ChoiceArrow3);
+                    hideGroup(SvgGroupStates.ChoiceArrow4);
+                    showGroup(SvgGroupStates.ChoiceArrow5);
+                    showGroup(SvgGroupStates.IncorrectButton);
+                    showGroup(SvgGroupStates.CorrectButton);
+                    audioPlayer.playSampleAudio3();
+                    break;
+            }
+        } else {
+//            label.setText(targetElement.getId());
+        }
     }
 
     private void showGroup(SvgGroupStates group) {
