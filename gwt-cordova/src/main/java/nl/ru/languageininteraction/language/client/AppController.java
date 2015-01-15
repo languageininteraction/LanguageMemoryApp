@@ -35,7 +35,7 @@ import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
-import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
+import nl.ru.languageininteraction.language.client.service.StimuliProvider;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
