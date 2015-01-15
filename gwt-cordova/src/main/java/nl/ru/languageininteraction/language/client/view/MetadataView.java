@@ -24,7 +24,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Set;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
-import nl.ru.languageininteraction.synaesthesia.client.view.ComplexView;
 
 /**
  * @since Oct 21, 2014 11:56:23 AM (creation date)

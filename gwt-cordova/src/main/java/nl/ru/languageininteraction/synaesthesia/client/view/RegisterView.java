@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import nl.ru.languageininteraction.language.client.view.ComplexView;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.CheckBox;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
