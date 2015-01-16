@@ -32,8 +32,8 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 
     public enum SvgGroupStates {
         </xsl:text>
-        <xsl:for-each select="svg:svg/svg:g[svg:path]">
-            <xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>,
+        <xsl:for-each select="svg:svg//svg:g[@inkscape:label]">
+            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>,
         </xsl:text>
         </xsl:for-each>
         <xsl:text>diagram // the diagram entry is used to identify the svg root element
@@ -52,16 +52,16 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     <xsl:for-each select="svg:path">    
     <xsl:text>
     @DefaultMessage("</xsl:text><xsl:value-of select="@style"/>"<xsl:text>)
-    @Key("style</xsl:text><xsl:value-of select="@id"/><xsl:text>")
-    abstract public String style</xsl:text><xsl:value-of select="@id"/><xsl:text>();
+    @Key("style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>")
+    abstract public String style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>();
         
     @DefaultMessage("</xsl:text><xsl:value-of select="@data"/>"<xsl:text>)
-    @Key("data</xsl:text><xsl:value-of select="@id"/><xsl:text>")
-    abstract public String data</xsl:text><xsl:value-of select="@id"/><xsl:text>();
+    @Key("data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>")
+    abstract public String data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>();
         
     @DefaultMessage("</xsl:text><xsl:value-of select="@transform"/>"<xsl:text>)
-    @Key("data</xsl:text><xsl:value-of select="@id"/><xsl:text>")
-    abstract public String transform</xsl:text><xsl:value-of select="@id"/><xsl:text>();
+    @Key("data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>")
+    abstract public String transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>();
 </xsl:text>
     </xsl:for-each>
 </xsl:for-each>-->
@@ -69,22 +69,22 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     public void getSvg(SafeHtmlBuilder builder) {
 </xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
-<xsl:text>        getSvg</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(builder, SvgTemplate.Visibility.visible);
+<xsl:text>        getSvg</xsl:text><xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>(builder, SvgTemplate.Visibility.visible);
 </xsl:text>
         </xsl:for-each>
         <xsl:text>    }
 </xsl:text>
-        <xsl:for-each select="svg:svg/svg:g[svg:path]">
+        <xsl:for-each select="svg:svg//svg:g[@inkscape:label]">
 <xsl:text>
-    public void getSvg</xsl:text><xsl:value-of select="replace(@inkscape:label, ' ', '_')"/><xsl:text>(SafeHtmlBuilder builder, SvgTemplate.Visibility visibility) {
+    public void getSvg</xsl:text><xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>(SafeHtmlBuilder builder, SvgTemplate.Visibility visibility) {
         builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text>
-<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
 <xsl:text>(),SVG_DATA.transform</xsl:text>
-<xsl:value-of select="replace(@inkscape:label, ' ', '_')"/>
+<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
 <xsl:text>(), visibility));
 </xsl:text>
             <xsl:for-each select="svg:path">
-<xsl:text>        builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="@id"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="@id"/><xsl:text>()));
+<xsl:text>        builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>
             </xsl:for-each>
 <xsl:text>        builder.append(SVG_TEMPLATE.groupTagEnd());
