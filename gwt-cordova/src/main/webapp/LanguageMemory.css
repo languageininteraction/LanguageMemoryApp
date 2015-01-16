@@ -58,6 +58,13 @@
     font-size: 30px;
 }
 
+.svgPanel {
+    /* this is required because of the contentPanel style */
+    position: absolute;
+    left: 0px;
+/*    top: -50px;*/
+}
+
 .gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
