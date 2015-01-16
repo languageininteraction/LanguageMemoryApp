@@ -27,11 +27,11 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 import static nl.ru.languageininteraction.language.client.view.SimpleView.HEADER_SIZE;
 
 /**
@@ -42,6 +42,7 @@ public abstract class AbstractSvgView extends SimpleView {
 
     final VerticalPanel verticalPanel = new VerticalPanel();
     protected final AudioPlayer audioPlayer;
+    final protected Label label = new Label("clicked labels show here");
 
     public AbstractSvgView(final AudioPlayer audioPlayer) throws AudioException {
         this.audioPlayer = audioPlayer;
@@ -51,19 +52,12 @@ public abstract class AbstractSvgView extends SimpleView {
     protected void parentResized(int height, int width, String units) {
         final Element diagramElement = DOM.getElementById(MatchLanguageBuilder.SvgGroupStates.diagram.name());
         if (diagramElement != null) {
-            diagramElement.setAttribute("height", height - HEADER_SIZE * 2 + units);
+            diagramElement.setAttribute("height", height - (HEADER_SIZE * 3) + units);
             diagramElement.setAttribute("width", width + units);
         }
         super.parentResized(height, width, units);
     }
 
-    protected void showGroup(MatchLanguageBuilder.SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
-    }
-
-    protected void hideGroup(MatchLanguageBuilder.SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
-    }
 //    private void showGroup(SvgGroupStates group) {
 ////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
 //        SafeHtmlBuilder builder = new SafeHtmlBuilder();
@@ -85,13 +79,11 @@ public abstract class AbstractSvgView extends SimpleView {
 ////        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
 //        DOM.getElementById(SvgGroupStates.ChoiceArrow2.name()).removeFromParent();
 //    }
-
     public void setupScreen() {
-//        final Label label = new Label("clicked labels show here");
-//        verticalPanel.add(label);
+        verticalPanel.add(label);
         SafeHtmlBuilder builder = new SafeHtmlBuilder();
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
-        int height = Window.getClientHeight();
+        int height = Window.getClientHeight() - (HEADER_SIZE * 3);
         int width = Window.getClientWidth();
         builder.append(SafeHtmlUtils.fromTrustedString("<svg id='" + MatchLanguageBuilder.SvgGroupStates.diagram.name() + "' height='" + height + "px' width='" + width + "px' >"));
         getSvg(builder);
@@ -111,6 +103,7 @@ public abstract class AbstractSvgView extends SimpleView {
                 performClick(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
+        html.setStylePrimaryName("svgPanel");
         verticalPanel.add(html);
         setContent(verticalPanel);
     }
