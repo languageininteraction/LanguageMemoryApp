@@ -77,7 +77,5 @@ public class AudioPlayer {
 
     public void stopAll() {
         audioPlayer.pause();
-        audioPlayer.setCurrentTime(0);
-        audioPlayer.play();
     }
 }
