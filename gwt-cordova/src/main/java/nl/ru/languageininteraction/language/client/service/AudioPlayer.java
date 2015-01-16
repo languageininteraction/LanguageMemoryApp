@@ -17,8 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
+import com.google.gwt.dom.client.AudioElement;
 import com.google.gwt.media.client.Audio;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 
 /**
  * @since Jan 6, 2015 10:27:57 AM (creation date)
@@ -27,12 +29,32 @@ import nl.ru.languageininteraction.language.client.exception.AudioException;
 public class AudioPlayer {
 
     private final Audio audioPlayer;
+    private AudioEventListner audioEventListner = null;
 
     public AudioPlayer() throws AudioException {
         audioPlayer = Audio.createIfSupported();
         if (audioPlayer == null) {
             throw new AudioException("audio not supportered");
         }
+        final AudioElement audioElement = audioPlayer.getAudioElement();
+        onEndedSetup(audioElement);
+    }
+
+    private native void onEndedSetup(final AudioElement audioElement) /*-{
+     var audioPlayer = this;
+     audioElement.addEventListener("ended", function(){
+     audioPlayer.@nl.ru.languageininteraction.language.client.service.AudioPlayer::onEndedAction()();
+     }, false);
+     }-*/;
+
+    public void onEndedAction() {
+        if (audioEventListner != null) {
+            audioEventListner.audioEnded();
+        }
+    }
+
+    public void addOnEndedListener(AudioEventListner audioEventListner) {
+        this.audioEventListner = audioEventListner;
     }
 
     public void playSampleAudio1() {
