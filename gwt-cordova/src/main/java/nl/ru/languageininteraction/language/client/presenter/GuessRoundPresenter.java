@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.view.AbstractSvgView;
@@ -59,5 +60,12 @@ public class GuessRoundPresenter extends AbstractPresenter implements Presenter 
     @Override
     public void setContent(AppEventListner appEventListner) {
         ((AbstractSvgView) simpleView).setupScreen();
+        audioPlayer.addOnEndedListener(new AudioEventListner() {
+
+            @Override
+            public void audioEnded() {
+                ((GuessRoundView) simpleView).showAudioEnded();
+            }
+        });
     }
 }
