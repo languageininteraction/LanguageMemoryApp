@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.DOM;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
@@ -137,5 +138,13 @@ public class MatchLanguageView extends AbstractSvgView {
         } else {
 //            label.setText(targetElement.getId());
         }
+    }
+
+    protected void showGroup(MatchLanguageBuilder.SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
+    }
+
+    protected void hideGroup(MatchLanguageBuilder.SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
     }
 }
