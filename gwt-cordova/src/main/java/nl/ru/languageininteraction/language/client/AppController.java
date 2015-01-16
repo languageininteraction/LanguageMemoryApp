@@ -98,7 +98,7 @@ public class AppController implements AppEventListner {
                     break;
                 case alien:
                     this.presenter = new AlienScreen(widgetTag);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.map);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.guess);
                     break;
                 case start:
                 case intro:
