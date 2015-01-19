@@ -98,6 +98,12 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     </xsl:template>
     <xsl:template match="svg:text">
 <xsl:text>      builder.append(SVG_TEMPLATE.textTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>     <xsl:apply-templates select="svg:tspan"/>
+<xsl:text>      builder.append(SVG_TEMPLATE.textTagEnd());
+</xsl:text>         
+    </xsl:template>
+    <xsl:template match="svg:tspan">
+<xsl:text>      builder.append(SVG_TEMPLATE.tspanTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.text</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>         
     </xsl:template>
     <xsl:template match="svg:rect">

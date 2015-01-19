@@ -59,6 +59,32 @@
             <xsl:text>
 </xsl:text>
             </xsl:for-each>
+            <xsl:for-each select="svg:text/svg:tspan">                
+            <xsl:text>style</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@style"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>x</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@x"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>y</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@y"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>text</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="text()"/>
+            <xsl:text>
+</xsl:text>
+            </xsl:for-each>
             <xsl:for-each select="svg:rect">                
             <xsl:text>style</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
