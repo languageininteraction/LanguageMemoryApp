@@ -150,10 +150,40 @@
             <xsl:value-of select="@id"/>
             <xsl:text>
 </xsl:text>
-            <xsl:text>offset</xsl:text>
+            <xsl:text>xlinkHref</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
-            <xsl:value-of select="@offset"/>
+            <xsl:value-of select="@xlink:href"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>x1</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@x1"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>y1</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@y1"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>x2</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@x2"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>y2</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@y2"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>gradientTransform</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@gradientTransform"/>
             <xsl:text>
 </xsl:text>
             </xsl:for-each>
