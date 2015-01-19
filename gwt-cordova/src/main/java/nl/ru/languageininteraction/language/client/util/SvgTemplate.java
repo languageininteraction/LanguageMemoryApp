@@ -46,4 +46,10 @@ public interface SvgTemplate extends SafeHtmlTemplates {
 
     @Template("<path transform=\"{0}\" style=\"{1}\" d=\"{2}\" />")
     SafeHtml pathTag(String transform, String style, String data);
+
+    @Template("<text x=\"{0}\" x=\"{1}\" style=\"{2}\" />")
+    SafeHtml textTag(String x, String y, String style);
+
+    @Template("<rect x=\"{0}\" y=\"{1}\" rx=\"{2}\" ry=\"{3}\" width=\"{4}\" height=\"{5}\" style=\"{6}\" />")
+    SafeHtml rectTag(String x, String y, String rx, String ry, String width, String height, String style);
 }

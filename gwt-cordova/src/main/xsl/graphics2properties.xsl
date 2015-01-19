@@ -39,6 +39,70 @@
             <xsl:text>
 </xsl:text>
             </xsl:for-each>
+            <xsl:for-each select="svg:text">                
+            <xsl:text>style</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@style"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>x</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@x"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>y</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@y"/>
+            <xsl:text>
+</xsl:text>
+            </xsl:for-each>
+            <xsl:for-each select="svg:rect">                
+            <xsl:text>style</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@style"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>x</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@x"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>y</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@y"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>rx</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@rx"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>ry</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@ry"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>width</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@width"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>height</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@height"/>
+            <xsl:text>
+</xsl:text>
+            </xsl:for-each>
             <xsl:text>transform</xsl:text>
             <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -53,12 +117,12 @@
             <xsl:text>
 </xsl:text> 
         </xsl:for-each>
-        <xsl:for-each select="svg:svg/svg:g[svg:path]">
+<!--        <xsl:for-each select="svg:svg/svg:g[svg:path]">
 #        builder.append(SVG_TEMPLATE.groupTag(autotypRegions.id<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>(),autotypRegions.transform<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>()));
 <xsl:for-each select="svg:path">
 #        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.transform<xsl:value-of select="translate(@id, ' -', '__')"/>(), autotypRegions.style<xsl:value-of select="translate(@id, ' -', '__')"/>(), autotypRegions.data<xsl:value-of select="translate(@id, ' -', '__')"/>()));
 </xsl:for-each>
 #        builder.append(SVG_TEMPLATE.groupTagEnd());
-        </xsl:for-each>
+        </xsl:for-each>-->
     </xsl:template>
 </xsl:stylesheet>
