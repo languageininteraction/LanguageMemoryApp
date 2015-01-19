@@ -56,6 +56,21 @@ public interface SvgTemplate extends SafeHtmlTemplates {
     @Template("</text>")
     SafeHtml textTagEnd();
 
+    @Template("<stop offset=\"{0}\" style=\"{1}\"/>")
+    SafeHtml stopTag(String offset, String style);
+
+    @Template("<linearGradient id=\"{0}\" >")
+    SafeHtml linearGradientTag(String id);
+
+    @Template("</linearGradient>")
+    SafeHtml linearGradientTagEnd();
+
+    @Template("<defs>")
+    SafeHtml defsTag();
+
+    @Template("</defs>")
+    SafeHtml defsTagEnd();
+
     @Template("<rect x=\"{0}\" y=\"{1}\" rx=\"{2}\" ry=\"{3}\" width=\"{4}\" height=\"{5}\" style=\"{6}\" />")
     SafeHtml rectTag(String x, String y, String rx, String ry, String width, String height, String style);
 }

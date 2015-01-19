@@ -67,6 +67,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 </xsl:for-each>-->
         <xsl:text>
     public void getSvg(SafeHtmlBuilder builder) {
+        getDefsTag(builder);
 </xsl:text>
         <xsl:for-each select="svg:svg/svg:g[svg:path]">
 <xsl:text>        getSvg</xsl:text><xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>(builder, SvgTemplate.Visibility.visible);
@@ -74,6 +75,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
         </xsl:for-each>
         <xsl:text>    }
 </xsl:text>
+           <xsl:apply-templates select="svg:svg/svg:defs"/>
            <xsl:apply-templates select="svg:svg/svg:g[svg:path]"/>
         <xsl:text>}</xsl:text>
     </xsl:template>
@@ -95,6 +97,24 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     <xsl:template match="svg:path">
 <xsl:text>      builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>
+    </xsl:template>
+    <xsl:template match="svg:defs">
+<xsl:text>public void getDefsTag(SafeHtmlBuilder builder) {
+      builder.append(SVG_TEMPLATE.defsTag());
+</xsl:text>     <xsl:apply-templates select="svg:linearGradient"/>
+<xsl:text>      builder.append(SVG_TEMPLATE.defsTagEnd());
+    }
+</xsl:text>         
+    </xsl:template>
+    <xsl:template match="svg:linearGradient">
+<xsl:text>      builder.append(SVG_TEMPLATE.linearGradientTag(SVG_DATA.id</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>     <xsl:apply-templates select="svg:stop"/>
+<xsl:text>      builder.append(SVG_TEMPLATE.linearGradientTagEnd());
+</xsl:text>         
+    </xsl:template>
+    <xsl:template match="svg:stop">
+<xsl:text>      builder.append(SVG_TEMPLATE.stopTag(SVG_DATA.offset</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>         
     </xsl:template>
     <xsl:template match="svg:text">
 <xsl:text>      builder.append(SVG_TEMPLATE.textTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
