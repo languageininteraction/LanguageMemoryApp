@@ -74,7 +74,11 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
         </xsl:for-each>
         <xsl:text>    }
 </xsl:text>
-        <xsl:for-each select="svg:svg//svg:g[@inkscape:label]">
+           <xsl:apply-templates select="svg:svg/svg:g[svg:path]"/>
+        <xsl:text>}</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="svg:g[@inkscape:label]">
 <xsl:text>
     public void getSvg</xsl:text><xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>(SafeHtmlBuilder builder, SvgTemplate.Visibility visibility) {
         builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text>
@@ -83,22 +87,21 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
 <xsl:text>(), visibility));
 </xsl:text>
-            <xsl:for-each select="svg:path">
-<xsl:text>        builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
-</xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:text">
-<xsl:text>        builder.append(SVG_TEMPLATE.textTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
-</xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:rect">
-<xsl:text>        builder.append(SVG_TEMPLATE.rectTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.rx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.ry</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.width</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.height</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
-</xsl:text>
-            </xsl:for-each>
-<xsl:text>        builder.append(SVG_TEMPLATE.groupTagEnd());
+<xsl:apply-templates/>
+<xsl:text>      builder.append(SVG_TEMPLATE.groupTagEnd());
     }
 </xsl:text>
-        </xsl:for-each>
-        <xsl:text>}</xsl:text>
+    </xsl:template>
+    <xsl:template match="svg:path">
+<xsl:text>      builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>
+    </xsl:template>
+    <xsl:template match="svg:text">
+<xsl:text>      builder.append(SVG_TEMPLATE.textTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>         
+    </xsl:template>
+    <xsl:template match="svg:rect">
+<xsl:text>      builder.append(SVG_TEMPLATE.rectTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.rx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.ry</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.width</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.height</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>
     </xsl:template>
 </xsl:stylesheet>
