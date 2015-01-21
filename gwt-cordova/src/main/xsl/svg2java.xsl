@@ -39,7 +39,20 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
         </xsl:for-each>
         <xsl:text>diagram // the diagram entry is used to identify the svg root element
     }
-            
+
+    public enum SvgTextElements {
+        </xsl:text>
+        <xsl:for-each select="svg:svg//svg:tspan">
+            <xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>,
+        </xsl:text>
+        </xsl:for-each>
+        <xsl:text>end // this final element is not used
+    }
+    
+    public void setLabel(SvgTextElements textElement, String label) {
+        DOM.getElementById(textElement.name()).setInnerText(label);
+    }
+
     public void showGroup(SvgGroupStates group) {
         DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
     }
@@ -132,7 +145,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 </xsl:text>         
     </xsl:template>
     <xsl:template match="svg:tspan">
-<xsl:text>      builder.append(SVG_TEMPLATE.tspanTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.text</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+<xsl:text>      builder.append(SVG_TEMPLATE.tspanTag(SVG_DATA.id</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.text</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>         
     </xsl:template>
     <xsl:template match="svg:rect">

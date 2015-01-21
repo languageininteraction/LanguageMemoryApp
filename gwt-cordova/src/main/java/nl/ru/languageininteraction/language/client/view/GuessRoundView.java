@@ -85,6 +85,9 @@ public class GuessRoundView extends AbstractSvgView {
         final Element parentElement = targetElement.getParentElement();
         final String elementId = parentElement.getId();
         if (!elementId.isEmpty()) {
+            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4319, GuessRoundBuilder.SvgTextElements.tspan4319.name());
+            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4326, GuessRoundBuilder.SvgTextElements.tspan4319.name());
+            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4413, GuessRoundBuilder.SvgTextElements.tspan4319.name());
             label.setText(elementId);
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
             switch (svgGroup) {
