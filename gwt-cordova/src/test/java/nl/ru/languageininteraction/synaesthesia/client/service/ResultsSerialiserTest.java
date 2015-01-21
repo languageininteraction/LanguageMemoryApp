@@ -28,6 +28,7 @@ import nl.ru.languageininteraction.language.client.model.StimulusResponseGroup;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  * @since Oct 31, 2014 4:33:24 PM (creation date)
@@ -38,6 +39,7 @@ public class ResultsSerialiserTest {
     /**
      * Test of serialise method, of class ResultsSerialiser.
      */
+    @Ignore
     @Test
     public void testSerialise() throws StimulusError {
         System.out.println("serialise");

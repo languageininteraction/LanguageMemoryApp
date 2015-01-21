@@ -23,6 +23,7 @@
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
+import com.google.gwt.user.client.DOM;
             
 // generated with svg2java.xsl
 public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder implements com.google.gwt.i18n.client.Messages {
@@ -37,6 +38,14 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
         </xsl:text>
         </xsl:for-each>
         <xsl:text>diagram // the diagram entry is used to identify the svg root element
+    }
+            
+    public void showGroup(SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
+    }
+
+    public void hideGroup(SvgGroupStates group) {
+        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
     }
 </xsl:text>
 <!--<xsl:for-each select="svg:svg/svg:g[svg:path]">

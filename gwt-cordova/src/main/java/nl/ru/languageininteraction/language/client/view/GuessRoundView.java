@@ -19,12 +19,10 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.DOM;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 
 /**
  * @since Nov 26, 2014 4:11:13 PM (creation date)
@@ -40,45 +38,45 @@ public class GuessRoundView extends AbstractSvgView {
 
     @Override
     protected void getSvg(SafeHtmlBuilder builder) {
-//        matchLanguageBuilder.getSvg(builder);
-        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
-        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
-        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
-        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButtonPlay1(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButtonPlay2(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.hidden);
-        matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
-        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
-
-        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvg(builder);
+//        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
+////        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay1(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay2(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.hidden);
+////        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
+////        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
+////        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
+////        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
+//
+//        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
     }
 
     public void showAudioEnded() {
-        hideGroup(SvgGroupStates.TargetButtonPlay);
-        hideGroup(SvgGroupStates.SampleButtonPlay1);
-        hideGroup(SvgGroupStates.SampleButtonPlay2);
-        hideGroup(SvgGroupStates.SampleButtonPlay3);
-        hideGroup(SvgGroupStates.SampleButtonPlay4);
-        hideGroup(SvgGroupStates.SampleButtonPlay5);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
     }
 
     @Override
@@ -91,123 +89,123 @@ public class GuessRoundView extends AbstractSvgView {
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
             switch (svgGroup) {
                 case NextRoundButton:
-                    hideGroup(SvgGroupStates.LanguageInfoBox);
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.NextRoundButton);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    hideGroup(SvgGroupStates.SampleButton1);
-                    hideGroup(SvgGroupStates.SampleButton2);
-                    hideGroup(SvgGroupStates.SampleButton3);
-                    hideGroup(SvgGroupStates.SampleButton4);
-                    hideGroup(SvgGroupStates.SampleButton5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.LanguageInfoBox);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.NextRoundButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton5);
                     break;
                 case TargetButton:
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    showGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.SampleButton1);
-                    showGroup(SvgGroupStates.SampleButton2);
-                    showGroup(SvgGroupStates.SampleButton3);
-                    showGroup(SvgGroupStates.SampleButton4);
-                    showGroup(SvgGroupStates.SampleButton5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton1);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton2);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton3);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton4);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton5);
                     audioPlayer.playSampleAudio1();
                     break;
                 case SampleButton1:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    showGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    showGroup(SvgGroupStates.ChoiceArrow1);
-//                    hideGroup(SvgGroupStates.SampleButton1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.CorrectButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow1);
+//                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton2:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    showGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    showGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.CorrectButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio3();
                     break;
                 case SampleButton3:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    showGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    showGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.CorrectButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio1();
                     break;
                 case SampleButton4:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    showGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    showGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.CorrectButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton5:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    showGroup(SvgGroupStates.SampleButtonPlay5);
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    showGroup(SvgGroupStates.ChoiceArrow5);
-                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.CorrectButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow5);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio3();
                     break;
                 case ChoiceArrow1:
@@ -215,35 +213,27 @@ public class GuessRoundView extends AbstractSvgView {
                 case ChoiceArrow3:
                 case ChoiceArrow4:
                 case ChoiceArrow5:
-                    hideGroup(SvgGroupStates.TargetButtonPlay);
-                    hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    hideGroup(SvgGroupStates.SampleButtonPlay5);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
 
-                    hideGroup(SvgGroupStates.ChoiceArrow1);
-                    hideGroup(SvgGroupStates.ChoiceArrow2);
-                    hideGroup(SvgGroupStates.ChoiceArrow3);
-                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    hideGroup(SvgGroupStates.ChoiceArrow5);
-//                    hideGroup(SvgGroupStates.ChoiceArrow4);
-                    showGroup(SvgGroupStates.LanguageInfoBox);
-//                    showGroup(SvgGroupStates.IncorrectButton);
-                    showGroup(SvgGroupStates.NextRoundButton);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+//                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.LanguageInfoBox);
+//                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
+                    matchLanguageBuilder.showGroup(SvgGroupStates.NextRoundButton);
                     audioPlayer.stopAll();
 
             }
         } else {
 //            label.setText(targetElement.getId());
         }
-    }
-
-    protected void showGroup(SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
-    }
-
-    protected void hideGroup(SvgGroupStates group) {
-        DOM.getElementById(group.name()).setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
     }
 }
