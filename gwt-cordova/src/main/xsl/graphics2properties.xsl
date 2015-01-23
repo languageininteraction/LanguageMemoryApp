@@ -192,6 +192,15 @@
             <xsl:value-of select="@gradientTransform"/>
             <xsl:text>
 </xsl:text>
+            <xsl:text>gradientUnits</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@gradientUnits"/>
+            <xsl:if test="not(@gradientUnits)">
+              <xsl:text>objectBoundingBox</xsl:text>
+            </xsl:if>
+            <xsl:text>
+</xsl:text>
             </xsl:for-each>
             <xsl:for-each select="svg:svg/svg:defs/svg:linearGradient/svg:stop">                
             <xsl:text>style</xsl:text>

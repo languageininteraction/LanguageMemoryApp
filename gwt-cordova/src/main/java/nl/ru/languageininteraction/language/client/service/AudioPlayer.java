@@ -21,6 +21,7 @@ import com.google.gwt.dom.client.AudioElement;
 import com.google.gwt.media.client.Audio;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
+import nl.ru.languageininteraction.language.client.listener.AudioExceptionListner;
 
 /**
  * @since Jan 6, 2015 10:27:57 AM (creation date)
@@ -28,10 +29,16 @@ import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
  */
 public class AudioPlayer {
 
-    private final Audio audioPlayer;
+    private Audio audioPlayer;
     private AudioEventListner audioEventListner = null;
+    final private AudioExceptionListner audioExceptionListner;
 
-    public AudioPlayer() throws AudioException {
+    public AudioPlayer(AudioExceptionListner audioExceptionListner) throws AudioException {
+        this.audioExceptionListner = audioExceptionListner;
+        createPlayer();
+    }
+
+    private void createPlayer() throws AudioException {
         audioPlayer = Audio.createIfSupported();
         if (audioPlayer == null) {
             throw new AudioException("audio not supportered");
@@ -58,24 +65,36 @@ public class AudioPlayer {
     }
 
     public void playSampleAudio1() {
-        audioPlayer.setSrc("media/Sample1.wav");
-        audioPlayer.setCurrentTime(0);
-        audioPlayer.play();
+        playSample("media/Sample1.wav");
     }
 
     public void playSampleAudio2() {
-        audioPlayer.setSrc("media/Sample2.wav");
-        audioPlayer.setCurrentTime(0);
-        audioPlayer.play();
+        playSample("media/Sample2.wav");
     }
 
     public void playSampleAudio3() {
-        audioPlayer.setSrc("media/Sample3.wav");
+        playSample("media/Sample3.wav");
+    }
+
+    private void playSample(String sample) {
+        if (audioPlayer == null) {
+            try {
+                createPlayer();
+            } catch (AudioException audioException) {
+                audioExceptionListner.audioExceptionFired(audioException);
+                return;
+            }
+        }
+        audioPlayer.setSrc(sample);
         audioPlayer.setCurrentTime(0);
         audioPlayer.play();
     }
 
     public void stopAll() {
-        audioPlayer.pause();
+//        audioPlayer.pause();
+        if (audioPlayer != null) {
+            audioPlayer.setSrc("");
+        }
+        onEndedAction();
     }
 }

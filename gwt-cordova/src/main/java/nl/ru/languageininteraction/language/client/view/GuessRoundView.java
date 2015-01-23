@@ -33,7 +33,7 @@ import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 public class GuessRoundView extends AbstractSvgView {
 
     public GuessRoundView(AudioPlayer audioPlayer) throws AudioException {
-        super(audioPlayer); 
+        super(audioPlayer);
     }
 
     protected final GuessRoundBuilder matchLanguageBuilder = new GuessRoundBuilder();
@@ -41,7 +41,32 @@ public class GuessRoundView extends AbstractSvgView {
     @Override
     protected void getSvg(SafeHtmlBuilder builder) {
 //        matchLanguageBuilder.getSvg(builder);
+        matchLanguageBuilder.getDefsTag(builder);
         matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay1(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay2(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
         matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
@@ -72,6 +97,7 @@ public class GuessRoundView extends AbstractSvgView {
 //        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
     }
 
+    @Override
     public void showAudioEnded() {
         matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
         matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
@@ -113,6 +139,19 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton5);
                     break;
+                case TargetButtonPlay:
+                case SampleButtonPlay1:
+                case SampleButtonPlay2:
+                case SampleButtonPlay3:
+                case SampleButtonPlay4:
+                case SampleButtonPlay5:
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                    audioPlayer.stopAll();
+                    break;
                 case TargetButton:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
@@ -145,8 +184,6 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton2:
@@ -161,8 +198,6 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio3();
                     break;
                 case SampleButton3:
@@ -177,8 +212,6 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow3);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio1();
                     break;
                 case SampleButton4:
@@ -193,8 +226,6 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton5:
@@ -209,8 +240,6 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
-                    matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
                     audioPlayer.playSampleAudio3();
                     break;
                 case ChoiceArrow1:

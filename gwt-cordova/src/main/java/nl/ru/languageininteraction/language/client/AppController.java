@@ -21,6 +21,7 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.AudioExceptionListner;
 import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
 import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
@@ -42,7 +43,7 @@ import nl.ru.languageininteraction.language.client.service.StimuliProvider;
  * @since Oct 7, 2014 11:07:35 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class AppController implements AppEventListner {
+public class AppController implements AppEventListner, AudioExceptionListner {
 
     private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
@@ -77,11 +78,11 @@ public class AppController implements AppEventListner {
                     presenter.setState(this, ApplicationState.guess, null);
                     break;
                 case guess:
-                    this.presenter = new GuessRoundPresenter(widgetTag, new AudioPlayer());
+                    this.presenter = new GuessRoundPresenter(widgetTag, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.match);
                     break;
                 case match:
-                    this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer());
+                    this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.map);
                     break;
                 case map:
@@ -164,6 +165,13 @@ public class AppController implements AppEventListner {
             this.presenter = new ErrorPresenter(widgetTag, error.getMessage());
             presenter.setState(this, ApplicationState.start, applicationState);
         }
+    }
+
+    @Override
+    public void audioExceptionFired(AudioException audioException) {
+        logger.warning(audioException.getMessage());
+        this.presenter = new ErrorPresenter(widgetTag, audioException.getMessage());
+        presenter.setState(this, ApplicationState.start, null);
     }
 
     public void start() {

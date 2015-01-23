@@ -59,8 +59,8 @@ public interface SvgTemplate extends SafeHtmlTemplates {
     @Template("<stop offset=\"{0}\" style=\"{1}\"/>")
     SafeHtml stopTag(String offset, String style);
 
-    @Template("<linearGradient id=\"{0}\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"{1}\" x1=\"{2}\" y1=\"{3}\" x2=\"{4}\" y2=\"{5}\" gradientTransform=\"{6}\">")
-    SafeHtml linearGradientTag(String id, String xlinkHref, String x1, String y1, String x2, String y2, String gradientTransform);
+    @Template("<linearGradient id=\"{0}\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xlink:href=\"{1}\" x1=\"{2}\" y1=\"{3}\" x2=\"{4}\" y2=\"{5}\" gradientTransform=\"{6}\" gradientUnits=\"{7}\">")
+    SafeHtml linearGradientTag(String id, String xlinkHref, String x1, String y1, String x2, String y2, String gradientTransform, String gradientUnits);
 
     @Template("</linearGradient>")
     SafeHtml linearGradientTagEnd();
