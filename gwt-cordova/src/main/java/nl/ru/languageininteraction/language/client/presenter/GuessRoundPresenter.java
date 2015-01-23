@@ -24,48 +24,94 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.view.AbstractSvgView;
 import nl.ru.languageininteraction.language.client.view.GuessRoundView;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class GuessRoundPresenter extends AbstractPresenter implements Presenter {
+public class GuessRoundPresenter implements Presenter {
 
+    protected final RootLayoutPanel widgetTag;
     final AudioPlayer audioPlayer;
+    final GuessRoundView guessRoundView;
+    private PresenterEventListner backEventListner = null;
+    private PresenterEventListner nextEventListner = null;
 
     public GuessRoundPresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
-        super(widgetTag, new GuessRoundView(audioPlayer));
+        guessRoundView = new GuessRoundView(audioPlayer);
         this.audioPlayer = audioPlayer;
+        this.widgetTag = widgetTag;
     }
 
     @Override
-    public void setTitle(final PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.mapScreenTitle(), new PresenterEventListner() {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
+        widgetTag.clear();
+        if (prevState != null) {
+            backEventListner = new PresenterEventListner() {
 
-            @Override
-            public String getLabel() {
-                return titleBarListner.getLabel();
-            }
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(prevState);
+                }
 
-            @Override
-            public void eventFired(Button button) {
-                audioPlayer.stopAll();
-                titleBarListner.eventFired(button);
-            }
-        });
-    }
+                @Override
+                public String getLabel() {
+                    return prevState.label;
+                }
+            };
+        } else {
+            backEventListner = new PresenterEventListner() {
 
-    @Override
-    public void setContent(AppEventListner appEventListner) {
-        ((AbstractSvgView) simpleView).setupScreen();
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+                }
+
+                @Override
+                public String getLabel() {
+                    return AppEventListner.ApplicationState.menu.label;
+                }
+            };
+        }
+        if (nextState != null) {
+            nextEventListner = new PresenterEventListner() {
+
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(nextState);
+                }
+
+                @Override
+                public String getLabel() {
+                    return nextState.label;
+                }
+            };
+        }
+        guessRoundView.setupScreen(backEventListner, nextEventListner);
         audioPlayer.addOnEndedListener(new AudioEventListner() {
 
             @Override
             public void audioEnded() {
-                ((GuessRoundView) simpleView).showAudioEnded();
+                guessRoundView.showAudioEnded();
             }
         });
+        widgetTag.add(guessRoundView);
+    }
+
+    @Override
+    public void fireBackEvent() {
+        if (backEventListner != null) {
+            audioPlayer.stopAll();
+            backEventListner.eventFired(null);
+        }
+    }
+
+    @Override
+    public void fireResizeEvent() {
+        guessRoundView.resizeView();
     }
 }

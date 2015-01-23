@@ -19,10 +19,12 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgGroupStates;
+import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
+import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgTextElements;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 
 /**
  * @since Nov 26, 2014 4:11:13 PM (creation date)
@@ -31,42 +33,42 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class GuessRoundView extends AbstractSvgView {
 
     public GuessRoundView(AudioPlayer audioPlayer) throws AudioException {
-        super(audioPlayer);
+        super(audioPlayer); 
     }
 
     protected final GuessRoundBuilder matchLanguageBuilder = new GuessRoundBuilder();
 
     @Override
     protected void getSvg(SafeHtmlBuilder builder) {
-        matchLanguageBuilder.getSvg(builder);
-//        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
-////        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButtonPlay1(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButtonPlay2(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.hidden);
-//        matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.hidden);
-////        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
-////        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
-////        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
-////        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
-//
+//        matchLanguageBuilder.getSvg(builder);
+        matchLanguageBuilder.getSvgChoiceArrows(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgChoiceArrow1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgScoreBox(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgSampleButton1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButton5(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButtonPlay1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButtonPlay2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
+//        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
+
 //        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
     }
 
@@ -85,9 +87,9 @@ public class GuessRoundView extends AbstractSvgView {
         final Element parentElement = targetElement.getParentElement();
         final String elementId = parentElement.getId();
         if (!elementId.isEmpty()) {
-            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4319, GuessRoundBuilder.SvgTextElements.tspan4319.name());
-            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4326, GuessRoundBuilder.SvgTextElements.tspan4319.name());
-            matchLanguageBuilder.setLabel(GuessRoundBuilder.SvgTextElements.tspan4413, GuessRoundBuilder.SvgTextElements.tspan4319.name());
+            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
+            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
+            matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, SvgTextElements.tspan4319.name());
             label.setText(elementId);
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
             switch (svgGroup) {

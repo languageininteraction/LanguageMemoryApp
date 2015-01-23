@@ -21,43 +21,97 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.view.AbstractSvgView;
 import nl.ru.languageininteraction.language.client.view.MatchLanguageView;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class MatchLanguagePresenter extends AbstractPresenter implements Presenter {
+public class MatchLanguagePresenter implements Presenter {
 
+    protected final RootLayoutPanel widgetTag;
     final AudioPlayer audioPlayer;
+    final MatchLanguageView matchLanguageView;
+    private PresenterEventListner backEventListner = null;
+    private PresenterEventListner nextEventListner = null;
 
     public MatchLanguagePresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
-        super(widgetTag, new MatchLanguageView(audioPlayer));
+        matchLanguageView = new MatchLanguageView(audioPlayer);
         this.audioPlayer = audioPlayer;
+        this.widgetTag = widgetTag;
     }
 
     @Override
-    public void setTitle(final PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.mapScreenTitle(), new PresenterEventListner() {
+    public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
+        widgetTag.clear();
+        if (prevState != null) {
+            backEventListner = new PresenterEventListner() {
+
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(prevState);
+                }
+
+                @Override
+                public String getLabel() {
+                    return prevState.label;
+                }
+            };
+        } else {
+            backEventListner = new PresenterEventListner() {
+
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+                }
+
+                @Override
+                public String getLabel() {
+                    return AppEventListner.ApplicationState.menu.label;
+                }
+            };
+        }
+        if (nextState != null) {
+            nextEventListner = new PresenterEventListner() {
+
+                @Override
+                public void eventFired(Button button) {
+                    audioPlayer.stopAll();
+                    appEventListner.requestApplicationState(nextState);
+                }
+
+                @Override
+                public String getLabel() {
+                    return nextState.label;
+                }
+            };
+        }
+        matchLanguageView.setupScreen(backEventListner, nextEventListner);
+        audioPlayer.addOnEndedListener(new AudioEventListner() {
 
             @Override
-            public String getLabel() {
-                return titleBarListner.getLabel();
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                audioPlayer.stopAll();
-                titleBarListner.eventFired(button);
+            public void audioEnded() {
+                matchLanguageView.showAudioEnded();
             }
         });
+        widgetTag.add(matchLanguageView);
     }
 
     @Override
-    public void setContent(AppEventListner appEventListner) {
-        ((AbstractSvgView) simpleView).setupScreen();
+    public void fireBackEvent() {
+        if (backEventListner != null) {
+            audioPlayer.stopAll();
+            backEventListner.eventFired(null);
+        }
+    }
+
+    @Override
+    public void fireResizeEvent() {
+        matchLanguageView.resizeView();
     }
 }

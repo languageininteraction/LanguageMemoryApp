@@ -60,9 +60,17 @@
 
 .svgPanel {
     /* this is required because of the contentPanel style */
-    position: absolute;
-    left: 0px;
-/*    top: -50px;*/
+    /*position: absolute;*/
+    /*left: 0px;*/
+    /*    top: -50px;*/
+}
+
+.svgDiagram {
+    position:fixed; 
+    top:0; 
+    bottom:0; 
+    left:0; 
+    right:0
 }
 
 .gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {

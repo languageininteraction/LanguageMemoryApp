@@ -139,4 +139,9 @@ public class MatchLanguageView extends AbstractSvgView {
 //            label.setText(targetElement.getId());
         }
     }
+
+    @Override
+    public void showAudioEnded() {
+
+    }
 }
