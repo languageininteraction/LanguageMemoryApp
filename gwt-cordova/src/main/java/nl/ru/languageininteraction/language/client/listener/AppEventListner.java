@@ -40,6 +40,7 @@ public interface AppEventListner {
         adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         stimulus(messages.stimulusMenuLabel()),
         guess("Guess"),
+        scores("Scores"),
         match("Match"),
         map(messages.mapMenuLabel()),
         autotyp_regions("AutotypRegions"),

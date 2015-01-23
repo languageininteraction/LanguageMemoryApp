@@ -24,7 +24,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 import com.google.gwt.user.client.DOM;
-            
+import com.google.gwt.dom.client.Element;
+                        
 // generated with svg2java.xsl
 public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder implements com.google.gwt.i18n.client.Messages {
 
@@ -50,7 +51,10 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     }
     
     public void setLabel(SvgTextElements textElement, String label) {
-        DOM.getElementById(textElement.name()).setInnerText(label);
+        final Element elementById = DOM.getElementById(textElement.name());
+        if (elementById != null) {
+            elementById.setInnerText(label);
+        }
     }
 
     public void showGroup(SvgGroupStates group) {

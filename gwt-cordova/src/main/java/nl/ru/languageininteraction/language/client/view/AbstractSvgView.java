@@ -40,8 +40,8 @@ public abstract class AbstractSvgView extends AbstractView {
 
     final VerticalPanel verticalPanel = new VerticalPanel();
     protected final AudioPlayer audioPlayer;
-    private PresenterEventListner backEventListner = null;
-    private PresenterEventListner nextEventListner = null;
+    protected PresenterEventListner backEventListner = null;
+    protected PresenterEventListner nextEventListner = null;
     protected Label label = new Label("clicked labels show here");
 
     public AbstractSvgView(AudioPlayer audioPlayer) throws AudioException {

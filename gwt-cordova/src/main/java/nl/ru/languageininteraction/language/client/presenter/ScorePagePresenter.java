@@ -24,23 +24,22 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.util.GameState;
-import nl.ru.languageininteraction.language.client.view.GuessRoundView;
+import nl.ru.languageininteraction.language.client.view.ScorePageView;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class GuessRoundPresenter implements Presenter {
+public class ScorePagePresenter implements Presenter {
 
     protected final RootLayoutPanel widgetTag;
     final AudioPlayer audioPlayer;
-    final GuessRoundView guessRoundView;
+    final ScorePageView scorePageView;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
 
-    public GuessRoundPresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
-        guessRoundView = new GuessRoundView(GameState.PlayerLevel.level_1, audioPlayer);
+    public ScorePagePresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
+        scorePageView = new ScorePageView(audioPlayer);
         this.audioPlayer = audioPlayer;
         this.widgetTag = widgetTag;
     }
@@ -92,15 +91,15 @@ public class GuessRoundPresenter implements Presenter {
                 }
             };
         }
-        guessRoundView.setupScreen(backEventListner, nextEventListner);
+        scorePageView.setupScreen(backEventListner, nextEventListner);
         audioPlayer.addOnEndedListener(new AudioEventListner() {
 
             @Override
             public void audioEnded() {
-                guessRoundView.showAudioEnded();
+                scorePageView.showAudioEnded();
             }
         });
-        widgetTag.add(guessRoundView);
+        widgetTag.add(scorePageView);
     }
 
     @Override
@@ -113,6 +112,6 @@ public class GuessRoundPresenter implements Presenter {
 
     @Override
     public void fireResizeEvent() {
-        guessRoundView.resizeView();
+        scorePageView.resizeView();
     }
 }

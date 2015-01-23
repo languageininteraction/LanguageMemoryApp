@@ -24,6 +24,7 @@ import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgTextElements;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.util.GameState.PlayerLevel;
 import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 
 /**
@@ -32,8 +33,12 @@ import nl.ru.languageininteraction.language.client.util.SvgTemplate;
  */
 public class GuessRoundView extends AbstractSvgView {
 
-    public GuessRoundView(AudioPlayer audioPlayer) throws AudioException {
+    private final PlayerLevel playerLevel;
+    private int roundsPlayed = 0;
+
+    public GuessRoundView(PlayerLevel playerLevel, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+        this.playerLevel = playerLevel;
     }
 
     protected final GuessRoundBuilder matchLanguageBuilder = new GuessRoundBuilder();
@@ -113,31 +118,35 @@ public class GuessRoundView extends AbstractSvgView {
         final Element parentElement = targetElement.getParentElement();
         final String elementId = parentElement.getId();
         if (!elementId.isEmpty()) {
-            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
-            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
-            matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, SvgTextElements.tspan4319.name());
+//            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
+//            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
+//            matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, SvgTextElements.tspan4319.name());
             label.setText(elementId);
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
             switch (svgGroup) {
                 case NextRoundButton:
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.LanguageInfoBox);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.NextRoundButton);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton1);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton2);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton3);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton4);
-                    matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton5);
+                    if (playerLevel.getRoundsPerGame() > roundsPlayed) {
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.LanguageInfoBox);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.NextRoundButton);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay2);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay3);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay4);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay5);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow2);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow3);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton1);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton2);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton3);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton4);
+                        matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton5);
+                    } else {
+                        nextEventListner.eventFired(null);
+                    }
                     break;
                 case TargetButtonPlay:
                 case SampleButtonPlay1:
@@ -264,10 +273,15 @@ public class GuessRoundView extends AbstractSvgView {
 //                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.NextRoundButton);
                     audioPlayer.stopAll();
-
+                    roundsPlayed++;
             }
+            updateRoundsLabel();
         } else {
 //            label.setText(targetElement.getId());
         }
+    }
+
+    private void updateRoundsLabel() {
+        matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, roundsPlayed + "/" + playerLevel.getRoundsPerGame());
     }
 }

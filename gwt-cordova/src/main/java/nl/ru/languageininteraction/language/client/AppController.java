@@ -34,6 +34,7 @@ import nl.ru.languageininteraction.language.client.presenter.InstructionsPresent
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
+import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -79,7 +80,11 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case guess:
                     this.presenter = new GuessRoundPresenter(widgetTag, new AudioPlayer(this));
-                    presenter.setState(this, ApplicationState.version, ApplicationState.match);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.scores);
+                    break;
+                case scores:
+                    this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.setuser, ApplicationState.guess);
                     break;
                 case match:
                     this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer(this));
@@ -104,7 +109,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                 case start:
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.setuser);
+                    presenter.setState(this, null, ApplicationState.guess);
                     break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
