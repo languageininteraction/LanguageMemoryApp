@@ -23,7 +23,9 @@ import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ScorePageView;
 
 /**
@@ -35,13 +37,16 @@ public class ScorePagePresenter implements Presenter {
     protected final RootLayoutPanel widgetTag;
     final AudioPlayer audioPlayer;
     final ScorePageView scorePageView;
+    final UserResults userResults;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
-    public ScorePagePresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
+    public ScorePagePresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer, UserResults userResults) throws AudioException {
         scorePageView = new ScorePageView(audioPlayer);
         this.audioPlayer = audioPlayer;
         this.widgetTag = widgetTag;
+        this.userResults = userResults;
     }
 
     @Override
@@ -100,6 +105,7 @@ public class ScorePagePresenter implements Presenter {
             }
         });
         widgetTag.add(scorePageView);
+        scorePageView.setUserName(userResults.getMetadataValue(metadataFieldProvider.metadataFieldArray[0].getPostName()));
     }
 
     @Override

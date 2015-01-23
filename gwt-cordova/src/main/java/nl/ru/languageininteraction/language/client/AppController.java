@@ -83,7 +83,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
                 case scores:
-                    this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this));
+                    this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this), userResults);
                     presenter.setState(this, ApplicationState.setuser, ApplicationState.guess);
                     break;
                 case match:

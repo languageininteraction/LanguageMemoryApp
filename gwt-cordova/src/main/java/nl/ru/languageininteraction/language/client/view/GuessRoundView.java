@@ -281,7 +281,7 @@ public class GuessRoundView extends AbstractSvgView {
         }
     }
 
-    private void updateRoundsLabel() {
+    public void updateRoundsLabel() {
         matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, roundsPlayed + "/" + playerLevel.getRoundsPerGame());
     }
 }

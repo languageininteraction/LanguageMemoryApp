@@ -101,6 +101,7 @@ public class GuessRoundPresenter implements Presenter {
             }
         });
         widgetTag.add(guessRoundView);
+        guessRoundView.updateRoundsLabel();
     }
 
     @Override

@@ -17,8 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import nl.ru.languageininteraction.language.client.ScorePage;
 import nl.ru.languageininteraction.language.client.ScorePageBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.ScorePageBuilder.SvgTextElements;
 import nl.ru.languageininteraction.language.client.ScorePageBuilder;
@@ -32,6 +34,7 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class ScorePageView extends AbstractSvgView {
 
     protected final ScorePageBuilder scorePageBuilder = new ScorePageBuilder();
+    private static final ScorePage SCORE_PAGE = GWT.create(ScorePage.class);
 
     public ScorePageView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
@@ -69,5 +72,12 @@ public class ScorePageView extends AbstractSvgView {
         } else {
 //            label.setText(targetElement.getId());
         }
+    }
+
+    public void setUserName(String userName) {
+        int maxNameLength = SCORE_PAGE.texttspan3285().length();
+        // trim the user name so that it fits in the text box
+        String shortName = (userName.length() <= maxNameLength) ? userName : userName.substring(0, maxNameLength) + "...";
+        scorePageBuilder.setLabel(SvgTextElements.tspan3285, shortName);
     }
 }
