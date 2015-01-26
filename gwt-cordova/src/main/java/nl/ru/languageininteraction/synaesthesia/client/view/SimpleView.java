@@ -126,7 +126,9 @@ public class SimpleView extends AbstractView {
             @Override
             public void onTouchEnd(TouchEndEvent event) {
                 event.preventDefault();
-                presenterListerner.eventFired(nextButton);
+                if (nextButton.isEnabled()) {
+                    presenterListerner.eventFired(nextButton);
+                }
             }
         });
         nextButton.addClickHandler(new ClickHandler() {
