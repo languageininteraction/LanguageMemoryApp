@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.177-testing</version>
+    <version>0.1.178-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -121,7 +121,7 @@
                             </fileMappers>
                             <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
                         </transformationSet>
-<!--                        <transformationSet>
+                        <transformationSet>
                             <dir>src/main/csv</dir>
                             <includes>
                                 <include>*.xml</include>
@@ -135,7 +135,6 @@
                             </fileMappers>
                             <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
                         </transformationSet>
-                    </transformationSets>-->
                         <transformationSet>
                             <dir>src/main/csv</dir>
                             <includes>
@@ -191,6 +190,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.GuessRound</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.ScorePage</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.LanguageData</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>

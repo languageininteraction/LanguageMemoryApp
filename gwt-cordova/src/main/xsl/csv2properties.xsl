@@ -22,19 +22,12 @@
             <!--<xsl:text>analyze</xsl:text>-->
             <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)$'>
                 <xsl:matching-substring>
-<xsl:text>language_name_</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>=</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>
+<xsl:value-of select="regex-group(2)"/><xsl:text>_Name=</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>
 </xsl:text>
-<xsl:text>language_population_</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>=</xsl:text><xsl:value-of select="regex-group(3)"/><xsl:text>
-</xsl:text>
-<xsl:text>language_area_</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>=</xsl:text><xsl:value-of select="regex-group(4)"/><xsl:text>
-</xsl:text>
-<xsl:text>language_family_</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>=</xsl:text><xsl:value-of select="regex-group(5)"/><xsl:text>
-</xsl:text>
-<xsl:text>language_dobes_</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>=</xsl:text><xsl:value-of select="regex-group(6)"/><xsl:text>
+<xsl:value-of select="regex-group(2)"/><xsl:text>_Description=</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>: no description available yet
 </xsl:text>
                 </xsl:matching-substring>
             </xsl:analyze-string>
         </xsl:for-each>
-        <!--<xsl:for-each select="getTokens($lines[1])" as="xs:string+" />-->
     </xsl:template>
 </xsl:stylesheet>
