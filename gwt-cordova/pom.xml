@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.175-testing</version>
+    <version>0.1.177-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -117,6 +117,35 @@
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
                                     <pattern>\.svg$</pattern>
                                     <replacement>Builder.java</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
+<!--                        <transformationSet>
+                            <dir>src/main/csv</dir>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <stylesheet>src/main/xsl/csv2java.xsl</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>\.xml$</pattern>
+                                    <replacement>Provider.java</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
+                    </transformationSets>-->
+                        <transformationSet>
+                            <dir>src/main/csv</dir>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <stylesheet>src/main/xsl/csv2properties.xsl</stylesheet>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>\.xml$</pattern>
+                                    <replacement>.properties</replacement>
                                 </fileMapper>
                             </fileMappers>
                             <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
