@@ -23,7 +23,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
 
     private static final </xsl:text><xsl:value-of select="$classname" /><xsl:text> LANGUAGE_DATA = GWT.create(</xsl:text><xsl:value-of select="$classname" /><xsl:text>.class);
 
-    public enum AvailableLanguages {
+    public enum LanguageSample {
         </xsl:text>
         <xsl:variable name="csvText" select="unparsed-text($csvfilepath)" />
         <xsl:for-each select="tokenize($csvText, '\n')">
@@ -34,19 +34,14 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
                 </xsl:matching-substring>
             </xsl:analyze-string>
         </xsl:for-each>
-        <!--<xsl:value-of select="/text()"/>-->
-<!--        <xsl:for-each select="text()">
-            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>,
-        </xsl:text>
-        </xsl:for-each>
--->        <xsl:text>;
+        <xsl:text>;
     final private String isoCode;
     final private int population;
     final private String area;
     final private String family;
     final private boolean dobes;
 
-        private AvailableLanguages(String isoCode, int population, String area, String family, boolean dobes) {
+        private LanguageSample(String isoCode, int population, String area, String family, boolean dobes) {
             this.isoCode = isoCode;
             this.population = population;
             this.area = area;
@@ -80,6 +75,10 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
 
         public String getLanguageDescription() {
             return LANGUAGE_DATA.arz_Description();
+        }
+
+        public String[] getSoundFiles() {
+            return new String[]{"media/" + isoCode + "/s1.mp3", "media/" + isoCode + "/s2.mp3", "media/" + isoCode + "/s3.mp3"};
         }
     }
 }
