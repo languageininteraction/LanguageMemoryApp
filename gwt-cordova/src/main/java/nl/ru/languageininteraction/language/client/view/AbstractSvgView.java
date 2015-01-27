@@ -95,6 +95,7 @@ public abstract class AbstractSvgView extends AbstractView {
 
             @Override
             public void onClick(ClickEvent event) {
+                event.preventDefault();
                 performClick(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
@@ -102,6 +103,7 @@ public abstract class AbstractSvgView extends AbstractView {
 
             @Override
             public void onTouchEnd(TouchEndEvent event) {
+                event.preventDefault();
                 performClick(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
