@@ -60,6 +60,8 @@ public class MatchLanguageView extends AbstractSvgView {
         matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.hidden);
 //        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
 //        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
+        
+        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.visible);
     }
 
     @Override

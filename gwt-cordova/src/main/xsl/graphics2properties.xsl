@@ -18,8 +18,13 @@
     <xsl:template match="/">
         <xsl:text># generated with map2properties.xsls
 </xsl:text>
-        <xsl:for-each select="svg:svg//svg:g">
-            <xsl:for-each select="svg:path">                
+    <xsl:apply-templates select="svg:svg/svg:defs/svg:linearGradient"/>
+    <xsl:apply-templates select="svg:svg//svg:g"/>
+    <xsl:apply-templates select="svg:svg//svg:rect"/>
+    <xsl:apply-templates select="svg:svg//svg:path"/>
+    <xsl:apply-templates select="svg:svg//svg:text"/>
+    </xsl:template>
+    <xsl:template match="svg:path">                
             <xsl:text>style</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -38,8 +43,8 @@
             <xsl:value-of select="@transform"/>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:text">                
+    </xsl:template>
+    <xsl:template match="svg:text">
             <xsl:text>style</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -58,8 +63,9 @@
             <xsl:value-of select="@y"/>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:text/svg:tspan">
+            <xsl:apply-templates select="svg:tspan" />
+    </xsl:template>
+    <xsl:template match="svg:text/svg:tspan">
             <xsl:text>id</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -90,8 +96,8 @@
             <xsl:value-of select="text()"/>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:rect">                
+    </xsl:template>
+    <xsl:template match="svg:rect">                
             <xsl:text>style</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -134,7 +140,8 @@
             <xsl:value-of select="@height"/>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="svg:g">
             <xsl:text>transform</xsl:text>
             <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -143,13 +150,12 @@
 </xsl:text>
             <xsl:text>id</xsl:text>
             <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
-            <!--<xsl:value-of select="@inkscape:label"/>-->
             <xsl:text>=</xsl:text>
             <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
             <xsl:text>
 </xsl:text> 
-        </xsl:for-each>
-            <xsl:for-each select="svg:svg/svg:defs/svg:linearGradient">
+    </xsl:template>
+    <xsl:template match="svg:defs/svg:linearGradient">
             <xsl:text>id</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -201,8 +207,9 @@
             </xsl:if>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
-            <xsl:for-each select="svg:svg/svg:defs/svg:linearGradient/svg:stop">                
+            <xsl:apply-templates select="svg:stop"/>
+    </xsl:template>
+    <xsl:template match="svg:defs/svg:linearGradient/svg:stop">                
             <xsl:text>style</xsl:text>
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
@@ -215,13 +222,5 @@
             <xsl:value-of select="@offset"/>
             <xsl:text>
 </xsl:text>
-            </xsl:for-each>
-<!--        <xsl:for-each select="svg:svg/svg:g[svg:path]">
-#        builder.append(SVG_TEMPLATE.groupTag(autotypRegions.id<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>(),autotypRegions.transform<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>()));
-<xsl:for-each select="svg:path">
-#        builder.append(SVG_TEMPLATE.pathTag(autotypRegions.transform<xsl:value-of select="translate(@id, ' -', '__')"/>(), autotypRegions.style<xsl:value-of select="translate(@id, ' -', '__')"/>(), autotypRegions.data<xsl:value-of select="translate(@id, ' -', '__')"/>()));
-</xsl:for-each>
-#        builder.append(SVG_TEMPLATE.groupTagEnd());
-        </xsl:for-each>-->
     </xsl:template>
 </xsl:stylesheet>
