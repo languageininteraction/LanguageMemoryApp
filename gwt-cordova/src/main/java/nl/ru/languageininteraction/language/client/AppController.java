@@ -35,6 +35,7 @@ import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
+import nl.ru.languageininteraction.language.client.presenter.TestSvgDuplicateStringsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -107,6 +108,9 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.version, ApplicationState.guess);
                     break;
                 case start:
+                    this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
+                    presenter.setState(this, null, ApplicationState.intro);
+                    break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
                     presenter.setState(this, null, ApplicationState.guess);
