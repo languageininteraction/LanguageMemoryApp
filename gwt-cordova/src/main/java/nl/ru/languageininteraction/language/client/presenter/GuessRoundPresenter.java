@@ -19,9 +19,11 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
+import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.util.GameState;
@@ -34,13 +36,16 @@ import nl.ru.languageininteraction.language.client.view.GuessRoundView;
 public class GuessRoundPresenter implements Presenter {
 
     protected final RootLayoutPanel widgetTag;
+    protected final LanguageDataProvider languageDataProvider;
     final AudioPlayer audioPlayer;
     final GuessRoundView guessRoundView;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
+    private int roundsPlayed = 0;
 
     public GuessRoundPresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
-        guessRoundView = new GuessRoundView(GameState.PlayerLevel.level_1, audioPlayer);
+        guessRoundView = new GuessRoundView(audioPlayer);
+        languageDataProvider = new LanguageDataProvider();
         this.audioPlayer = audioPlayer;
         this.widgetTag = widgetTag;
     }
@@ -83,7 +88,11 @@ public class GuessRoundPresenter implements Presenter {
                 @Override
                 public void eventFired(Button button) {
                     audioPlayer.stopAll();
-                    appEventListner.requestApplicationState(nextState);
+                    if (GameState.PlayerLevel.level_1.getRoundsPerGame() > roundsPlayed) {
+                        setSamples();
+                    } else {
+                        appEventListner.requestApplicationState(nextState);
+                    }
                 }
 
                 @Override
@@ -101,7 +110,57 @@ public class GuessRoundPresenter implements Presenter {
             }
         });
         widgetTag.add(guessRoundView);
-        guessRoundView.updateRoundsLabel();
+        setSamples();
+        guessRoundView.updateRoundsLabel(0, 0);
+    }
+
+    private void setSamples() {
+        guessRoundView.setSampleListeners(new LanguageSampleListener() {
+
+            @Override
+            public void eventFired() {
+                // no event is required for the target language
+            }
+
+            @Override
+            public LanguageDataProvider.LanguageSample getLanguageSample() {
+                return LanguageDataProvider.LanguageSample.arz;
+            }
+
+            @Override
+            public boolean isCorrect() {
+                return true;
+            }
+
+            @Override
+            public int getStampleIndex() {
+                return 1;
+            }
+        }, new LanguageSampleListener[]{
+            new LanguageSampleListener() {
+
+                @Override
+                public void eventFired() {
+                    roundsPlayed++;
+                    guessRoundView.updateRoundsLabel(0, roundsPlayed);
+                }
+
+                @Override
+                public LanguageDataProvider.LanguageSample getLanguageSample() {
+                    return LanguageDataProvider.LanguageSample.cmn;
+                }
+
+                @Override
+                public boolean isCorrect() {
+                    return false;
+                }
+
+                @Override
+                public int getStampleIndex() {
+                    return 2;
+                }
+            }
+        });
     }
 
     @Override
