@@ -108,9 +108,9 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 <xsl:text>
     public void getSvg</xsl:text><xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>(SafeHtmlBuilder builder, SvgTemplate.Visibility visibility) {
         builder.append(SVG_TEMPLATE.groupTag(SVG_DATA.id</xsl:text>
-<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
+<xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/>
 <xsl:text>(),SVG_DATA.transform</xsl:text>
-<xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
+<xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/>
 <xsl:text>(), visibility));</xsl:text>
 <xsl:apply-templates/>
 <xsl:text>      builder.append(SVG_TEMPLATE.groupTagEnd());

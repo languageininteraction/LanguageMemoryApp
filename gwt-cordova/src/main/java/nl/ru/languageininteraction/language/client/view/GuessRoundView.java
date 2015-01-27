@@ -103,6 +103,7 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
 
 //        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.visible);
     }
 
     public void setSampleListeners(LanguageSampleListener targetSampleListener, LanguageSampleListener[] languageSampleListeners) {

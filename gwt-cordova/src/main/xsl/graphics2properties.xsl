@@ -143,15 +143,15 @@
     </xsl:template>
     <xsl:template match="svg:g">
             <xsl:text>transform</xsl:text>
-            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
+            <xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
             <xsl:value-of select="@transform"/>
             <xsl:text>
 </xsl:text>
             <xsl:text>id</xsl:text>
-            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
+            <xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
-            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/>
+            <xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/>
             <xsl:text>
 </xsl:text> 
     </xsl:template>
