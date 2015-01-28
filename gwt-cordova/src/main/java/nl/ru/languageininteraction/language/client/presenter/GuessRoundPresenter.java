@@ -25,7 +25,9 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.util.GameState;
 import nl.ru.languageininteraction.language.client.view.GuessRoundView;
 
@@ -37,17 +39,23 @@ public class GuessRoundPresenter implements Presenter {
 
     protected final RootLayoutPanel widgetTag;
     protected final LanguageDataProvider languageDataProvider;
-    final AudioPlayer audioPlayer;
-    final GuessRoundView guessRoundView;
+    private final AudioPlayer audioPlayer;
+    private final GuessRoundView guessRoundView;
+    private final UserResults userResults;
     private PresenterEventListner backEventListner = null;
     private PresenterEventListner nextEventListner = null;
     private int roundsPlayed = 0;
+    private int playerScore = 0;
+    private final GameState.PlayerLevel playerLevel;
 
-    public GuessRoundPresenter(RootLayoutPanel widgetTag, final AudioPlayer audioPlayer) throws AudioException {
+    public GuessRoundPresenter(RootLayoutPanel widgetTag, UserResults userResults, final AudioPlayer audioPlayer) throws AudioException {
         guessRoundView = new GuessRoundView(audioPlayer);
         languageDataProvider = new LanguageDataProvider();
         this.audioPlayer = audioPlayer;
         this.widgetTag = widgetTag;
+        this.userResults = userResults;
+        playerScore = userResults.getBestScore();
+        playerLevel = new GameState().getPlayerLevel(playerScore);
     }
 
     @Override
@@ -88,9 +96,10 @@ public class GuessRoundPresenter implements Presenter {
                 @Override
                 public void eventFired(Button button) {
                     audioPlayer.stopAll();
-                    if (GameState.PlayerLevel.level_1.getRoundsPerGame() > roundsPlayed) {
-                        setSamples();
+                    if (playerLevel.getRoundsPerGame() > roundsPlayed) {
+                        setSamples(playerLevel);
                     } else {
+                        new LocalStorage().storeData(userResults);
                         appEventListner.requestApplicationState(nextState);
                     }
                 }
@@ -110,11 +119,11 @@ public class GuessRoundPresenter implements Presenter {
             }
         });
         widgetTag.add(guessRoundView);
-        setSamples();
+        setSamples(playerLevel);
         guessRoundView.updateRoundsLabel(0, 0);
     }
 
-    private void setSamples() {
+    private void setSamples(GameState.PlayerLevel playerLevel) {
         guessRoundView.setSampleListeners(new LanguageSampleListener() {
 
             @Override
@@ -142,7 +151,9 @@ public class GuessRoundPresenter implements Presenter {
                 @Override
                 public void eventFired() {
                     roundsPlayed++;
-                    guessRoundView.updateRoundsLabel(0, roundsPlayed);
+                    playerScore = (playerScore == 0) ? 1 : playerScore * 2;
+                    userResults.updateBestScore(playerScore);
+                    guessRoundView.updateRoundsLabel(playerScore, roundsPlayed);
                 }
 
                 @Override

@@ -66,7 +66,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
             ((ReportView) simpleView).showResults(stimuliGroup, calculatedScores);
             ((ReportView) simpleView).addText(messages.reportScreenScore(numberFormat2.format(calculatedScores.getScore())));
             ((ReportView) simpleView).addText(messages.userfeedbackscreentext());
-            userResults.updateBestScore(calculatedScores.getScore());
+//            userResults.updateBestScore(calculatedScores.getScore());
 //            ((ReportView) simpleView).addText(messages.reportScreenSCT());
 //            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
 //            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));

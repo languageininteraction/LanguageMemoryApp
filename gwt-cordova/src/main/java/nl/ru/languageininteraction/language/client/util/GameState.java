@@ -29,18 +29,30 @@ public class GameState {
     protected static final int LEVEL_3_MAX = 3000;
     protected static final int LEVEL_4_MAX = 12000;
 
+    protected static final int LEVEL_1_CHOICES = 2;
+    protected static final int LEVEL_4_CHOICES = 5;
+    protected static final int LEVEL_3_CHOICES = 4;
+    protected static final int LEVEL_2_CHOICES = 3;
+
+    protected static final int LEVEL_4_ROUNDS = 10;
+    protected static final int LEVEL_3_ROUNDS = 8;
+    protected static final int LEVEL_2_ROUNDS = 6;
+    protected static final int LEVEL_1_ROUNDS = 5;
+
     public enum PlayerLevel {
 
-        level_1(5, 2),
-        level_2(6, 3),
-        level_3(8, 4),
-        level_4(10, 5);
+        level_1(LEVEL_1_ROUNDS, LEVEL_1_CHOICES, LEVEL_1_MAX),
+        level_2(LEVEL_2_ROUNDS, LEVEL_2_CHOICES, LEVEL_2_MAX),
+        level_3(LEVEL_3_ROUNDS, LEVEL_3_CHOICES, LEVEL_3_MAX),
+        level_4(LEVEL_4_ROUNDS, LEVEL_4_CHOICES, LEVEL_4_MAX);
         final private int roundsPerGame;
         final private int choiceCount;
+        final private int maxScoreForLevel;
 
-        private PlayerLevel(int roundsPerGame, int choiceCount) {
+        private PlayerLevel(int roundsPerGame, int choiceCount, int maxScoreForLevel) {
             this.roundsPerGame = roundsPerGame;
             this.choiceCount = choiceCount;
+            this.maxScoreForLevel = maxScoreForLevel;
         }
 
         public int getRoundsPerGame() {
@@ -50,12 +62,16 @@ public class GameState {
         public int getChoiceCount() {
             return choiceCount;
         }
+
+        public int getMaxScoreForLevel() {
+            return maxScoreForLevel;
+        }
     }
 
     public enum LanguageStatus {
 
         endangered(1.5f),
-        vigourus(1);
+        vigorous(1);
         final private float scoreFactor;
 
         private LanguageStatus(float scoreFactor) {
@@ -65,6 +81,15 @@ public class GameState {
         public float getScoreFactor() {
             return scoreFactor;
         }
+    }
+
+    public PlayerLevel getPlayerLevel(int playerScore) {
+        for (PlayerLevel testLevel : PlayerLevel.values()) {
+            if (playerScore < testLevel.getMaxScoreForLevel()) {
+                return testLevel;
+            }
+        }
+        return PlayerLevel.level_4;
     }
 
     public int getScore(boolean playerCorrect, LanguageStatus languageStatus, int choiceCount) {

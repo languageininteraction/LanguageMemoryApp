@@ -31,7 +31,7 @@ public class UserResults {
     private final HashMap<String, String> metadataValues = new HashMap<>();
     private final HashMap<StimuliGroup, StimulusResponseGroup> results = new HashMap<>();
     private StimuliGroup pendingStimuliGroup = null;
-    private Double bestScore = null;
+    private int bestScore = 0;
     private String scoreLog = "";
     private final StimuliGroup defaultStimuliGroup;
 
@@ -93,12 +93,12 @@ public class UserResults {
         this.pendingStimuliGroup = pendingStimuliGroup;
     }
 
-    public Double getBestScore() {
+    public int getBestScore() {
         return bestScore;
     }
 
-    public void updateBestScore(Double bestScore) {
-        this.bestScore = (this.bestScore == null || this.bestScore > bestScore) ? bestScore : this.bestScore;
+    public void updateBestScore(int bestScore) {
+        this.bestScore = (this.bestScore < bestScore) ? bestScore : this.bestScore;
     }
 
     public String getScoreLog() {

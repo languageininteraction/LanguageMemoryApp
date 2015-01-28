@@ -80,7 +80,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.guess, null);
                     break;
                 case guess:
-                    this.presenter = new GuessRoundPresenter(widgetTag, new AudioPlayer(this));
+                    this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
                 case scores:

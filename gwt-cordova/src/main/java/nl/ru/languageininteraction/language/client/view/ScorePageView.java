@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.ScorePage;
 import nl.ru.languageininteraction.language.client.ScorePageBuilder.SvgGroupStates;
@@ -79,5 +80,11 @@ public class ScorePageView extends AbstractSvgView {
         // trim the user name so that it fits in the text box
         String shortName = (userName.length() <= maxNameLength) ? userName : userName.substring(0, maxNameLength) + "...";
         scorePageBuilder.setLabel(SvgTextElements.tspan3285, shortName);
+    }
+
+    public void setUserScore(int userScore) {
+        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
+        String formattedScore = decimalFormat.format(userScore);
+        scorePageBuilder.setLabel(SvgTextElements.tspan3303, formattedScore);
     }
 }

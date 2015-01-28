@@ -106,6 +106,7 @@ public class ScorePagePresenter implements Presenter {
         });
         widgetTag.add(scorePageView);
         scorePageView.setUserName(userResults.getMetadataValue(metadataFieldProvider.metadataFieldArray[0].getPostName()));
+        scorePageView.setUserScore(userResults.getBestScore());
     }
 
     @Override

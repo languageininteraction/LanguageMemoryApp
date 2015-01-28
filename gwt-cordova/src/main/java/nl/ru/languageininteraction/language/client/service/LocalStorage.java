@@ -30,6 +30,7 @@ public class LocalStorage {
 
     private Storage dataStore = null;
     private static final String USER_RESULTS = "UserResults.";
+    protected static final String MAX_SCORE = "maxScore";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
     public UserResults getStoredData(StimuliGroup defaultStimuliGroup) {
@@ -37,11 +38,25 @@ public class LocalStorage {
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                final String storedValue = dataStore.getItem(USER_RESULTS + metadataField.getPostName());
-                userResults.setMetadataValue(metadataField.getPostName(), (storedValue == null || "undefined".equals(storedValue)) ? "" : storedValue);
+                userResults.setMetadataValue(metadataField.getPostName(), getCleanStoredData(USER_RESULTS + metadataField.getPostName()));
             }
         }
+        userResults.updateBestScore(getCleanStoredInt(USER_RESULTS + MAX_SCORE));
         return userResults;
+    }
+
+    private int getCleanStoredInt(String keyString) {
+        final String cleanStoredData = getCleanStoredData(keyString);
+        try {
+            return Integer.parseInt(cleanStoredData);
+        } catch (NumberFormatException exception) {
+            return 0;
+        }
+    }
+
+    private String getCleanStoredData(String keyString) {
+        final String storedValue = dataStore.getItem(keyString);
+        return (storedValue == null || "undefined".equals(storedValue)) ? "" : storedValue;
     }
 
     public void clear() {
@@ -58,5 +73,6 @@ public class LocalStorage {
                 dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
             }
         }
+        dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getBestScore()));
     }
 }
