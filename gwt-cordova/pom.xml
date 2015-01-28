@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.180-testing</version>
+    <version>0.1.187-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -183,7 +183,7 @@
                     <i18nMessagesBundles>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Messages</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MetadataFields</i18nMessagesBundle>
-                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Stimuli</i18nMessagesBundle>
+                        <!--<i18nMessagesBundle>nl.ru.languageininteraction.language.client.Stimuli</i18nMessagesBundle>-->
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.ServiceLocations</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.Version</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.AutotypRegions</i18nMessagesBundle>

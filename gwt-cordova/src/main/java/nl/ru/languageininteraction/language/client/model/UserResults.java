@@ -17,8 +17,6 @@
  */
 package nl.ru.languageininteraction.language.client.model;
 
-import com.google.gwt.user.client.Random;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -29,48 +27,20 @@ import java.util.Set;
 public class UserResults {
 
     private final HashMap<String, String> metadataValues = new HashMap<>();
-    private final HashMap<StimuliGroup, StimulusResponseGroup> results = new HashMap<>();
+    private GameData gameData = new GameData();
     private StimuliGroup pendingStimuliGroup = null;
-    private int bestScore = 0;
     private String scoreLog = "";
-    private final StimuliGroup defaultStimuliGroup;
-
-    public UserResults(StimuliGroup defaultStimuliGroup) {
-        this.defaultStimuliGroup = defaultStimuliGroup;
-    }
 
     public void clearResults() {
-        results.clear();
+        gameData = new GameData();
     }
 
     public void clearMetadata() {
         metadataValues.clear();
     }
 
-    public void addDummyResults(StimuliGroup stimuliGroup) {
-        final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
-        results.put(stimuliGroup, stimulusResponseGroup);
-        for (Stimulus stimulus : stimuliGroup.getStimuli()) {
-            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
-            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
-            stimulusResponseGroup.addResponse(stimulus, new StimulusResponse(new ColourData(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)), new Date(), Random.nextDouble()));
-        }
-    }
-
-    public boolean canRegister() {
-        return results.containsKey(defaultStimuliGroup);
-    }
-
-    public Set<StimuliGroup> getStimuliGroups() {
-        return results.keySet();
-    }
-
-    public void addStimulusResponseGroup(StimuliGroup stimuliGroup, StimulusResponseGroup stimulusResponseGroup) {
-        results.put(stimuliGroup, stimulusResponseGroup);
-    }
-
-    public StimulusResponseGroup getStimulusResponseGroup(StimuliGroup stimuliGroup) {
-        return results.get(stimuliGroup);
+    public GameData getGameData() {
+        return gameData;
     }
 
     public void setMetadataValue(String key, String value) {
@@ -93,12 +63,8 @@ public class UserResults {
         this.pendingStimuliGroup = pendingStimuliGroup;
     }
 
-    public int getBestScore() {
-        return bestScore;
-    }
-
     public void updateBestScore(int bestScore) {
-        this.bestScore = (this.bestScore < bestScore) ? bestScore : this.bestScore;
+        gameData.setBestScore((gameData.getBestScore() < bestScore) ? bestScore : gameData.getBestScore());
     }
 
     public String getScoreLog() {

@@ -87,4 +87,20 @@ public class ScorePageView extends AbstractSvgView {
         String formattedScore = decimalFormat.format(userScore);
         scorePageBuilder.setLabel(SvgTextElements.tspan3303, formattedScore);
     }
+
+    public void setUserLevel(int choicePerRound) {
+        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
+        String formattedChoiceCount = decimalFormat.format(choicePerRound);
+        scorePageBuilder.setLabel(SvgTextElements.tspan4237, formattedChoiceCount);
+    }
+
+    public void setEndangeredCount(int endangeredCount) {
+        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
+        String formattedChoiceCount = decimalFormat.format(endangeredCount);
+        scorePageBuilder.setLabel(SvgTextElements.tspan4192, formattedChoiceCount);
+    }
+
+    public void setRoundsData(int roundsCorrect, int roundsPlayed) {
+        scorePageBuilder.setLabel(SvgTextElements.tspan3289, roundsCorrect + "/" + roundsPlayed);
+    }
 }

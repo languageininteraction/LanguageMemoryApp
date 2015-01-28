@@ -106,7 +106,10 @@ public class ScorePagePresenter implements Presenter {
         });
         widgetTag.add(scorePageView);
         scorePageView.setUserName(userResults.getMetadataValue(metadataFieldProvider.metadataFieldArray[0].getPostName()));
-        scorePageView.setUserScore(userResults.getBestScore());
+        scorePageView.setUserScore(userResults.getGameData().getBestScore());
+        scorePageView.setUserLevel(userResults.getGameData().getChoicesPerRound());
+        scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());
+        scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(),userResults.getGameData().getRoundsPlayed());
     }
 
     @Override

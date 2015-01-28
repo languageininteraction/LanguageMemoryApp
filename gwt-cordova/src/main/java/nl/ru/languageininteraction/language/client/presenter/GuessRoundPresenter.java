@@ -54,7 +54,7 @@ public class GuessRoundPresenter implements Presenter {
         this.audioPlayer = audioPlayer;
         this.widgetTag = widgetTag;
         this.userResults = userResults;
-        playerScore = userResults.getBestScore();
+        playerScore = userResults.getGameData().getBestScore();
         playerLevel = new GameState().getPlayerLevel(playerScore);
     }
 

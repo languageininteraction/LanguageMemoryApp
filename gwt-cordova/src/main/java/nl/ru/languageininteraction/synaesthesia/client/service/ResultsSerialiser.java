@@ -18,10 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
-import nl.ru.languageininteraction.language.client.model.StimuliGroup;
-import nl.ru.languageininteraction.language.client.model.Stimulus;
-import nl.ru.languageininteraction.language.client.model.StimulusResponse;
-import nl.ru.languageininteraction.language.client.model.StimulusResponseGroup;
+import nl.ru.languageininteraction.language.client.LanguageDataProvider;
+import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 
 /**
@@ -33,30 +31,22 @@ public abstract class ResultsSerialiser {
 //    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     public String serialise(UserResults userResults, String postName_email) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (StimuliGroup stimuliGroup : userResults.getStimuliGroups()) {
-            StimulusResponseGroup responseGroup = userResults.getStimulusResponseGroup(stimuliGroup);
-            for (Stimulus stimulus : stimuliGroup.getStimuli()) {
-                for (StimulusResponse response : responseGroup.getResults(stimulus)) {
-                    stringBuilder.append(userResults.getMetadataValue(postName_email));
-                    stringBuilder.append("\t");
-                    stringBuilder.append(stimuliGroup.getGroupLabel());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(stimulus.getValue());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(formatDate(response.getTime()));
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getDurationMs());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getHexValue());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getRed());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getGreen());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getBlue());
-                    stringBuilder.append("\n");
-                }
+        for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
+            stringBuilder.append(userResults.getMetadataValue(postName_email));
+            stringBuilder.append("\t");
+            stringBuilder.append(roundData.getChosenAnswer().getIsoCode());
+            stringBuilder.append("\t");
+            stringBuilder.append(roundData.getCorrectAnswer().getIsoCode());
+            stringBuilder.append("\t");
+            for (LanguageDataProvider.LanguageSample roundChoice : roundData.getRoundChoices()) {
+                stringBuilder.append(roundChoice.getIsoCode());
+                stringBuilder.append(",");
             }
+            stringBuilder.append("\t");
+            stringBuilder.append(formatDate(roundData.getTime()));
+            stringBuilder.append("\t");
+            stringBuilder.append(roundData.getDurationMs());
+            stringBuilder.append("\n");
         }
         return stringBuilder.toString();
     }

@@ -20,7 +20,6 @@ package nl.ru.languageininteraction.language.client.service;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import com.google.gwt.storage.client.Storage;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
-import nl.ru.languageininteraction.language.client.model.StimuliGroup;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -33,8 +32,8 @@ public class LocalStorage {
     protected static final String MAX_SCORE = "maxScore";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
-    public UserResults getStoredData(StimuliGroup defaultStimuliGroup) {
-        UserResults userResults = new UserResults(defaultStimuliGroup);
+    public UserResults getStoredData() {
+        UserResults userResults = new UserResults();
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
@@ -73,6 +72,6 @@ public class LocalStorage {
                 dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
             }
         }
-        dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getBestScore()));
+        dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getGameData().getBestScore()));
     }
 }

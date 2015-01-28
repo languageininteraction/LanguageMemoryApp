@@ -39,7 +39,6 @@ import nl.ru.languageininteraction.language.client.presenter.TestSvgDuplicateStr
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
-import nl.ru.languageininteraction.language.client.service.StimuliProvider;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -52,13 +51,10 @@ public class AppController implements AppEventListner, AudioExceptionListner {
     private final RootLayoutPanel widgetTag;
     private Presenter presenter;
     private final UserResults userResults;
-    private final StimuliProvider stimuliProvider;
 
     public AppController(RootLayoutPanel widgetTag) {
         this.widgetTag = widgetTag;
-        stimuliProvider = new StimuliProvider();
-        userResults = new LocalStorage().getStoredData(stimuliProvider.getDefaultStimuli());
-//        userResults.setPendingStimuliGroup(stimuliProvider.getDefaultStimuli());
+        userResults = new LocalStorage().getStoredData();
     }
 
     @Override
@@ -109,7 +105,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case start:
                     this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.intro);
+                    presenter.setState(this, null, ApplicationState.scores);
                     break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
