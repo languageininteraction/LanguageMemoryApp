@@ -103,7 +103,7 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
 
 //        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
-        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.visible);
+        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.hidden);
     }
 
     public void setSampleListeners(LanguageSampleListener targetSampleListener, LanguageSampleListener[] languageSampleListeners) {
@@ -310,6 +310,7 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
 //                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
         matchLanguageBuilder.showGroup(SvgGroupStates.LanguageInfoBox);
+        matchLanguageBuilder.showGroup(SvgGroupStates.g4704);
 //                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
         matchLanguageBuilder.showGroup(SvgGroupStates.NextRoundButton);
         audioPlayer.stopAll();

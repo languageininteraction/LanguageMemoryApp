@@ -29,7 +29,7 @@ public interface SvgTemplate extends SafeHtmlTemplates {
 
     enum Visibility {
 
-        hidden, visible
+        hidden, visible, inherit
     }
 
     @Template("<svg>{0}</svg>")

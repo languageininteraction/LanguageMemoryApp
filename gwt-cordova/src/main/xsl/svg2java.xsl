@@ -34,8 +34,8 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 
     public enum SvgGroupStates {
         </xsl:text>
-        <xsl:for-each select="svg:svg//svg:g[@inkscape:label]">
-            <xsl:value-of select="translate(@inkscape:label, ' -', '__')"/><xsl:text>,
+        <xsl:for-each select="svg:svg//svg:g">
+            <xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>,
         </xsl:text>
         </xsl:for-each>
         <xsl:text>diagram // the diagram entry is used to identify the svg root element
@@ -136,7 +136,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
     </xsl:template>-->
 <xsl:template match="svg:g">
 <xsl:text>
-        getSvg</xsl:text><xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>(builder, visibility);</xsl:text>
+        getSvg</xsl:text><xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>(builder, SvgTemplate.Visibility.inherit);</xsl:text>
     </xsl:template>
     <xsl:template match="svg:path">
 <xsl:text>    builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));</xsl:text>
