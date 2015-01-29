@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
@@ -25,6 +26,7 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -132,18 +134,8 @@ public class GuessRoundPresenter implements Presenter {
             }
 
             @Override
-            public LanguageDataProvider.LanguageSample getLanguageSample() {
-                return LanguageDataProvider.LanguageSample.arz;
-            }
-
-            @Override
-            public boolean isCorrect() {
-                return true;
-            }
-
-            @Override
-            public int getStampleIndex() {
-                return 1;
+            public RoundSample getRoundSample() {
+                return new RoundSample(LanguageDataProvider.LanguageSample.arz, true, 1);
             }
         }, new LanguageSampleListener[]{
             new LanguageSampleListener() {
@@ -151,24 +143,19 @@ public class GuessRoundPresenter implements Presenter {
                 @Override
                 public void eventFired() {
                     roundsPlayed++;
-                    playerScore = (playerScore == 0) ? 1 : playerScore * 2;
-                    userResults.updateBestScore(playerScore);
-                    guessRoundView.updateRoundsLabel(playerScore, roundsPlayed);
+                    boolean isCorrect = Random.nextBoolean();
+                    if (isCorrect) {
+                        playerScore = (playerScore == 0) ? 1 : playerScore * 2;
+                        userResults.updateBestScore(playerScore);
+                        userResults.getGameData().addCorrectRound();
+                    }
+                    userResults.getGameData().addRoundPlayed();
+                    guessRoundView.updateRoundsLabel(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
                 }
 
                 @Override
-                public LanguageDataProvider.LanguageSample getLanguageSample() {
-                    return LanguageDataProvider.LanguageSample.cmn;
-                }
-
-                @Override
-                public boolean isCorrect() {
-                    return false;
-                }
-
-                @Override
-                public int getStampleIndex() {
-                    return 2;
+                public RoundSample getRoundSample() {
+                    return new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 2);
                 }
             }
         });

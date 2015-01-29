@@ -15,17 +15,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.listener;
+package nl.ru.languageininteraction.language.client.model;
 
-import nl.ru.languageininteraction.language.client.model.RoundSample;
+import nl.ru.languageininteraction.language.client.LanguageDataProvider.LanguageSample;
 
 /**
- * @since Jan 26, 2015 4:36:43 PM (creation date)
+ * @since Jan 29, 2015 12:59:31 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface LanguageSampleListener {
+public class RoundSample {
 
-    public void eventFired();
+    private final LanguageSample languageSample;
+    private final boolean correct;
+    private final int sampleIndex;
 
-    public RoundSample getRoundSample();
+    public RoundSample(LanguageSample languageSample, boolean correct, int sampleIndex) {
+        this.languageSample = languageSample;
+        this.correct = correct;
+        this.sampleIndex = sampleIndex;
+    }
+
+    public LanguageSample getLanguageSample() {
+        return languageSample;
+    }
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public int getSampleIndex() {
+        return sampleIndex;
+    }
 }

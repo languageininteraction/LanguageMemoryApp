@@ -21,6 +21,7 @@ import java.util.Date;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.model.RoundData;
+import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -39,18 +40,8 @@ public class ResultsSerialiserTest {
             }
 
             @Override
-            public LanguageDataProvider.LanguageSample getLanguageSample() {
-                return languageSample;
-            }
-
-            @Override
-            public boolean isCorrect() {
-                return correct;
-            }
-
-            @Override
-            public int getStampleIndex() {
-                return sampleIndex;
+            public RoundSample getRoundSample() {
+                return new RoundSample(languageSample, correct, sampleIndex);
             }
         };
     }

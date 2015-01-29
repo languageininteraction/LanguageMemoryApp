@@ -34,18 +34,18 @@ public abstract class ResultsSerialiser {
         for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
             stringBuilder.append(userResults.getMetadataValue(postName_email));
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
+            stringBuilder.append(roundData.getChosenAnswer().getRoundSample().getLanguageSample().getIsoCode());
             stringBuilder.append("_");
-            stringBuilder.append(roundData.getChosenAnswer().getStampleIndex());
+            stringBuilder.append(roundData.getChosenAnswer().getRoundSample().getSampleIndex());
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getCorrectAnswer().getLanguageSample().getIsoCode());
+            stringBuilder.append(roundData.getCorrectAnswer().getRoundSample().getLanguageSample().getIsoCode());
             stringBuilder.append("_");
-            stringBuilder.append(roundData.getCorrectAnswer().getStampleIndex());
+            stringBuilder.append(roundData.getCorrectAnswer().getRoundSample().getSampleIndex());
             stringBuilder.append("\t");
             for (LanguageSampleListener roundChoice : roundData.getRoundChoices()) {
-                stringBuilder.append(roundChoice.getLanguageSample().getIsoCode());
+                stringBuilder.append(roundChoice.getRoundSample().getLanguageSample().getIsoCode());
                 stringBuilder.append("_");
-                stringBuilder.append(roundChoice.getStampleIndex());
+                stringBuilder.append(roundChoice.getRoundSample().getSampleIndex());
                 stringBuilder.append(",");
             }
             stringBuilder.append("\t");
