@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.model;
 
 import java.util.Date;
-import nl.ru.languageininteraction.language.client.LanguageDataProvider;
+import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 
 /**
  * @since Jan 28, 2015 4:09:17 PM (creation date)
@@ -26,13 +26,13 @@ import nl.ru.languageininteraction.language.client.LanguageDataProvider;
  */
 public class RoundData {
 
-    private final LanguageDataProvider.LanguageSample chosenAnswer;
-    private final LanguageDataProvider.LanguageSample correctAnswer;
-    private final LanguageDataProvider.LanguageSample[] roundChoices;
+    private final LanguageSampleListener chosenAnswer;
+    private final LanguageSampleListener correctAnswer;
+    private final LanguageSampleListener[] roundChoices;
     private final Date time;
     private final double durationMs;
 
-    public RoundData(LanguageDataProvider.LanguageSample chosenAnswer, LanguageDataProvider.LanguageSample correctAnswer, LanguageDataProvider.LanguageSample[] roundChoices, Date time, double durationMs) {
+    public RoundData(LanguageSampleListener chosenAnswer, LanguageSampleListener correctAnswer, LanguageSampleListener[] roundChoices, Date time, double durationMs) {
         this.chosenAnswer = chosenAnswer;
         this.correctAnswer = correctAnswer;
         this.roundChoices = roundChoices;
@@ -40,15 +40,15 @@ public class RoundData {
         this.durationMs = durationMs;
     }
 
-    public LanguageDataProvider.LanguageSample getChosenAnswer() {
+    public LanguageSampleListener getChosenAnswer() {
         return chosenAnswer;
     }
 
-    public LanguageDataProvider.LanguageSample getCorrectAnswer() {
+    public LanguageSampleListener getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public LanguageDataProvider.LanguageSample[] getRoundChoices() {
+    public LanguageSampleListener[] getRoundChoices() {
         return roundChoices;
     }
 

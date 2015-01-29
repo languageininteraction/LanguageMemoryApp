@@ -56,6 +56,18 @@ public class GameData {
         this.roundsCorrect = roundsCorrect;
     }
 
+    public void addCorrectRound() {
+        this.roundsCorrect++;
+    }
+
+    public void addRoundPlayed() {
+        this.roundsPlayed++;
+    }
+
+    public void addEndangeredCorrectRound() {
+        this.roundsCorrectEndangered++;
+    }
+
     public int getRoundsCorrectEndangered() {
         return roundsCorrectEndangered;
     }

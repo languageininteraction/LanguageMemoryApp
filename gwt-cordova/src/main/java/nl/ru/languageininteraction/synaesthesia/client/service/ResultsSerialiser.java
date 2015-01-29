@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
-import nl.ru.languageininteraction.language.client.LanguageDataProvider;
+import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 
@@ -34,12 +34,18 @@ public abstract class ResultsSerialiser {
         for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
             stringBuilder.append(userResults.getMetadataValue(postName_email));
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getChosenAnswer().getIsoCode());
+            stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
+            stringBuilder.append("_");
+            stringBuilder.append(roundData.getChosenAnswer().getStampleIndex());
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getCorrectAnswer().getIsoCode());
+            stringBuilder.append(roundData.getCorrectAnswer().getLanguageSample().getIsoCode());
+            stringBuilder.append("_");
+            stringBuilder.append(roundData.getCorrectAnswer().getStampleIndex());
             stringBuilder.append("\t");
-            for (LanguageDataProvider.LanguageSample roundChoice : roundData.getRoundChoices()) {
-                stringBuilder.append(roundChoice.getIsoCode());
+            for (LanguageSampleListener roundChoice : roundData.getRoundChoices()) {
+                stringBuilder.append(roundChoice.getLanguageSample().getIsoCode());
+                stringBuilder.append("_");
+                stringBuilder.append(roundChoice.getStampleIndex());
                 stringBuilder.append(",");
             }
             stringBuilder.append("\t");
