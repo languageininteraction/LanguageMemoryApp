@@ -25,7 +25,5 @@ import nl.ru.languageininteraction.language.client.model.RoundSample;
  */
 public interface LanguageSampleListener {
 
-    public void eventFired();
-
-    public RoundSample getRoundSample();
+    public void eventFired(RoundSample roundSample);
 }

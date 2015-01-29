@@ -38,42 +38,31 @@ public class GameData {
 
     public void addRoundData(RoundData roundData) {
         gameRoundData.add(roundData);
+        if (roundData.getChosenAnswer().isCorrect()) {
+            roundsCorrect++;
+        }
+        if (roundData.getChosenAnswer().getLanguageSample().isDobes()) {
+            roundsCorrectEndangered++;
+        }
+        roundsPlayed++;
+    }
+
+    public void clearGameCounters() {
+        roundsPlayed = 0;
+        roundsCorrect = 0;
+        roundsCorrectEndangered = 0;
     }
 
     public int getRoundsPlayed() {
         return roundsPlayed;
     }
 
-    public void setRoundsPlayed(int roundsPlayed) {
-        this.roundsPlayed = roundsPlayed;
-    }
-
     public int getRoundsCorrect() {
         return roundsCorrect;
     }
 
-    public void setRoundsCorrect(int roundsCorrect) {
-        this.roundsCorrect = roundsCorrect;
-    }
-
-    public void addCorrectRound() {
-        this.roundsCorrect++;
-    }
-
-    public void addRoundPlayed() {
-        this.roundsPlayed++;
-    }
-
-    public void addEndangeredCorrectRound() {
-        this.roundsCorrectEndangered++;
-    }
-
     public int getRoundsCorrectEndangered() {
         return roundsCorrectEndangered;
-    }
-
-    public void setRoundsCorrectEndangered(int roundsCorrectEndangered) {
-        this.roundsCorrectEndangered = roundsCorrectEndangered;
     }
 
     public int getChoicesPerRound() {
@@ -91,5 +80,4 @@ public class GameData {
     public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
     }
-
 }

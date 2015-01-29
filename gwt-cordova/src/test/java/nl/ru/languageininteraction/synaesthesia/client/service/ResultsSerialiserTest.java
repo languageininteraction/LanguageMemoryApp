@@ -19,7 +19,6 @@ package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
-import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
@@ -32,18 +31,8 @@ import static org.junit.Assert.*;
  */
 public class ResultsSerialiserTest {
 
-    private LanguageSampleListener getLanguageSampleListener(final LanguageDataProvider.LanguageSample languageSample, final int sampleIndex, final boolean correct) {
-        return new LanguageSampleListener() {
-
-            @Override
-            public void eventFired() {
-            }
-
-            @Override
-            public RoundSample getRoundSample() {
-                return new RoundSample(languageSample, correct, sampleIndex);
-            }
-        };
+    private RoundSample getRoundSample(final LanguageDataProvider.LanguageSample languageSample, final int sampleIndex, final boolean correct) {
+        return new RoundSample(languageSample, correct, sampleIndex);
     }
 
     /**
@@ -55,8 +44,14 @@ public class ResultsSerialiserTest {
         UserResults userResults = new UserResults();
         final String postName_email = "postName_email";
         userResults.setMetadataValue(postName_email, "postName@email");
-        userResults.getGameData().addRoundData(new RoundData(getLanguageSampleListener(LanguageDataProvider.LanguageSample.fij, 1, true), getLanguageSampleListener(LanguageDataProvider.LanguageSample.cmn, 2, false), new LanguageSampleListener[]{getLanguageSampleListener(LanguageDataProvider.LanguageSample.arz, 3, true), getLanguageSampleListener(LanguageDataProvider.LanguageSample.spa, 3, false), getLanguageSampleListener(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999), 123456));
-        userResults.getGameData().addRoundData(new RoundData(getLanguageSampleListener(LanguageDataProvider.LanguageSample.cmn, 1, false), getLanguageSampleListener(LanguageDataProvider.LanguageSample.spa, 1, true), new LanguageSampleListener[]{getLanguageSampleListener(LanguageDataProvider.LanguageSample.cmn, 1, false), getLanguageSampleListener(LanguageDataProvider.LanguageSample.deu, 1, true), getLanguageSampleListener(LanguageDataProvider.LanguageSample.fij, 1, false)}, new Date(9999999), 123456));
+        final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
+        roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
+        roundData.setDurationMs(123456);
+        userResults.getGameData().addRoundData(roundData);
+        final RoundData roundData1 = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.spa, 1, true), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 1, true), getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, false)}, new Date(9999999));
+        roundData1.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false));
+        roundData1.setDurationMs(123456);
+        userResults.getGameData().addRoundData(roundData1);
         ResultsSerialiser instance = new ResultsSerialiser() {
             @Override
             protected String formatDate(Date date) {

@@ -19,10 +19,10 @@ package nl.ru.languageininteraction.language.client.service;
 
 import com.google.gwt.dom.client.AudioElement;
 import com.google.gwt.media.client.Audio;
-import nl.ru.languageininteraction.language.client.LanguageDataProvider.LanguageSample;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioExceptionListner;
+import nl.ru.languageininteraction.language.client.model.RoundSample;
 
 /**
  * @since Jan 6, 2015 10:27:57 AM (creation date)
@@ -65,9 +65,9 @@ public class AudioPlayer {
         this.audioEventListner = audioEventListner;
     }
 
-    public void playSampleAudio(LanguageSample languageSample, int sampleIndex) {
-        final String[] soundFiles = languageSample.getSoundFiles();
-        playSample(soundFiles[sampleIndex]);
+    public void playSampleAudio(RoundSample roundSample) {
+        final String[] soundFiles = roundSample.getLanguageSample().getSoundFiles();
+        playSample(soundFiles[roundSample.getSampleIndex()]);
     }
 
     @Deprecated

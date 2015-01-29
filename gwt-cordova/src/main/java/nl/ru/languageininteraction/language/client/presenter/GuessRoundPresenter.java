@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
-import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
@@ -26,10 +25,12 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
+import nl.ru.languageininteraction.language.client.service.RoundDataProvider;
 import nl.ru.languageininteraction.language.client.util.GameState;
 import nl.ru.languageininteraction.language.client.view.GuessRoundView;
 
@@ -57,6 +58,7 @@ public class GuessRoundPresenter implements Presenter {
         this.widgetTag = widgetTag;
         this.userResults = userResults;
         playerScore = userResults.getGameData().getBestScore();
+        userResults.getGameData().clearGameCounters();
         playerLevel = new GameState().getPlayerLevel(playerScore);
     }
 
@@ -126,39 +128,23 @@ public class GuessRoundPresenter implements Presenter {
     }
 
     private void setSamples(GameState.PlayerLevel playerLevel) {
+        final RoundData roundData = new RoundDataProvider().getRoundData(playerLevel);
+        final long startMs = System.currentTimeMillis();
         guessRoundView.setSampleListeners(new LanguageSampleListener() {
 
             @Override
-            public void eventFired() {
-                // no event is required for the target language
-            }
-
-            @Override
-            public RoundSample getRoundSample() {
-                return new RoundSample(LanguageDataProvider.LanguageSample.arz, true, 1);
-            }
-        }, new LanguageSampleListener[]{
-            new LanguageSampleListener() {
-
-                @Override
-                public void eventFired() {
-                    roundsPlayed++;
-                    boolean isCorrect = Random.nextBoolean();
-                    if (isCorrect) {
-                        playerScore = (playerScore == 0) ? 1 : playerScore * 2;
-                        userResults.updateBestScore(playerScore);
-                        userResults.getGameData().addCorrectRound();
-                    }
-                    userResults.getGameData().addRoundPlayed();
-                    guessRoundView.updateRoundsLabel(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
+            public void eventFired(RoundSample roundSample) {
+                roundsPlayed++;
+                if (roundSample.isCorrect()) {
+                    playerScore = (playerScore == 0) ? 1 : playerScore * 2;
+                    userResults.updateBestScore(playerScore);
                 }
-
-                @Override
-                public RoundSample getRoundSample() {
-                    return new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 2);
-                }
+                roundData.setChosenAnswer(roundSample);
+                roundData.setDurationMs(System.currentTimeMillis() - startMs);
+                userResults.getGameData().addRoundData(roundData);
+                guessRoundView.updateRoundsLabel(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
             }
-        });
+        }, roundData);
     }
 
     @Override

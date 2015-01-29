@@ -18,8 +18,8 @@
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
-import nl.ru.languageininteraction.language.client.listener.LanguageSampleListener;
 import nl.ru.languageininteraction.language.client.model.RoundData;
+import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 
 /**
@@ -34,18 +34,18 @@ public abstract class ResultsSerialiser {
         for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
             stringBuilder.append(userResults.getMetadataValue(postName_email));
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getChosenAnswer().getRoundSample().getLanguageSample().getIsoCode());
+            stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
             stringBuilder.append("_");
-            stringBuilder.append(roundData.getChosenAnswer().getRoundSample().getSampleIndex());
+            stringBuilder.append(roundData.getChosenAnswer().getSampleIndex());
             stringBuilder.append("\t");
-            stringBuilder.append(roundData.getCorrectAnswer().getRoundSample().getLanguageSample().getIsoCode());
+            stringBuilder.append(roundData.getCorrectSample().getLanguageSample().getIsoCode());
             stringBuilder.append("_");
-            stringBuilder.append(roundData.getCorrectAnswer().getRoundSample().getSampleIndex());
+            stringBuilder.append(roundData.getCorrectSample().getSampleIndex());
             stringBuilder.append("\t");
-            for (LanguageSampleListener roundChoice : roundData.getRoundChoices()) {
-                stringBuilder.append(roundChoice.getRoundSample().getLanguageSample().getIsoCode());
+            for (RoundSample roundSample : roundData.getRoundChoices()) {
+                stringBuilder.append(roundSample.getLanguageSample().getIsoCode());
                 stringBuilder.append("_");
-                stringBuilder.append(roundChoice.getRoundSample().getSampleIndex());
+                stringBuilder.append(roundSample.getSampleIndex());
                 stringBuilder.append(",");
             }
             stringBuilder.append("\t");
