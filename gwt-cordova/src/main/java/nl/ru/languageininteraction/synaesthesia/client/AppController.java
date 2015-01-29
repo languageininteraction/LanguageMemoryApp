@@ -39,6 +39,8 @@ import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.MenuPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.RegisterDisabledPresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.RegistrationCompletePresenter;
+import nl.ru.languageininteraction.synaesthesia.client.presenter.RegistrationFailedPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.StimulusMenuPresenter;
 import nl.ru.languageininteraction.synaesthesia.client.presenter.UserNamePresenter;
 
@@ -137,6 +139,14 @@ public class AppController implements AppEventListner {
                         this.presenter = new RegisterPresenter(widgetTag, userResults);
                         presenter.setState(this, null, ApplicationState.version);
                     }
+                    break;
+                case registrationcomplete:
+                    this.presenter = new RegistrationCompletePresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.menu, ApplicationState.version);
+                    break;
+                case registrationfailed:
+                    this.presenter = new RegistrationFailedPresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.menu, ApplicationState.registration);
                     break;
                 case moreinfo:
                     this.presenter = new MoreInfoPresenter(widgetTag);

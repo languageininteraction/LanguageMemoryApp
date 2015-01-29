@@ -134,27 +134,13 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
 
                     @Override
                     public void registrationFailed(Throwable exception) {
-                        simpleView.setDisplayText("Registration failed. " + exception.getMessage());
-                        addRegisterButton(appEventListner);
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailed);
                     }
 
                     @Override
                     public void registrationComplete() {
-                        simpleView.setDisplayText("Registration complete.");
                         userResults.clearResults();
-                        simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
-
-                            @Override
-                            public void eventFired(Button button) {
-                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
-                            }
-
-                            @Override
-                            public String getLabel() {
-                                return AppEventListner.ApplicationState.version.label;
-                            }
-
-                        });
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationcomplete);
                     }
                 }, messages.reportDateFormat());
             }
