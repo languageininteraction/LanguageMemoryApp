@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,23 +35,23 @@ public class Properties2Csv {
     private static final String FILE_SUFFIX = ".csv";
     private static final String COLUMN_SEPARATOR = ",";
 
-    final private Properties properties = new Properties();
-    final private Properties properties_nl = new Properties();
-    final private Properties properties_de = new Properties();
-    final private String propertiesFileName;
+    final File outputFile = new File("target/translations" + FILE_SUFFIX);
 
-    public Properties2Csv(String propertiesFileName) throws IOException {
-        this.propertiesFileName = propertiesFileName;
+    public void deleteOutputFile() {
+        outputFile.delete();
+    }
+
+    public void writePropertyValues(String propertiesFileName) throws FileNotFoundException, IOException {
+        Properties properties = new Properties();
+        Properties properties_nl = new Properties();
+        Properties properties_de = new Properties();
         final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
         properties.load(resourceAsStream);
         final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_nl.properties");
         properties_nl.load(resourceAsStream_nl);
         final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
         properties_de.load(resourceAsStream_de);
-    }
-
-    public void writePropertyValues() throws FileNotFoundException, IOException {
-        final OutputStream outputStream = new FileOutputStream("target/" + propertiesFileName + FILE_SUFFIX);
+        OutputStream outputStream = new FileOutputStream(outputFile, true);
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8")) {
             for (String key : properties.stringPropertyNames()) {
                 writer.write(key);
@@ -71,8 +72,10 @@ public class Properties2Csv {
     }
 
     public static void main(String[] args) throws IOException {
-        new Properties2Csv("Messages").writePropertyValues();
-        new Properties2Csv("Stimuli").writePropertyValues();
-        new Properties2Csv("MetadataFields").writePropertyValues();
+        final Properties2Csv properties2Csv = new Properties2Csv();
+        properties2Csv.deleteOutputFile();
+        properties2Csv.writePropertyValues("Messages");
+        properties2Csv.writePropertyValues("Stimuli");
+        properties2Csv.writePropertyValues("MetadataFields");
     }
 }
