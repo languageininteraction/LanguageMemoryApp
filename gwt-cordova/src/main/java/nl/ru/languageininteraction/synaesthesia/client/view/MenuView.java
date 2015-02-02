@@ -64,7 +64,9 @@ public class MenuView extends ComplexView {
             @Override
             public void onTouchEnd(TouchEndEvent event) {
                 event.preventDefault();
-                menuItemListerner.eventFired(menuButton);
+                if (menuButton.isEnabled()) {
+                    menuItemListerner.eventFired(menuButton);
+                }
             }
         });
         final int rowCount = flexTable.getRowCount();
