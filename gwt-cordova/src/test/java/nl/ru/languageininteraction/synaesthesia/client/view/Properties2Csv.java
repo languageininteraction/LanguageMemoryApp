@@ -31,6 +31,9 @@ import java.util.Properties;
  */
 public class Properties2Csv {
 
+    private static final String FILE_SUFFIX = ".csv";
+    private static final String COLUMN_SEPARATOR = ",";
+
     final private Properties properties = new Properties();
     final private Properties properties_nl = new Properties();
     final private Properties properties_de = new Properties();
@@ -40,22 +43,22 @@ public class Properties2Csv {
         this.propertiesFileName = propertiesFileName;
         final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
         properties.load(resourceAsStream);
-        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
+        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_nl.properties");
         properties_nl.load(resourceAsStream_nl);
         final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
         properties_de.load(resourceAsStream_de);
     }
 
     public void writePropertyValues() throws FileNotFoundException, IOException {
-        final OutputStream outputStream = new FileOutputStream("target/" + propertiesFileName + ".tab");
+        final OutputStream outputStream = new FileOutputStream("target/" + propertiesFileName + FILE_SUFFIX);
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8")) {
             for (String key : properties.stringPropertyNames()) {
                 writer.write(key);
-                writer.write("\t");
+                writer.write(COLUMN_SEPARATOR);
                 writer.write(escapeString(properties.getProperty(key, "")));
-                writer.write("\t");
+                writer.write(COLUMN_SEPARATOR);
                 writer.write(escapeString(properties_nl.getProperty(key, "")));
-                writer.write("\t");
+                writer.write(COLUMN_SEPARATOR);
                 writer.write(escapeString(properties_de.getProperty(key, "")));
                 writer.write("\n");
             }
