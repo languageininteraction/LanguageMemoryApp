@@ -57,7 +57,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
         StringBuilder stringBuilder = new StringBuilder();
         final DateTimeFormat format = DateTimeFormat.getFormat(messages.reportDateFormat());
         final NumberFormat numberFormat2 = NumberFormat.getFormat("0.00");
-        final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
+//        final NumberFormat numberFormat3 = NumberFormat.getFormat("0.000");
         final ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         for (final StimuliGroup stimuliGroup : scoreCalculator.getStimuliGroups()) {
             final GroupScoreData calculatedScores = scoreCalculator.calculateScores(stimuliGroup);
@@ -69,6 +69,8 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
 //            ((ReportView) simpleView).addText(messages.reportScreenSCTaccuracy(numberFormat2.format(calculatedScores.getAccuracy())));
 //            ((ReportView) simpleView).addText(messages.reportScreenSCTmeanreactionTime(numberFormat3.format(calculatedScores.getMeanReactionTime() / 1000), numberFormat3.format(calculatedScores.getReactionTimeDeviation() / 1000)));
             stringBuilder.append(userResults.getMetadataValue(mateadataFields.postName_firstname()));
+            stringBuilder.append("\t");
+            stringBuilder.append(stimuliGroup.getPostName());
             stringBuilder.append("\t");
             stringBuilder.append(format.format(new Date()));
             stringBuilder.append("\t");
