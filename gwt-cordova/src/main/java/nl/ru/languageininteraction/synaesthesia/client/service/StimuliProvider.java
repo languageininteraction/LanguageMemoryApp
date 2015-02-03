@@ -37,10 +37,10 @@ public class StimuliProvider {
 
     public StimuliGroup[] getStimuli() {
         return new StimuliGroup[]{
-            new StimuliGroup(stimuli.stimuli0Label(), getStimulusArray(stimuli.stimuli0csv())),
-            new StimuliGroup(stimuli.stimuli1Label(), getStimulusArray(stimuli.stimuli1csv())),
-            new StimuliGroup(stimuli.stimuli2Label(), getStimulusArray(stimuli.stimuli2csv())),
-            new StimuliGroup(stimuli.stimuli3Label(), getStimulusArray(stimuli.stimuli3csv()))
+            new StimuliGroup(stimuli.stimuli0Label(), stimuli.stimuli0PostName(), getStimulusArray(stimuli.stimuli0csv())),
+            new StimuliGroup(stimuli.stimuli1Label(), stimuli.stimuli1PostName(), getStimulusArray(stimuli.stimuli1csv())),
+            new StimuliGroup(stimuli.stimuli2Label(), stimuli.stimuli2PostName(), getStimulusArray(stimuli.stimuli2csv())),
+            new StimuliGroup(stimuli.stimuli3Label(), stimuli.stimuli3PostName(), getStimulusArray(stimuli.stimuli3csv()))
         };
     }
 

@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.safehtml.shared.UriUtils;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.Version;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
@@ -43,6 +44,7 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
+//        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
         ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
         ((ComplexView) simpleView).addText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
@@ -50,5 +52,6 @@ public class VersionPresenter extends AbstractPresenter {
                 + version.projectVersion() + "\n"
                 + "Compile Date: " + version.compileDate() + "\n"
                 + "Last Commit Date: " + version.lastCommitDate());
+        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LiI_logo_rgb.jpg"), 100);
     }
 }

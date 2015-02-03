@@ -103,7 +103,7 @@ public class AppController implements AppEventListner {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
                         presenter.setState(this, null, null);
                     } else {
-                        trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getGroupLabel());
+                        trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getPostName());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
                         presenter.setState(this, ApplicationState.stimulusselect, ApplicationState.report);
                     }

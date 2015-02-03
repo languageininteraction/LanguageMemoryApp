@@ -39,7 +39,7 @@ import org.junit.Test;
 public class ScoreCalculatorTest {
 
     private UserResults getUserResults(String userId) {
-        final UserResults userResults = new UserResults(new StimuliGroup(null, null));
+        final UserResults userResults = new UserResults(new StimuliGroup(null, null, null));
         final String resourcePath = "/nl/ru/languageininteraction/testdata/" + userId;
         System.out.println("resourcePath:" + resourcePath);
         final InputStream testDataStream = ScoreCalculatorTest.class.getClass().getResourceAsStream(resourcePath);
@@ -55,7 +55,7 @@ public class ScoreCalculatorTest {
                 System.out.print("\n new group: " + user);
                 stimulusResponseGroup = new StimulusResponseGroup();
                 stimulusList = new ArrayList<>();
-                userResults.addStimulusResponseGroup(new StimuliGroup(user, stimulusList), stimulusResponseGroup);
+                userResults.addStimulusResponseGroup(new StimuliGroup(user, null, stimulusList), stimulusResponseGroup);
                 user = scanner.next().trim();
             }
             assertEquals("1772837", user);
@@ -179,7 +179,7 @@ public class ScoreCalculatorTest {
 //        fail("The test case is a prototype.");
 //    }
     private GroupScoreData getGroupScoreData() {
-        final UserResults userResults = new UserResults(new StimuliGroup(null, null));
+        final UserResults userResults = new UserResults(new StimuliGroup(null, null, null));
         ScoreCalculator scoreCalculator = new ScoreCalculator(userResults);
         final ArrayList<Stimulus> stimulusList = new ArrayList<Stimulus>();
         stimulusList.add(new Stimulus("A"));
@@ -195,7 +195,7 @@ public class ScoreCalculatorTest {
         stimulusResponseGroup.addResponse(stimulusList.get(3), new StimulusResponse(new ColourData(0, 0, 0), null, 96));
         stimulusResponseGroup.addResponse(stimulusList.get(4), new StimulusResponse(new ColourData(0, 0, 0), null, 1000));
         stimulusResponseGroup.addResponse(stimulusList.get(5), new StimulusResponse(new ColourData(0, 0, 0), null, 500));
-        final StimuliGroup stimuliGroup = new StimuliGroup("TestStimulusGroup", stimulusList);
+        final StimuliGroup stimuliGroup = new StimuliGroup("TestStimulusGroup", null, stimulusList);
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
         return scoreCalculator.calculateScores(stimuliGroup);
     }

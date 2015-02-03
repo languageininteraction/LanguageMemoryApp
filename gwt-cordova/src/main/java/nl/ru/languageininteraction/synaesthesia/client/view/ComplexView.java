@@ -22,10 +22,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 
@@ -59,6 +61,12 @@ public class ComplexView extends SimpleView {
 
     public void addPadding() {
         outerPanel.add(new HTML("&nbsp;"));
+    }
+
+    public void addImage(SafeUri imagePath, int percentWidth) {
+        final Image image = new Image(imagePath);
+        image.setWidth(percentWidth + "%");
+        outerPanel.add(image);
     }
 
     public void addLink(String label, final String target) {

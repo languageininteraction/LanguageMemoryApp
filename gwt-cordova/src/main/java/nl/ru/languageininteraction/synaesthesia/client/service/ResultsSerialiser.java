@@ -40,7 +40,7 @@ public abstract class ResultsSerialiser {
                 for (StimulusResponse response : responseGroup.getResults(stimulus)) {
                     stringBuilder.append(userResults.getMetadataValue(postName_email));
                     stringBuilder.append("\t");
-                    stringBuilder.append(stimuliGroup.getGroupLabel());
+                    stringBuilder.append(stimuliGroup.getPostName());
                     stringBuilder.append("\t");
                     stringBuilder.append(stimulus.getValue());
                     stringBuilder.append("\t");

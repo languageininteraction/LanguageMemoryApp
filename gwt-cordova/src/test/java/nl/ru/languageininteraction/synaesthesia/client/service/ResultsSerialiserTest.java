@@ -41,7 +41,7 @@ public class ResultsSerialiserTest {
     @Test
     public void testSerialise() throws StimulusError {
         System.out.println("serialise");
-        UserResults userResults = new UserResults(new StimuliGroup(null, null));
+        UserResults userResults = new UserResults(new StimuliGroup(null, null, null));
         final String postName_email = "postName_email";
         userResults.setMetadataValue(postName_email, "postName@email");
         final ArrayList<Stimulus> arrayList1 = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ResultsSerialiserTest {
         arrayList1.add(new Stimulus("d1"));
         arrayList1.add(new Stimulus("e1"));
         arrayList1.add(new Stimulus("f1"));
-        final StimuliGroup stimuli1 = new StimuliGroup("test-group-1", arrayList1);
+        final StimuliGroup stimuli1 = new StimuliGroup("test-group-1", "test-group-1", arrayList1);
         final ArrayList<Stimulus> arrayList2 = new ArrayList<>();
         arrayList2.add(new Stimulus("a2"));
         arrayList2.add(new Stimulus("b2"));
@@ -59,7 +59,7 @@ public class ResultsSerialiserTest {
         arrayList2.add(new Stimulus("d2"));
         arrayList2.add(new Stimulus("e2"));
         arrayList2.add(new Stimulus("f2"));
-        final StimuliGroup stimuli2 = new StimuliGroup("test-group-2", arrayList2);
+        final StimuliGroup stimuli2 = new StimuliGroup("test-group-2", "test-group-2", arrayList2);
         final StimulusResponseGroup stimulusResponseGroup1 = new StimulusResponseGroup();
         userResults.addStimulusResponseGroup(stimuli1, stimulusResponseGroup1);
         for (Stimulus stimulus : arrayList1) {
