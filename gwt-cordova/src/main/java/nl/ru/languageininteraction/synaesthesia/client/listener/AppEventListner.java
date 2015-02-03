@@ -45,7 +45,9 @@ public interface AppEventListner {
         metadata(messages.metadataMenuLabel()),
         registration(messages.registerMenuLabel()),
         registrationcomplete(""),
-        registrationfailed(""),
+        registrationfailednon202(""),
+        registrationfailedbuildererror(""),
+        registrationfailedconnectionerror(""),
         moreinfo(messages.moreInfoMenuLabel()),
         end(messages.exitButton());
 

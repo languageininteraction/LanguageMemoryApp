@@ -31,6 +31,7 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
+import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.synaesthesia.client.service.MetadataFieldProvider;
@@ -133,8 +134,18 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                 registrationService.submitRegistration(userResults, new RegistrationListener() {
 
                     @Override
-                    public void registrationFailed(Throwable exception) {
-                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailed);
+                    public void registrationFailed(RegistrationException exception) {
+                        switch (exception.getErrorType()) {
+                            case buildererror:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailedbuildererror);
+                                break;
+                            case connectionerror:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailedconnectionerror);
+                                break;
+                            case non202response:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailednon202);
+                                break;
+                        }
                     }
 
                     @Override

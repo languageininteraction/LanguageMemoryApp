@@ -144,7 +144,9 @@ public class AppController implements AppEventListner {
                     this.presenter = new RegistrationCompletePresenter(widgetTag);
                     presenter.setState(this, ApplicationState.menu, ApplicationState.version);
                     break;
-                case registrationfailed:
+                case registrationfailedbuildererror:
+                case registrationfailedconnectionerror:
+                case registrationfailednon202:
                     this.presenter = new RegistrationFailedPresenter(widgetTag);
                     presenter.setState(this, ApplicationState.menu, ApplicationState.registration);
                     break;
