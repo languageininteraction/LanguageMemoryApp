@@ -80,11 +80,11 @@ public class AppController implements AppEventListner {
                     break;
                 case locale:
                     this.presenter = new LocalePresenter(widgetTag);
-                    presenter.setState(this, null, null);
+                    presenter.setState(this, ApplicationState.menu, null);
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, null, null);
+                    presenter.setState(this, ApplicationState.menu, null);
                     break;
                 case start:
                 case intro:
@@ -93,19 +93,19 @@ public class AppController implements AppEventListner {
 //                    break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.stimulusselect);
+                    presenter.setState(this, ApplicationState.menu, ApplicationState.stimulusselect);
 //                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case instructions:
                     // the user gets here via the stimulus menu
                     this.presenter = new InstructionsPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.stimulusshow);
+                    presenter.setState(this, ApplicationState.menu, ApplicationState.stimulusshow);
                     break;
                 case stimulusshow:
                 case stimulusselect:
                     if (userResults.getPendingStimuliGroup() == null) {
                         this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);
-                        presenter.setState(this, null, null);
+                        presenter.setState(this, ApplicationState.menu, null);
                     } else {
                         trackEvent(applicationState.name(), "show", userResults.getPendingStimuliGroup().getPostName());
                         this.presenter = new ColourPickerPresenter(widgetTag, userResults, 3);
@@ -123,7 +123,7 @@ public class AppController implements AppEventListner {
                     if (userResults.canRegister()) {
                         presenter.setState(this, null, ApplicationState.metadata);
                     } else {
-                        presenter.setState(this, null, ApplicationState.stimulusselect);
+                        presenter.setState(this, ApplicationState.menu, ApplicationState.stimulusselect);
                     }
                     break;
                 case feedback:
@@ -132,16 +132,16 @@ public class AppController implements AppEventListner {
                     break;
                 case metadata:
                     this.presenter = new MetadataPresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.registration);
+                    presenter.setState(this, ApplicationState.menu, ApplicationState.registration);
 //                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
                 case registration:
                     if (userResults.getStimuliGroups().isEmpty()) {
                         this.presenter = new RegisterDisabledPresenter(widgetTag);
-                        presenter.setState(this, null, ApplicationState.stimulusselect);
+                        presenter.setState(this, ApplicationState.menu, ApplicationState.stimulusselect);
                     } else {
                         this.presenter = new RegisterPresenter(widgetTag, userResults);
-                        presenter.setState(this, null, ApplicationState.version);
+                        presenter.setState(this, ApplicationState.menu, ApplicationState.version);
                     }
                     break;
                 case registrationcomplete:
@@ -224,6 +224,6 @@ public class AppController implements AppEventListner {
      }-*/;
 
     private native void exitApplication() /*-{
-     $doc.navigator.app.exitApp();
+     $wnd.navigator.app.exitApp();
      }-*/;
 }

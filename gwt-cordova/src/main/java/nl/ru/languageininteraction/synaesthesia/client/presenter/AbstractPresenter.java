@@ -63,7 +63,7 @@ public abstract class AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired(Button button) {
-                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.end);
                 }
 
                 @Override
