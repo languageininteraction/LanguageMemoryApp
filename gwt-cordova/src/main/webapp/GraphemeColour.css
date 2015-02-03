@@ -257,6 +257,10 @@ canvas {
     */
 }
 
+.menuTable .gwt-HTML, .menuTable.gwt-HTML .highlightedText {
+    text-align: center;
+}
+
 .gwt-HTML.highlightedText {
     font-weight: bold; 
     /*text-transform: uppercase;*/

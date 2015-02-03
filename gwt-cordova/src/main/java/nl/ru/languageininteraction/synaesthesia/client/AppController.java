@@ -19,6 +19,8 @@ package nl.ru.languageininteraction.synaesthesia.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptException;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.user.client.Command;
 import nl.ru.languageininteraction.synaesthesia.client.service.LocalStorage;
 import nl.ru.languageininteraction.synaesthesia.client.service.StimuliProvider;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
@@ -179,7 +181,12 @@ public class AppController implements AppEventListner {
     }
 
     public void backAction() {
-        presenter.fireBackEvent();
+        Scheduler.get().scheduleDeferred(new Command() {
+            @Override
+            public void execute() {
+                presenter.fireBackEvent();
+            }
+        });
     }
 
     public void resizeAction() {

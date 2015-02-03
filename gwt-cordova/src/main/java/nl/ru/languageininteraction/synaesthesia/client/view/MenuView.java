@@ -25,7 +25,9 @@ import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
@@ -36,10 +38,10 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventLi
  */
 public class MenuView extends ComplexView {
 
-    final private ArrayList<Button> buttonsArray = new ArrayList<>();
+    final private ArrayList<IsWidget> buttonsArray = new ArrayList<>();
     private FlexTable flexTable = null;
 
-    public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
+    private void checkFlexTableExists() {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("menuTable");
@@ -47,6 +49,10 @@ public class MenuView extends ComplexView {
             outerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
             outerPanel.add(flexTable);
         }
+    }
+
+    public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
+        checkFlexTableExists();
         final Button menuButton = new Button(new SafeHtmlBuilder().appendEscapedLines(menuItemListerner.getLabel()).toSafeHtml());
         buttonsArray.add(menuButton);
         menuButton.addStyleName("menuButton");
@@ -73,6 +79,17 @@ public class MenuView extends ComplexView {
         flexTable.setWidget(rowCount, 0, menuButton);
     }
 
+    public void addMenuLabel(String textString, boolean boldText) {
+        checkFlexTableExists();
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
+        if (boldText) {
+            html.addStyleName("highlightedText");
+        }
+        buttonsArray.add(html);
+        final int rowCount = flexTable.getRowCount();
+        flexTable.setWidget(rowCount, 0, html);
+    }
+
     @Override
     protected void parentResized(int height, int width, String units) {
         super.parentResized(height, width, units);
@@ -86,8 +103,10 @@ public class MenuView extends ComplexView {
         int col = 0;
         flexTable.removeAllRows();
         flexTable.setCellPadding(textHeight / 7);
-        for (Button menuButton : buttonsArray) {
-            menuButton.getElement().getStyle().setFontSize(textHeight, Style.Unit.PX);
+        for (IsWidget menuButton : buttonsArray) {
+            if (menuButton instanceof Button) {
+                ((Button) menuButton).getElement().getStyle().setFontSize(textHeight, Style.Unit.PX);
+            }
             flexTable.setWidget(row, col, menuButton);
             row++;
             if (!portrate) {
