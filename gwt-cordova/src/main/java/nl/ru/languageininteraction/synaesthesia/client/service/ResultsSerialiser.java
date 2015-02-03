@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
+import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimulusResponse;
@@ -47,13 +48,18 @@ public abstract class ResultsSerialiser {
                     stringBuilder.append("\t");
                     stringBuilder.append(response.getDurationMs());
                     stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getHexValue());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getRed());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getGreen());
-                    stringBuilder.append("\t");
-                    stringBuilder.append(response.getColour().getBlue());
+                    final ColourData colour = response.getColour();
+                    if (colour != null) {
+                        stringBuilder.append(colour.getHexValue());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getRed());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getGreen());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getBlue());
+                    } else {
+                        stringBuilder.append("\t\t\t");
+                    }
                     stringBuilder.append("\n");
                 }
             }
