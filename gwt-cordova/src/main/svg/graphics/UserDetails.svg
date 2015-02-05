@@ -101,16 +101,6 @@
     </linearGradient>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient4134"
-       id="linearGradient4466"
-       x1="305.88995"
-       y1="2.3651478"
-       x2="305.88995"
-       y2="317.5126"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.007005,0,0,1.0125018,-1.9893866,-2.0002899)" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient4004"
        id="linearGradient4021"
        gradientUnits="userSpaceOnUse"
@@ -145,13 +135,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.2570423"
-     inkscape:cx="159.19339"
-     inkscape:cy="191.09239"
+     inkscape:cx="297.49529"
+     inkscape:cy="162.00145"
      inkscape:document-units="px"
-     inkscape:current-layer="layer10"
+     inkscape:current-layer="layer8"
      showgrid="false"
-     inkscape:window-width="1580"
-     inkscape:window-height="828"
+     inkscape:window-width="1672"
+     inkscape:window-height="1057"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0" />
@@ -171,16 +161,7 @@
      inkscape:groupmode="layer"
      id="layer15"
      inkscape:label="Background"
-     style="display:inline">
-    <rect
-       style="fill:url(#linearGradient4466);fill-opacity:1;fill-rule:nonzero;stroke:none"
-       id="rect4458"
-       width="568"
-       height="320"
-       x="-1.6059385e-05"
-       y="-1.2802244e-06"
-       ry="0" />
-  </g>
+     style="display:inline" />
   <g
      inkscape:groupmode="layer"
      id="layer6"
@@ -188,91 +169,18 @@
      style="display:inline">
     <rect
        ry="6.6874042"
-       y="237.58275"
-       x="268.25168"
-       height="73.364761"
-       width="157.62334"
+       y="257.83334"
+       x="472.4451"
+       height="57.051804"
+       width="86.183754"
        id="rect4310"
        style="fill:#95c11f;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4.38130379;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1.86405301;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       d="m 371.40511,282.85658 c 0,0 2.4714,-0.22732 3.72989,-1.56161 4.17709,-4.42865 9.94444,-7.74225 13.27995,-7.73013 5.51922,0.0201 5.53898,3.95946 5.74805,4.5588 3.6647,0 22.67478,0 24.35555,0 3.79206,0.07 3.71544,6.74738 0,6.66352 -4.88365,0 -13.50168,-0.0496 -18.42838,0 1.71415,0 4.25232,0 4.25232,0 1.97465,0.71706 3.41227,5.18899 -0.81816,6.84202 -0.79893,0.0111 -2.61939,0 -3.46319,0 0.77437,0 2.8817,-5.8e-4 3.60439,0 1.58608,1.15207 2.34942,6.19668 -2.05736,6.9105 -0.19698,0.006 -3.99582,-0.0242 -4.39202,-5.9e-4 0.22781,0.01 2.40285,-0.0383 2.95414,0.2424 3.08963,1.67215 1.5844,6.57465 -1.05209,6.79401 -3.41698,0 -9.49101,0 -14.3701,0 -3.98886,0 -7.34852,-3.79918 -11.09966,-5.59939 -0.93199,-0.0816 -2.31341,-0.14016 -2.31341,-0.14016"
+       d="m 494.59618,281.16904 c 0,0 2.4714,-0.22732 3.72989,-1.56161 4.17709,-4.42865 9.94444,-7.74225 13.27995,-7.73013 5.51922,0.0201 5.53898,3.95946 5.74805,4.5588 3.6647,0 22.67478,0 24.35555,0 3.79206,0.07 3.71544,6.74738 0,6.66352 -4.88365,0 -13.50168,-0.0496 -18.42838,0 1.71415,0 4.25232,0 4.25232,0 1.97465,0.71706 3.41227,5.18899 -0.81816,6.84202 -0.79893,0.0111 -2.61939,0 -3.46319,0 0.77437,0 2.8817,-5.8e-4 3.60439,0 1.58608,1.15207 2.34942,6.19668 -2.05736,6.9105 -0.19698,0.006 -3.99582,-0.0242 -4.39202,-5.9e-4 0.22781,0.01 2.40285,-0.0383 2.95414,0.2424 3.08963,1.67215 1.5844,6.57465 -1.05209,6.79401 -3.41698,0 -9.49101,0 -14.3701,0 -3.98886,0 -7.34852,-3.79918 -11.09966,-5.59939 -0.93199,-0.0816 -2.31341,-0.14016 -2.31341,-0.14016"
        id="path4935"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssccccccccccccscc" />
-    <path
-       sodipodi:nodetypes="ccccc"
-       inkscape:connector-curvature="0"
-       id="path4447"
-       d="m 396.37376,246.39795 -18.54647,-1e-5 -0.19943,22.86191 31.50904,0.1504 0.0688,-7.22351"
-       style="fill:none;stroke:#000000;stroke-width:3.35269427;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
-    <path
-       style="fill:#000000;fill-opacity:1;stroke:none;display:inline"
-       d="m 387.61496,264.83743 c 1.53618,-16.38749 17.8394,-17.02896 17.8394,-17.02896 l 0,-7.13085 12.89844,10.69628 -12.89844,10.69627 0,-7.13085 c 0,0 -9.54276,-1.73918 -17.8394,9.89811 z"
-       id="path4449"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccc" />
-    <text
-       inkscape:label="ShareAndContinueText"
-       sodipodi:linespacing="110%"
-       id="ShareAndContinueText"
-       y="268.35327"
-       x="276.21329"
-       style="font-size:25.46579742px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
-       xml:space="preserve"><tspan
-         style="fill:#000000"
-         y="268.35327"
-         x="276.21329"
-         sodipodi:role="line"
-         id="tspan4461">Share &amp;</tspan><tspan
-         style="fill:#000000"
-         y="296.36566"
-         x="276.21329"
-         sodipodi:role="line"
-         id="tspan4542">Continue</tspan></text>
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer7"
-     inkscape:label="ContinueWithoutSharing"
-     style="display:inline">
-    <rect
-       style="fill:#8b221f;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.76168704;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
-       id="rect4442"
-       width="128.66486"
-       height="73.364746"
-       x="433.78149"
-       y="236.84558"
-       ry="6.6874042" />
-    <path
-       sodipodi:nodetypes="cssccccccccccccscc"
-       inkscape:connector-curvature="0"
-       id="path4451"
-       d="m 515.24615,270.83284 c 0,0 2.19037,-0.20148 3.30576,-1.38403 3.70211,-3.92507 8.81365,-6.86188 11.76988,-6.85114 4.89163,0.0178 4.90914,3.50923 5.09444,4.04041 3.24799,0 20.09643,0 21.58608,0 3.36086,0.0621 3.29294,5.98015 0,5.90582 -4.32834,0 -11.96641,-0.0439 -16.33289,0 1.51923,0 3.76879,0 3.76879,0 1.7501,0.63552 3.02426,4.59895 -0.72513,6.06401 -0.70808,0.01 -2.32154,0 -3.06939,0 0.68632,0 2.55403,-5.2e-4 3.19453,0 1.40573,1.02107 2.08227,5.49206 -1.82342,6.1247 -0.17457,0.005 -3.54145,-0.0214 -3.8926,-5.2e-4 0.20191,0.008 2.12963,-0.0339 2.61823,0.21484 2.73831,1.482 1.40423,5.82704 -0.93246,6.02145 -3.02843,0 -8.41178,0 -12.73606,0 -3.5353,0 -6.51292,-3.36717 -9.83752,-4.96268 -0.82602,-0.0724 -2.05035,-0.12421 -2.05035,-0.12421"
-       style="fill:none;stroke:#000000;stroke-width:1.65209103;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
-    <text
-       inkscape:label="ContinueWithoutSharingText"
-       sodipodi:linespacing="110%"
-       id="ContinueWithoutSharingText"
-       y="256.47519"
-       x="438.38678"
-       style="font-size:21.65377998px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
-       xml:space="preserve"><tspan
-         style="fill:#000000"
-         y="256.47519"
-         x="438.38678"
-         sodipodi:role="line"
-         id="tspan4475">Continue</tspan><tspan
-         style="fill:#000000"
-         y="280.29434"
-         x="438.38678"
-         sodipodi:role="line"
-         id="tspan4481">Without</tspan><tspan
-         style="fill:#000000"
-         y="304.11349"
-         x="438.38678"
-         sodipodi:role="line"
-         id="tspan4483">Sharing</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -375,9 +283,9 @@
          id="tspan4395"
          sodipodi:role="line">99</tspan></text>
     <text
-       inkscape:label="NameFieldText"
+       inkscape:label="UserDetailsHowOldText"
        sodipodi:linespacing="110%"
-       id="text4397"
+       id="UserDetailsHowOldText"
        y="37.93972"
        x="368.8396"
        style="font-size:39.45893478px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
@@ -427,16 +335,16 @@
        ry="14.723525" />
     <text
        xml:space="preserve"
-       style="font-size:39.45893478px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
+       style="font-size:39.45893478px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
        x="178.65254"
        y="134.29961"
-       id="text3527"
+       id="UserDetailsWhichLangText"
        sodipodi:linespacing="110%"
-       inkscape:label="NameFieldText"><tspan
+       inkscape:label="UserDetailsWhichLangText"><tspan
          sodipodi:role="line"
          x="178.65254"
          y="134.29961"
-         style="font-size:26px;fill:#ffffff"
+         style="font-size:26px;fill:#000000"
          id="tspan3541">Which languages do you speak?</tspan></text>
     <path
        sodipodi:nodetypes="ccc"
@@ -517,10 +425,83 @@
   </g>
   <g
      inkscape:groupmode="layer"
-     id="layer10"
-     inkscape:label="EnterLanguage">
+     id="layer3"
+     inkscape:label="ShareBox"
+     style="display:inline">
     <rect
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       ry="5.2973561"
+       y="200.58"
+       x="250.83005"
+       height="51.580078"
+       width="311.68323"
+       id="rect3829"
+       style="fill:#c1e3f1;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path4447"
+       d="m 309.07461,216.18754 -15.83995,0 -0.17033,19.52564 26.91088,0.12845 0.0588,-6.16938"
+       style="fill:none;stroke:#ffffff;stroke-width:2.86343098;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       d="m 301.594,231.93613 c 1.312,-13.99605 15.23607,-14.5439 15.23607,-14.5439 l 0,-6.09024 11.01615,9.13536 -11.01615,9.13535 0,-6.09024 c 0,0 -8.15017,-1.48538 -15.23607,8.45367 z"
+       id="path4449"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <flowRoot
+       xml:space="preserve"
+       id="UserDetailsShareDataText"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:Arial Bold"
+       inkscape:label="UserDetailsShareDataText"><flowRegion
+         id="flowRegion3857"><rect
+           id="rect3859"
+           width="221.63138"
+           height="42.188725"
+           x="334.13467"
+           y="205.24667"
+           style="fill:#000000;stroke:none" /></flowRegion><flowPara
+         id="flowPara3861">Share my data with researchers</flowPara></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="ShareCheckBoxUnchecked"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.15430093;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
+       id="rect3806"
+       width="24.971308"
+       height="24.971308"
+       x="259.88571"
+       y="212.79236"
+       ry="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="ShareCheckBoxChecked"
+     style="display:inline">
+    <rect
+       ry="0"
+       y="212.79236"
+       x="259.88571"
+       height="24.971308"
+       width="24.971308"
+       id="rect3823"
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:3.15430093;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline" />
+    <path
+       style="fill:#00a47a;stroke:none"
+       d="m 261.9741,220.88942 10.89875,13.92227 17.22707,-29.39147 -18.56304,20.53184 z"
+       id="path3826"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer10"
+     inkscape:label="EnterLanguage"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline"
        id="rect3521"
        width="282.58948"
        height="44.333569"
@@ -533,7 +514,7 @@
        id="LangFieldText"
        y="183.62175"
        x="267.75058"
-       style="display:inline;font-size:39.45893477999999988px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000237999999797%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
+       style="font-size:39.45893478px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:110.00000238%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
        xml:space="preserve"><tspan
          style="font-size:26px;fill:#000000"
          y="183.62175"
@@ -544,9 +525,10 @@
   <g
      inkscape:groupmode="layer"
      id="layer9"
-     inkscape:label="AddLangButton">
+     inkscape:label="AddLangButton"
+     style="display:inline">
     <rect
-       style="display:inline;fill:#c1e3f1;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       style="fill:#c1e3f1;fill-opacity:1;fill-rule:nonzero;stroke:none;display:inline"
        id="rect3549"
        width="46.913754"
        height="45.357243"
@@ -558,14 +540,15 @@
        inkscape:connector-curvature="0"
        id="path3547"
        d="m 249.39341,180.15948 0,-10.67341 -15.82423,0 0,-10.51753 -19.34603,16.04305 19.34603,16.04305 0,-10.89516 z"
-       style="display:inline;fill:#000000;fill-opacity:1;stroke:none" />
+       style="fill:#000000;fill-opacity:1;stroke:none;display:inline" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer8"
-     inkscape:label="DeleteLangButton">
+     inkscape:label="DeleteLangButton"
+     style="display:inline">
     <path
-       style="display:inline;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;display:inline"
        d="m 236.061,268.08926 -7.55422,7.55422 -7.55422,-7.55422 -8.35408,8.35408 7.55422,7.55422 -7.55422,7.55422 8.35408,8.35408 7.55422,-7.55422 7.55422,7.55422 8.35408,-8.35408 -7.55422,-7.55422 7.55422,-7.55422 -8.35408,-8.35408 z"
        id="rect4356"
        inkscape:connector-curvature="0" />
