@@ -172,4 +172,6 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 <xsl:text>    builder.append(SVG_TEMPLATE.rectTag(SVG_DATA.x</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.y</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.rx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.ry</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.width</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.height</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>
     </xsl:template>
+    <xsl:template match="svg:flowRoot">
+    </xsl:template>
 </xsl:stylesheet>

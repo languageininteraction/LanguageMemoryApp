@@ -29,12 +29,16 @@ import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
 import nl.ru.languageininteraction.language.client.presenter.MatchLanguagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.presenter.ChoosePlayerPresenter;
 import nl.ru.languageininteraction.language.client.presenter.GuessRoundPresenter;
+import nl.ru.languageininteraction.language.client.presenter.InfoScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
+import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
+import nl.ru.languageininteraction.language.client.presenter.StartScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.TestSvgDuplicateStringsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
@@ -79,6 +83,22 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
+                case chooseplayer:
+                    this.presenter = new ChoosePlayerPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.version, ApplicationState.playerdetails);
+                    break;
+                case playerdetails:
+                    this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.version, ApplicationState.startscreen);
+                    break;
+                case startscreen:
+                    this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.version, ApplicationState.infoscreen);
+                    break;
+                case infoscreen:
+                    this.presenter = new InfoScreenPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.version, ApplicationState.scores);
+                    break;
                 case scores:
                     this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this), userResults);
                     presenter.setState(this, ApplicationState.setuser, ApplicationState.guess);
@@ -105,7 +125,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case start:
                     this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.scores);
+                    presenter.setState(this, null, ApplicationState.chooseplayer);
                     break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);

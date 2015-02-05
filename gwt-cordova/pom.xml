@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.187-testing</version>
+    <version>0.1.191-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -102,6 +102,9 @@
                         </transformationSet>
                         <transformationSet>
                             <dir>src/main/svg/graphics</dir>
+                            <includes>
+                                <include>*.svg</include>
+                            </includes>
                             <stylesheet>src/main/xsl/graphics2properties.xsl</stylesheet>
                             <fileMappers>
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
@@ -112,6 +115,9 @@
                         </transformationSet>
                         <transformationSet>
                             <dir>src/main/svg/graphics</dir>
+                            <includes>
+                                <include>*.svg</include>
+                            </includes>
                             <stylesheet>src/main/xsl/svg2java.xsl</stylesheet>
                             <fileMappers>
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
@@ -191,6 +197,10 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.GuessRound</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.ScorePage</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.LanguageData</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.InfoScreen</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.UserDetails</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.ChoosePlayerScreen</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.StartScreen</i18nMessagesBundle>
                     </i18nMessagesBundles>
                 </configuration>
             </plugin>
