@@ -52,6 +52,10 @@ public class ComplexView extends SimpleView {
         HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
         outerPanel.add(html);
     }
+    public void addHtmlText(String textString) {
+        HTML html = new HTML(new SafeHtmlBuilder().appendHtmlConstant(textString).toSafeHtml());
+        outerPanel.add(html);
+    }
 
     public void addHighlightedText(String textString) {
         HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
