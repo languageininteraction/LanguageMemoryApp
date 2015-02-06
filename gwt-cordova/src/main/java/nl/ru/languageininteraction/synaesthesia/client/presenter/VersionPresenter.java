@@ -45,13 +45,34 @@ public class VersionPresenter extends AbstractPresenter {
     @Override
     protected void setContent(final AppEventListner appEventListner) {
 //        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
+        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAtitle());
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextAbody());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextBtitle());
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextBbody());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextCtitle());
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextCBody());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextC1point());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextC2point());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextC3point());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextC4point());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addText(messages.aboutScreenTextC5point());
+        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
+        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextJtitle());
         ((ComplexView) simpleView).addText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
                 + version.projectVersion() + "\n"
                 + "Compile Date: " + version.compileDate() + "\n"
                 + "Last Commit Date: " + version.lastCommitDate());
-        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LiI_logo_rgb.jpg"), 100);
+        ((ComplexView) simpleView).addFooterImage(UriUtils.fromString("images/LiI_logo_rgb.jpg"), 100);
     }
 }

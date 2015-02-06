@@ -121,7 +121,7 @@ public class AppController implements AppEventListner {
                 case report:
                     this.presenter = new ReportPresenter(widgetTag, userResults);
                     if (userResults.canRegister()) {
-                        presenter.setState(this, null, ApplicationState.metadata);
+                        presenter.setState(this, ApplicationState.menu, ApplicationState.metadata);
                     } else {
                         presenter.setState(this, ApplicationState.menu, ApplicationState.stimulusselect);
                     }
