@@ -17,10 +17,6 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.Window;
@@ -30,6 +26,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 
 /**
  * @since Jan 8, 2015 5:01:05 PM (creation date)
@@ -52,6 +49,7 @@ public class ComplexView extends SimpleView {
         HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
         outerPanel.add(html);
     }
+
     public void addHtmlText(String textString) {
         HTML html = new HTML(new SafeHtmlBuilder().appendHtmlConstant(textString).toSafeHtml());
         outerPanel.add(html);
@@ -78,22 +76,15 @@ public class ComplexView extends SimpleView {
         // this link relies on the org.apache.cordova.inappbrowser which offers secure viewing of external html pages and handles user navigation such as back navigation.
         // in this case the link will be opend in the system browser rather than in the cordova application.
         outerPanel.add(anchor);
-        anchor.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 Window.open(target, "_system", "");
             }
-        });
-        anchor.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                Window.open(target, "_system", "");
-            }
-        });
+        };
+        anchor.addClickHandler(singleShotEventListner);
+        anchor.addTouchEndHandler(singleShotEventListner);
         anchor.addStyleName("pageLink");
     }
 
@@ -102,21 +93,16 @@ public class ComplexView extends SimpleView {
         nextButton.addStyleName("optionButton");
         nextButton.setEnabled(true);
         outerPanel.add(nextButton);
-        nextButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
+            protected void singleShotFired() {
+                if (nextButton.isEnabled()) {
+                    presenterListerner.eventFired(nextButton);
+                }
             }
-        });
-        nextButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
-            }
-        });
+        };
+        nextButton.addClickHandler(singleShotEventListner);
+        nextButton.addTouchEndHandler(singleShotEventListner);
     }
 }

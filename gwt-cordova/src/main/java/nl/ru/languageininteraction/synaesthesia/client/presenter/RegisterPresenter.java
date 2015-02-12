@@ -18,10 +18,6 @@
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -29,6 +25,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.RegisterView;
 import nl.ru.languageininteraction.synaesthesia.client.InformationSheet;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.MetadataField;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException;
@@ -100,26 +97,18 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
         final Button registerButton = addRegisterButton(appEventListner);
         agreementCheckBox.setValue(false);
         registerButton.setEnabled(false);
-        agreementCheckBox.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner checkBoxEventListner = new SingleShotEventListner() {
+            private boolean agreed = false;
 
             @Override
-            public void onClick(ClickEvent event) {
-//                event.preventDefault();
-//                event.stopPropagation();
-                // on chrome the check box is changed before this code is reached
-//                agreementCheckBox.setValue(!registerButton.isEnabled());
-                registerButton.setEnabled(agreementCheckBox.getValue());
+            protected void singleShotFired() {
+                agreed = !agreed;
+                agreementCheckBox.setValue(agreed);
+                registerButton.setEnabled(agreed);
             }
-        });
-        agreementCheckBox.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                agreementCheckBox.setValue(!agreementCheckBox.getValue());
-                registerButton.setEnabled(agreementCheckBox.getValue());
-            }
-        });
+        };
+        agreementCheckBox.addClickHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchEndHandler(checkBoxEventListner);
     }
 
     private Button addRegisterButton(final AppEventListner appEventListner) {
@@ -128,7 +117,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
             @Override
             public void eventFired(Button button) {
                 ((RegisterView) simpleView).clearGui();
-                simpleView.removeButton(button);
+                simpleView.removeFooterButtons();
                 simpleView.setDisplayText("Connecting");
                 final RegistrationService registrationService = new RegistrationService();
                 registrationService.submitRegistration(userResults, new RegistrationListener() {

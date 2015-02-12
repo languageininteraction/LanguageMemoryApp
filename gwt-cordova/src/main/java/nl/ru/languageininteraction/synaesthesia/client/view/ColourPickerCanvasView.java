@@ -47,6 +47,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.ColourData;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
 
@@ -190,7 +191,6 @@ public class ColourPickerCanvasView extends AbstractView {
                 }
             });
         }
-        outerGrid.setWidget(0, 0, pickerPanel);
         add(outerGrid);
     }
 
@@ -314,22 +314,15 @@ public class ColourPickerCanvasView extends AbstractView {
 
     public void setQuitButton(final PresenterEventListner quitListerner) {
         quitButton.setText(quitListerner.getLabel());
-        quitButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 quitListerner.eventFired(quitButton);
             }
-        });
-        quitButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                quitListerner.eventFired(quitButton);
-            }
-        });
+        };
+        quitButton.addClickHandler(singleShotEventListner);
+        quitButton.addTouchEndHandler(singleShotEventListner);
     }
 
     public void setInstructions(final String instructions, final String infoButtonChar) {
@@ -337,51 +330,38 @@ public class ColourPickerCanvasView extends AbstractView {
         final PopupPanel popupPanel = new PopupPanel(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
         instructionsLabel.setStylePrimaryName("stimulusHelpText");
-        popupPanel.setWidget(new ScrollPanel(instructionsLabel));
+        final ScrollPanel scrollPanel = new ScrollPanel(instructionsLabel);
+        popupPanel.setWidget(scrollPanel);
         infoButton.setText(infoButtonChar);
         popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
 
             @Override
             public void onClose(CloseEvent<PopupPanel> event) {
                 infoButton.setEnabled(true);
+                resizeView();
             }
         });
-        infoButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner infoSingleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
+                outerGrid.clear();
                 popupPanel.center();
                 infoButton.setEnabled(false);
             }
-        });
-        infoButton.addTouchEndHandler(new TouchEndHandler() {
+        };
+        infoButton.addClickHandler(infoSingleShotEventListner);
+        infoButton.addTouchEndHandler(infoSingleShotEventListner);
+        final SingleShotEventListner instructionsSingleShotEventListner1 = new SingleShotEventListner() {
 
             @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                popupPanel.center();
-                infoButton.setEnabled(false);
-            }
-        });
-        instructionsLabel.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 popupPanel.hide();
                 infoButton.setEnabled(true);
             }
-        });
-        instructionsLabel.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                popupPanel.hide();
-                infoButton.setEnabled(true);
-            }
-        });
+        };
+        instructionsLabel.addClickHandler(instructionsSingleShotEventListner1);
+        instructionsLabel.addTouchEndHandler(instructionsSingleShotEventListner1);
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {
@@ -410,27 +390,21 @@ public class ColourPickerCanvasView extends AbstractView {
         nextButton.addStyleName("stimulusButton");
         nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         nextButton.setEnabled(true);
-        nextButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 presenterListerner.eventFired(nextButton);
             }
-        });
-        nextButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
-            }
-        });
+        };
+        nextButton.addClickHandler(singleShotEventListner);
+        nextButton.addTouchEndHandler(singleShotEventListner);
         return nextButton;
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
+        outerGrid.setWidget(0, 0, pickerPanel);
         if (height < width) {
             int resizedHeight = (int) (height - 50);
             int resizedBarWidth = (int) (resizedHeight * 0.1);

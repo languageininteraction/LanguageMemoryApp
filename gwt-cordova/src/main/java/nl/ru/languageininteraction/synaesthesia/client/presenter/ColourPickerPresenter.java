@@ -27,7 +27,6 @@ import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.synaesthesia.client.Messages;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.model.UserResults;
 import nl.ru.languageininteraction.synaesthesia.client.model.StimuliGroup;
 import nl.ru.languageininteraction.synaesthesia.client.model.Stimulus;
@@ -87,10 +86,10 @@ public class ColourPickerPresenter implements Presenter {
         widgetTag.clear();
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
         userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
-        colourPickerCanvasView.setAcceptButton(new SingleShotEventListner() {
+        colourPickerCanvasView.setAcceptButton(new PresenterEventListner() {
 
             @Override
-            protected void singleShotFired(Button button) {
+            public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(colourPickerCanvasView.getColour(), new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }
@@ -100,10 +99,10 @@ public class ColourPickerPresenter implements Presenter {
                 return messages.stimulusscreenselectbutton();
             }
         });
-        colourPickerCanvasView.setRejectButton(new SingleShotEventListner() {
+        colourPickerCanvasView.setRejectButton(new PresenterEventListner() {
 
             @Override
-            protected void singleShotFired(Button button) {
+            public void eventFired(Button button) {
                 stimulusResponseGroup.addResponse(currentStimulus, new StimulusResponse(null, new Date(), System.currentTimeMillis() - startMs));
                 triggerEvent(appEventListner, colourPickerCanvasView, nextState);
             }

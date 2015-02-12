@@ -18,24 +18,29 @@
 package nl.ru.languageininteraction.synaesthesia.client.listener;
 
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HandlesAllTouchEvents;
+import com.google.gwt.event.dom.client.TouchCancelEvent;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchMoveEvent;
+import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.Button;
 
 /**
  * @since Feb 11, 2015 4:34:40 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public abstract class SingleShotEventListner implements PresenterEventListner {
+public abstract class SingleShotEventListner extends HandlesAllTouchEvents implements ClickHandler {
 
     private boolean singleShotConsumed = false;
 
-    @Override
-    final public void eventFired(final Button button) {
+    final public void eventFired() {
         if (!singleShotConsumed) {
             Scheduler.get().scheduleDeferred(new Command() {
                 @Override
                 public void execute() {
-                    singleShotFired(button);
+                    singleShotFired();
                     singleShotConsumed = false;
                 }
             });
@@ -43,5 +48,44 @@ public abstract class SingleShotEventListner implements PresenterEventListner {
         singleShotConsumed = true;
     }
 
-    protected abstract void singleShotFired(Button button);
+    @Override
+    final public void onClick(ClickEvent event) {
+        event.preventDefault();
+        eventFired();
+    }
+    private boolean hasTargetTouch = false;
+
+    @Override
+    public void onTouchStart(TouchStartEvent event) {
+        event.preventDefault();
+        if (event.getTargetTouches().length() > 0) {
+            hasTargetTouch = true;
+        }
+    }
+
+    @Override
+    public void onTouchMove(TouchMoveEvent event) {
+        event.preventDefault();
+        if (event.getTargetTouches().length() == 0) {
+            hasTargetTouch = false;
+        }
+    }
+
+    @Override
+    public void onTouchCancel(TouchCancelEvent event) {
+        event.preventDefault();
+        if (event.getTargetTouches().length() == 0) {
+            hasTargetTouch = false;
+        }
+    }
+
+    @Override
+    public void onTouchEnd(TouchEndEvent event) {
+        event.preventDefault();
+        if (hasTargetTouch && event.getTargetTouches().length() == 0) {
+            eventFired();
+        }
+    }
+
+    protected abstract void singleShotFired();
 }

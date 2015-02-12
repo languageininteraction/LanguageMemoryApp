@@ -43,6 +43,6 @@ public class FeedbackPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        
+
     }
 }

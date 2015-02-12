@@ -18,10 +18,6 @@
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -31,6 +27,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import java.util.ArrayList;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 
 /**
  * @since Oct 31, 2014 11:36:28 AM (creation date)
@@ -57,24 +54,17 @@ public class MenuView extends ComplexView {
         buttonsArray.add(menuButton);
         menuButton.addStyleName("menuButton");
         menuButton.setEnabled(menuEnabled);
-        menuButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                menuItemListerner.eventFired(menuButton);
-            }
-        });
-        menuButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 if (menuButton.isEnabled()) {
                     menuItemListerner.eventFired(menuButton);
                 }
             }
-        });
+        };
+        menuButton.addClickHandler(singleShotEventListner);
+        menuButton.addTouchEndHandler(singleShotEventListner);
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, menuButton);
     }
