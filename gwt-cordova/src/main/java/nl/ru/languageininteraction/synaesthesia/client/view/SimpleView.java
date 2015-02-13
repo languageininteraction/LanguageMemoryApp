@@ -96,6 +96,12 @@ public class SimpleView extends AbstractView {
             headerButton.addClickHandler(singleShotEventListner);
             headerIcon.addClickHandler(singleShotEventListner);
 
+            headerArrow.addTouchStartHandler(singleShotEventListner);
+            headerButton.addTouchStartHandler(singleShotEventListner);
+            headerIcon.addTouchStartHandler(singleShotEventListner);
+            headerArrow.addTouchMoveHandler(singleShotEventListner);
+            headerButton.addTouchMoveHandler(singleShotEventListner);
+            headerIcon.addTouchMoveHandler(singleShotEventListner);
             headerArrow.addTouchEndHandler(singleShotEventListner);
             headerButton.addTouchEndHandler(singleShotEventListner);
             headerIcon.addTouchEndHandler(singleShotEventListner);
@@ -119,6 +125,8 @@ public class SimpleView extends AbstractView {
                 }
             }
         };
+        nextButton.addTouchStartHandler(singleShotEventListner);
+        nextButton.addTouchMoveHandler(singleShotEventListner);
         nextButton.addTouchEndHandler(singleShotEventListner);
         nextButton.addClickHandler(singleShotEventListner);
         return nextButton;

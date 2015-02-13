@@ -322,12 +322,15 @@ public class ColourPickerCanvasView extends AbstractView {
             }
         };
         quitButton.addClickHandler(singleShotEventListner);
+        quitButton.addTouchStartHandler(singleShotEventListner);
+        quitButton.addTouchMoveHandler(singleShotEventListner);
         quitButton.addTouchEndHandler(singleShotEventListner);
     }
 
     public void setInstructions(final String instructions, final String infoButtonChar) {
         final Label instructionsLabel = new Label(instructions);
-        final PopupPanel popupPanel = new PopupPanel(true);
+        final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
+        popupPanel.setGlassEnabled(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
         instructionsLabel.setStylePrimaryName("stimulusHelpText");
         final ScrollPanel scrollPanel = new ScrollPanel(instructionsLabel);
@@ -338,7 +341,7 @@ public class ColourPickerCanvasView extends AbstractView {
             @Override
             protected void singleShotFired() {
                 if (infoButton.isEnabled()) {
-                    outerGrid.clear();
+//                    outerGrid.clear(); // users found that hiding the picker screen made it hard to understand the instruction text
                     popupPanel.center();
                     infoButton.setEnabled(false);
                     resetSingleShot();
@@ -346,6 +349,8 @@ public class ColourPickerCanvasView extends AbstractView {
             }
         };
         infoButton.addClickHandler(infoSingleShotEventListner);
+        infoButton.addTouchStartHandler(infoSingleShotEventListner);
+        infoButton.addTouchMoveHandler(infoSingleShotEventListner);
         infoButton.addTouchEndHandler(infoSingleShotEventListner);
         final SingleShotEventListner instructionsSingleShotEventListner1 = new SingleShotEventListner() {
 
@@ -358,6 +363,8 @@ public class ColourPickerCanvasView extends AbstractView {
             }
         };
         instructionsLabel.addClickHandler(instructionsSingleShotEventListner1);
+        instructionsLabel.addTouchStartHandler(instructionsSingleShotEventListner1);
+        instructionsLabel.addTouchMoveHandler(instructionsSingleShotEventListner1);
         instructionsLabel.addTouchEndHandler(instructionsSingleShotEventListner1);
         popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
 
@@ -405,6 +412,8 @@ public class ColourPickerCanvasView extends AbstractView {
             }
         };
         nextButton.addClickHandler(singleShotEventListner);
+        nextButton.addTouchStartHandler(singleShotEventListner);
+        nextButton.addTouchMoveHandler(singleShotEventListner);
         nextButton.addTouchEndHandler(singleShotEventListner);
         return nextButton;
     }

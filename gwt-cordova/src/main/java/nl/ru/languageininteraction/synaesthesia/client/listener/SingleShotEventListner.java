@@ -34,12 +34,20 @@ import com.google.gwt.user.client.Command;
 public abstract class SingleShotEventListner extends HandlesAllTouchEvents implements ClickHandler {
 
     private boolean singleShotConsumed = false;
+//    private final Button button;
 
+//    public SingleShotEventListner(Button button) {
+//        this.button = button;
+//    }
     final public void eventFired() {
+//        button.setText("eventFired");
+//        hasTargetTouch = false;
+//        touchTarget = null;
         if (!singleShotConsumed) {
             Scheduler.get().scheduleDeferred(new Command() {
                 @Override
                 public void execute() {
+//                    button.setText("scheduleDeferred");
                     singleShotFired();
                 }
             });
@@ -48,50 +56,66 @@ public abstract class SingleShotEventListner extends HandlesAllTouchEvents imple
     }
 
     public void resetSingleShot() {
+//        button.setText("resetSingleShot");
         singleShotConsumed = false;
     }
 
     @Override
     final public void onClick(ClickEvent event) {
-//        event.preventDefault();
+//        button.setText("onClick");
+        event.preventDefault();
         eventFired();
 //        if (!singleShotConsumed) {
 //            singleShotConsumed = true;
 //            singleShotFired();
 //        }
     }
-    private boolean hasTargetTouch = false;
+//    private boolean hasTargetTouch = false;
+//    private EventTarget touchTarget = null;
 
     @Override
     public void onTouchStart(TouchStartEvent event) {
+//        final JsArray<Touch> targetTouches = event.getTargetTouches();
+//        button.setText("onTouchStart:" + targetTouches.length());
 //        event.preventDefault();
-        if (event.getTargetTouches().length() > 0) {
-            hasTargetTouch = true;
-        }
+//        if (targetTouches.length() > 0) {
+//            touchTarget = targetTouches.shift().getTarget();
+//            hasTargetTouch = true;
+//        }
     }
 
     @Override
     public void onTouchMove(TouchMoveEvent event) {
-//        event.preventDefault();
-        if (event.getTargetTouches().length() == 0) {
-            hasTargetTouch = false;
-        }
+//        final JsArray<Touch> targetTouches = event.getTargetTouches();
+//        button.setText("onTouchMove:" + event.getTouches().length() + ":" + event.getTargetTouches().length());
+////        event.preventDefault();
+//        if (targetTouches.length() > 0) {
+//            final EventTarget target = targetTouches.shift().getTarget();
+//            hasTargetTouch = target.equals(touchTarget);
+//            button.setText(targetTouches.length() + ":" + hasTargetTouch);
+//        } else {
+//            touchTarget = null;
+//            hasTargetTouch = true;
+//        }
     }
 
     @Override
     public void onTouchCancel(TouchCancelEvent event) {
+//        button.setText("onTouchCanceled");
 //        event.preventDefault();
-        if (event.getTargetTouches().length() == 0) {
-            hasTargetTouch = false;
-        }
+//        if (event.getTargetTouches().length() == 0) {
+//            hasTargetTouch = false;
+//            touchTarget = null;
+//        }
     }
 
     @Override
     public void onTouchEnd(TouchEndEvent event) {
-//        event.preventDefault();
-        if (hasTargetTouch && event.getTargetTouches().length() == 0) {
-            eventFired();
-        }
+//        button.setText("onTouchEnd:" + event.getTouches().length() + ":" + event.getTargetTouches().length());
+        event.preventDefault();
+//        if (hasTargetTouch && event.getTargetTouches().length() == 0) {
+        eventFired();
+//        }
     }
 
     protected abstract void singleShotFired();

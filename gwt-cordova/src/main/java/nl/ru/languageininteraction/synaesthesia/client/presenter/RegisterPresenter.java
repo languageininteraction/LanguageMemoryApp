@@ -108,6 +108,8 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
             }
         };
         agreementCheckBox.addClickHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchStartHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchMoveHandler(checkBoxEventListner);
         agreementCheckBox.addTouchEndHandler(checkBoxEventListner);
     }
 

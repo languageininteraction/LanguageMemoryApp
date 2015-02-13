@@ -64,6 +64,8 @@ public class MenuView extends ComplexView {
             }
         };
         menuButton.addClickHandler(singleShotEventListner);
+        menuButton.addTouchStartHandler(singleShotEventListner);
+        menuButton.addTouchMoveHandler(singleShotEventListner);
         menuButton.addTouchEndHandler(singleShotEventListner);
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, menuButton);

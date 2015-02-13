@@ -84,6 +84,8 @@ public class ComplexView extends SimpleView {
             }
         };
         anchor.addClickHandler(singleShotEventListner);
+        anchor.addTouchStartHandler(singleShotEventListner);
+        anchor.addTouchMoveHandler(singleShotEventListner);
         anchor.addTouchEndHandler(singleShotEventListner);
         anchor.addStyleName("pageLink");
     }
@@ -103,6 +105,8 @@ public class ComplexView extends SimpleView {
             }
         };
         nextButton.addClickHandler(singleShotEventListner);
+        nextButton.addTouchStartHandler(singleShotEventListner);
+        nextButton.addTouchMoveHandler(singleShotEventListner);
         nextButton.addTouchEndHandler(singleShotEventListner);
     }
 }
