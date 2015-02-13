@@ -273,7 +273,7 @@ canvas {
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, 
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
 {  
-    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif, "Open Sans", "Droid Sans";
+    font-family: Calibri, "Open Sans", "Droid Sans", Arial, Candara, Segoe, "Segoe UI", Optima, sans-serif;
 }
 
 #widgetTag {
