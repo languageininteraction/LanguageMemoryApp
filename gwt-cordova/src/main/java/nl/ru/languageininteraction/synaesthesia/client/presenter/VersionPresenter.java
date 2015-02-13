@@ -44,6 +44,7 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
+        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LiI_logo_rgb.jpg"), 100);
 //        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
         ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAheading());
