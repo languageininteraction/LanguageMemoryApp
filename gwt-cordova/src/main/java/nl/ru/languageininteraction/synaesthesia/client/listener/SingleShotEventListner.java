@@ -41,23 +41,30 @@ public abstract class SingleShotEventListner extends HandlesAllTouchEvents imple
                 @Override
                 public void execute() {
                     singleShotFired();
-                    singleShotConsumed = false;
                 }
             });
         }
         singleShotConsumed = true;
     }
 
+    public void resetSingleShot() {
+        singleShotConsumed = false;
+    }
+
     @Override
     final public void onClick(ClickEvent event) {
-        event.preventDefault();
+//        event.preventDefault();
         eventFired();
+//        if (!singleShotConsumed) {
+//            singleShotConsumed = true;
+//            singleShotFired();
+//        }
     }
     private boolean hasTargetTouch = false;
 
     @Override
     public void onTouchStart(TouchStartEvent event) {
-        event.preventDefault();
+//        event.preventDefault();
         if (event.getTargetTouches().length() > 0) {
             hasTargetTouch = true;
         }
@@ -65,7 +72,7 @@ public abstract class SingleShotEventListner extends HandlesAllTouchEvents imple
 
     @Override
     public void onTouchMove(TouchMoveEvent event) {
-        event.preventDefault();
+//        event.preventDefault();
         if (event.getTargetTouches().length() == 0) {
             hasTargetTouch = false;
         }
@@ -73,7 +80,7 @@ public abstract class SingleShotEventListner extends HandlesAllTouchEvents imple
 
     @Override
     public void onTouchCancel(TouchCancelEvent event) {
-        event.preventDefault();
+//        event.preventDefault();
         if (event.getTargetTouches().length() == 0) {
             hasTargetTouch = false;
         }
@@ -81,7 +88,7 @@ public abstract class SingleShotEventListner extends HandlesAllTouchEvents imple
 
     @Override
     public void onTouchEnd(TouchEndEvent event) {
-        event.preventDefault();
+//        event.preventDefault();
         if (hasTargetTouch && event.getTargetTouches().length() == 0) {
             eventFired();
         }

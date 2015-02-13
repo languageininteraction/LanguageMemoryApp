@@ -333,21 +333,16 @@ public class ColourPickerCanvasView extends AbstractView {
         final ScrollPanel scrollPanel = new ScrollPanel(instructionsLabel);
         popupPanel.setWidget(scrollPanel);
         infoButton.setText(infoButtonChar);
-        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
-
-            @Override
-            public void onClose(CloseEvent<PopupPanel> event) {
-                infoButton.setEnabled(true);
-                resizeView();
-            }
-        });
         final SingleShotEventListner infoSingleShotEventListner = new SingleShotEventListner() {
 
             @Override
             protected void singleShotFired() {
-                outerGrid.clear();
-                popupPanel.center();
-                infoButton.setEnabled(false);
+                if (infoButton.isEnabled()) {
+                    outerGrid.clear();
+                    popupPanel.center();
+                    infoButton.setEnabled(false);
+                    resetSingleShot();
+                }
             }
         };
         infoButton.addClickHandler(infoSingleShotEventListner);
@@ -357,11 +352,22 @@ public class ColourPickerCanvasView extends AbstractView {
             @Override
             protected void singleShotFired() {
                 popupPanel.hide();
+                resizeView();
                 infoButton.setEnabled(true);
+                resetSingleShot();
             }
         };
         instructionsLabel.addClickHandler(instructionsSingleShotEventListner1);
         instructionsLabel.addTouchEndHandler(instructionsSingleShotEventListner1);
+        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(CloseEvent<PopupPanel> event) {
+                instructionsSingleShotEventListner1.eventFired();
+//                infoButton.setEnabled(true);
+//                resizeView();
+            }
+        });
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {
@@ -395,6 +401,7 @@ public class ColourPickerCanvasView extends AbstractView {
             @Override
             protected void singleShotFired() {
                 presenterListerner.eventFired(nextButton);
+                resetSingleShot();
             }
         };
         nextButton.addClickHandler(singleShotEventListner);
