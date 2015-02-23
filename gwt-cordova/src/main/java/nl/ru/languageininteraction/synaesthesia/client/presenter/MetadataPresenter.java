@@ -65,7 +65,6 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
             }
         };
         addNextButton();
-        ((MetadataView) simpleView).addKeyboardPadding();
     }
 
     protected void addNextButton() {
