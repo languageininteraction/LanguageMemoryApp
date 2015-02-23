@@ -235,6 +235,7 @@ canvas {
     border-width: 1px;
     border-style: solid;
     width: 100%;
+    margin-bottom: 10px;
 }
 .gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
 }
