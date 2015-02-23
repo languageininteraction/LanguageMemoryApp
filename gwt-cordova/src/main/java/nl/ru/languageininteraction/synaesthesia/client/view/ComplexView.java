@@ -102,6 +102,7 @@ public class ComplexView extends SimpleView {
                 if (nextButton.isEnabled()) {
                     presenterListerner.eventFired(nextButton);
                 }
+                resetSingleShot();
             }
         };
         nextButton.addClickHandler(singleShotEventListner);
