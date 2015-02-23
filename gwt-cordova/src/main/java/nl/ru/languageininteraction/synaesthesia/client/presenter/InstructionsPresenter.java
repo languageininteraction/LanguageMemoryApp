@@ -20,7 +20,7 @@ package nl.ru.languageininteraction.synaesthesia.client.presenter;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
+import nl.ru.languageininteraction.synaesthesia.client.view.ComplexView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
@@ -29,7 +29,7 @@ import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 public class InstructionsPresenter extends AbstractPresenter implements Presenter {
 
     public InstructionsPresenter(RootLayoutPanel widgetTag) {
-        super(widgetTag, new SimpleView());
+        super(widgetTag, new ComplexView());
     }
 
     @Override
@@ -39,6 +39,7 @@ public class InstructionsPresenter extends AbstractPresenter implements Presente
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        simpleView.setDisplayText(messages.instructionscreentext());
+        ((ComplexView) simpleView).addText(messages.instructionscreentext());
+        ((ComplexView) simpleView).addHtmlText(messages.instructionscreenExample());
     }
 }

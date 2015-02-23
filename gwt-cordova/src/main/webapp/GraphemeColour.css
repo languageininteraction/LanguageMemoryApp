@@ -251,6 +251,7 @@ canvas {
     background: rgb(246,170,139);
 }
 
+table#screenExample td, 
 .gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
@@ -282,9 +283,10 @@ canvas {
     line-height: 20pt;
 } 
 
+table#screenExample td, 
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
-{  
+{
     font-family: Calibri, "Open Sans", "Droid Sans", Arial, Candara, Segoe, "Segoe UI", Optima, sans-serif;
 }
 
@@ -296,6 +298,58 @@ canvas {
     background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
 }
+
+/* example stimulus screen table */
+table#screenExample td {
+    font-weight: bold; 
+    text-align: center;
+}
+#screenExample {
+    margin-left: auto;
+    margin-right: auto; 
+}
+#screenExamplePicker {
+    height: 90px;
+    width: 90px;
+    background: -webkit-linear-gradient(red, black);
+    background: -o-linear-gradient(red, black);
+    background: -moz-linear-gradient(red, black);
+    background: linear-gradient(red, black);
+}
+
+#screenExampleHue {
+    height: 90px;
+    width: 10px;
+    background: -webkit-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: -o-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: -moz-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: linear-gradient(to bottom, red,orange,yellow,green,blue,indigo,violet); 
+}
+
+#screenExampleStimulus {
+    height: 20px;
+    width: 50px;
+    background:lightgray;
+}
+
+#screenExampleSelection {
+    height: 20px;
+    width: 50px;
+    background:lightgray;
+}
+
+#screenExampleNone {
+    height: 10px;
+    width: 50px;
+    background:darkgray;
+}
+
+#screenExampleSubmit {
+    height: 10px;
+    width: 50px;
+    background:darkgray;
+}
+/* end example stimulus screen table */
 
 /*
 Language in Interaction uses a fixed color sequence. 
