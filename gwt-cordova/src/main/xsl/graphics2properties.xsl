@@ -21,6 +21,7 @@
     <xsl:apply-templates select="svg:svg/svg:defs/svg:linearGradient"/>
     <xsl:apply-templates select="svg:svg//svg:g"/>
     <xsl:apply-templates select="svg:svg//svg:rect"/>
+    <xsl:apply-templates select="svg:svg//svg:circle"/>
     <xsl:apply-templates select="svg:svg//svg:path"/>
     <xsl:apply-templates select="svg:svg//svg:text"/>
     </xsl:template>
@@ -61,6 +62,12 @@
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
             <xsl:value-of select="@y"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>transform</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@transform"/>
             <xsl:text>
 </xsl:text>
             <xsl:apply-templates select="svg:tspan" />
@@ -138,6 +145,32 @@
             <xsl:value-of select="translate(@id, ' -', '__')"/>
             <xsl:text>=</xsl:text>
             <xsl:value-of select="@height"/>
+            <xsl:text>
+</xsl:text>
+    </xsl:template>
+    <xsl:template match="svg:circle">                
+            <xsl:text>style</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@style"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>cx</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@cx"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>cy</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@cy"/>
+            <xsl:text>
+</xsl:text>
+            <xsl:text>r</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@r"/>
             <xsl:text>
 </xsl:text>
     </xsl:template>
