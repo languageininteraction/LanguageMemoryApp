@@ -112,6 +112,7 @@ public class MetadataView extends ComplexView {
                 break;
             }
         }
+        fieldBox.setFocus(true);
     }
 
     public void clearErrors() {
