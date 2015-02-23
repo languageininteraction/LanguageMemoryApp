@@ -50,8 +50,8 @@ public interface SvgTemplate extends SafeHtmlTemplates {
     @Template("<tspan id=\"{0}\" x=\"{1}\" y=\"{2}\" style=\"{3}\">{4}</tspan>")
     SafeHtml tspanTag(String id, String x, String y, String style, String text);
 
-    @Template("<text x=\"{0}\" y=\"{1}\" style=\"{2}\" >")
-    SafeHtml textTag(String x, String y, String style);
+    @Template("<text x=\"{0}\" y=\"{1}\" transform=\"{2}\" style=\"{3}\" >")
+    SafeHtml textTag(String x, String y, String transform, String style);
 
     @Template("</text>")
     SafeHtml textTagEnd();
@@ -73,4 +73,7 @@ public interface SvgTemplate extends SafeHtmlTemplates {
 
     @Template("<rect x=\"{0}\" y=\"{1}\" rx=\"{2}\" ry=\"{3}\" width=\"{4}\" height=\"{5}\" style=\"{6}\" />")
     SafeHtml rectTag(String x, String y, String rx, String ry, String width, String height, String style);
+
+    @Template("<circle cx=\"{0}\" cy=\"{1}\" r=\"{2}\" style=\"{3}\" />")
+    SafeHtml circleTag(String cx, String cy, String r, String style);
 }
