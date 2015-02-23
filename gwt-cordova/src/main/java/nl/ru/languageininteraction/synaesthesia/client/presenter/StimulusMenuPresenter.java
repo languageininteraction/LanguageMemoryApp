@@ -74,6 +74,7 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
         addMenuItem(appEventListner, stimuliGroups[0]);
         addMenuItem(appEventListner, stimuliGroups[1]);
         addMenuItem(appEventListner, stimuliGroups[2]);
+        ((MenuView) simpleView).addSeparateMenuPanel();
         ((MenuView) simpleView).addMenuLabel(messages.stimulusMenuLongTestLabelBold(), true);
         ((MenuView) simpleView).addMenuLabel(messages.stimulusMenuLongTestLabel(), false);
         addMenuItem(appEventListner, stimuliGroups[3]);

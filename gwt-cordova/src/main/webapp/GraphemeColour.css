@@ -107,9 +107,11 @@
     border: none;
 }
 
-/*.gwt-Button.nextButton:disabled, .gwt-Button.menuButton:disabled, .gwt-Button.optionButton:disabled, .gwt-Label.headerButton:disabled {
+/*.gwt-Button.nextButton:disabled,*/ 
+/*, .gwt-Button.optionButton:disabled, .gwt-Label.headerButton:disabled {*/
+.gwt-Button.menuButton:hover:disabled {
     border: none;
-}*/
+}
 
 /*.gwt-Button.nextButton:hover, .gwt-Button.menuButton:hover, .gwt-Button.optionButton:hover, .gwt-Label.headerButton:hover, */
 .gwt-Button.nextButton:active, .gwt-Button.menuButton:active, .gwt-Button.optionButton:active, .gwt-Label.headerButton:active {
@@ -232,6 +234,7 @@ canvas {
     outline: none;
     border-width: 1px;
     border-style: solid;
+    width: 100%;
 }
 .gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
 }
