@@ -17,13 +17,16 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.view;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -65,26 +68,54 @@ public class Csv2Properties {
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
                 OutputStreamWriter writerDE = new OutputStreamWriter(outputStreamDE, "UTF-8");
                 OutputStreamWriter writerNL = new OutputStreamWriter(outputStreamNL, "UTF-8")) {
-            for (String key : properties.stringPropertyNames()) {
-                writer.write(key);
-                writer.write(PROPERTY_SEPARATOR);
-                writerDE.write(key);
-                writerDE.write(PROPERTY_SEPARATOR);
-                writerNL.write(key);
-                writerNL.write(PROPERTY_SEPARATOR);
-                writer.write(escapeString(translationsEN.get(key)));
-                writer.write("\n");
-                writerDE.write(escapeString(translationsDE.get(key)));
-                writerDE.write("\n");
-                writerNL.write(escapeString(translationsNL.get(key)));
-                writerNL.write("\n");
+
+            final InputStream propertiesFileStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
+            InputStreamReader inputStreamReader = new InputStreamReader(propertiesFileStream, Charset.forName("UTF-8"));
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String lineString;
+            while ((lineString = bufferedReader.readLine()) != null) {
+                if (lineString.isEmpty()) {
+                    writer.write("\n");
+                    writerDE.write("\n");
+                    writerNL.write("\n");
+                } else if (lineString.startsWith("#")) {
+                    writer.write(lineString);
+                    writerDE.write(lineString);
+                    writerNL.write(lineString);
+                    writer.write("\n");
+                    writerDE.write("\n");
+                    writerNL.write("\n");
+                } else {
+                    String key = lineString.split("=")[0];
+                    writer.write(key);
+                    writer.write(PROPERTY_SEPARATOR);
+                    writerDE.write(key);
+                    writerDE.write(PROPERTY_SEPARATOR);
+                    writerNL.write(key);
+                    writerNL.write(PROPERTY_SEPARATOR);
+                    final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : escapePropertiesString(properties.getProperty(key, ""));
+                    writer.write(escapedStringEN);
+                    writer.write("\n");
+                    final String escapedStringDE = (translationsDE.containsKey(key)) ? escapeString(translationsDE.get(key)) : escapePropertiesString(properties_de.getProperty(key, ""));
+                    writerDE.write(escapedStringDE);
+                    writerDE.write("\n");
+                    final String escapedStringNL = (translationsNL.containsKey(key)) ? escapeString(translationsNL.get(key)) : escapePropertiesString(properties_nl.getProperty(key, ""));
+                    writerNL.write(escapedStringNL);
+                    writerNL.write("\n");
+                }
             }
             writer.close();
+            writerDE.close();
+            writerNL.close();
         }
     }
 
     private String escapeString(String inputString) {
-        return "\"" + inputString.replaceAll("\"", "\"\"") + "\"";
+        return inputString; //"\"" + inputString.replaceAll("\"", "\"\"") + "\"";
+    }
+
+    private String escapePropertiesString(String inputString) {
+        return inputString.replaceAll("\n", "\\\\n"); //"\"" + inputString.replaceAll("\"", "\"\"") + "\"";
     }
 
     public static void main(String[] args) throws IOException {
