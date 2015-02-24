@@ -52,6 +52,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
             public void eventFired(Button button) {
                 try {
                     ((MetadataView) simpleView).clearErrors();
+                    validateFields();
                     saveFields();
                     appEventListner.requestApplicationState(nextState);
                 } catch (MetadataFieldException exception) {
@@ -82,10 +83,16 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
         });
     }
 
-    protected void saveFields() throws MetadataFieldException {
+    protected void validateFields() throws MetadataFieldException {
         for (MetadataField fieldName : ((MetadataView) simpleView).getFieldNames()) {
             String fieldString = ((MetadataView) simpleView).getFieldValue(fieldName);
             fieldName.validateValue(fieldString);
+        }
+    }
+
+    protected void saveFields() {
+        for (MetadataField fieldName : ((MetadataView) simpleView).getFieldNames()) {
+            String fieldString = ((MetadataView) simpleView).getFieldValue(fieldName);
             userResults.setMetadataValue(fieldName.getPostName(), fieldString);
         }
         new LocalStorage().storeData(userResults);

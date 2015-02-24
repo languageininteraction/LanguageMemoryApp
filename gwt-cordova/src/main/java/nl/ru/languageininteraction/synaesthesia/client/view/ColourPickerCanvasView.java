@@ -452,5 +452,6 @@ public class ColourPickerCanvasView extends AbstractView {
             progressPanel.setWidget(0, 0, infoButton);
             outerGrid.setWidget(1, 0, innerGrid);
         }
+        setStyleByWidth(width);
     }
 }

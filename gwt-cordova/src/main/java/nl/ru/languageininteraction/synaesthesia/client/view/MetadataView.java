@@ -69,13 +69,13 @@ public class MetadataView extends ComplexView {
                 scrollToPosition(label.getAbsoluteTop());
             }
         });
-        textBox.addBlurHandler(new BlurHandler() {
-
-            @Override
-            public void onBlur(BlurEvent event) {
-                removeKeyboardPadding();
-            }
-        });
+//        textBox.addBlurHandler(new BlurHandler() {
+//
+//            @Override
+//            public void onBlur(BlurEvent event) {
+//                removeKeyboardPadding();
+//            }
+//        });
         flexTable.setWidget(rowCount + 1, 0, textBox);
         fieldBoxes.put(metadataField, textBox);
         if (firstTextBox == null) {
@@ -119,7 +119,13 @@ public class MetadataView extends ComplexView {
         for (TextBox textBox : fieldBoxes.values()) {
             textBox.setStylePrimaryName("metadataOK");
         }
-        flexTable.remove(errorText);
+        for (int rowCounter = 0; rowCounter < flexTable.getRowCount(); rowCounter++) {
+            if (flexTable.getWidget(rowCounter, 0) == errorText) {
+                // remove the error message and the tabel row that was added for the error message
+                flexTable.removeRow(rowCounter);
+                break;
+            }
+        }
     }
 
     private void addKeyboardPadding() {
@@ -128,12 +134,12 @@ public class MetadataView extends ComplexView {
 
     private void removeKeyboardPadding() {
         outerPanel.remove(keyboardPadding);
-        // todo: it would be nice to also remove the tabel row that was added
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
         super.parentResized(height, width, units);
         keyboardPadding.setHeight(height * 0.8 + units);
+        setStyleByWidth(width);
     }
 }

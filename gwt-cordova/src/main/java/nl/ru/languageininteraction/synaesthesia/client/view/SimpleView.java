@@ -149,6 +149,7 @@ public class SimpleView extends AbstractView {
             scrollPanel.setHeight(height - 50 - 50 + "px");
         } else {
             scrollPanel.setHeight(height - 50 + "px");
-        }
+        }        
+        setStyleByWidth(width);
     }
 }

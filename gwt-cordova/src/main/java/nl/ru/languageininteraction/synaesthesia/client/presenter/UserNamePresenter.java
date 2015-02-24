@@ -44,7 +44,7 @@ public class UserNamePresenter extends MetadataPresenter {
     protected void setTitle(PresenterEventListner titleBarListner) {
         simpleView.addTitle(messages.introductionscreentitle(), titleBarListner);
     }
-    
+
     @Override
     protected void setContent(AppEventListner appEventListner) {
         ((MetadataView) simpleView).addText(messages.introductionscreentext());
@@ -97,7 +97,7 @@ public class UserNamePresenter extends MetadataPresenter {
     }
 
     @Override
-    protected void saveFields() throws MetadataFieldException {
+    protected void saveFields() {
         if (isNewUser) {
             userResults.clearResults();
             userResults.clearMetadata();
