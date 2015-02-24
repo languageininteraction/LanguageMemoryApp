@@ -278,6 +278,7 @@ table#screenExample td,
     /*text-transform: uppercase;*/
 }
 
+.gwt-HTML a, .gwt-HTML a:visited, .gwt-HTML a:hover,
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {
     color:rgb(255,255,255);  
     line-height: 20pt;
