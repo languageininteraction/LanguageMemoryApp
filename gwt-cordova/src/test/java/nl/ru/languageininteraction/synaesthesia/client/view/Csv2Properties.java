@@ -21,14 +21,18 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Properties;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 
 /**
  * @since Jan 29, 2015 4:23:38 PM (creation date)
@@ -40,6 +44,10 @@ public class Csv2Properties {
     private static final String PROPERTIES_SUFFIX = ".properties";
     private static final String COLUMN_SEPARATOR = ",";
     private static final String PROPERTY_SEPARATOR = "=";
+    private static final int DE_COLUMN = 3;
+    private static final int NL_COLUMN = 2;
+    private static final int EN_COLUMN = 1;
+    private static final int KEY_COLUMN = 0;
     private final HashMap<String, String> translationsEN = new HashMap<>();
     private final HashMap<String, String> translationsDE = new HashMap<>();
     private final HashMap<String, String> translationsNL = new HashMap<>();
@@ -47,6 +55,24 @@ public class Csv2Properties {
 
     public void readTranslations() {
 
+    }
+
+    public void parseInputCSV() throws IOException {
+        Reader in = new FileReader(inputFile);
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+        for (CSVRecord record : records) {
+            String key_name = record.get(KEY_COLUMN);
+            String en_value = record.get(EN_COLUMN);
+            String nl_value = record.get(NL_COLUMN);
+            String de_value = record.get(DE_COLUMN);
+//            System.out.println(key_name);
+//            System.out.println(en_value);
+//            System.out.println(nl_value);
+//            System.out.println(de_value);
+            translationsEN.put(key_name, en_value);
+            translationsNL.put(key_name, nl_value);
+            translationsDE.put(key_name, de_value);
+        }
     }
 
     public void writePropertyValues(String propertiesFileName) throws FileNotFoundException, IOException {
@@ -111,15 +137,16 @@ public class Csv2Properties {
     }
 
     private String escapeString(String inputString) {
-        return inputString; //"\"" + inputString.replaceAll("\"", "\"\"") + "\"";
+        return inputString.replaceAll("\n", "\\\\n");
     }
 
     private String escapePropertiesString(String inputString) {
-        return inputString.replaceAll("\n", "\\\\n"); //"\"" + inputString.replaceAll("\"", "\"\"") + "\"";
+        return inputString.replaceAll("\n", "\\\\n");
     }
 
     public static void main(String[] args) throws IOException {
         final Csv2Properties properties2Csv = new Csv2Properties();
+        properties2Csv.parseInputCSV();
         properties2Csv.writePropertyValues("Messages");
         properties2Csv.writePropertyValues("Stimuli");
         properties2Csv.writePropertyValues("MetadataFields");
