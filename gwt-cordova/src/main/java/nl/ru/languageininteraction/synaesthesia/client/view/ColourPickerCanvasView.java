@@ -66,7 +66,6 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
     private final Button infoButton;
-    private final Button quitButton;
     private Button acceptButton = null;
     private Button rejectButton = null;
     private final Label progressLabel;
@@ -98,14 +97,11 @@ public class ColourPickerCanvasView extends AbstractView {
         outerGrid = new Grid(2, 2);
         innerGrid = new Grid(6, 2);
         pickerPanel = new Grid(1, 2);
-        progressPanel = new Grid(1, 2);
+        progressPanel = new Grid(1, 3);
         progressPanel.setWidth("100%");
         infoButton = new Button();
         infoButton.addStyleName("stimulusHelpButton");
         infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
-        quitButton = new Button();
-        quitButton.addStyleName("stimulusQuitButton");
-        quitButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         progressLabel.addStyleName("stimulusProgressLabel");
@@ -191,6 +187,11 @@ public class ColourPickerCanvasView extends AbstractView {
                 }
             });
         }
+        progressPanel.setWidget(0, 1, progressLabel);
+        progressPanel.setWidget(0, 2, infoButton);
+        progressPanel.setStylePrimaryName("headerPanel");
+        progressPanel.getColumnFormatter().setWidth(1, "100%");
+        addNorth(progressPanel, 50);
         add(outerGrid);
     }
 
@@ -313,18 +314,7 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     public void setQuitButton(final PresenterEventListner quitListerner) {
-        quitButton.setText(quitListerner.getLabel());
-        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
-
-            @Override
-            protected void singleShotFired() {
-                quitListerner.eventFired(quitButton);
-            }
-        };
-        quitButton.addClickHandler(singleShotEventListner);
-        quitButton.addTouchStartHandler(singleShotEventListner);
-        quitButton.addTouchMoveHandler(singleShotEventListner);
-        quitButton.addTouchEndHandler(singleShotEventListner);
+        progressPanel.setWidget(0, 0, new MenuButton(quitListerner));
     }
 
     public void setInstructions(final String instructions, final String infoButtonChar) {
@@ -422,7 +412,7 @@ public class ColourPickerCanvasView extends AbstractView {
     protected void parentResized(int height, int width, String units) {
         outerGrid.setWidget(0, 0, pickerPanel);
         if (height < width) {
-            int resizedHeight = (int) (height - 50);
+            int resizedHeight = (int) (height - 80);
             int resizedBarWidth = (int) (resizedHeight * 0.1);
             int resizedWidth = (int) (width - 50) - resizedBarWidth - buttonWidth - buttonHeight; // buttonHeight is used to allow for the info button
             sizeAndPaintCanvases(resizedHeight, resizedWidth, resizedBarWidth);
@@ -431,10 +421,6 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(2, 0, selectedColourPanel);
             innerGrid.setWidget(3, 0, acceptButton);
-            innerGrid.setWidget(4, 0, progressLabel);
-            progressPanel.setWidget(0, 0, infoButton);
-            progressPanel.setWidget(0, 1, quitButton);
-            innerGrid.setWidget(5, 0, progressPanel);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
             int resizedWidth = (int) (width * 0.9 - 50);
@@ -446,12 +432,12 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(0, 1, selectedColourPanel);
             innerGrid.setWidget(1, 1, acceptButton);
-            progressPanel.setWidget(0, 1, progressLabel);
-            innerGrid.setWidget(2, 0, progressPanel);
-            innerGrid.setWidget(2, 1, quitButton);
-            progressPanel.setWidget(0, 0, infoButton);
             outerGrid.setWidget(1, 0, innerGrid);
         }
         setStyleByWidth(width);
+    }
+
+    @Override
+    public void setStyleByWidth(int width) {
     }
 }

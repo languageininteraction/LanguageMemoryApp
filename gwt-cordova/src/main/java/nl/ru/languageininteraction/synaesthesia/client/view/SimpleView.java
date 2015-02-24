@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -40,12 +41,13 @@ public class SimpleView extends AbstractView {
         menu, back, next
     }
     private final HorizontalPanel footerPanel;
-    private final HorizontalPanel headerPanel;
+    private final Grid headerPanel;
     private final VerticalPanel borderedContentPanel;
     private final ScrollPanel scrollPanel;
 
     public SimpleView() {
-        headerPanel = new HorizontalPanel();
+        headerPanel = new Grid(1, 3);
+        headerPanel.setWidth("100%");
         headerPanel.setStylePrimaryName("headerPanel");
         footerPanel = new HorizontalPanel();
         borderedContentPanel = new VerticalPanel();
@@ -72,42 +74,12 @@ public class SimpleView extends AbstractView {
     }
 
     public void addTitle(String label, final PresenterEventListner presenterListerner) {
-        final Label headerIcon = new Label();
-        headerIcon.addStyleName("headerIcon");
-
         final Label headerLabel = new Label(label);
         headerLabel.setStylePrimaryName("headerLabel");
-        if (presenterListerner != null) {
-            final Label headerArrow = new Label();
-            headerArrow.addStyleName("headerArrow");
-            headerPanel.add(headerArrow);
-
-            final Label headerButton = new Label(presenterListerner.getLabel());
-            headerButton.addStyleName("headerButton");
-            headerPanel.add(headerButton);
-            SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
-
-                @Override
-                protected void singleShotFired() {
-                    presenterListerner.eventFired(null);
-                }
-            };
-            headerArrow.addClickHandler(singleShotEventListner);
-            headerButton.addClickHandler(singleShotEventListner);
-            headerIcon.addClickHandler(singleShotEventListner);
-
-            headerArrow.addTouchStartHandler(singleShotEventListner);
-            headerButton.addTouchStartHandler(singleShotEventListner);
-            headerIcon.addTouchStartHandler(singleShotEventListner);
-            headerArrow.addTouchMoveHandler(singleShotEventListner);
-            headerButton.addTouchMoveHandler(singleShotEventListner);
-            headerIcon.addTouchMoveHandler(singleShotEventListner);
-            headerArrow.addTouchEndHandler(singleShotEventListner);
-            headerButton.addTouchEndHandler(singleShotEventListner);
-            headerIcon.addTouchEndHandler(singleShotEventListner);
-        }
-        headerPanel.add(headerIcon);
-        headerPanel.add(headerLabel);
+        headerPanel.setWidget(0, 0, new MenuButton(presenterListerner));
+        headerPanel.setWidget(0, 1, headerLabel);
+        headerPanel.setStylePrimaryName("headerPanel");
+        headerPanel.getColumnFormatter().setWidth(1, "100%");
     }
 
     public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {
@@ -149,7 +121,7 @@ public class SimpleView extends AbstractView {
             scrollPanel.setHeight(height - 50 - 50 + "px");
         } else {
             scrollPanel.setHeight(height - 50 + "px");
-        }        
+        }
         setStyleByWidth(width);
     }
 }
