@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-1.0.126-testing
+synquizname=synquiz-1.0.127-testing
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
@@ -28,9 +28,9 @@ echo $splashImage
 #file ./platforms/ios/SynQuiz/Resources/splash/*
 
 echo "making 9 patch splash images"
-convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
+#convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
 #draw9patch platforms/splash320x320.9.png
-convert -background none images/LiI_logo_rgb.jpg -resize 150x150 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,32 0,32" -draw "line 152,0 152,0" platforms/splash150x150.9.png
+#convert -background none images/LiI_logo_rgb.jpg -resize 150x150 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,32 0,32" -draw "line 152,0 152,0" platforms/splash150x150.9.png
 #draw9patch platforms/splash150x150.9.png
 
 echo "making iOS splash images"
