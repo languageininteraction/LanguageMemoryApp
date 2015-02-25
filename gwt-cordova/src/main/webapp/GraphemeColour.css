@@ -58,6 +58,7 @@
     font-size: 30px;
 }
 
+.stimulusHelpPanel .gwt-Button,
 .gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
@@ -65,7 +66,7 @@
     /*margin: 0 10px 10px 0;*/
     color: black;
     text-decoration: none;
-    border-color: rgb(111,111,111);;
+    border: none;
     border-radius: 15px;
     outline: none;
 }
@@ -91,6 +92,7 @@
     width: 100%;
 }
 
+.stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 #widgetTag, .stimulusScreen, .menuTable, .gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     /* prevent text selection on the buttons */
     -webkit-touch-callout: none;
@@ -211,11 +213,18 @@ canvas {
 }
 
 .stimulusHelpPanel {
-    border: rgb(111,111,111); 
+    border: none; 
     background: white;
-    border-width: 3px;
-    border-style: solid;
+    margin: 10px;
+    border-radius: 15px;
+    padding: 10px 10px 10px 10px;
+}
 
+.stimulusHelpPanel .gwt-Button {
+    background: darkgrey;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    margin-left: auto;
 }
 
 .stimulusPanel {    
@@ -256,7 +265,7 @@ canvas {
     /*background: green;*/
 }
 
-table#screenExample td, 
+table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 .gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
@@ -289,7 +298,8 @@ table#screenExample td,
     line-height: 20pt;
 } 
 
-table#screenExample td, 
+.stimulusHelpText,
+table#screenExample td, .stimulusHelpPanel .gwt-Button,
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
 {

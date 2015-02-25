@@ -112,7 +112,7 @@ public class ColourPickerPresenter implements Presenter {
                 return messages.stimulusscreenrejectbutton();
             }
         });
-        colourPickerCanvasView.setInstructions(messages.instructionscreentext(), messages.helpButtonChar());
+        colourPickerCanvasView.setInstructions(messages.instructionscreentext(), messages.helpButtonChar(),messages.instructionscreenbutton());
         colourPickerCanvasView.setQuitButton(new PresenterEventListner() {
 
             @Override

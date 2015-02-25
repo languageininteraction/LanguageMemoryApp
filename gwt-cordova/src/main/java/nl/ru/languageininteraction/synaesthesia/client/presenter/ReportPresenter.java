@@ -89,7 +89,7 @@ public class ReportPresenter extends AbstractPresenter implements Presenter {
 
                 @Override
                 public void eventFired(Button button) {
-                    new SocialMediaPost().postImageAndLink(messages.socialMediaPostText(numberFormat2.format(calculatedScores.getScore()), "(this precentage is not calculated yet) 100", stimuliGroup.getGroupLabel()), messages.socialMediaPostSubject(), messages.socialMediaPostImage(), messages.socialMediaPostUrl()); //stimuliGroup.getGroupLabel(), numberFormat2.format(calculatedScores.getScore())
+                    new SocialMediaPost().postImageAndLink(messages.socialMediaPostText(numberFormat2.format(calculatedScores.getScore())), messages.socialMediaPostSubject(), messages.socialMediaPostImage(), messages.socialMediaPostUrl());
                 }
             });
         }

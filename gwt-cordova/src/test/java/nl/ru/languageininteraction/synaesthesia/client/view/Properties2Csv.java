@@ -34,6 +34,10 @@ public class Properties2Csv {
 
     private static final String FILE_SUFFIX = ".csv";
     private static final String COLUMN_SEPARATOR = ",";
+    private static final String DE_COLUMN = "DE";
+    private static final String NL_COLUMN = "NL";
+    private static final String EN_COLUMN = "EN";
+    private static final String KEY_COLUMN = "key";
 
     final File outputFile = new File("target/translations" + FILE_SUFFIX);
 
@@ -53,6 +57,14 @@ public class Properties2Csv {
         properties_de.load(resourceAsStream_de);
         OutputStream outputStream = new FileOutputStream(outputFile, true);
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8")) {
+            writer.write(KEY_COLUMN);
+            writer.write(COLUMN_SEPARATOR);
+            writer.write(EN_COLUMN);
+            writer.write(COLUMN_SEPARATOR);
+            writer.write(NL_COLUMN);
+            writer.write(COLUMN_SEPARATOR);
+            writer.write(DE_COLUMN);
+            writer.write("\n");
             for (String key : properties.stringPropertyNames()) {
                 writer.write(key);
                 writer.write(COLUMN_SEPARATOR);

@@ -34,12 +34,12 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -317,14 +317,19 @@ public class ColourPickerCanvasView extends AbstractView {
         progressPanel.setWidget(0, 0, new MenuButton(quitListerner));
     }
 
-    public void setInstructions(final String instructions, final String infoButtonChar) {
-        final Label instructionsLabel = new Label(instructions);
+    public void setInstructions(final String instructions, final String infoButtonChar, final String closeButtonLabel) {
+        final HTML instructionsLabel = new HTML(instructions);
         final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
         popupPanel.setGlassEnabled(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
         instructionsLabel.setStylePrimaryName("stimulusHelpText");
         final ScrollPanel scrollPanel = new ScrollPanel(instructionsLabel);
-        popupPanel.setWidget(scrollPanel);
+        final VerticalPanel verticalPanel = new VerticalPanel();
+        verticalPanel.add(scrollPanel);
+        final Button closeButton = new Button(closeButtonLabel);
+        verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        verticalPanel.add(closeButton);
+        popupPanel.setWidget(verticalPanel);
         infoButton.setText(infoButtonChar);
         final SingleShotEventListner infoSingleShotEventListner = new SingleShotEventListner() {
 
@@ -352,19 +357,20 @@ public class ColourPickerCanvasView extends AbstractView {
                 resetSingleShot();
             }
         };
-        instructionsLabel.addClickHandler(instructionsSingleShotEventListner1);
-        instructionsLabel.addTouchStartHandler(instructionsSingleShotEventListner1);
-        instructionsLabel.addTouchMoveHandler(instructionsSingleShotEventListner1);
-        instructionsLabel.addTouchEndHandler(instructionsSingleShotEventListner1);
-        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
-
-            @Override
-            public void onClose(CloseEvent<PopupPanel> event) {
-                instructionsSingleShotEventListner1.eventFired();
-//                infoButton.setEnabled(true);
-//                resizeView();
-            }
-        });
+        closeButton.addClickHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchStartHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchMoveHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchEndHandler(instructionsSingleShotEventListner1);
+//        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
+//
+//            @Override
+//            public void onClose(CloseEvent<PopupPanel> event) {
+//                instructionsSingleShotEventListner1.eventFired();
+////                infoButton.setEnabled(true);
+////                resizeView();
+//            }
+//        });
+        popupPanel.center();
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {

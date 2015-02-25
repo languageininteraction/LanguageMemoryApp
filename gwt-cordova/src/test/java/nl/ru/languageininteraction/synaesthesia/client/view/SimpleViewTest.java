@@ -64,7 +64,8 @@ public class SimpleViewTest {
                     if (parts.length > 1) {
                         if (parts[0].toLowerCase().contains("title")) {
                             System.out.println(line);
-                            assertTrue("The title string is too long: " + line, parts[1].length() < maxTitleLength);
+                            final String part = parts[1].replace("\\u00", ""); // unicode strings should only be counted as their display length
+                            assertTrue("The title string is too long: " + line, part.length() < maxTitleLength);
                         }
                     }
                 }

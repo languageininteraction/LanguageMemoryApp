@@ -56,7 +56,7 @@ public class StimulusMenuPresenter extends MenuPresenter implements Presenter {
             @Override
             public void eventFired(Button button) {
                 userResults.setPendingStimuliGroup(stimuliGroup);
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.instructions);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.stimulusshow);
             }
 
             @Override

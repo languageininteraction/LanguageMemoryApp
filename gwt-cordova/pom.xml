@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>synquiz</artifactId>
     <packaging>war</packaging>
-    <version>1.0.116-testing</version>
+    <version>1.0.125-testing</version>
     <name>SynQuiz</name>
     <organization>
         <name>Language In Interaction</name>
@@ -55,6 +55,18 @@
             <artifactId>validation-api</artifactId>
             <version>1.0.0.GA</version>
             <classifier>sources</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

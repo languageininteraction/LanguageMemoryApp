@@ -119,13 +119,19 @@ public class Csv2Properties {
                     writerNL.write(key);
                     writerNL.write(PROPERTY_SEPARATOR);
                     final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : escapePropertiesString(properties.getProperty(key, ""));
-                    writer.write(escapedStringEN);
+                    if (!escapedStringEN.isEmpty()) {
+                        writer.write(escapedStringEN);
+                    }
                     writer.write("\n");
                     final String escapedStringDE = (translationsDE.containsKey(key)) ? escapeString(translationsDE.get(key)) : escapePropertiesString(properties_de.getProperty(key, ""));
-                    writerDE.write(escapedStringDE);
+                    if (!escapedStringDE.isEmpty()) {
+                        writerDE.write(escapedStringDE);
+                    }
                     writerDE.write("\n");
                     final String escapedStringNL = (translationsNL.containsKey(key)) ? escapeString(translationsNL.get(key)) : escapePropertiesString(properties_nl.getProperty(key, ""));
-                    writerNL.write(escapedStringNL);
+                    if (!escapedStringNL.isEmpty()) {
+                        writerNL.write(escapedStringNL);
+                    }
                     writerNL.write("\n");
                 }
             }
