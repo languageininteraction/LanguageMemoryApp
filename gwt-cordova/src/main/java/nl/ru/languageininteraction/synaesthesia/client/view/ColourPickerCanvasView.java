@@ -74,7 +74,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private String currentHueCss;
     private final int stimulusTextHeight;
     private final int buttonHeight;
-    private final int buttonTextHeight;
+//    private final int buttonTextHeight;
     private final int buttonWidth;
     private final int selectedColourPanelHeight;
     private final int selectedColourPanelWidth;
@@ -88,7 +88,7 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusTextHeight = (int) (minClient * 0.08);
         selectedColourPanelHeight = (int) (minClient * 0.25);
         selectedColourPanelWidth = (int) (minClient * 0.47);
-        buttonTextHeight = (int) (minClient * 0.05);
+//        buttonTextHeight = (int) (minClient * 0.05);
         buttonHeight = (int) (minClient * 0.1);
         buttonWidth = (int) (minClient * 0.47);
         stimulusPanel = new VerticalPanel();
@@ -101,7 +101,7 @@ public class ColourPickerCanvasView extends AbstractView {
         progressPanel.setWidth("100%");
         infoButton = new Button();
         infoButton.addStyleName("stimulusHelpButton");
-        infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
+//        infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         progressLabel.addStyleName("stimulusProgressLabel");
@@ -397,7 +397,7 @@ public class ColourPickerCanvasView extends AbstractView {
         nextButton.setHeight(buttonHeight + "px");
         nextButton.setWidth(buttonWidth + "px");
         nextButton.addStyleName("stimulusButton");
-        nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
+//        nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         nextButton.setEnabled(true);
         final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 

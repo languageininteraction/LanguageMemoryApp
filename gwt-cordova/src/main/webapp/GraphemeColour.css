@@ -162,8 +162,8 @@
 .gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton {
     border-radius: 25px;
     padding: 5px 10px;
-    height: 30px;
-    width: 30px;
+    height: 42px;
+    width: 42px;
 }
 .gwt-Button.stimulusQuitButton {
     float: right;
