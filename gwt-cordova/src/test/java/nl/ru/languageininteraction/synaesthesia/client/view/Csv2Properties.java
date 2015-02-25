@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -58,17 +57,17 @@ public class Csv2Properties {
     }
 
     public void parseInputCSV() throws IOException {
-        Reader in = new FileReader(inputFile);
-        Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+        final Reader reader = new InputStreamReader(inputFile.toURL().openStream(), "UTF-8");
+        Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(reader);
         for (CSVRecord record : records) {
             String key_name = record.get(KEY_COLUMN);
             String en_value = record.get(EN_COLUMN);
             String nl_value = record.get(NL_COLUMN);
             String de_value = record.get(DE_COLUMN);
-//            System.out.println(key_name);
-//            System.out.println(en_value);
-//            System.out.println(nl_value);
-//            System.out.println(de_value);
+            System.out.println(key_name);
+            System.out.println(en_value);
+            System.out.println(nl_value);
+            System.out.println(de_value);
             translationsEN.put(key_name, en_value);
             translationsNL.put(key_name, nl_value);
             translationsDE.put(key_name, de_value);
