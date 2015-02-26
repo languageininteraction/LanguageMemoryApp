@@ -105,6 +105,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
                 agreed = !agreed;
                 agreementCheckBox.setValue(agreed);
                 registerButton.setEnabled(agreed);
+                resetSingleShot();
             }
         };
         agreementCheckBox.addClickHandler(checkBoxEventListner);

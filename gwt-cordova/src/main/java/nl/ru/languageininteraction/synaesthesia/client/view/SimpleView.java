@@ -94,6 +94,8 @@ public class SimpleView extends AbstractView {
             protected void singleShotFired() {
                 if (nextButton.isEnabled()) {
                     presenterListerner.eventFired(nextButton);
+                } else {
+                    resetSingleShot();
                 }
             }
         };
