@@ -26,7 +26,7 @@
             <directory>${project.build.directory}/${project.build.finalName}</directory>
             <includes>
                 <include>/images/icon.png</include>
-                <!--<include>/images/LiI_logo_rgb.jpg</include>-->
+                <include>/images/LIL-logo-diap.png</include>
                 <include>*.*</include>
                 <include>/GraphemeColour/**</include>
             </includes>  
