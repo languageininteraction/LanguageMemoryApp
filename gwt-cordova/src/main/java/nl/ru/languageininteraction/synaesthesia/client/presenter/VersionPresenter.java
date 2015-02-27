@@ -47,11 +47,31 @@ public class VersionPresenter extends AbstractPresenter {
 //        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), 100);
 //        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
-        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAheading());
-        ((ComplexView) simpleView).addText(messages.aboutScreenTextAbody());
-        ((ComplexView) simpleView).addPadding();
-//        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextBheading());
-//        ((ComplexView) simpleView).addText(messages.aboutScreenTextBbody());
+//        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAheading());
+
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextAbody());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addOptionButton(new PresenterEventListner() {
+//
+//            @Override
+//            public String getLabel() {
+//                return messages.aboutScreenTextAlink();
+//            }
+//
+//            @Override
+//            public void eventFired(Button button) {
+////                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
+//        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextBheading());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextBbody());
+//        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCheading());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCbody());
+//        ((ComplexView) simpleView).addPadding();
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextDheading());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextDbody());
 //        ((ComplexView) simpleView).addPadding();
 //        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextCheading());
 //        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCBody());
@@ -65,16 +85,17 @@ public class VersionPresenter extends AbstractPresenter {
 //        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC4point());
 //        ((ComplexView) simpleView).addPadding();
 //        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC5point());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
         ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextJheading());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextJheading());
         ((ComplexView) simpleView).addText("Version: " + version.majorVersion() + "."
                 + version.minorVersion() + "."
                 + version.buildVersion() + "-"
                 + version.projectVersion() + "\n"
                 + "Compile Date: " + version.compileDate() + "\n"
                 + "Last Commit Date: " + version.lastCommitDate());
+        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), 100);
     }
 }
