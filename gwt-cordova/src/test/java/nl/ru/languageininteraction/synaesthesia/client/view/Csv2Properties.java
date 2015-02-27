@@ -90,9 +90,9 @@ public class Csv2Properties {
         OutputStream outputStream = new FileOutputStream(outputFile, false);
         OutputStream outputStreamDE = new FileOutputStream(outputFileDE, false);
         OutputStream outputStreamNL = new FileOutputStream(outputFileNL, false);
-        try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
-                OutputStreamWriter writerDE = new OutputStreamWriter(outputStreamDE, "UTF-8");
-                OutputStreamWriter writerNL = new OutputStreamWriter(outputStreamNL, "UTF-8")) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "ISO-8859-1");
+                OutputStreamWriter writerDE = new OutputStreamWriter(outputStreamDE, "ISO-8859-1");
+                OutputStreamWriter writerNL = new OutputStreamWriter(outputStreamNL, "ISO-8859-1")) {
 
             final InputStream propertiesFileStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
             InputStreamReader inputStreamReader = new InputStreamReader(propertiesFileStream, Charset.forName("UTF-8"));
