@@ -44,27 +44,27 @@ public class VersionPresenter extends AbstractPresenter {
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), 100);
 //        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
         ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAheading());
         ((ComplexView) simpleView).addText(messages.aboutScreenTextAbody());
         ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextBheading());
-        ((ComplexView) simpleView).addText(messages.aboutScreenTextBbody());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextCheading());
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCBody());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC1point());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC2point());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC3point());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC4point());
-        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC5point());
+//        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextBheading());
+//        ((ComplexView) simpleView).addText(messages.aboutScreenTextBbody());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextCheading());
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCBody());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC1point());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC2point());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC3point());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC4point());
+//        ((ComplexView) simpleView).addPadding();
+//        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextC5point());
         ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addLink(messages.mpiLinkText(), messages.mpiLink());
         ((ComplexView) simpleView).addPadding();
