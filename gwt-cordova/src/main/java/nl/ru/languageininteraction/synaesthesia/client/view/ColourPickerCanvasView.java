@@ -34,6 +34,8 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -79,6 +81,7 @@ public class ColourPickerCanvasView extends AbstractView {
     private final int selectedColourPanelHeight;
     private final int selectedColourPanelWidth;
     private ColourData selectedColourData = null;
+    private ScrollPanel instructionsScrollPanel = null;
 
     public ColourPickerCanvasView() throws CanvasError {
         setStylePrimaryName("stimulusScreen");
@@ -323,9 +326,10 @@ public class ColourPickerCanvasView extends AbstractView {
         popupPanel.setGlassEnabled(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
         instructionsLabel.setStylePrimaryName("stimulusHelpText");
-        final ScrollPanel scrollPanel = new ScrollPanel(instructionsLabel);
+        instructionsScrollPanel = new ScrollPanel(instructionsLabel);
+        instructionsScrollPanel.getElement().getStyle().setPropertyPx("maxHeight", Window.getClientHeight() - 150);
         final VerticalPanel verticalPanel = new VerticalPanel();
-        verticalPanel.add(scrollPanel);
+        verticalPanel.add(instructionsScrollPanel);
         final Button closeButton = new Button(closeButtonLabel);
         verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
         verticalPanel.add(closeButton);
@@ -361,15 +365,16 @@ public class ColourPickerCanvasView extends AbstractView {
         closeButton.addTouchStartHandler(instructionsSingleShotEventListner1);
         closeButton.addTouchMoveHandler(instructionsSingleShotEventListner1);
         closeButton.addTouchEndHandler(instructionsSingleShotEventListner1);
-//        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
-//
-//            @Override
-//            public void onClose(CloseEvent<PopupPanel> event) {
+        popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
+
+            @Override
+            public void onClose(CloseEvent<PopupPanel> event) {
+                instructionsScrollPanel = null;
 //                instructionsSingleShotEventListner1.eventFired();
-////                infoButton.setEnabled(true);
-////                resizeView();
-//            }
-//        });
+//                infoButton.setEnabled(true);
+//                resizeView();
+            }
+        });
         popupPanel.center();
     }
 
@@ -441,6 +446,9 @@ public class ColourPickerCanvasView extends AbstractView {
             outerGrid.setWidget(1, 0, innerGrid);
         }
         setStyleByWidth(width);
+        if (instructionsScrollPanel != null) {
+            instructionsScrollPanel.getElement().getStyle().setPropertyPx("maxHeight", height - 150);
+        }
     }
 
     @Override
