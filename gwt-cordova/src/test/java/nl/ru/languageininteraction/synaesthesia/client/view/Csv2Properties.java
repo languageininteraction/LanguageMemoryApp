@@ -112,27 +112,27 @@ public class Csv2Properties {
                     writerNL.write("\n");
                 } else {
                     String key = lineString.split("=")[0];
-                    writer.write(key);
-                    writer.write(PROPERTY_SEPARATOR);
-                    writerDE.write(key);
-                    writerDE.write(PROPERTY_SEPARATOR);
-                    writerNL.write(key);
-                    writerNL.write(PROPERTY_SEPARATOR);
                     final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : escapePropertiesString(properties.getProperty(key, ""));
                     if (!escapedStringEN.isEmpty()) {
+                        writer.write(key);
+                        writer.write(PROPERTY_SEPARATOR);
                         writer.write(escapedStringEN);
+                        writer.write("\n");
                     }
-                    writer.write("\n");
                     final String escapedStringDE = (translationsDE.containsKey(key)) ? escapeString(translationsDE.get(key)) : escapePropertiesString(properties_de.getProperty(key, ""));
                     if (!escapedStringDE.isEmpty()) {
+                        writerDE.write(key);
+                        writerDE.write(PROPERTY_SEPARATOR);
                         writerDE.write(escapedStringDE);
+                        writerDE.write("\n");
                     }
-                    writerDE.write("\n");
                     final String escapedStringNL = (translationsNL.containsKey(key)) ? escapeString(translationsNL.get(key)) : escapePropertiesString(properties_nl.getProperty(key, ""));
                     if (!escapedStringNL.isEmpty()) {
+                        writerNL.write(key);
+                        writerNL.write(PROPERTY_SEPARATOR);
                         writerNL.write(escapedStringNL);
+                        writerNL.write("\n");
                     }
-                    writerNL.write("\n");
                 }
             }
             writer.close();
