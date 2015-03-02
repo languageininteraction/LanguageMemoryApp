@@ -52,14 +52,17 @@ public class ScorePageView extends AbstractSvgView {
 
     @Override
     protected void performClick(final Element targetElement) {
-
-        final Element parentElement = targetElement.getParentElement();
+        Element parentElement = targetElement.getParentElement();
+        while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
+            parentElement = parentElement.getParentElement();
+        }
         final String elementId = parentElement.getId();
         label.setText(elementId);
+        setUserName(elementId);
         if (!elementId.isEmpty()) {
-            for (SvgTextElements svgTextElement : SvgTextElements.values()) {
-                scorePageBuilder.setLabel(svgTextElement, svgTextElement.name());
-            }
+//            for (SvgTextElements svgTextElement : SvgTextElements.values()) {
+//                scorePageBuilder.setLabel(svgTextElement, svgTextElement.name());
+//            }
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
             switch (svgGroup) {
                 case ContinueWithoutSharing:
@@ -89,9 +92,10 @@ public class ScorePageView extends AbstractSvgView {
     }
 
     public void setUserLevel(int choicePerRound) {
-        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
-        String formattedChoiceCount = decimalFormat.format(choicePerRound);
-        scorePageBuilder.setLabel(SvgTextElements.tspan4237, formattedChoiceCount);
+//        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
+//        String formattedChoiceCount = decimalFormat.format(choicePerRound);
+        // todo: the choice / level appears not to be in the new SVG files, check and discard or re add if required.
+//        scorePageBuilder.setLabel(SvgTextElements.tspan4237, formattedChoiceCount);
     }
 
     public void setEndangeredCount(int endangeredCount) {
