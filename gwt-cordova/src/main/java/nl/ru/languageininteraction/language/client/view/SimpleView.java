@@ -29,7 +29,6 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.view.MenuButton;
 
 /**
  * @since Oct 7, 2014 2:06:28 PM (creation date)
