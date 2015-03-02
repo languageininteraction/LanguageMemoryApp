@@ -50,7 +50,6 @@ public class UserNamePresenter extends MetadataPresenter {
         
         final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
         if (userNameValue != null && !userNameValue.isEmpty()) {
-            ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));
             ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
                 @Override
@@ -65,6 +64,7 @@ public class UserNamePresenter extends MetadataPresenter {
                     saveEventListner.eventFired(button);
                 }
             });
+            ((MetadataView) simpleView).addText(messages.userNameScreenExistingUserText(userNameValue));
         }
         ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addPadding();
@@ -96,7 +96,7 @@ public class UserNamePresenter extends MetadataPresenter {
     }
 
     @Override
-    protected void saveFields() throws MetadataFieldException {
+    protected void saveFields() {
         if (isNewUser) {
             userResults.clearResults();
             userResults.clearMetadata();

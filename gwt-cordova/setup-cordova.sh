@@ -20,14 +20,17 @@ cordova plugin add https://github.com/GetJobber/cordova-plugin-keyboard.git
 
 splashResourcesDir="./platforms/ios/LanguageMemory/Resources/splash/"
 echo $splashResourcesDir
-splashImage="images/splash.png" #"images/splash.gif" "images/icon.jpg"
+splashImage="images/splash.png" #"images/splash.gif" 
+iconResourcesDir="./platforms/ios/SynQuiz/Resources/icons/"
+iconImage="images/icon.png"
+
 echo $splashImage
 #file ./platforms/ios/LanguageMemory/Resources/splash/*
 
 echo "making 9 patch splash images"
-convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
+#convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
 #draw9patch platforms/splash320x320.9.png
-convert -background none images/LiI_logo_rgb.jpg -resize 150x150 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,32 0,32" -draw "line 152,0 152,0" platforms/splash150x150.9.png
+#convert -background none images/LiI_logo_rgb.jpg -resize 150x150 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,32 0,32" -draw "line 152,0 152,0" platforms/splash150x150.9.png
 #draw9patch platforms/splash150x150.9.png
 
 echo "making iOS splash images"
@@ -72,6 +75,24 @@ cordova build -release
 #cordova emulate ios --target="iPad"
 #cordova emulate ios --target="iPhone"
 #cordova emulate android 
+
+echo "make the iOS icons"
+convert -resize 180x180 -quality 100 $iconImage $iconResourcesDir/icon-60@3x.png
+convert -resize 60x60 -quality 100 $iconImage $iconResourcesDir/icon-60.png
+convert -resize 120x120 -quality 100 $iconImage $iconResourcesDir/icon-60@2x.png
+convert -resize 76x76 -quality 100 $iconImage $iconResourcesDir/icon-76.png
+convert -resize 152x152 -quality 100 $iconImage $iconResourcesDir/icon-76@2x.png
+convert -resize 180x180 -quality 100 $iconImage $iconResourcesDir/icon-60@3x.png
+convert -resize 40x40 -quality 100 $iconImage $iconResourcesDir/icon-40.png
+convert -resize 80x80 -quality 100 $iconImage $iconResourcesDir/icon-40@2x.png
+convert -resize 57x57 -quality 100 $iconImage $iconResourcesDir/icon.png
+convert -resize 114x114 -quality 100 $iconImage $iconResourcesDir/icon@2x.png
+convert -resize 72x72 -quality 100 $iconImage $iconResourcesDir/icon-72.png
+convert -resize 144x144 -quality 100 $iconImage $iconResourcesDir/icon-72@2x.png
+convert -resize 29x29 -quality 100 $iconImage $iconResourcesDir/icon-small.png
+convert -resize 58x58 -quality 100 $iconImage $iconResourcesDir/icon-small@2x.png
+convert -resize 50x50 -quality 100 $iconImage $iconResourcesDir/icon-50.png
+convert -resize 100x100 -quality 100 $iconImage $iconResourcesDir/icon-50@2x.png
 
 # list the schemes available 
 #xcodebuild -list

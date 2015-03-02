@@ -27,11 +27,17 @@ import java.util.Objects;
 public class StimuliGroup {
 
     private final String groupLabel;
+    private final String postName;
     private final List<Stimulus> stimuli;
 
-    public StimuliGroup(String groupLabel, List<Stimulus> stimuli) {
+    public StimuliGroup(String groupLabel, String postName, List<Stimulus> stimuli) {
         this.groupLabel = groupLabel;
+        this.postName = postName;
         this.stimuli = stimuli;
+    }
+
+    public String getPostName() {
+        return postName;
     }
 
     public List<Stimulus> getStimuli() {

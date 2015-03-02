@@ -23,7 +23,7 @@ package nl.ru.languageininteraction.synaesthesia.client.registration;
  */
 public interface RegistrationListener {
 
-    void registrationFailed(Throwable exception);
+    void registrationFailed(RegistrationException exception);
 
     void registrationComplete();
 }

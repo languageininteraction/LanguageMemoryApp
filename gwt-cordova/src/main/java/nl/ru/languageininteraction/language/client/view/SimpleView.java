@@ -17,12 +17,9 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -43,12 +40,13 @@ public class SimpleView extends AbstractView {
         menu, back, next
     }
     private final HorizontalPanel footerPanel;
-    private final HorizontalPanel headerPanel;
+    private final Grid headerPanel;
     private final VerticalPanel borderedContentPanel;
     private final ScrollPanel scrollPanel;
 
     public SimpleView() {
-        headerPanel = new HorizontalPanel();
+        headerPanel = new Grid(1, 3);
+        headerPanel.setWidth("100%");
         headerPanel.setStylePrimaryName("headerPanel");
         footerPanel = new HorizontalPanel();
         borderedContentPanel = new VerticalPanel();
@@ -75,44 +73,12 @@ public class SimpleView extends AbstractView {
     }
 
     public void addTitle(String label, final PresenterEventListner presenterListerner) {
-        final Label headerIcon = new Label();
-        headerIcon.addStyleName("headerIcon");
-
         final Label headerLabel = new Label(label);
         headerLabel.setStylePrimaryName("headerLabel");
-        if (presenterListerner != null) {
-            final Label headerArrow = new Label();
-            headerArrow.addStyleName("headerArrow");
-            headerPanel.add(headerArrow);
-
-            final Label headerButton = new Label(presenterListerner.getLabel());
-            headerButton.addStyleName("headerButton");
-            headerPanel.add(headerButton);
-            final ClickHandler backHandler = new ClickHandler() {
-
-                @Override
-                public void onClick(ClickEvent event) {
-                    event.preventDefault();
-                    presenterListerner.eventFired(null);
-                }
-            };
-            headerArrow.addClickHandler(backHandler);
-            headerButton.addClickHandler(backHandler);
-            headerIcon.addClickHandler(backHandler);
-            final TouchEndHandler touchEndHandler = new TouchEndHandler() {
-
-                @Override
-                public void onTouchEnd(TouchEndEvent event) {
-                    event.preventDefault();
-                    presenterListerner.eventFired(null);
-                }
-            };
-            headerArrow.addTouchEndHandler(touchEndHandler);
-            headerButton.addTouchEndHandler(touchEndHandler);
-            headerIcon.addTouchEndHandler(touchEndHandler);
-        }
-        headerPanel.add(headerIcon);
-        headerPanel.add(headerLabel);
+        headerPanel.setWidget(0, 0, new MenuButton(presenterListerner));
+        headerPanel.setWidget(0, 1, headerLabel);
+        headerPanel.setStylePrimaryName("headerPanel");
+        headerPanel.getColumnFormatter().setWidth(1, "100%");
     }
 
     public Button setButton(ButtonType buttonType, final PresenterEventListner presenterListerner) {
@@ -121,27 +87,26 @@ public class SimpleView extends AbstractView {
         nextButton.addStyleName(buttonType.name() + "Button");
         nextButton.setEnabled(true);
         footerPanel.add(nextButton);
-        nextButton.addTouchEndHandler(new TouchEndHandler() {
+        SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
+            protected void singleShotFired() {
+                if (nextButton.isEnabled()) {
+                    presenterListerner.eventFired(nextButton);
+                } else {
+                    resetSingleShot();
+                }
             }
-        });
-        nextButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
-            }
-        });
+        };
+        nextButton.addTouchStartHandler(singleShotEventListner);
+        nextButton.addTouchMoveHandler(singleShotEventListner);
+        nextButton.addTouchEndHandler(singleShotEventListner);
+        nextButton.addClickHandler(singleShotEventListner);
         return nextButton;
     }
 
-    public void removeButton(Button button) {
-        footerPanel.remove(button);
+    public void removeFooterButtons() {
+        footerPanel.clear();
         footerPanel.setVisible(footerPanel.getWidgetCount() > 0);
     }
 
@@ -158,6 +123,7 @@ public class SimpleView extends AbstractView {
         } else {
             scrollPanel.setHeight(height - HEADER_SIZE + "px");
         }
+        setStyleByWidth(width);
     }
     protected static final int HEADER_SIZE = 50;
 }

@@ -26,6 +26,7 @@
             <directory>${project.build.directory}/${project.build.finalName}</directory>
             <includes>
                 <include>/images/icon.png</include>
+                <include>/images/LIL-logo-diap.png</include>
                 <include>*.*</include>
                 <include>/LanguageMemory/**</include>
             </includes>  

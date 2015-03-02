@@ -10,7 +10,7 @@
     width: 0; 
     height: 0; 
     position: relative;
-    top: 9px;
+    top: 4px;
     left:5px;
     border-top: 15px solid transparent;
     border-bottom: 17px solid transparent; 
@@ -25,7 +25,7 @@
 }
 .gwt-Label.headerButton {
     position: relative;
-    top: 5px;
+    /*top: 5px;*/
     padding: 5px;
     margin-left: 0px;
     display: block;
@@ -54,7 +54,7 @@
 }
 
 .headerLabel {
-    padding: 10px 10px;
+    padding: 8px 10px;
     font-size: 30px;
 }
 
@@ -73,15 +73,16 @@
     right:0
 }
 
+.stimulusHelpPanel .gwt-Button,
 .gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
-    padding:  5px 10px;
+    /*padding:  5px;*/
     /*margin: 0 10px 10px 0;*/
     color: black;
     text-decoration: none;
-    border-color: rgb(111,111,111);;
-    border-radius: 5px;
+    border: none;
+    border-radius: 15px;
     outline: none;
 }
 .gwt-CheckBox.optionCheckBox input {    
@@ -106,6 +107,7 @@
     width: 100%;
 }
 
+.stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 #widgetTag, .stimulusScreen, .menuTable, .gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     /* prevent text selection on the buttons */
     -webkit-touch-callout: none;
@@ -122,9 +124,11 @@
     border: none;
 }
 
-/*.gwt-Button.nextButton:disabled, .gwt-Button.menuButton:disabled, .gwt-Button.optionButton:disabled, .gwt-Label.headerButton:disabled {
+/*.gwt-Button.nextButton:disabled,*/ 
+/*, .gwt-Button.optionButton:disabled, .gwt-Label.headerButton:disabled {*/
+.gwt-Button.menuButton:hover:disabled {
     border: none;
-}*/
+}
 
 /*.gwt-Button.nextButton:hover, .gwt-Button.menuButton:hover, .gwt-Button.optionButton:hover, .gwt-Label.headerButton:hover, */
 .gwt-Button.nextButton:active, .gwt-Button.menuButton:active, .gwt-Button.optionButton:active, .gwt-Label.headerButton:active {
@@ -173,8 +177,8 @@
 .gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton {
     border-radius: 25px;
     padding: 5px 10px;
-    height: 51px;
-    width: 51px;
+    height: 42px;
+    width: 42px;
 }
 .gwt-Button.stimulusQuitButton {
     float: right;
@@ -183,10 +187,11 @@
     float: left;
 }
 
-.contentPanel {
-    border-top-color: white;
-    border-top-width: 1px;
-    border-top-style: solid;
+.headerPanel {
+    border-bottom-color: white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 100%;
 }
 
 .contentBody, .menuOuter {
@@ -223,11 +228,18 @@ canvas {
 }
 
 .stimulusHelpPanel {
-    border: rgb(111,111,111); 
+    border: none; 
     background: white;
-    border-width: 3px;
-    border-style: solid;
+    margin: 10px;
+    border-radius: 15px;
+    padding: 10px 10px 10px 10px;
+}
 
+.stimulusHelpPanel .gwt-Button {
+    background: darkgrey;
+    color: white;
+    padding: 10px 10px 10px 10px;
+    margin-left: auto;
 }
 
 .stimulusPanel {    
@@ -247,6 +259,8 @@ canvas {
     outline: none;
     border-width: 1px;
     border-style: solid;
+    width: 100%;
+    margin-bottom: 10px;
 }
 .gwt-HTML, .resultsTablePanel, .metadataTable, .menuTable, .gwt-CheckBox, .pageLink {
 }
@@ -255,14 +269,19 @@ canvas {
 }
 .gwt-Label.stimulusProgressLabel {
     text-align: center;
-    /*width: 100%;*/
+    width: 100%;
 }
 
 .metadataError {
     background: rgb(246,170,139);
 }
 
-.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK,
+.narrowWidth {
+    /*background: green;*/
+}
+
+table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
+.gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
     /*    
@@ -272,18 +291,33 @@ canvas {
     */
 }
 
+/*.menuTable .gwt-HTML,*/
+.menuTable.gwt-HTML .highlightedText {
+    text-align: center;
+}
+
 .gwt-HTML.highlightedText {
     font-weight: bold; 
+    text-align: center;
     /*text-transform: uppercase;*/
 }
 
+.gwt-HTML a, .gwt-HTML a:visited, .gwt-HTML a:hover,
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody {
     color:rgb(255,255,255);  
     line-height: 20pt;
 } 
-.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, 
+
+.metadataErrorMessage {
+    color:rgb(246,170,139);
+    line-height: 20pt;
+} 
+
+.stimulusHelpText,
+table#screenExample td, .stimulusHelpPanel .gwt-Button,
+.gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
-{  
+{
     font-family: Calibri, "Open Sans", "Droid Sans", Arial, Candara, Segoe, "Segoe UI", Optima, sans-serif;
 }
 
@@ -295,6 +329,58 @@ canvas {
     background: -moz-linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(rgb(0,158,200), rgb(142,207,230)); /* Standard syntax (must be last) */
 }
+
+/* example stimulus screen table */
+table#screenExample td {
+    font-weight: bold; 
+    text-align: center;
+}
+#screenExample {
+    margin-left: auto;
+    margin-right: auto; 
+}
+#screenExamplePicker {
+    height: 90px;
+    width: 90px;
+    background: -webkit-linear-gradient(red, black);
+    background: -o-linear-gradient(red, black);
+    background: -moz-linear-gradient(red, black);
+    background: linear-gradient(red, black);
+}
+
+#screenExampleHue {
+    height: 90px;
+    width: 10px;
+    background: -webkit-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: -o-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: -moz-linear-gradient(top,red,orange,yellow,green,blue,indigo,violet);
+    background: linear-gradient(to bottom, red,orange,yellow,green,blue,indigo,violet); 
+}
+
+#screenExampleStimulus {
+    height: 20px;
+    width: 50px;
+    background:lightgray;
+}
+
+#screenExampleSelection {
+    height: 20px;
+    width: 50px;
+    background:lightgray;
+}
+
+#screenExampleNone {
+    height: 10px;
+    width: 50px;
+    background:darkgray;
+}
+
+#screenExampleSubmit {
+    height: 10px;
+    width: 50px;
+    background:darkgray;
+}
+/* end example stimulus screen table */
 
 /*
 Language in Interaction uses a fixed color sequence. 

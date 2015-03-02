@@ -15,31 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.presenter;
+package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import nl.ru.languageininteraction.language.client.listener.AppEventListner;
-import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.language.client.view.SimpleView;
+import nl.ru.languageininteraction.synaesthesia.client.listener.AppEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.view.SimpleView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class InstructionsPresenter extends AbstractPresenter implements Presenter {
+public class RegistrationFailedPresenter extends AbstractPresenter implements Presenter {
 
-    public InstructionsPresenter(RootLayoutPanel widgetTag) {
-        super(widgetTag, new ComplexView());
+    public RegistrationFailedPresenter(RootLayoutPanel widgetTag) {
+        super(widgetTag, new SimpleView());
     }
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.instructionscreenTitle(), titleBarListner);
+        simpleView.addTitle(messages.registrationFailedTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        ((ComplexView) simpleView).addText(messages.instructionscreentext());
-        ((ComplexView) simpleView).addHtmlText(messages.instructionscreenExample());
+        simpleView.setDisplayText(messages.registrationFailedText());
     }
 }

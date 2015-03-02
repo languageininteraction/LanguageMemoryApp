@@ -54,5 +54,13 @@ public abstract class AbstractView extends DockLayoutPanel {
         parentResized(height, width, "px");
     }
 
+    public void setStyleByWidth(int width) {
+        if (width < 500) {
+            this.setStylePrimaryName("narrowWidth");
+        } else {
+            this.setStylePrimaryName("normalWidth");
+        }
+    }
+
     abstract protected void parentResized(int height, int width, String units);
 }

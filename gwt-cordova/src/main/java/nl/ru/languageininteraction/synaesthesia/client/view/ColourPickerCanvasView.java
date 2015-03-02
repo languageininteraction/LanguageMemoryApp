@@ -41,6 +41,8 @@ import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -66,7 +68,6 @@ public class ColourPickerCanvasView extends AbstractView {
     private final VerticalPanel stimulusPanel;
     private final VerticalPanel selectedColourPanel;
     private final Button infoButton;
-    private final Button quitButton;
     private Button acceptButton = null;
     private Button rejectButton = null;
     private final Label progressLabel;
@@ -75,11 +76,12 @@ public class ColourPickerCanvasView extends AbstractView {
     private String currentHueCss;
     private final int stimulusTextHeight;
     private final int buttonHeight;
-    private final int buttonTextHeight;
+//    private final int buttonTextHeight;
     private final int buttonWidth;
     private final int selectedColourPanelHeight;
     private final int selectedColourPanelWidth;
     private ColourData selectedColourData = null;
+    private ScrollPanel instructionsScrollPanel = null;
 
     public ColourPickerCanvasView() throws CanvasError {
         setStylePrimaryName("stimulusScreen");
@@ -89,7 +91,7 @@ public class ColourPickerCanvasView extends AbstractView {
         stimulusTextHeight = (int) (minClient * 0.08);
         selectedColourPanelHeight = (int) (minClient * 0.25);
         selectedColourPanelWidth = (int) (minClient * 0.47);
-        buttonTextHeight = (int) (minClient * 0.05);
+//        buttonTextHeight = (int) (minClient * 0.05);
         buttonHeight = (int) (minClient * 0.1);
         buttonWidth = (int) (minClient * 0.47);
         stimulusPanel = new VerticalPanel();
@@ -98,14 +100,11 @@ public class ColourPickerCanvasView extends AbstractView {
         outerGrid = new Grid(2, 2);
         innerGrid = new Grid(6, 2);
         pickerPanel = new Grid(1, 2);
-        progressPanel = new Grid(1, 2);
+        progressPanel = new Grid(1, 3);
         progressPanel.setWidth("100%");
         infoButton = new Button();
         infoButton.addStyleName("stimulusHelpButton");
-        infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
-        quitButton = new Button();
-        quitButton.addStyleName("stimulusQuitButton");
-        quitButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
+//        infoButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         selectedColourPanel = new VerticalPanel();
         progressLabel = new Label();
         progressLabel.addStyleName("stimulusProgressLabel");
@@ -191,7 +190,11 @@ public class ColourPickerCanvasView extends AbstractView {
                 }
             });
         }
-        outerGrid.setWidget(0, 0, pickerPanel);
+        progressPanel.setWidget(0, 1, progressLabel);
+        progressPanel.setWidget(0, 2, infoButton);
+        progressPanel.setStylePrimaryName("headerPanel");
+        progressPanel.getColumnFormatter().setWidth(1, "100%");
+        addNorth(progressPanel, 50);
         add(outerGrid);
     }
 
@@ -314,75 +317,65 @@ public class ColourPickerCanvasView extends AbstractView {
     }
 
     public void setQuitButton(final PresenterEventListner quitListerner) {
-        quitButton.setText(quitListerner.getLabel());
-        quitButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                quitListerner.eventFired(quitButton);
-            }
-        });
-        quitButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                quitListerner.eventFired(quitButton);
-            }
-        });
+        progressPanel.setWidget(0, 0, new MenuButton(quitListerner));
     }
 
-    public void setInstructions(final String instructions, final String infoButtonChar) {
-        final Label instructionsLabel = new Label(instructions);
-        final PopupPanel popupPanel = new PopupPanel(true);
+    public void setInstructions(final String instructions, final String infoButtonChar, final String closeButtonLabel) {
+        final HTML instructionsLabel = new HTML(instructions);
+        final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
+        popupPanel.setGlassEnabled(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
         instructionsLabel.setStylePrimaryName("stimulusHelpText");
-        popupPanel.setWidget(new ScrollPanel(instructionsLabel));
+        instructionsScrollPanel = new ScrollPanel(instructionsLabel);
+        instructionsScrollPanel.getElement().getStyle().setPropertyPx("maxHeight", Window.getClientHeight() - 150);
+        final VerticalPanel verticalPanel = new VerticalPanel();
+        verticalPanel.add(instructionsScrollPanel);
+        final Button closeButton = new Button(closeButtonLabel);
+        verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        verticalPanel.add(closeButton);
+        popupPanel.setWidget(verticalPanel);
         infoButton.setText(infoButtonChar);
+        final SingleShotEventListner infoSingleShotEventListner = new SingleShotEventListner() {
+
+            @Override
+            protected void singleShotFired() {
+                if (infoButton.isEnabled()) {
+//                    outerGrid.clear(); // users found that hiding the picker screen made it hard to understand the instruction text
+                    popupPanel.center();
+                    infoButton.setEnabled(false);
+                    resetSingleShot();
+                }
+            }
+        };
+        infoButton.addClickHandler(infoSingleShotEventListner);
+        infoButton.addTouchStartHandler(infoSingleShotEventListner);
+        infoButton.addTouchMoveHandler(infoSingleShotEventListner);
+        infoButton.addTouchEndHandler(infoSingleShotEventListner);
+        final SingleShotEventListner instructionsSingleShotEventListner1 = new SingleShotEventListner() {
+
+            @Override
+            protected void singleShotFired() {
+                popupPanel.hide();
+                resizeView();
+                infoButton.setEnabled(true);
+                resetSingleShot();
+            }
+        };
+        closeButton.addClickHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchStartHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchMoveHandler(instructionsSingleShotEventListner1);
+        closeButton.addTouchEndHandler(instructionsSingleShotEventListner1);
         popupPanel.addCloseHandler(new CloseHandler<PopupPanel>() {
 
             @Override
             public void onClose(CloseEvent<PopupPanel> event) {
-                infoButton.setEnabled(true);
+                instructionsScrollPanel = null;
+//                instructionsSingleShotEventListner1.eventFired();
+//                infoButton.setEnabled(true);
+//                resizeView();
             }
         });
-        infoButton.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                popupPanel.center();
-                infoButton.setEnabled(false);
-            }
-        });
-        infoButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                popupPanel.center();
-                infoButton.setEnabled(false);
-            }
-        });
-        instructionsLabel.addClickHandler(new ClickHandler() {
-
-            @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                popupPanel.hide();
-                infoButton.setEnabled(true);
-            }
-        });
-        instructionsLabel.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                popupPanel.hide();
-                infoButton.setEnabled(true);
-            }
-        });
+        popupPanel.center();
     }
 
     public void setStimulus(Stimulus stimulus, String progress) {
@@ -409,31 +402,28 @@ public class ColourPickerCanvasView extends AbstractView {
         nextButton.setHeight(buttonHeight + "px");
         nextButton.setWidth(buttonWidth + "px");
         nextButton.addStyleName("stimulusButton");
-        nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
+//        nextButton.getElement().getStyle().setFontSize(buttonTextHeight, Unit.PX);
         nextButton.setEnabled(true);
-        nextButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
+            protected void singleShotFired() {
                 presenterListerner.eventFired(nextButton);
+                resetSingleShot();
             }
-        });
-        nextButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                presenterListerner.eventFired(nextButton);
-            }
-        });
+        };
+        nextButton.addClickHandler(singleShotEventListner);
+        nextButton.addTouchStartHandler(singleShotEventListner);
+        nextButton.addTouchMoveHandler(singleShotEventListner);
+        nextButton.addTouchEndHandler(singleShotEventListner);
         return nextButton;
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
+        outerGrid.setWidget(0, 0, pickerPanel);
         if (height < width) {
-            int resizedHeight = (int) (height - 50);
+            int resizedHeight = (int) (height - 80);
             int resizedBarWidth = (int) (resizedHeight * 0.1);
             int resizedWidth = (int) (width - 50) - resizedBarWidth - buttonWidth - buttonHeight; // buttonHeight is used to allow for the info button
             sizeAndPaintCanvases(resizedHeight, resizedWidth, resizedBarWidth);
@@ -442,10 +432,6 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(2, 0, selectedColourPanel);
             innerGrid.setWidget(3, 0, acceptButton);
-            innerGrid.setWidget(4, 0, progressLabel);
-            progressPanel.setWidget(0, 0, infoButton);
-            progressPanel.setWidget(0, 1, quitButton);
-            innerGrid.setWidget(5, 0, progressPanel);
             outerGrid.setWidget(0, 1, innerGrid);
         } else {
             int resizedWidth = (int) (width * 0.9 - 50);
@@ -457,11 +443,15 @@ public class ColourPickerCanvasView extends AbstractView {
             innerGrid.setWidget(1, 0, rejectButton);
             innerGrid.setWidget(0, 1, selectedColourPanel);
             innerGrid.setWidget(1, 1, acceptButton);
-            progressPanel.setWidget(0, 1, progressLabel);
-            innerGrid.setWidget(2, 0, progressPanel);
-            innerGrid.setWidget(2, 1, quitButton);
-            progressPanel.setWidget(0, 0, infoButton);
             outerGrid.setWidget(1, 0, innerGrid);
         }
+        setStyleByWidth(width);
+        if (instructionsScrollPanel != null) {
+            instructionsScrollPanel.getElement().getStyle().setPropertyPx("maxHeight", height - 150);
+        }
+    }
+
+    @Override
+    public void setStyleByWidth(int width) {
     }
 }

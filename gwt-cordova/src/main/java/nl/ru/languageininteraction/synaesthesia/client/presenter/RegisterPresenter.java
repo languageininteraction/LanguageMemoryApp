@@ -17,12 +17,7 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
-import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
-import nl.ru.languageininteraction.language.client.presenter.Presenter;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -99,26 +94,21 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
         final Button registerButton = addRegisterButton(appEventListner);
         agreementCheckBox.setValue(false);
         registerButton.setEnabled(false);
-        agreementCheckBox.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner checkBoxEventListner = new SingleShotEventListner() {
+            private boolean agreed = false;
 
             @Override
-            public void onClick(ClickEvent event) {
-//                event.preventDefault();
-//                event.stopPropagation();
-                // on chrome the check box is changed before this code is reached
-//                agreementCheckBox.setValue(!registerButton.isEnabled());
-                registerButton.setEnabled(agreementCheckBox.getValue());
+            protected void singleShotFired() {
+                agreed = !agreed;
+                agreementCheckBox.setValue(agreed);
+                registerButton.setEnabled(agreed);
+                resetSingleShot();
             }
-        });
-        agreementCheckBox.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                agreementCheckBox.setValue(!agreementCheckBox.getValue());
-                registerButton.setEnabled(agreementCheckBox.getValue());
-            }
-        });
+        };
+        agreementCheckBox.addClickHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchStartHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchMoveHandler(checkBoxEventListner);
+        agreementCheckBox.addTouchEndHandler(checkBoxEventListner);
     }
 
     private Button addRegisterButton(final AppEventListner appEventListner) {
@@ -127,34 +117,30 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
             @Override
             public void eventFired(Button button) {
                 ((RegisterView) simpleView).clearGui();
-                simpleView.removeButton(button);
+                simpleView.removeFooterButtons();
                 simpleView.setDisplayText("Connecting");
                 final RegistrationService registrationService = new RegistrationService();
                 registrationService.submitRegistration(userResults, new RegistrationListener() {
 
                     @Override
-                    public void registrationFailed(Throwable exception) {
-                        simpleView.setDisplayText("Registration failed. " + exception.getMessage());
-                        addRegisterButton(appEventListner);
+                    public void registrationFailed(RegistrationException exception) {
+                        switch (exception.getErrorType()) {
+                            case buildererror:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailedbuildererror);
+                                break;
+                            case connectionerror:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailedconnectionerror);
+                                break;
+                            case non202response:
+                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationfailednon202);
+                                break;
+                        }
                     }
 
                     @Override
                     public void registrationComplete() {
-                        simpleView.setDisplayText("Registration complete.");
                         userResults.clearResults();
-                        simpleView.setButton(SimpleView.ButtonType.next, new PresenterEventListner() {
-
-                            @Override
-                            public void eventFired(Button button) {
-                                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
-                            }
-
-                            @Override
-                            public String getLabel() {
-                                return AppEventListner.ApplicationState.version.label;
-                            }
-
-                        });
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.registrationcomplete);
                     }
                 }, messages.reportDateFormat());
             }

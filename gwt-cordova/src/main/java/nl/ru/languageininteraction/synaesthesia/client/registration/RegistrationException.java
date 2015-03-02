@@ -23,7 +23,27 @@ package nl.ru.languageininteraction.synaesthesia.client.registration;
  */
 public class RegistrationException extends Exception {
 
-    public RegistrationException(String message) {
-        super(message);
+    private final ErrorType errorType;
+
+    public enum ErrorType {
+
+        non202response,
+        buildererror,
+        connectionerror
     }
+
+    public RegistrationException(ErrorType errorType, Throwable cause) {
+        super(cause);
+        this.errorType = errorType;
+    }
+
+    public RegistrationException(ErrorType errorType, String message) {
+        super(message);
+        this.errorType = errorType;
+    }
+
+    public ErrorType getErrorType() {
+        return errorType;
+    }
+
 }

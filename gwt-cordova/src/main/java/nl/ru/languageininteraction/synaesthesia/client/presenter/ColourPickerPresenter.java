@@ -113,7 +113,7 @@ public class ColourPickerPresenter implements Presenter {
                 return messages.stimulusscreenrejectbutton();
             }
         });
-        colourPickerCanvasView.setInstructions(messages.instructionscreentext(), messages.helpButtonChar());
+        colourPickerCanvasView.setInstructions(messages.instructionscreentext(), messages.helpButtonChar(),messages.instructionscreenbutton());
         colourPickerCanvasView.setQuitButton(new PresenterEventListner() {
 
             @Override
@@ -123,6 +123,8 @@ public class ColourPickerPresenter implements Presenter {
 
             @Override
             public void eventFired(Button button) {
+                // delete the uncomplete test results
+                userResults.deleteStimuliGroupResults(stimuliGroup);
                 appEventListner.requestApplicationState(prevState);
             }
         });

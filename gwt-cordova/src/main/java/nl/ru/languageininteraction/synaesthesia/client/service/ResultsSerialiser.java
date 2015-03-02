@@ -31,22 +31,34 @@ public abstract class ResultsSerialiser {
 //    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     public String serialise(UserResults userResults, String postName_email) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
-            stringBuilder.append(userResults.getMetadataValue(postName_email));
-            stringBuilder.append("\t");
-            stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
-            stringBuilder.append("_");
-            stringBuilder.append(roundData.getChosenAnswer().getSampleIndex());
-            stringBuilder.append("\t");
-            stringBuilder.append(roundData.getCorrectSample().getLanguageSample().getIsoCode());
-            stringBuilder.append("_");
-            stringBuilder.append(roundData.getCorrectSample().getSampleIndex());
-            stringBuilder.append("\t");
-            for (RoundSample roundSample : roundData.getRoundChoices()) {
-                stringBuilder.append(roundSample.getLanguageSample().getIsoCode());
-                stringBuilder.append("_");
-                stringBuilder.append(roundSample.getSampleIndex());
-                stringBuilder.append(",");
+        for (StimuliGroup stimuliGroup : userResults.getStimuliGroups()) {
+            StimulusResponseGroup responseGroup = userResults.getStimulusResponseGroup(stimuliGroup);
+            for (Stimulus stimulus : stimuliGroup.getStimuli()) {
+                for (StimulusResponse response : responseGroup.getResults(stimulus)) {
+                    stringBuilder.append(userResults.getMetadataValue(postName_email));
+                    stringBuilder.append("\t");
+                    stringBuilder.append(stimuliGroup.getPostName());
+                    stringBuilder.append("\t");
+                    stringBuilder.append(stimulus.getValue());
+                    stringBuilder.append("\t");
+                    stringBuilder.append(formatDate(response.getTime()));
+                    stringBuilder.append("\t");
+                    stringBuilder.append(response.getDurationMs());
+                    stringBuilder.append("\t");
+                    final ColourData colour = response.getColour();
+                    if (colour != null) {
+                        stringBuilder.append(colour.getHexValue());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getRed());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getGreen());
+                        stringBuilder.append("\t");
+                        stringBuilder.append(colour.getBlue());
+                    } else {
+                        stringBuilder.append("\t\t\t");
+                    }
+                    stringBuilder.append("\n");
+                }
             }
             stringBuilder.append("\t");
             stringBuilder.append(formatDate(roundData.getTime()));

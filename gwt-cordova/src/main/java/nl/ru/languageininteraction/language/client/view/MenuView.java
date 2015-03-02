@@ -17,14 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.TouchEndEvent;
-import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import java.util.ArrayList;
@@ -36,10 +32,20 @@ import nl.ru.languageininteraction.language.client.listener.PresenterEventListne
  */
 public class MenuView extends ComplexView {
 
-    final private ArrayList<Button> buttonsArray = new ArrayList<>();
+//    final private HashMap<FlexTable, ArrayList<IsWidget>> tableMap = new HashMap<>();
     private FlexTable flexTable = null;
+//    final FlexTable outerTable;
 
-    public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
+//    public MenuView() {
+//        outerTable = new FlexTable();
+//        outerPanel.add(outerTable);
+//    }
+    public void addSeparateMenuPanel() {
+        flexTable = null;
+        checkFlexTableExists();
+    }
+
+    private void checkFlexTableExists() {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("menuTable");
@@ -47,55 +53,90 @@ public class MenuView extends ComplexView {
             outerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
             outerPanel.add(flexTable);
         }
+    }
+
+    public void addMenuItem(final PresenterEventListner menuItemListerner, final boolean menuEnabled) {
+        checkFlexTableExists();
         final Button menuButton = new Button(new SafeHtmlBuilder().appendEscapedLines(menuItemListerner.getLabel()).toSafeHtml());
-        buttonsArray.add(menuButton);
+//        tableMap.get(flexTable).add(menuButton);
         menuButton.addStyleName("menuButton");
         menuButton.setEnabled(menuEnabled);
-        menuButton.addClickHandler(new ClickHandler() {
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
 
             @Override
-            public void onClick(ClickEvent event) {
-                event.preventDefault();
-                menuItemListerner.eventFired(menuButton);
+            protected void singleShotFired() {
+                if (menuButton.isEnabled()) {
+                    menuItemListerner.eventFired(menuButton);
+                }
             }
-        });
-        menuButton.addTouchEndHandler(new TouchEndHandler() {
-
-            @Override
-            public void onTouchEnd(TouchEndEvent event) {
-                event.preventDefault();
-                menuItemListerner.eventFired(menuButton);
-            }
-        });
+        };
+        menuButton.addClickHandler(singleShotEventListner);
+        menuButton.addTouchStartHandler(singleShotEventListner);
+        menuButton.addTouchMoveHandler(singleShotEventListner);
+        menuButton.addTouchEndHandler(singleShotEventListner);
         final int rowCount = flexTable.getRowCount();
         flexTable.setWidget(rowCount, 0, menuButton);
     }
 
-    @Override
-    protected void parentResized(int height, int width, String units) {
-        super.parentResized(height, width, units);
-        boolean portrate = height > width;
-        final int maxFontPx = 30;
-        final boolean singleColumnOnly = (buttonsArray.size() * maxFontPx < height);
-        final int rowPerColumn = (portrate || singleColumnOnly) ? buttonsArray.size() : buttonsArray.size() / 2;
-        int textHeight = (height / (3 + rowPerColumn)) / 3;
-        textHeight = (textHeight > maxFontPx) ? maxFontPx : textHeight;
-        int row = 0;
-        int col = 0;
-        flexTable.removeAllRows();
-        flexTable.setCellPadding(textHeight / 7);
-        for (Button menuButton : buttonsArray) {
-            menuButton.getElement().getStyle().setFontSize(textHeight, Style.Unit.PX);
-            flexTable.setWidget(row, col, menuButton);
-            row++;
-            if (!portrate) {
-                if (row > rowPerColumn) {
-                    row = 0;
-                    col++;
-                    flexTable.setWidget(row, col, new Label(""));
-                    col++;
-                }
-            }
+    public void addMenuLabel(String textString, boolean boldText) {
+        checkFlexTableExists();
+        HTML html = new HTML(new SafeHtmlBuilder().appendEscapedLines(textString).toSafeHtml());
+        if (boldText) {
+            html.addStyleName("highlightedText");
         }
+//        tableMap.get(flexTable).add(html);
+        final int rowCount = flexTable.getRowCount();
+        flexTable.setWidget(rowCount, 0, html);
     }
+
+    // previous versions re aranged the menu based on the screen orientation, however the retrospective feature requests have made this hard to maintain.
+//    @Override
+//    protected void parentResized(int height, int width, String units) {
+//        super.parentResized(height, width, units);
+//        boolean portrate = height > width;
+//        if (tableMap.size() > 1) {
+//            int row = 0;
+//            int col = 0;
+//            outerTable.removeAllRows();
+////        flexTable.setCellPadding(textHeight / 7);
+//            for (FlexTable table : tableMap.keySet()) {
+//
+//                outerTable.setWidget(row, col, table);
+//                if (portrate) {
+//                    row++;
+//                } else {
+//                    col++;
+//                }
+//            }
+//        } else {
+//            for (FlexTable table : tableMap.keySet()) {
+//                ArrayList<IsWidget> buttonsArray = tableMap.get(table);
+//                final int maxFontPx = 30;
+//                final boolean singleColumnOnly = (buttonsArray.size() * maxFontPx < height);
+//                final int rowPerColumn = (portrate || singleColumnOnly) ? buttonsArray.size() : buttonsArray.size() / 2;
+//                int textHeight = (height / (3 + rowPerColumn)) / 3;
+//                textHeight = (textHeight > maxFontPx) ? maxFontPx : textHeight;
+//                int row = 0;
+//                int col = 0;
+//                table.removeAllRows();
+//                table.setCellPadding(textHeight / 7);
+//                for (IsWidget menuButton : buttonsArray) {
+//                    if (menuButton instanceof Button) {
+//                        ((Button) menuButton).getElement().getStyle().setFontSize(textHeight, Style.Unit.PX);
+//                    }
+//                    table.setWidget(row, col, menuButton);
+//                    row++;
+//                    if (!portrate) {
+//                        if (row > rowPerColumn) {
+//                            row = 0;
+//                            col++;
+//                            table.setWidget(row, col, new Label(""));
+//                            col++;
+//                        }
+//                    }
+//                }
+//                outerTable.setWidget(0, 0, table);
+//            }
+//        }
+//    }
 }

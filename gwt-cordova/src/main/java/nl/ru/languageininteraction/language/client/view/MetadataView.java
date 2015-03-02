@@ -17,6 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -41,7 +45,8 @@ public class MetadataView extends ComplexView {
         fieldBoxes = new HashMap<>();
         errorText = new Label();
         keyboardPadding = new VerticalPanel();
-//        errorText.setStylePrimaryName("metadataErrorMessage");
+        keyboardPadding.add(new Label(""));
+        errorText.setStylePrimaryName("metadataErrorMessage");
     }
 
     public void addField(final MetadataField metadataField, final String existingValue) {
@@ -51,18 +56,27 @@ public class MetadataView extends ComplexView {
             outerPanel.add(flexTable);
         }
         final int rowCount = flexTable.getRowCount();
-        flexTable.setWidget(rowCount, 0, new Label(metadataField.getFieldLabel()));
+        final Label label = new Label(metadataField.getFieldLabel());
+        flexTable.setWidget(rowCount, 0, label);
         final TextBox textBox = new TextBox();
         textBox.setStylePrimaryName("metadataOK");
         textBox.setText((existingValue == null) ? "" : existingValue);
-//        textBox.addFocusHandler(new FocusHandler() {
+        textBox.addFocusHandler(new FocusHandler() {
+
+            @Override
+            public void onFocus(FocusEvent event) {
+                addKeyboardPadding();
+                scrollToPosition(label.getAbsoluteTop());
+            }
+        });
+//        textBox.addBlurHandler(new BlurHandler() {
 //
 //            @Override
-//            public void onFocus(FocusEvent event) {
-//                scrollToPosition(textBox.getAbsoluteTop());
+//            public void onBlur(BlurEvent event) {
+//                removeKeyboardPadding();
 //            }
 //        });
-        flexTable.setWidget(rowCount, 1, textBox);
+        flexTable.setWidget(rowCount + 1, 0, textBox);
         fieldBoxes.put(metadataField, textBox);
         if (firstTextBox == null) {
             firstTextBox = textBox;
@@ -92,28 +106,40 @@ public class MetadataView extends ComplexView {
         fieldBox.setStylePrimaryName("metadataError");
         errorText.setText(metadataField.getControlledMessage());
         for (int rowCounter = 0; rowCounter < flexTable.getRowCount(); rowCounter++) {
-            if (fieldBox.equals(flexTable.getWidget(rowCounter, 1))) {
-                flexTable.setWidget(rowCounter, 2, errorText);
+            if (fieldBox.equals(flexTable.getWidget(rowCounter, 0))) {
+                flexTable.insertRow(rowCounter);
+                flexTable.setWidget(rowCounter, 0, errorText);
                 break;
             }
         }
+        fieldBox.setFocus(true);
     }
 
     public void clearErrors() {
         for (TextBox textBox : fieldBoxes.values()) {
             textBox.setStylePrimaryName("metadataOK");
         }
-        flexTable.remove(errorText);
+        for (int rowCounter = 0; rowCounter < flexTable.getRowCount(); rowCounter++) {
+            if (flexTable.getWidget(rowCounter, 0) == errorText) {
+                // remove the error message and the tabel row that was added for the error message
+                flexTable.removeRow(rowCounter);
+                break;
+            }
+        }
     }
 
-    public void addKeyboardPadding() {
+    private void addKeyboardPadding() {
         outerPanel.add(keyboardPadding);
-        keyboardPadding.add(new Label(""));
+    }
+
+    private void removeKeyboardPadding() {
+        outerPanel.remove(keyboardPadding);
     }
 
     @Override
     protected void parentResized(int height, int width, String units) {
         super.parentResized(height, width, units);
         keyboardPadding.setHeight(height * 0.8 + units);
+        setStyleByWidth(width);
     }
 }
