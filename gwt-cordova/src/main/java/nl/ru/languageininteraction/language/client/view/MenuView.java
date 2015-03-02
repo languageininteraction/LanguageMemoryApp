@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
+import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
 
 /**
  * @since Oct 31, 2014 11:36:28 AM (creation date)

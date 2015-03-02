@@ -31,7 +31,7 @@ import nl.ru.languageininteraction.synaesthesia.client.registration.Registration
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
-import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
+import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException;
 import static nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException.ErrorType.buildererror;
 import static nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException.ErrorType.connectionerror;

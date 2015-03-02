@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
+import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
 
 /**
  * @since Jan 8, 2015 5:01:05 PM (creation date)
