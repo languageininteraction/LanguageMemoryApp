@@ -42,11 +42,10 @@ public class PlayerDetailsView extends AbstractSvgView {
 
     @Override
     protected void performClick(Element targetElement) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        nextEventListner.eventFired(null);
     }
 
     @Override
     public void showAudioEnded() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

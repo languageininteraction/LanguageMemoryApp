@@ -89,11 +89,12 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case playerdetails:
                     this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this));
-                    presenter.setState(this, ApplicationState.version, ApplicationState.startscreen);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.guess);
                     break;
+                case start:
                 case startscreen:
                     this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this));
-                    presenter.setState(this, ApplicationState.version, ApplicationState.infoscreen);
+                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game
                     break;
                 case infoscreen:
                     this.presenter = new InfoScreenPresenter(widgetTag, userResults, new AudioPlayer(this));
@@ -123,10 +124,10 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     this.presenter = new AlienScreen(widgetTag);
                     presenter.setState(this, ApplicationState.version, ApplicationState.guess);
                     break;
-                case start:
-                    this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.chooseplayer);
-                    break;
+//                case start:
+//                    this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
+//                    presenter.setState(this, null, ApplicationState.startscreen);
+//                    break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
                     presenter.setState(this, null, ApplicationState.guess);
