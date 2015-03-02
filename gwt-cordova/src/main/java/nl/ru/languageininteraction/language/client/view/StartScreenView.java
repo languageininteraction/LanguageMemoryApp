@@ -41,8 +41,9 @@ public class StartScreenView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(Element targetElement) {
-        nextEventListner.eventFired(null);
+    protected void performClick(final String svgGroupStateString) {
+//        nextEventListner.eventFired(null);
+        label.setText(svgGroupStateString);
     }
 
     @Override

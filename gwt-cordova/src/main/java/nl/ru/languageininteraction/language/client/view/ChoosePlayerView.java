@@ -41,7 +41,7 @@ public class ChoosePlayerView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(Element targetElement) {
+    protected void performClick(final String svgGroupStateString) {
         nextEventListner.eventFired(null);
     }
 

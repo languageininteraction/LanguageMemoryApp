@@ -18,7 +18,6 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import nl.ru.languageininteraction.language.client.ChoosePlayerScreenBuilder;
 import nl.ru.languageininteraction.language.client.StartScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.model.UserResults;

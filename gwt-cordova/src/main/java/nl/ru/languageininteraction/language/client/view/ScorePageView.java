@@ -51,19 +51,14 @@ public class ScorePageView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final Element targetElement) {
-        Element parentElement = targetElement.getParentElement();
-        while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
-            parentElement = parentElement.getParentElement();
-        }
-        final String elementId = parentElement.getId();
-        label.setText(elementId);
-        setUserName(elementId);
-        if (!elementId.isEmpty()) {
+    protected void performClick(final String svgGroupStateString) {        
+        label.setText(svgGroupStateString);
+        setUserName(svgGroupStateString);
+        if (!svgGroupStateString.isEmpty()) {
 //            for (SvgTextElements svgTextElement : SvgTextElements.values()) {
 //                scorePageBuilder.setLabel(svgTextElement, svgTextElement.name());
 //            }
-            SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
+            SvgGroupStates svgGroup = SvgGroupStates.valueOf(svgGroupStateString);
             switch (svgGroup) {
                 case ContinueWithoutSharing:
                 case ShareAndContinueButton:

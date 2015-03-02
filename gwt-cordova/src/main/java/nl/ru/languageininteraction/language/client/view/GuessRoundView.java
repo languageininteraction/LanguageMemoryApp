@@ -124,16 +124,13 @@ public class GuessRoundView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final Element targetElement) {
-
-        final Element parentElement = targetElement.getParentElement();
-        final String elementId = parentElement.getId();
-        if (!elementId.isEmpty()) {
+    protected void performClick(final String svgGroupStateString) {
+        if (!svgGroupStateString.isEmpty()) {
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4413, SvgTextElements.tspan4319.name());
-            label.setText(elementId);
-            SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
+            label.setText(svgGroupStateString);
+            SvgGroupStates svgGroup = SvgGroupStates.valueOf(svgGroupStateString);
             switch (svgGroup) {
                 case NextRoundButton:
                     nextEventListner.eventFired(null);

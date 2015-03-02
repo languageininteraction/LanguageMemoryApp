@@ -96,7 +96,14 @@ public abstract class AbstractSvgView extends AbstractView {
             @Override
             public void onClick(ClickEvent event) {
                 event.preventDefault();
-                performClick(Element.as(event.getNativeEvent().getEventTarget()));
+                Element parentElement = Element.as(event.getNativeEvent().getEventTarget()).getParentElement();
+                while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
+                    parentElement = parentElement.getParentElement();
+                }
+                final String elementId = parentElement.getId();
+                if (!elementId.isEmpty()) {
+                    performClick(elementId);
+                }
             }
         });
         html.addTouchEndHandler(new TouchEndHandler() {
@@ -104,7 +111,14 @@ public abstract class AbstractSvgView extends AbstractView {
             @Override
             public void onTouchEnd(TouchEndEvent event) {
                 event.preventDefault();
-                performClick(Element.as(event.getNativeEvent().getEventTarget()));
+                Element parentElement = Element.as(event.getNativeEvent().getEventTarget()).getParentElement();
+                while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
+                    parentElement = parentElement.getParentElement();
+                }
+                final String elementId = parentElement.getId();
+                if (!elementId.isEmpty()) {
+                    performClick(elementId);
+                }
             }
         });
         html.setStylePrimaryName("svgPanel");
@@ -114,7 +128,7 @@ public abstract class AbstractSvgView extends AbstractView {
 
     abstract protected void getSvg(SafeHtmlBuilder builder);
 
-    abstract protected void performClick(final Element targetElement);
+    abstract protected void performClick(final String svgGroupStateString);
 
     abstract public void showAudioEnded();
 }

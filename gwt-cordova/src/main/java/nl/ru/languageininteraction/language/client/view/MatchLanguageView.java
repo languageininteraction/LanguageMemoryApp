@@ -60,18 +60,15 @@ public class MatchLanguageView extends AbstractSvgView {
         matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.hidden);
 //        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
 //        matchLanguageBuilder.getSvgSampleButtonDisabled(builder, SvgTemplate.Visibility.visible);
-        
+
         matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.visible);
     }
 
     @Override
-    protected void performClick(final Element targetElement) {
-
-        final Element parentElement = targetElement.getParentElement();
-        final String elementId = parentElement.getId();
-        if (!elementId.isEmpty()) {
+    protected void performClick(final String svgGroupStateString) {
+        if (!svgGroupStateString.isEmpty()) {
 //            label.setText(elementId);
-            SvgGroupStates svgGroup = SvgGroupStates.valueOf(elementId);
+            SvgGroupStates svgGroup = SvgGroupStates.valueOf(svgGroupStateString);
             switch (svgGroup) {
                 case TargetButton:
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow1);
