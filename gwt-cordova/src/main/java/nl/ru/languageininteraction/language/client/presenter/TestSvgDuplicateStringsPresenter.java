@@ -46,16 +46,16 @@ public class TestSvgDuplicateStringsPresenter extends AbstractPresenter implemen
         ((ComplexView) simpleView).addText("Testing string instances.");
         ((ComplexView) simpleView).addText("The purpose of this test is to confirm if duplicate paths in the provided SVG are discovered by the compiler and optimised into one.");
         ((ComplexView) simpleView).addText("SVG_DATA.transformpath5452().equals(SVG_DATA.transformpath5955())");
-        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.transformpath5452().equals(SVG_DATA.transformpath5955())));
+        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.stylepath6059().equals(SVG_DATA.stylepath6063())));
 
         ((ComplexView) simpleView).addText("SVG_DATA.stylepath5452().equals(SVG_DATA.stylepath5955())");
-        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.stylepath5452().equals(SVG_DATA.stylepath5955())));
+        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.stylepath6059().equals(SVG_DATA.stylepath6063())));
 
         ((ComplexView) simpleView).addText("SVG_DATA.datapath5452().equals(SVG_DATA.datapath5955())");
-        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.datapath5452().equals(SVG_DATA.datapath5955())));
+        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.stylepath6059().equals(SVG_DATA.stylepath6063())));
 
         ((ComplexView) simpleView).addText("SVG_DATA.datapath5452() == SVG_DATA.datapath5955()");
-        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.datapath5452() == SVG_DATA.datapath5955()));
+        ((ComplexView) simpleView).addText(String.valueOf(SVG_DATA.stylepath6059() == SVG_DATA.stylepath6063()));
         ((ComplexView) simpleView).addText("If the final test is true then only one copy is compiled into the application which is desired since it saves space.");
     }
 }
