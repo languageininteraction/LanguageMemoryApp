@@ -86,7 +86,7 @@ public class ColourPickerPresenter implements Presenter {
     public void setState(final AppEventListner appEventListner, final AppEventListner.ApplicationState prevState, final AppEventListner.ApplicationState nextState) {
         widgetTag.clear();
         final StimulusResponseGroup stimulusResponseGroup = new StimulusResponseGroup();
-        userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
+//        userResults.addStimulusResponseGroup(stimuliGroup, stimulusResponseGroup);
         colourPickerCanvasView.setAcceptButton(new PresenterEventListner() {
 
             @Override
