@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.synaesthesia.client.presenter;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -26,10 +25,17 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.presenter.AbstractPresenter;
+import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationListener;
 import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationService;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.SimpleView;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
+import nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException;
+import static nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException.ErrorType.buildererror;
+import static nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException.ErrorType.connectionerror;
+import static nl.ru.languageininteraction.synaesthesia.client.registration.RegistrationException.ErrorType.non202response;
 
 /**
  * @since Oct 21, 2014 5:06:21 PM (creation date)

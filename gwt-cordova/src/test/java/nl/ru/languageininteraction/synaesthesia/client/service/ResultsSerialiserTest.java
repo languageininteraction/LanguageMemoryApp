@@ -41,39 +41,17 @@ public class ResultsSerialiserTest {
     @Test
     public void testSerialise() {
         System.out.println("serialise");
-        UserResults userResults = new UserResults(new StimuliGroup(null, null, null));
+        UserResults userResults = new UserResults();
         final String postName_email = "postName_email";
         userResults.setMetadataValue(postName_email, "postName@email");
-        final ArrayList<Stimulus> arrayList1 = new ArrayList<>();
-        arrayList1.add(new Stimulus("a1"));
-        arrayList1.add(new Stimulus("b1"));
-        arrayList1.add(new Stimulus("c1"));
-        arrayList1.add(new Stimulus("d1"));
-        arrayList1.add(new Stimulus("e1"));
-        arrayList1.add(new Stimulus("f1"));
-        final StimuliGroup stimuli1 = new StimuliGroup("test-group-1", "test-group-1", arrayList1);
-        final ArrayList<Stimulus> arrayList2 = new ArrayList<>();
-        arrayList2.add(new Stimulus("a2"));
-        arrayList2.add(new Stimulus("b2"));
-        arrayList2.add(new Stimulus("c2"));
-        arrayList2.add(new Stimulus("d2"));
-        arrayList2.add(new Stimulus("e2"));
-        arrayList2.add(new Stimulus("f2"));
-        final StimuliGroup stimuli2 = new StimuliGroup("test-group-2", "test-group-2", arrayList2);
-        final StimulusResponseGroup stimulusResponseGroup1 = new StimulusResponseGroup();
-        userResults.addStimulusResponseGroup(stimuli1, stimulusResponseGroup1);
-        for (Stimulus stimulus : arrayList1) {
-            stimulusResponseGroup1.addResponse(stimulus, new StimulusResponse(new ColourData(255, 255, 255), new Date(123445), 23));
-            stimulusResponseGroup1.addResponse(stimulus, new StimulusResponse(new ColourData(0, 0, 0), new Date(12321), 21));
-            stimulusResponseGroup1.addResponse(stimulus, new StimulusResponse(new ColourData(128, 127, 126), new Date(123445), 20));
-        }
-        final StimulusResponseGroup stimulusResponseGroup2 = new StimulusResponseGroup();
-        userResults.addStimulusResponseGroup(stimuli2, stimulusResponseGroup2);
-        for (Stimulus stimulus : arrayList2) {
-            stimulusResponseGroup2.addResponse(stimulus, new StimulusResponse(new ColourData(255, 255, 0), new Date(9999999), 141));
-            stimulusResponseGroup2.addResponse(stimulus, new StimulusResponse(new ColourData(255, 0, 255), new Date(33333), 121));
-            stimulusResponseGroup2.addResponse(stimulus, new StimulusResponse(new ColourData(0, 255, 255), new Date(111111), 12));
-        }
+        final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
+        roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
+        roundData.setDurationMs(123456);
+        userResults.getGameData().addRoundData(roundData);
+        final RoundData roundData1 = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.spa, 1, true), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 1, true), getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, false)}, new Date(9999999));
+        roundData1.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false));
+        roundData1.setDurationMs(123456);
+        userResults.getGameData().addRoundData(roundData1);
         ResultsSerialiser instance = new ResultsSerialiser() {
             @Override
             protected String formatDate(Date date) {

@@ -19,7 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.view;
 
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import nl.ru.languageininteraction.synaesthesia.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 
 /**

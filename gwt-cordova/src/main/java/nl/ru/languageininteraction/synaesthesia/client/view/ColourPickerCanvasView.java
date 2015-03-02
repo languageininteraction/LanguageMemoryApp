@@ -52,6 +52,7 @@ import nl.ru.languageininteraction.synaesthesia.client.exception.CanvasError;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.ColourData;
 import nl.ru.languageininteraction.language.client.model.Stimulus;
+import nl.ru.languageininteraction.synaesthesia.client.listener.SingleShotEventListner;
 
 /**
  * @since Oct 8, 2014 5:09:10 PM (creation date)

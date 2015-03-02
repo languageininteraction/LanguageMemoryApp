@@ -20,7 +20,7 @@ package nl.ru.languageininteraction.language.client.presenter;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
-import nl.ru.languageininteraction.language.client.view.SimpleView;
+import nl.ru.languageininteraction.language.client.view.ComplexView;
 
 /**
  * @since Oct 7, 2014 2:17:51 PM (creation date)
@@ -40,6 +40,6 @@ public class InstructionsPresenter extends AbstractPresenter implements Presente
     @Override
     protected void setContent(final AppEventListner appEventListner) {
         ((ComplexView) simpleView).addText(messages.instructionscreentext());
-        ((ComplexView) simpleView).addHtmlText(messages.instructionscreenExample());
+//        ((ComplexView) simpleView).addHtmlText(messages.instructionscreenExample());
     }
 }
