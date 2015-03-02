@@ -2,3 +2,4 @@
 /registration/target/
 /gwt-cordova/target/
 /gwt-cordova/src/main/webapp/media/*.wav
+/gwt-cordova/src/main/webapp/media/*/*.mp3
