@@ -72,6 +72,8 @@ public class VersionPresenter extends AbstractPresenter {
 //        ((ComplexView) simpleView).addPadding();
         ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextDheading());
         ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextDbody());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextEheading());
+        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextEbody());
 //        ((ComplexView) simpleView).addPadding();
 //        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextCheading());
 //        ((ComplexView) simpleView).addHtmlText(messages.aboutScreenTextCBody());

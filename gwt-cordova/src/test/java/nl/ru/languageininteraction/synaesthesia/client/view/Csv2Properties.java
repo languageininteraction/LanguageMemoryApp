@@ -113,7 +113,7 @@ public class Csv2Properties {
                     writerNL.write("\n");
                 } else {
                     String key = lineString.split("=")[0];
-                    final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : ""; //escapePropertiesString(properties.getProperty(key, ""));
+                    final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : escapePropertiesString(properties.getProperty(key, ""));
 //                    if (!escapedStringEN.isEmpty()) {
                     writer.write(key);
                     writer.write(PROPERTY_SEPARATOR);

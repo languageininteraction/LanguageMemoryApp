@@ -69,9 +69,9 @@ public class UserNamePresenter extends MetadataPresenter {
         }
         ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addPadding();
-        ((MetadataView) simpleView).addText(messages.userNameScreenText());
+//        ((MetadataView) simpleView).addText();
 //        for (MetadataField metadataField : new MetadataField[]{firstNameField/*, metadataFieldProvider.metadataFieldArray[1]*/}) {
-        ((MetadataView) simpleView).addField(firstNameField, "");
+        ((MetadataView) simpleView).addField(firstNameField, "", messages.userNameScreenText());
 //        }        
         ((MetadataView) simpleView).addPadding();
         ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
