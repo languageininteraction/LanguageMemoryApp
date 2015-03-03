@@ -84,9 +84,10 @@ public class Csv2Properties {
         properties_nl.load(resourceAsStream_nl);
         final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
         properties_de.load(resourceAsStream_de);
-        final File outputFile = new File("target/" + propertiesFileName + PROPERTIES_SUFFIX);
-        final File outputFileDE = new File("target/" + propertiesFileName + "_de" + PROPERTIES_SUFFIX);
-        final File outputFileNL = new File("target/" + propertiesFileName + "_nl" + PROPERTIES_SUFFIX);
+        final String targetDirectory = "src/main/resources/nl/ru/languageininteraction/synaesthesia/client/";
+        final File outputFile = new File(targetDirectory + propertiesFileName + PROPERTIES_SUFFIX);
+        final File outputFileDE = new File(targetDirectory + propertiesFileName + "_de" + PROPERTIES_SUFFIX);
+        final File outputFileNL = new File(targetDirectory + propertiesFileName + "_nl" + PROPERTIES_SUFFIX);
         OutputStream outputStream = new FileOutputStream(outputFile, false);
         OutputStream outputStreamDE = new FileOutputStream(outputFileDE, false);
         OutputStream outputStreamNL = new FileOutputStream(outputFileNL, false);
@@ -112,21 +113,21 @@ public class Csv2Properties {
                     writerNL.write("\n");
                 } else {
                     String key = lineString.split("=")[0];
-                    final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : escapePropertiesString(properties.getProperty(key, ""));
-                    if (!escapedStringEN.isEmpty()) {
-                        writer.write(key);
-                        writer.write(PROPERTY_SEPARATOR);
-                        writer.write(escapedStringEN);
-                        writer.write("\n");
-                    }
-                    final String escapedStringDE = (translationsDE.containsKey(key)) ? escapeString(translationsDE.get(key)) : escapePropertiesString(properties_de.getProperty(key, ""));
+                    final String escapedStringEN = (translationsEN.containsKey(key)) ? escapeString(translationsEN.get(key)) : ""; //escapePropertiesString(properties.getProperty(key, ""));
+//                    if (!escapedStringEN.isEmpty()) {
+                    writer.write(key);
+                    writer.write(PROPERTY_SEPARATOR);
+                    writer.write(escapedStringEN);
+                    writer.write("\n");
+//                    }
+                    final String escapedStringDE = (translationsDE.containsKey(key)) ? escapeString(translationsDE.get(key)) : ""; //escapePropertiesString(properties_de.getProperty(key, ""));
                     if (!escapedStringDE.isEmpty()) {
                         writerDE.write(key);
                         writerDE.write(PROPERTY_SEPARATOR);
                         writerDE.write(escapedStringDE);
                         writerDE.write("\n");
                     }
-                    final String escapedStringNL = (translationsNL.containsKey(key)) ? escapeString(translationsNL.get(key)) : escapePropertiesString(properties_nl.getProperty(key, ""));
+                    final String escapedStringNL = (translationsNL.containsKey(key)) ? escapeString(translationsNL.get(key)) : ""; //escapePropertiesString(properties_nl.getProperty(key, ""));
                     if (!escapedStringNL.isEmpty()) {
                         writerNL.write(key);
                         writerNL.write(PROPERTY_SEPARATOR);
