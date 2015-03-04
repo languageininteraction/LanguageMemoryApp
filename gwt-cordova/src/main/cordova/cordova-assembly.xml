@@ -27,7 +27,7 @@
             <includes>
                 <include>/images/icon.png</include>
                 <include>/images/LIL-logo-diap.png</include>
-                <include>/images/MPI-logo.jpg</include>
+                <include>/images/MPI-logo.png</include>
                 <include>*.*</include>
                 <include>/GraphemeColour/**</include>
             </includes>  
