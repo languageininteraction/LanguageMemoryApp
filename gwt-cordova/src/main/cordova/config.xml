@@ -35,7 +35,7 @@
     <!--<preference name="KeyboardShrinksView" value="true" />-->
     <preference name="DisallowOverscroll" value="true" />
     <icon src="images/icon.png" />
-<!--    <platform name="ios">
+    <!--    <platform name="ios">
         <icon src="images/icon-60@3x.png" width="180" height="180" />
         <icon src="images/icon-60.png" width="60" height="60" />
         <icon src="images/icon-60@2x.png" width="120" height="120" />
