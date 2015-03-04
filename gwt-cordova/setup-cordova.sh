@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=synquiz-1.1.151-testing
+synquizname=synquiz-1.1.152-stable
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
