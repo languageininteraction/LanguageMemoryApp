@@ -143,7 +143,10 @@ public class Csv2Properties {
     }
 
     private String escapeString(String inputString) {
-        return inputString.replaceAll("\n", "\\\\n");
+        return inputString.replaceAll("\n", "\\\\n")
+                .replace("onclick=\"window.open(this.href,'_system'); return false;\"", "")
+                .replace("<a href=\"", "<a href=\"#\" onclick=\"window.open(''")
+                .replaceAll("\"[ ]*>", "'',''_system''); return false;\">");
     }
 
     private String escapePropertiesString(String inputString) {
