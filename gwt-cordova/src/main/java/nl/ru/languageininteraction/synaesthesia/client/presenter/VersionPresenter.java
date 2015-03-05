@@ -45,7 +45,7 @@ public class VersionPresenter extends AbstractPresenter {
     @Override
     protected void setContent(final AppEventListner appEventListner) {
 //        ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), 100);
+        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), messages.languageInteractionUrl(), 100);
 //        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/icon.png"), 10);
 //        ((ComplexView) simpleView).addHighlightedText(messages.aboutScreenTextAheading());
 
@@ -98,6 +98,6 @@ public class VersionPresenter extends AbstractPresenter {
                 + "Compile Date: " + version.compileDate() + "\n"
                 + "Last Commit Date: " + version.lastCommitDate());
         ((ComplexView) simpleView).addPadding();
-        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), 100);
+        ((ComplexView) simpleView).addImage(UriUtils.fromString("images/LIL-logo-diap.png"), messages.languageInteractionUrl(), 100);
     }
 }
