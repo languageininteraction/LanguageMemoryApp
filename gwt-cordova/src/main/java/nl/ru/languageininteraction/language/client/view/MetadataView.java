@@ -49,14 +49,14 @@ public class MetadataView extends ComplexView {
         errorText.setStylePrimaryName("metadataErrorMessage");
     }
 
-    public void addField(final MetadataField metadataField, final String existingValue) {
+    public void addField(final MetadataField metadataField, final String existingValue, String labelString) {
         if (flexTable == null) {
             flexTable = new FlexTable();
             flexTable.setStylePrimaryName("metadataTable");
             outerPanel.add(flexTable);
         }
         final int rowCount = flexTable.getRowCount();
-        final Label label = new Label(metadataField.getFieldLabel());
+        final Label label = new Label(labelString);
         flexTable.setWidget(rowCount, 0, label);
         final TextBox textBox = new TextBox();
         textBox.setStylePrimaryName("metadataOK");
@@ -66,7 +66,7 @@ public class MetadataView extends ComplexView {
             @Override
             public void onFocus(FocusEvent event) {
                 addKeyboardPadding();
-                scrollToPosition(label.getAbsoluteTop());
+//                scrollToPosition(label.getAbsoluteTop());
             }
         });
 //        textBox.addBlurHandler(new BlurHandler() {
@@ -139,7 +139,7 @@ public class MetadataView extends ComplexView {
     @Override
     protected void parentResized(int height, int width, String units) {
         super.parentResized(height, width, units);
-        keyboardPadding.setHeight(height * 0.8 + units);
+        keyboardPadding.setHeight(height * 0.5 + units);
         setStyleByWidth(width);
     }
 }

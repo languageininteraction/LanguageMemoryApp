@@ -107,7 +107,7 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
     protected void setContent(AppEventListner appEventListner) {
         ((MetadataView) simpleView).addText(messages.metadataScreenText());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            ((MetadataView) simpleView).addField(metadataField, userResults.getMetadataValue(metadataField.getPostName()));
+            ((MetadataView) simpleView).addField(metadataField, userResults.getMetadataValue(metadataField.getPostName()), metadataField.getFieldLabel());
         }
     }
 

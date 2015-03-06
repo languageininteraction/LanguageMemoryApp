@@ -65,9 +65,20 @@ public class ComplexView extends SimpleView {
         outerPanel.add(new HTML("&nbsp;"));
     }
 
-    public void addImage(SafeUri imagePath, int percentWidth) {
+    public void addImage(SafeUri imagePath, final String linkUrl, int percentWidth) {
         final Image image = new Image(imagePath);
         image.setWidth(percentWidth + "%");
+        final SingleShotEventListner singleShotEventListner = new SingleShotEventListner() {
+
+            @Override
+            protected void singleShotFired() {
+                Window.open(linkUrl, "_system", "");
+            }
+        };
+        image.addClickHandler(singleShotEventListner);
+        image.addTouchStartHandler(singleShotEventListner);
+        image.addTouchMoveHandler(singleShotEventListner);
+        image.addTouchEndHandler(singleShotEventListner);
         outerPanel.add(image);
     }
 

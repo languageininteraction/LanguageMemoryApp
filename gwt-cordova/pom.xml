@@ -260,7 +260,7 @@
                     <allowSnapshots>true</allowSnapshots>
                     <majorVersion>0</majorVersion>
                     <minorVersion>1</minorVersion>
-                    <buildType>testing</buildType>
+                    <buildType>stable</buildType>
                     <propertiesPrefix>application</propertiesPrefix>
                     <shortVersionModule></shortVersionModule>
                 </configuration>
