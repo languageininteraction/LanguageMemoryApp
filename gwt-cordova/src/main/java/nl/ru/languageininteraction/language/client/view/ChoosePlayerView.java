@@ -17,10 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.ChoosePlayerScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
@@ -30,9 +30,17 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class ChoosePlayerView extends AbstractSvgView {
 
     protected final ChoosePlayerScreenBuilder svgBuilder = new ChoosePlayerScreenBuilder();
+    protected final PresenterEventListner editButtonListner;
+    protected final PresenterEventListner goButtonListner;
+    protected final PresenterEventListner createButtonListner;
+    protected final PresenterEventListner switchButtonListner;
 
-    public ChoosePlayerView(AudioPlayer audioPlayer) throws AudioException {
+    public ChoosePlayerView(PresenterEventListner editButtonListner, PresenterEventListner goButtonListner, PresenterEventListner createButtonListner, PresenterEventListner switchButtonListner, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+        this.editButtonListner = editButtonListner;
+        this.goButtonListner = goButtonListner;
+        this.createButtonListner = createButtonListner;
+        this.switchButtonListner = switchButtonListner;
     }
 
     @Override
@@ -41,8 +49,32 @@ public class ChoosePlayerView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {
-        nextEventListner.eventFired(null);
+    protected boolean performClick(final String svgGroupStateString) {
+        boolean consumed = false;
+        label.setText(svgGroupStateString);
+        ChoosePlayerScreenBuilder.SvgGroupStates svgGroup = ChoosePlayerScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
+        switch (svgGroup) {
+            case EditButton:
+                consumed = true;
+                editButtonListner.eventFired(null);
+                break;
+            case GoButton:
+                consumed = true;
+                goButtonListner.eventFired(null);
+                break;
+            case NameField:
+                consumed = true;
+                break;
+            case NewPlayerButton:
+                consumed = true;
+                createButtonListner.eventFired(null);
+                break;
+            case SwitchPlayerButton:
+                consumed = true;
+                switchButtonListner.eventFired(null);
+                break;
+        }
+        return consumed;
     }
 
     @Override

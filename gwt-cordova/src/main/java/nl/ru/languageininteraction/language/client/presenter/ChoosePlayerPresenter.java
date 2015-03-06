@@ -17,8 +17,11 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
@@ -29,8 +32,52 @@ import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
  */
 public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Presenter {
 
-    public ChoosePlayerPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new ChoosePlayerView(audioPlayer));
+    public ChoosePlayerPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
+        super(widgetTag, userResults, audioPlayer, new ChoosePlayerView(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
+            }
+        }, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
+            }
+        }, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.createplayer);
+            }
+        }, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
+            }
+        }, audioPlayer));
     }
 
     @Override

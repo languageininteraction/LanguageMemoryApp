@@ -47,7 +47,6 @@ public class StartScreenView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-//        nextEventListner.eventFired(null);
         label.setText(svgGroupStateString);
         StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
@@ -55,6 +54,7 @@ public class StartScreenView extends AbstractSvgView {
                 consumed = true;
                 infoButtonListner.eventFired(null);
                 break;
+                case LQLogo:
             case GoButton:
                 consumed = true;
                 goButtonListner.eventFired(null);

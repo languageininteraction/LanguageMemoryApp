@@ -47,6 +47,7 @@ public interface AppEventListner {
         matchlanguage("Match"),
         chooseplayer("Choose Player"),
         playerdetails("Player Details"),
+        createplayer("New Player"),
         startscreen("Start"),
         infoscreen("Information"),
         @Deprecated

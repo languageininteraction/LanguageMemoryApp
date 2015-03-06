@@ -17,7 +17,6 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.InfoScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
@@ -41,8 +40,21 @@ public class InfoScreenView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {
-        nextEventListner.eventFired(null);
+    protected boolean performClick(final String svgGroupStateString) {
+boolean consumed = false;
+        label.setText(svgGroupStateString);
+        InfoScreenBuilder.SvgGroupStates svgGroup = InfoScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
+        switch (svgGroup) {
+            case InfoButton:
+                consumed = true;
+                backEventListner.eventFired(null);
+                break;
+            case MoreButton:
+                consumed = true;
+//                goButtonListner.eventFired(null);
+                break;
+        }
+        return consumed;
     }
 
     @Override

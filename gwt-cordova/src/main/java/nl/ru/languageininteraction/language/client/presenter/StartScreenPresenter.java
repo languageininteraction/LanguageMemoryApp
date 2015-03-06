@@ -45,7 +45,7 @@ public class StartScreenPresenter extends AbstractSvgPresenter implements Presen
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.infoscreen);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
             }
         }, new PresenterEventListner() {
 

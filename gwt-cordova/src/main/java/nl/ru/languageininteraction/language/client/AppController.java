@@ -76,14 +76,14 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.guessround, null);
+                    presenter.setState(this, ApplicationState.startscreen, null);
                     break;
                 case guessround:
                     this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
                 case chooseplayer:
-                    this.presenter = new ChoosePlayerPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    this.presenter = new ChoosePlayerPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.version, ApplicationState.playerdetails);
                     break;
                 case playerdetails:
