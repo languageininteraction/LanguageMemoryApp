@@ -39,7 +39,6 @@ import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.StartScreenPresenter;
-import nl.ru.languageininteraction.language.client.presenter.TestSvgDuplicateStringsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -77,9 +76,9 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.guess, null);
+                    presenter.setState(this, ApplicationState.guessround, null);
                     break;
-                case guess:
+                case guessround:
                     this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
@@ -89,7 +88,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case playerdetails:
                     this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this));
-                    presenter.setState(this, ApplicationState.version, ApplicationState.guess);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
                     break;
                 case start:
                 case startscreen:
@@ -102,9 +101,9 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case scores:
                     this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this), userResults);
-                    presenter.setState(this, ApplicationState.setuser, ApplicationState.guess);
+                    presenter.setState(this, ApplicationState.setuser, ApplicationState.guessround);
                     break;
-                case match:
+                case matchlanguage:
                     this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer(this));
                     presenter.setState(this, ApplicationState.version, ApplicationState.map);
                     break;
@@ -122,7 +121,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case alien:
                     this.presenter = new AlienScreen(widgetTag);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.guess);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
                     break;
 //                case start:
 //                    this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
@@ -130,11 +129,11 @@ public class AppController implements AppEventListner, AudioExceptionListner {
 //                    break;
                 case intro:
                     this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.guess);
+                    presenter.setState(this, null, ApplicationState.guessround);
                     break;
                 case setuser:
                     this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.guess);
+                    presenter.setState(this, null, ApplicationState.guessround);
 //                    ((MetadataPresenter) presenter).focusFirstTextBox();
                     break;
 //                case stimulus:

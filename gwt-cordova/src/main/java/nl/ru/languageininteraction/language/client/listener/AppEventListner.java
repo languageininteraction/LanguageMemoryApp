@@ -33,30 +33,40 @@ public interface AppEventListner {
         start(messages.startButton()),
         locale(messages.localeMenuLabel()),
         version(messages.versionMenuLabel()),
+        @Deprecated
         intro(messages.introMenuLabel()),
+        @Deprecated
         instructions(messages.instructionsMenuLabel()),
         menu(messages.menuButton()),
+        @Deprecated
         setuser(messages.setUserMenuLabel()),
-        adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
-        stimulus(messages.stimulusMenuLabel()),
-        guess("Guess"),
+        //        adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
+        //        stimulus(messages.stimulusMenuLabel()),
+        guessround("Guess"),
         scores("Scores"),
-        match("Match"),
+        matchlanguage("Match"),
         chooseplayer("Choose Player"),
         playerdetails("Player Details"),
         startscreen("Start"),
         infoscreen("Information"),
+        @Deprecated
         map(messages.mapMenuLabel()),
+        @Deprecated
         autotyp_regions("AutotypRegions"),
+        @Deprecated
         alien("Alien"),
+        @Deprecated
         report(messages.reportMenuLabel()),
+        @Deprecated
         feedback(messages.feedbackMenuLabel()),
+        @Deprecated
         metadata(messages.metadataMenuLabel()),
         registration(messages.registerMenuLabel()),
         registrationcomplete(""),
         registrationfailednon202(""),
         registrationfailedbuildererror(""),
         registrationfailedconnectionerror(""),
+        @Deprecated
         moreinfo(messages.moreInfoMenuLabel()),
         end(messages.exitButton());
 

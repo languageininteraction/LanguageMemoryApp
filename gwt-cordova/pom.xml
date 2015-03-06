@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.203-testing</version>
+    <version>0.1.291-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -260,7 +260,7 @@
                     <allowSnapshots>true</allowSnapshots>
                     <majorVersion>0</majorVersion>
                     <minorVersion>1</minorVersion>
-                    <buildType>stable</buildType>
+                    <buildType>testing</buildType>
                     <propertiesPrefix>application</propertiesPrefix>
                     <shortVersionModule></shortVersionModule>
                 </configuration>

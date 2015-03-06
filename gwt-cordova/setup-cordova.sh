@@ -1,6 +1,6 @@
 #mvn install
 cd target
-synquizname=languagememorygame-0.1.203-testing
+synquizname=languagememorygame-0.1.291-testing
 rm -rf $synquizname-cordova
 unzip $synquizname-cordova.zip -d $synquizname-cordova
 cd $synquizname-cordova
