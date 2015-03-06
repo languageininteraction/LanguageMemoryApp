@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import nl.ru.languageininteraction.language.client.ScorePageBuilder;
 import nl.ru.languageininteraction.language.client.StartScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
@@ -44,6 +45,16 @@ public class StartScreenView extends AbstractSvgView {
     protected void performClick(final String svgGroupStateString) {
 //        nextEventListner.eventFired(null);
         label.setText(svgGroupStateString);
+        StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
+            switch (svgGroup) {
+                case InfoButton:
+                case ShareAndContinueButton:
+                    nextEventListner.eventFired(null);
+                    break;
+                case GoButton:
+                    backEventListner.eventFired(null);
+                    break;
+            }
     }
 
     @Override
