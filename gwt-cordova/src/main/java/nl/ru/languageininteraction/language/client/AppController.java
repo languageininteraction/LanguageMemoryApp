@@ -92,7 +92,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case start:
                 case startscreen:
-                    this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game
                     break;
                 case infoscreen:

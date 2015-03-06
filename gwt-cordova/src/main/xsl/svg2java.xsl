@@ -38,7 +38,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
             <xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>,
         </xsl:text>
         </xsl:for-each>
-        <xsl:text>diagram // the diagram entry is used to identify the svg root element
+        <xsl:text>svgDiagram // the diagram entry is used to identify the svg root element
     }
 
     public enum SvgTextElements {

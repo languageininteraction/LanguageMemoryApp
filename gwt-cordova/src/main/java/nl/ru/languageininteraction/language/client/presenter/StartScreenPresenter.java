@@ -17,9 +17,12 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.StartScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.view.StartScreenView;
@@ -32,8 +35,31 @@ public class StartScreenPresenter extends AbstractSvgPresenter implements Presen
 
     protected final StartScreenBuilder svgBuilder = new StartScreenBuilder();
 
-    public StartScreenPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new StartScreenView(audioPlayer));
+    public StartScreenPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
+        super(widgetTag, userResults, audioPlayer, new StartScreenView(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.infoscreen);
+            }
+        }, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
+            }
+        },
+                audioPlayer));
     }
 
     @Override

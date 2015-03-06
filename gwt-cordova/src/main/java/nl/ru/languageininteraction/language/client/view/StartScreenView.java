@@ -17,11 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import nl.ru.languageininteraction.language.client.ScorePageBuilder;
 import nl.ru.languageininteraction.language.client.StartScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
@@ -31,9 +30,13 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class StartScreenView extends AbstractSvgView {
 
     protected final StartScreenBuilder svgBuilder = new StartScreenBuilder();
+    protected final PresenterEventListner infoButtonListner;
+    protected final PresenterEventListner goButtonListner;
 
-    public StartScreenView(AudioPlayer audioPlayer) throws AudioException {
+    public StartScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+        this.infoButtonListner = infoButtonListner;
+        this.goButtonListner = goButtonListner;
     }
 
     @Override
@@ -42,18 +45,22 @@ public class StartScreenView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {
+    protected boolean performClick(final String svgGroupStateString) {
+        boolean consumed = false;
 //        nextEventListner.eventFired(null);
         label.setText(svgGroupStateString);
         StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
-            switch (svgGroup) {
-                case InfoButton:
-                    nextEventListner.eventFired(null);
-                    break;
-                case GoButton:
-                    backEventListner.eventFired(null);
-                    break;
-            }
+        switch (svgGroup) {
+            case InfoButton:
+                consumed = true;
+                infoButtonListner.eventFired(null);
+                break;
+            case GoButton:
+                consumed = true;
+                goButtonListner.eventFired(null);
+                break;
+        }
+        return consumed;
     }
 
     @Override

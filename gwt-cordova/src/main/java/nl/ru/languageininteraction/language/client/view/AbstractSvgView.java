@@ -87,7 +87,7 @@ public abstract class AbstractSvgView extends AbstractView {
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
 //        int height = Window.getClientHeight() - (HEADER_SIZE * 3);
 //        int width = Window.getClientWidth();
-        builder.append(SafeHtmlUtils.fromTrustedString("<svg class='svgDiagram' id='" + MatchLanguageBuilder.SvgGroupStates.diagram.name() + "' width=\"100%\" height=\"100%\" viewBox='0 0 568 320' >"));
+        builder.append(SafeHtmlUtils.fromTrustedString("<svg class='svgDiagram' id='" + MatchLanguageBuilder.SvgGroupStates.svgDiagram.name() + "' width=\"100%\" height=\"100%\" viewBox='0 0 568 320' >"));
         getSvg(builder);
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
         final HTML html = new HTML(builder.toSafeHtml());
@@ -96,14 +96,7 @@ public abstract class AbstractSvgView extends AbstractView {
             @Override
             public void onClick(ClickEvent event) {
                 event.preventDefault();
-                Element parentElement = Element.as(event.getNativeEvent().getEventTarget()).getParentElement();
-                while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
-                    parentElement = parentElement.getParentElement();
-                }
-                final String elementId = parentElement.getId();
-                if (!elementId.isEmpty()) {
-                    performClick(elementId);
-                }
+                eventTriggered(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
         html.addTouchEndHandler(new TouchEndHandler() {
@@ -111,14 +104,7 @@ public abstract class AbstractSvgView extends AbstractView {
             @Override
             public void onTouchEnd(TouchEndEvent event) {
                 event.preventDefault();
-                Element parentElement = Element.as(event.getNativeEvent().getEventTarget()).getParentElement();
-                while (parentElement.getParentElement() != null && parentElement.getId().isEmpty()) {
-                    parentElement = parentElement.getParentElement();
-                }
-                final String elementId = parentElement.getId();
-                if (!elementId.isEmpty()) {
-                    performClick(elementId);
-                }
+                eventTriggered(Element.as(event.getNativeEvent().getEventTarget()));
             }
         });
         html.setStylePrimaryName("svgPanel");
@@ -126,9 +112,27 @@ public abstract class AbstractSvgView extends AbstractView {
         add(verticalPanel);
     }
 
+    private void eventTriggered(Element targetElement) {
+        boolean consumed = false;
+        while (!consumed) {
+            while (targetElement.getParentElement() != null && targetElement.getId().isEmpty()) {
+                targetElement = targetElement.getParentElement();
+            }
+            final String elementId = targetElement.getId();
+            if (elementId.equals(MatchLanguageBuilder.SvgGroupStates.svgDiagram.name())) {
+                // we have navigated to the root node of the SVG
+                return;
+            }
+            if (!elementId.isEmpty()) {
+                consumed = performClick(elementId);
+            }
+            targetElement = targetElement.getParentElement();
+        }
+    }
+
     abstract protected void getSvg(SafeHtmlBuilder builder);
 
-    abstract protected void performClick(final String svgGroupStateString);
+    abstract protected boolean performClick(final String svgGroupStateString);
 
     abstract public void showAudioEnded();
 }
