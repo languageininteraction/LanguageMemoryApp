@@ -48,7 +48,6 @@ public class StartScreenView extends AbstractSvgView {
         StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
             switch (svgGroup) {
                 case InfoButton:
-                case ShareAndContinueButton:
                     nextEventListner.eventFired(null);
                     break;
                 case GoButton:

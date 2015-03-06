@@ -45,7 +45,7 @@ public class SimpleViewTest {
     public void testCheckTitleLength() throws FileNotFoundException, IOException {
         System.out.println("CheckTitleLength");
         final int maxTitleLength = 20;
-        final File directory = new File("./src/main/resources/nl/ru/languageininteraction/synaesthesia/client/");
+        final File directory = new File("./src/main/resources/nl/ru/languageininteraction/language/client/");
         assertTrue("Properties directory not found.", directory.exists());
         System.out.println(directory.getAbsolutePath());
         for (String fileName : directory.list(new FilenameFilter() {
