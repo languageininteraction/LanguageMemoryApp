@@ -37,7 +37,7 @@ public class LocalStorage {
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                userResults.setMetadataValue(metadataField.getPostName(), getCleanStoredData(USER_RESULTS + metadataField.getPostName()));
+                userResults.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + metadataField.getPostName()));
             }
         }
         userResults.updateBestScore(getCleanStoredInt(USER_RESULTS + MAX_SCORE));
@@ -69,7 +69,7 @@ public class LocalStorage {
         dataStore = Storage.getLocalStorageIfSupported();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField.getPostName()));
+                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField));
             }
         }
         dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getGameData().getBestScore()));

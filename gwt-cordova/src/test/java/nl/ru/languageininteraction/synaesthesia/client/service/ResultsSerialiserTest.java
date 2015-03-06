@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.synaesthesia.client.service;
 
 import java.util.Date;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
+import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserResults;
@@ -43,7 +44,8 @@ public class ResultsSerialiserTest {
         System.out.println("serialise");
         UserResults userResults = new UserResults();
         final String postName_email = "postName_email";
-        userResults.setMetadataValue(postName_email, "postName@email");
+        final MetadataField emailField = new MetadataField(postName_email, postName_email, postName_email, postName_email, postName_email);
+        userResults.setMetadataValue(emailField, "postName@email");
         final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
         roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
         roundData.setDurationMs(123456);
@@ -60,7 +62,7 @@ public class ResultsSerialiserTest {
         };
         String expResult = "postName@email	fij_1	cmn_2	arz_3,spa_3,deu_3,	Thu Jan 01 03:46:39 CET 1970	123456.0\n"
                 + "postName@email	cmn_1	spa_1	cmn_1,deu_1,fij_1,	Thu Jan 01 03:46:39 CET 1970	123456.0\n";
-        String result = instance.serialise(userResults, postName_email);
+        String result = instance.serialise(userResults, emailField);
         System.out.println(result);
         assertEquals(expResult, result);
     }

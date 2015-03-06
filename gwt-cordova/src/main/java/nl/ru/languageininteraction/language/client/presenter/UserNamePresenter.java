@@ -25,7 +25,6 @@ import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.view.MetadataView;
-import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 
 /**
  * @since Nov 14, 2014 3:28:10 PM (creation date)
@@ -34,7 +33,7 @@ import nl.ru.languageininteraction.language.client.exception.MetadataFieldExcept
 public class UserNamePresenter extends MetadataPresenter {
 
     private boolean isNewUser = true;
-    final MetadataField firstNameField = metadataFieldProvider.metadataFieldArray[0];
+    final MetadataField firstNameField = metadataFieldProvider.firstNameMetadataField;
 
     public UserNamePresenter(RootLayoutPanel widgetTag, UserResults userResults) {
         super(widgetTag, userResults);
@@ -48,7 +47,7 @@ public class UserNamePresenter extends MetadataPresenter {
     @Override
     protected void setContent(AppEventListner appEventListner) {
         
-        final String userNameValue = userResults.getMetadataValue(firstNameField.getPostName());
+        final String userNameValue = userResults.getMetadataValue(firstNameField);
         if (userNameValue != null && !userNameValue.isEmpty()) {
             ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 

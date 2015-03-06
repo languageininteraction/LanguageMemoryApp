@@ -17,10 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.UserDetailsBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
@@ -30,6 +30,13 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class PlayerDetailsView extends AbstractSvgView {
 
     protected final UserDetailsBuilder svgBuilder = new UserDetailsBuilder();
+    protected PresenterEventListner age1ButtonListner;
+    protected PresenterEventListner age2ButtonListner;
+    protected PresenterEventListner age3ButtonListner;
+    protected PresenterEventListner shareCheckBoxListner;
+    protected PresenterEventListner addListner;
+    protected PresenterEventListner removeListner;
+    protected PresenterEventListner editNameListner;
 
     public PlayerDetailsView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
@@ -40,9 +47,105 @@ public class PlayerDetailsView extends AbstractSvgView {
         svgBuilder.getSvg(builder);
     }
 
+    public void setAge1ButtonListner(PresenterEventListner age1ButtonListner) {
+        this.age1ButtonListner = age1ButtonListner;
+    }
+
+    public void setAge2ButtonListner(PresenterEventListner age2ButtonListner) {
+        this.age2ButtonListner = age2ButtonListner;
+    }
+
+    public void setAge3ButtonListner(PresenterEventListner age3ButtonListner) {
+        this.age3ButtonListner = age3ButtonListner;
+    }
+
+    public void setShareCheckBoxListner(PresenterEventListner shareCheckBoxListner) {
+        this.shareCheckBoxListner = shareCheckBoxListner;
+    }
+
+    public void setAddListner(PresenterEventListner addListner) {
+        this.addListner = addListner;
+    }
+
+    public void setRemoveListner(PresenterEventListner removeListner) {
+        this.removeListner = removeListner;
+    }
+
+    public void setEditNameListner(PresenterEventListner editNameListner) {
+        this.editNameListner = editNameListner;
+    }
+
+    public void clearAge() {
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1Selected);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2Selected);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3Selected);
+
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3);
+    }
+
+    public void setAge1() {
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2Selected);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3Selected);
+
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1Selected);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3);
+    }
+
+    public void setAge2() {
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1Selected);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3Selected);
+
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2Selected);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3);
+    }
+
+    public void setAge3() {
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2Selected);
+        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1Selected);
+
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat3Selected);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2);
+        svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1);
+    }
+
     @Override
-    protected void performClick(final String svgGroupStateString) {
-        nextEventListner.eventFired(null);
+    protected boolean performClick(final String svgGroupStateString) {
+        boolean consumed = false;
+        label.setText(svgGroupStateString);
+        UserDetailsBuilder.SvgGroupStates svgGroup = UserDetailsBuilder.SvgGroupStates.valueOf(svgGroupStateString);
+        switch (svgGroup) {
+            case AgeCat1:
+                consumed = true;
+                age1ButtonListner.eventFired(null);
+                break;
+            case AgeCat1Selected:
+                consumed = true;
+                break;
+            case AgeCat2:
+                consumed = true;
+                age2ButtonListner.eventFired(null);
+                break;
+            case AgeCat2Selected:
+                consumed = true;
+                break;
+            case AgeCat3:
+                consumed = true;
+                age3ButtonListner.eventFired(null);
+                break;
+            case AgeCat3Selected:
+                consumed = true;
+                break;
+            case Background:
+                backEventListner.eventFired(null);
+        }
+        return consumed;
     }
 
     @Override

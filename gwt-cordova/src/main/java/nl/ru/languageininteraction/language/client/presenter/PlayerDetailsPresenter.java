@@ -15,27 +15,84 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.PlayerDetailsView;
 
 /**
  * @since Feb 4, 2015 11:26:01 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class PlayerDetailsPresenter  extends AbstractSvgPresenter implements Presenter {
+public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Presenter {
 
-  public PlayerDetailsPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer) throws AudioException {
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
+    private final PlayerDetailsView playerDetailsView;
+
+    public PlayerDetailsPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer) throws AudioException {
         super(widgetTag, userResults, audioPlayer, new PlayerDetailsView(audioPlayer));
+        playerDetailsView = ((PlayerDetailsView) abstractSvgView);
     }
 
     @Override
     void configureSvg() {
+        String currentAge = userResults.getMetadataValue(metadataFieldProvider.ageMetadataField);
+        final String[] ageVocabulary = metadataFieldProvider.ageMetadataField.getControlledVocabulary();
+        if (ageVocabulary[0].equals(currentAge)) {
+            playerDetailsView.setAge1();
+        } else if (ageVocabulary[1].equals(currentAge)) {
+            playerDetailsView.setAge2();
+        } else if (ageVocabulary[2].equals(currentAge)) {
+            playerDetailsView.setAge3();
+        } else {
+            playerDetailsView.clearAge();
+        }
+
+        playerDetailsView.setAge1ButtonListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[0]);
+                playerDetailsView.setAge1();
+            }
+        });
+        playerDetailsView.setAge2ButtonListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[1]);
+                playerDetailsView.setAge2();
+            }
+        });
+        playerDetailsView.setAge3ButtonListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[2]);
+                playerDetailsView.setAge3();
+            }
+        });
     }
 
     @Override

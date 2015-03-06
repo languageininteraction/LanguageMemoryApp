@@ -26,7 +26,7 @@ import java.util.Set;
  */
 public class UserResults {
 
-    private final HashMap<String, String> metadataValues = new HashMap<>();
+    private final HashMap<MetadataField, String> metadataValues = new HashMap<>();
     private GameData gameData = new GameData();
     private StimuliGroup pendingStimuliGroup = null;
     private String scoreLog = "";
@@ -43,15 +43,15 @@ public class UserResults {
         return gameData;
     }
 
-    public void setMetadataValue(String key, String value) {
-        metadataValues.put(key, value);
+    public void setMetadataValue(MetadataField metadataField, String value) {
+        metadataValues.put(metadataField, value);
     }
 
-    public String getMetadataValue(String key) {
-        return metadataValues.get(key);
+    public String getMetadataValue(MetadataField metadataField) {
+        return metadataValues.get(metadataField);
     }
 
-    public Set<String> getMetadataKeys() {
+    public Set<MetadataField> getMetadataFields() {
         return metadataValues.keySet();
     }
 

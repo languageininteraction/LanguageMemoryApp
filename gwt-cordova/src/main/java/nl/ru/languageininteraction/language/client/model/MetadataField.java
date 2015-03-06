@@ -28,14 +28,14 @@ public class MetadataField {
 
     private final String postName;
     private final String fieldLabel;
-    private final String controlledVocabulary;
+    private final String[] controlledVocabulary;
     private final String controlledRegex;
     private final String controlledMessage;
 
     public MetadataField(String postName, String fieldLabel, String controlledVocabulary, String controlledRegex, String controlledMessage) {
         this.postName = postName;
         this.fieldLabel = fieldLabel;
-        this.controlledVocabulary = controlledVocabulary;
+        this.controlledVocabulary = (controlledVocabulary != null) ? controlledVocabulary.split(",") : null;
         this.controlledRegex = controlledRegex;
         this.controlledMessage = controlledMessage;
     }
@@ -48,7 +48,7 @@ public class MetadataField {
         return fieldLabel;
     }
 
-    public String getControlledVocabulary() {
+    public String[] getControlledVocabulary() {
         return controlledVocabulary;
     }
 
@@ -81,6 +81,6 @@ public class MetadataField {
             return false;
         }
         final MetadataField other = (MetadataField) obj;
-        return true;
+        return other.postName.equals(postName);
     }
 }

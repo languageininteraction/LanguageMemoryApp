@@ -68,7 +68,7 @@ public class RegisterPresenter extends AbstractPresenter implements Presenter {
     protected void setContent(final AppEventListner appEventListner) {
         ((RegisterView) simpleView).addText(messages.registerScreenText());
         for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField.getPostName()));
+            ((RegisterView) simpleView).addField(metadataField.getFieldLabel(), userResults.getMetadataValue(metadataField));
         }
         ((RegisterView) simpleView).addOptionButton(new PresenterEventListner() {
 
