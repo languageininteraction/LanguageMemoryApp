@@ -24,12 +24,18 @@ import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
@@ -132,6 +138,48 @@ public abstract class AbstractSvgView extends AbstractView {
             }
             targetElement = targetElement.getParentElement();
         }
+    }
+
+    public void showTextEntryPopop(final PresenterEventListner saveEventListner, IsWidget popupContentWidget) {
+        final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
+        popupPanel.setGlassEnabled(true);
+        popupPanel.setStylePrimaryName("stimulusHelpPanel");
+        final VerticalPanel popupverticalPanel = new VerticalPanel();
+        popupverticalPanel.add(popupContentWidget);
+
+        popupverticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+        final SingleShotEventListner cancelSingleShotEventListner = new SingleShotEventListner() {
+
+            @Override
+            protected void singleShotFired() {
+                popupPanel.hide();
+            }
+        };
+        final SingleShotEventListner okSingleShotEventListner = new SingleShotEventListner() {
+
+            @Override
+            protected void singleShotFired() {
+                popupPanel.hide();
+                saveEventListner.eventFired(null);
+            }
+        };
+        final Button cancelButton = new Button("cancelButtonLabel");
+        cancelButton.addClickHandler(cancelSingleShotEventListner);
+        cancelButton.addTouchStartHandler(cancelSingleShotEventListner);
+        cancelButton.addTouchMoveHandler(cancelSingleShotEventListner);
+        cancelButton.addTouchEndHandler(cancelSingleShotEventListner);
+        final Button okButton = new Button("okButtonLabel");
+        okButton.addClickHandler(okSingleShotEventListner);
+        okButton.addTouchStartHandler(okSingleShotEventListner);
+        okButton.addTouchMoveHandler(okSingleShotEventListner);
+        okButton.addTouchEndHandler(okSingleShotEventListner);
+
+        final HorizontalPanel buttonPanel = new HorizontalPanel();
+        buttonPanel.add(cancelButton);
+        buttonPanel.add(okButton);
+        popupverticalPanel.add(buttonPanel);
+        popupPanel.setWidget(popupverticalPanel);
+        popupPanel.center();
     }
 
     abstract protected void getSvg(SafeHtmlBuilder builder);

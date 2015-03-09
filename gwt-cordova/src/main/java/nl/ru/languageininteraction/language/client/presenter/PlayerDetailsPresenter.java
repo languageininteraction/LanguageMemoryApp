@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
@@ -114,6 +115,35 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
                 }
             }
         });
+        playerDetailsView.setEditNameListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                final TextBox userNameBox = new TextBox();
+                userNameBox.setStylePrimaryName("stimulusHelpText");
+                userNameBox.setValue(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+                playerDetailsView.showTextEntryPopop(new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        userResults.setMetadataValue(metadataFieldProvider.firstNameMetadataField, userNameBox.getValue());
+                        playerDetailsView.setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+                    }
+                }, userNameBox);
+            }
+        });
+        playerDetailsView.setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+        playerDetailsView.setUserScoreField(userResults.getGameData().getBestScore());
     }
 
     @Override

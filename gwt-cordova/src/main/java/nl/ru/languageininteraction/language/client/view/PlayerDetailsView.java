@@ -125,12 +125,24 @@ public class PlayerDetailsView extends AbstractSvgView {
         svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1);
     }
 
+    public void setUserNameField(String userName) {
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3285, userName);
+    }
+
+    public void setUserScoreField(int userScore) {
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3303, String.valueOf(userScore));
+    }
+
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
         label.setText(svgGroupStateString);
         UserDetailsBuilder.SvgGroupStates svgGroup = UserDetailsBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
+            case NameField:
+                consumed = true;
+                editNameListner.eventFired(null);
+                break;
             case AgeCat1:
                 consumed = true;
                 age1ButtonListner.eventFired(null);
