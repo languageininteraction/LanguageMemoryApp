@@ -124,7 +124,11 @@ public abstract class AbstractSvgView extends AbstractView {
                 return;
             }
             if (!elementId.isEmpty()) {
-                consumed = performClick(elementId);
+                try {
+                    consumed = performClick(elementId);
+                } catch (IllegalArgumentException exception) {
+                    // id values can exist outside of group tags, only group tags are put into the enum and so this exception is not exceptional
+                }
             }
             targetElement = targetElement.getParentElement();
         }

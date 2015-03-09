@@ -43,6 +43,8 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
     @Override
     void configureSvg() {
         String currentAge = userResults.getMetadataValue(metadataFieldProvider.ageMetadataField);
+        boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getMetadataValue(metadataFieldProvider.shareMetadataField));
+        playerDetailsView.setShareData(shareAgreed);
         final String[] ageVocabulary = metadataFieldProvider.ageMetadataField.getControlledVocabulary();
         if (ageVocabulary[0].equals(currentAge)) {
             playerDetailsView.setAge1();
@@ -91,6 +93,25 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
             public void eventFired(Button button) {
                 userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[2]);
                 playerDetailsView.setAge3();
+            }
+        });
+        playerDetailsView.setShareCheckBoxListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getMetadataValue(metadataFieldProvider.shareMetadataField));
+                if (shareAgreed) {
+                    userResults.setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
+                    playerDetailsView.setShareData(Boolean.FALSE);
+                } else {
+                    userResults.setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+                    playerDetailsView.setShareData(Boolean.TRUE);
+                }
             }
         });
     }

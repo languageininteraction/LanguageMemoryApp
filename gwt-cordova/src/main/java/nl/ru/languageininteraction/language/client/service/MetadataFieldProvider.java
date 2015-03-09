@@ -29,6 +29,7 @@ public class MetadataFieldProvider {
 
     private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
     public final MetadataField ageMetadataField = new MetadataField(mateadataFields.postName_age(), mateadataFields.registrationField_age(), mateadataFields.fieldValues_age(), null, null);
+    public final MetadataField shareMetadataField = new MetadataField(mateadataFields.postName_share(), mateadataFields.registrationField_share(), mateadataFields.fieldValues_share(), mateadataFields.controlledRegex_share(), mateadataFields.controlledMessage_share());
     public final MetadataField emailMetadataField = new MetadataField(mateadataFields.postName_email(), mateadataFields.registrationField_email(), null, mateadataFields.controlledRegex_email(), mateadataFields.controlledMessage_email());
     public final MetadataField firstNameMetadataField = new MetadataField(mateadataFields.postName_firstname(), mateadataFields.registrationField_firstname(), null, mateadataFields.controlledRegex_firstname(), mateadataFields.controlledMessage_firstname());
     public final MetadataField[] metadataFieldArray = new MetadataField[]{

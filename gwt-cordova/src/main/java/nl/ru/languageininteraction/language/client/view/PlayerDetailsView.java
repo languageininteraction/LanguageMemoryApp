@@ -75,6 +75,16 @@ public class PlayerDetailsView extends AbstractSvgView {
         this.editNameListner = editNameListner;
     }
 
+    public void setShareData(Boolean shareOption) {
+        if (shareOption) {
+            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
+            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
+        } else {
+            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
+            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
+        }
+    }
+
     public void clearAge() {
         svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat1Selected);
         svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AgeCat2Selected);
@@ -142,8 +152,19 @@ public class PlayerDetailsView extends AbstractSvgView {
             case AgeCat3Selected:
                 consumed = true;
                 break;
-            case Background:
-                backEventListner.eventFired(null);
+//            case Background:
+//                backEventListner.eventFired(null);
+//                break;
+            case ShareBox:
+            case ShareCheckBoxChecked:
+            case ShareCheckBoxUnchecked:
+                shareCheckBoxListner.eventFired(null);
+                consumed = true;
+                break;
+            case ShareAndContinueButton:
+                nextEventListner.eventFired(null);
+                consumed = true;
+                break;
         }
         return consumed;
     }
