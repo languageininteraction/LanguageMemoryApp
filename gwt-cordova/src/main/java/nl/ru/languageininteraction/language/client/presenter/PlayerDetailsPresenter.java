@@ -24,6 +24,7 @@ import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.PlayerDetailsView;
 
@@ -127,7 +128,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
                 final TextBox userNameBox = new TextBox();
                 userNameBox.setStylePrimaryName("stimulusHelpText");
                 userNameBox.setValue(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
-                playerDetailsView.showTextEntryPopop(new PresenterEventListner() {
+                playerDetailsView.showWidgetPopup(new PresenterEventListner() {
 
                     @Override
                     public String getLabel() {
@@ -148,6 +149,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
     @Override
     boolean nextEventFired() {
+        new LocalStorage().storeData(userResults);
         return true;
     }
 }

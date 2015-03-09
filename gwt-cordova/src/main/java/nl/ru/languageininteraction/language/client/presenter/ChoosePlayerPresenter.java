@@ -24,6 +24,7 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
 
 /**
@@ -32,8 +33,30 @@ import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
  */
 public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Presenter {
 
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
+    final AppEventListner appEventListner;
+
     public ChoosePlayerPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new ChoosePlayerView(new PresenterEventListner() {
+        super(widgetTag, userResults, audioPlayer, new ChoosePlayerView(audioPlayer));
+        this.appEventListner = appEventListner;
+    }
+
+    @Override
+    void configureSvg() {
+        ((ChoosePlayerView) abstractSvgView).setEditButtonListner(
+                new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
+                    }
+                });
+        ((ChoosePlayerView) abstractSvgView).setGoButtonListner(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -42,20 +65,11 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
-            }
-        }, new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return "";
-            }
-
-            @Override
-            public void eventFired(Button button) {
+//                appEventListner.requestApplicationState(AppEventListner.ApplicationState.scores);
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
             }
-        }, new PresenterEventListner() {
+        });
+        ((ChoosePlayerView) abstractSvgView).setCreateButtonListner(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -66,7 +80,8 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
             public void eventFired(Button button) {
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.createplayer);
             }
-        }, new PresenterEventListner() {
+        });
+        ((ChoosePlayerView) abstractSvgView).setSwitchButtonListner(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -75,13 +90,32 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
-            }
-        }, audioPlayer));
-    }
+                ((ChoosePlayerView) abstractSvgView).showChoosePlayer(new PresenterEventListner[]{new PresenterEventListner() {
 
-    @Override
-    void configureSvg() {
+                    @Override
+                    public String getLabel() {
+                        return "a player";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                }, new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "b player";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                }});
+            }
+        });
+        ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
     }
 
     @Override

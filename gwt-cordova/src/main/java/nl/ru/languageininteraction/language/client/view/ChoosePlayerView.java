@@ -18,6 +18,8 @@
 package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ListBox;
 import nl.ru.languageininteraction.language.client.ChoosePlayerScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
@@ -30,16 +32,28 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class ChoosePlayerView extends AbstractSvgView {
 
     protected final ChoosePlayerScreenBuilder svgBuilder = new ChoosePlayerScreenBuilder();
-    protected final PresenterEventListner editButtonListner;
-    protected final PresenterEventListner goButtonListner;
-    protected final PresenterEventListner createButtonListner;
-    protected final PresenterEventListner switchButtonListner;
+    protected PresenterEventListner editButtonListner;
+    protected PresenterEventListner goButtonListner;
+    protected PresenterEventListner createButtonListner;
+    protected PresenterEventListner switchButtonListner;
 
-    public ChoosePlayerView(PresenterEventListner editButtonListner, PresenterEventListner goButtonListner, PresenterEventListner createButtonListner, PresenterEventListner switchButtonListner, AudioPlayer audioPlayer) throws AudioException {
+    public ChoosePlayerView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+    }
+
+    public void setEditButtonListner(PresenterEventListner editButtonListner) {
         this.editButtonListner = editButtonListner;
+    }
+
+    public void setGoButtonListner(PresenterEventListner goButtonListner) {
         this.goButtonListner = goButtonListner;
+    }
+
+    public void setCreateButtonListner(PresenterEventListner createButtonListner) {
         this.createButtonListner = createButtonListner;
+    }
+
+    public void setSwitchButtonListner(PresenterEventListner switchButtonListner) {
         this.switchButtonListner = switchButtonListner;
     }
 
@@ -79,5 +93,28 @@ public class ChoosePlayerView extends AbstractSvgView {
 
     @Override
     public void showAudioEnded() {
+    }
+
+    public void showChoosePlayer(final PresenterEventListner[] playerListeners) {
+        final ListBox listBox = new ListBox();
+        for (PresenterEventListner currentListener : playerListeners) {
+            listBox.addItem(currentListener.getLabel());
+        }
+        showWidgetPopup(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                playerListeners[listBox.getSelectedIndex()].eventFired(null);
+            }
+        }, listBox);
+    }
+
+    public void setUserNameField(String userName) {
+        svgBuilder.setLabel(ChoosePlayerScreenBuilder.SvgTextElements.tspan3491, userName);
     }
 }

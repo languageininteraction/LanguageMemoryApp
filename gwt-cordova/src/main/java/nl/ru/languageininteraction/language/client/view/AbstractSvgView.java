@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client.view;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -33,6 +34,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import nl.ru.languageininteraction.language.client.MatchLanguageBuilder;
+import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.listener.SingleShotEventListner;
@@ -44,6 +46,7 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
  */
 public abstract class AbstractSvgView extends AbstractView {
 
+    protected final Messages messages = GWT.create(Messages.class);
     final VerticalPanel verticalPanel = new VerticalPanel();
     protected final AudioPlayer audioPlayer;
     protected PresenterEventListner backEventListner = null;
@@ -140,7 +143,11 @@ public abstract class AbstractSvgView extends AbstractView {
         }
     }
 
-    public void showTextEntryPopop(final PresenterEventListner saveEventListner, IsWidget popupContentWidget) {
+    public void showWidgetPopup(IsWidget popupContentWidget) {
+        showWidgetPopup(null, popupContentWidget);
+    }
+
+    public void showWidgetPopup(final PresenterEventListner saveEventListner, IsWidget popupContentWidget) {
         final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
         popupPanel.setGlassEnabled(true);
         popupPanel.setStylePrimaryName("stimulusHelpPanel");
@@ -155,28 +162,29 @@ public abstract class AbstractSvgView extends AbstractView {
                 popupPanel.hide();
             }
         };
-        final SingleShotEventListner okSingleShotEventListner = new SingleShotEventListner() {
-
-            @Override
-            protected void singleShotFired() {
-                popupPanel.hide();
-                saveEventListner.eventFired(null);
-            }
-        };
-        final Button cancelButton = new Button("cancelButtonLabel");
+        final HorizontalPanel buttonPanel = new HorizontalPanel();
+        final Button cancelButton = new Button(messages.popupCancelButtonLabel());
         cancelButton.addClickHandler(cancelSingleShotEventListner);
         cancelButton.addTouchStartHandler(cancelSingleShotEventListner);
         cancelButton.addTouchMoveHandler(cancelSingleShotEventListner);
         cancelButton.addTouchEndHandler(cancelSingleShotEventListner);
-        final Button okButton = new Button("okButtonLabel");
-        okButton.addClickHandler(okSingleShotEventListner);
-        okButton.addTouchStartHandler(okSingleShotEventListner);
-        okButton.addTouchMoveHandler(okSingleShotEventListner);
-        okButton.addTouchEndHandler(okSingleShotEventListner);
-
-        final HorizontalPanel buttonPanel = new HorizontalPanel();
         buttonPanel.add(cancelButton);
-        buttonPanel.add(okButton);
+        if (saveEventListner != null) {
+            final SingleShotEventListner okSingleShotEventListner = new SingleShotEventListner() {
+
+                @Override
+                protected void singleShotFired() {
+                    popupPanel.hide();
+                    saveEventListner.eventFired(null);
+                }
+            };
+            final Button okButton = new Button(messages.popupOkButtonLabel());
+            okButton.addClickHandler(okSingleShotEventListner);
+            okButton.addTouchStartHandler(okSingleShotEventListner);
+            okButton.addTouchMoveHandler(okSingleShotEventListner);
+            okButton.addTouchEndHandler(okSingleShotEventListner);
+            buttonPanel.add(okButton);
+        }
         popupverticalPanel.add(buttonPanel);
         popupPanel.setWidget(popupverticalPanel);
         popupPanel.center();

@@ -40,6 +40,7 @@ public class MetadataFieldProvider {
         new MetadataField(mateadataFields.postName_language(), mateadataFields.registrationField_language(), null, null, null),
         new MetadataField(mateadataFields.postName_ethnicity(), mateadataFields.registrationField_ethnicity(), mateadataFields.fieldValues_ethnicity(), null, null),
         new MetadataField(mateadataFields.postName_gender(), mateadataFields.registrationField_gender(), mateadataFields.fieldValues_gender(), null, null),
-        emailMetadataField
+        emailMetadataField,
+        shareMetadataField
     };
 }
