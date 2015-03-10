@@ -150,7 +150,7 @@ public abstract class AbstractSvgView extends AbstractView {
     public void showWidgetPopup(final PresenterEventListner saveEventListner, IsWidget popupContentWidget) {
         final PopupPanel popupPanel = new PopupPanel(false); // the close action to this panel causes background buttons to be clicked
         popupPanel.setGlassEnabled(true);
-        popupPanel.setStylePrimaryName("stimulusHelpPanel");
+        popupPanel.setStylePrimaryName("svgPopupPanel");
         final VerticalPanel popupverticalPanel = new VerticalPanel();
         popupverticalPanel.add(popupContentWidget);
 

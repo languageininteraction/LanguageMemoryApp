@@ -97,6 +97,8 @@ public class ChoosePlayerView extends AbstractSvgView {
 
     public void showChoosePlayer(final PresenterEventListner[] playerListeners) {
         final ListBox listBox = new ListBox();
+        listBox.setVisibleItemCount(5);
+        listBox.setStylePrimaryName("choosePlayerList");
         for (PresenterEventListner currentListener : playerListeners) {
             listBox.addItem(currentListener.getLabel());
         }

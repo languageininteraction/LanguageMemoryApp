@@ -72,8 +72,14 @@
     left:0; 
     right:0
 }
+.choosePlayerList {
+    /*color: green;*/
+    width: 100%;
+}
 
+.svgPopupPanel .gwt-Button,
 .stimulusHelpPanel .gwt-Button,
+.choosePlayerList,
 .gwt-Button.stimulusButton, .gwt-Button.stimulusQuitButton {
     display: block;
     display: inline-block;
@@ -107,6 +113,8 @@
     width: 100%;
 }
 
+.svgPopupPanel .gwt-Button,
+.choosePlayerList,
 .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 #widgetTag, .stimulusScreen, .menuTable, .gwt-Label.stimulusProgressLabel, .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     /* prevent text selection on the buttons */
@@ -137,6 +145,8 @@
     background:lightgrey;
     border: none;
 }
+
+.choosePlayerList,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {
     cursor: pointer;
     border-width: 0px;
@@ -227,6 +237,7 @@ canvas {
     padding: 10px 10px 10px 10px;
 }
 
+.svgPopupPanel,
 .stimulusHelpPanel {
     border: none; 
     background: white;
@@ -235,6 +246,7 @@ canvas {
     padding: 10px 10px 10px 10px;
 }
 
+.svgPopupPanel .gwt-Button,
 .stimulusHelpPanel .gwt-Button {
     background: darkgrey;
     color: white;
@@ -280,6 +292,8 @@ canvas {
     /*background: green;*/
 }
 
+.choosePlayerList,
+.svgPopupPanel .gwt-Button,
 table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 .gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
@@ -313,6 +327,8 @@ table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
     line-height: 20pt;
 } 
 
+.choosePlayerList,
+.svgPopupPanel .gwt-Button,
 .stimulusHelpText,
 table#screenExample td, .stimulusHelpPanel .gwt-Button,
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, .metadataErrorMessage,
