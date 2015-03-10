@@ -17,42 +17,32 @@
  */
 package nl.ru.languageininteraction.language.client.model;
 
-import java.util.HashMap;
-import java.util.Set;
-
 /**
  * @since Oct 14, 2014 1:11:22 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
 public class UserResults {
 
-    private final HashMap<MetadataField, String> metadataValues = new HashMap<>();
+    private UserData userData = null;
     private GameData gameData = new GameData();
     private StimuliGroup pendingStimuliGroup = null;
     private String scoreLog = "";
 
-    public void clearResults() {
-        gameData = new GameData();
+    public void setUser(UserData userId) {
+        this.userData = userId;
     }
 
-    public void clearMetadata() {
-        metadataValues.clear();
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void clearResults() {
+        // todo: is this needed? 
+        gameData = new GameData();
     }
 
     public GameData getGameData() {
         return gameData;
-    }
-
-    public void setMetadataValue(MetadataField metadataField, String value) {
-        metadataValues.put(metadataField, value);
-    }
-
-    public String getMetadataValue(MetadataField metadataField) {
-        return metadataValues.get(metadataField);
-    }
-
-    public Set<MetadataField> getMetadataFields() {
-        return metadataValues.keySet();
     }
 
     public StimuliGroup getPendingStimuliGroup() {

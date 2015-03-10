@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.language.client.view;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import java.util.List;
 import nl.ru.languageininteraction.language.client.ChoosePlayerScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
@@ -95,7 +96,7 @@ public class ChoosePlayerView extends AbstractSvgView {
     public void showAudioEnded() {
     }
 
-    public void showChoosePlayer(final PresenterEventListner[] playerListeners) {
+    public void showChoosePlayer(final List<PresenterEventListner> playerListeners) {
         final ListBox listBox = new ListBox();
         listBox.setVisibleItemCount(5);
         listBox.setStylePrimaryName("choosePlayerList");
@@ -111,7 +112,7 @@ public class ChoosePlayerView extends AbstractSvgView {
 
             @Override
             public void eventFired(Button button) {
-                playerListeners[listBox.getSelectedIndex()].eventFired(null);
+                playerListeners.get(listBox.getSelectedIndex()).eventFired(null);
             }
         }, listBox);
     }

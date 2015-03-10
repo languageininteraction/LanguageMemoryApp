@@ -45,7 +45,7 @@ public class ResultsSerialiserTest {
         UserResults userResults = new UserResults();
         final String postName_email = "postName_email";
         final MetadataField emailField = new MetadataField(postName_email, postName_email, postName_email, postName_email, postName_email);
-        userResults.setMetadataValue(emailField, "postName@email");
+        userResults.getUserData().setMetadataValue(emailField, "postName@email");
         final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
         roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
         roundData.setDurationMs(123456);

@@ -19,11 +19,14 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import java.util.ArrayList;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.UserData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
 
@@ -90,32 +93,27 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-                ((ChoosePlayerView) abstractSvgView).showChoosePlayer(new PresenterEventListner[]{new PresenterEventListner() {
+                ArrayList<PresenterEventListner> playerListeners = new ArrayList<>();
+                for (final UserData userId : new LocalStorage().getUserIdList()) {
+                    playerListeners.add(new PresenterEventListner() {
 
-                    @Override
-                    public String getLabel() {
-                        return "a player";
-                    }
+                        @Override
+                        public String getLabel() {
+                            return userId.getUserLabel();
+                        }
 
-                    @Override
-                    public void eventFired(Button button) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-                }, new PresenterEventListner() {
-
-                    @Override
-                    public String getLabel() {
-                        return "b player";
-                    }
-
-                    @Override
-                    public void eventFired(Button button) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-                }});
+                        @Override
+                        public void eventFired(Button button) {
+                            userResults.setUser(userId);
+                            ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+                        }
+                    });
+                }
+                ((ChoosePlayerView) abstractSvgView).showChoosePlayer(playerListeners);
             }
-        });
-        ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+        }
+        );
+        ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
     }
 
     @Override

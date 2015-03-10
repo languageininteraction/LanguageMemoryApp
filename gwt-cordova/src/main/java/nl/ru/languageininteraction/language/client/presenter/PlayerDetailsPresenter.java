@@ -44,8 +44,8 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
     @Override
     void configureSvg() {
-        String currentAge = userResults.getMetadataValue(metadataFieldProvider.ageMetadataField);
-        boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getMetadataValue(metadataFieldProvider.shareMetadataField));
+        String currentAge = userResults.getUserData().getMetadataValue(metadataFieldProvider.ageMetadataField);
+        boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
         playerDetailsView.setShareData(shareAgreed);
         final String[] ageVocabulary = metadataFieldProvider.ageMetadataField.getControlledVocabulary();
         if (ageVocabulary[0].equals(currentAge)) {
@@ -67,7 +67,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[0]);
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[0]);
                 playerDetailsView.setAge1();
             }
         });
@@ -80,7 +80,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[1]);
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[1]);
                 playerDetailsView.setAge2();
             }
         });
@@ -93,7 +93,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                userResults.setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[2]);
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.ageMetadataField, metadataFieldProvider.ageMetadataField.getControlledVocabulary()[2]);
                 playerDetailsView.setAge3();
             }
         });
@@ -106,12 +106,12 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getMetadataValue(metadataFieldProvider.shareMetadataField));
+                boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
                 if (shareAgreed) {
-                    userResults.setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
+                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
                     playerDetailsView.setShareData(Boolean.FALSE);
                 } else {
-                    userResults.setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
                     playerDetailsView.setShareData(Boolean.TRUE);
                 }
             }
@@ -127,7 +127,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
             public void eventFired(Button button) {
                 final TextBox userNameBox = new TextBox();
                 userNameBox.setStylePrimaryName("stimulusHelpText");
-                userNameBox.setValue(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+                userNameBox.setValue(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
                 playerDetailsView.showWidgetPopup(new PresenterEventListner() {
 
                     @Override
@@ -137,13 +137,13 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
                     @Override
                     public void eventFired(Button button) {
-                        userResults.setMetadataValue(metadataFieldProvider.firstNameMetadataField, userNameBox.getValue());
-                        playerDetailsView.setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+                        userResults.getUserData().setMetadataValue(metadataFieldProvider.firstNameMetadataField, userNameBox.getValue());
+                        playerDetailsView.setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
                     }
                 }, userNameBox);
             }
         });
-        playerDetailsView.setUserNameField(userResults.getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+        playerDetailsView.setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
         playerDetailsView.setUserScoreField(userResults.getGameData().getBestScore());
     }
 

@@ -33,7 +33,7 @@ public abstract class ResultsSerialiser {
     public String serialise(UserResults userResults, MetadataField metadataField_email) {
         StringBuilder stringBuilder = new StringBuilder();
         for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
-            stringBuilder.append(userResults.getMetadataValue(metadataField_email));
+            stringBuilder.append(userResults.getUserData().getMetadataValue(metadataField_email));
             stringBuilder.append("\t");
             stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
             stringBuilder.append("_");

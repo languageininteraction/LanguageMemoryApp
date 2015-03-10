@@ -51,8 +51,8 @@ public class RegistrationService {
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
         StringBuilder stringBuilder = new StringBuilder();
-        for (MetadataField key : userResults.getMetadataFields()) {
-            String value = URL.encodeQueryString(userResults.getMetadataValue(key));
+        for (MetadataField key : userResults.getUserData().getMetadataFields()) {
+            String value = URL.encodeQueryString(userResults.getUserData().getMetadataValue(key));
             if (stringBuilder.length() > 0) {
                 stringBuilder.append("&");
             }

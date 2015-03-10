@@ -47,7 +47,7 @@ public class UserNamePresenter extends MetadataPresenter {
     @Override
     protected void setContent(AppEventListner appEventListner) {
         
-        final String userNameValue = userResults.getMetadataValue(firstNameField);
+        final String userNameValue = userResults.getUserData().getMetadataValue(firstNameField);
         if (userNameValue != null && !userNameValue.isEmpty()) {
             ((MetadataView) simpleView).addOptionButton(new PresenterEventListner() {
 
@@ -98,7 +98,7 @@ public class UserNamePresenter extends MetadataPresenter {
     protected void saveFields() {
         if (isNewUser) {
             userResults.clearResults();
-            userResults.clearMetadata();
+            userResults.getUserData().clearMetadata();
             new LocalStorage().clear();
             super.saveFields();
         }

@@ -54,7 +54,7 @@ public class StartScreenView extends AbstractSvgView {
                 consumed = true;
                 infoButtonListner.eventFired(null);
                 break;
-                case LQLogo:
+            case LQLogo:
             case GoButton:
                 consumed = true;
                 goButtonListner.eventFired(null);

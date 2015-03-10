@@ -17,9 +17,14 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
+import com.google.gwt.core.client.GWT;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import com.google.gwt.storage.client.Storage;
+import java.util.ArrayList;
+import java.util.List;
+import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
+import nl.ru.languageininteraction.language.client.model.UserData;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -29,15 +34,23 @@ public class LocalStorage {
 
     private Storage dataStore = null;
     private static final String USER_RESULTS = "UserResults.";
+    private static final String LAST_USER_ID = "LastUserId.";
     protected static final String MAX_SCORE = "maxScore";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
-    public UserResults getStoredData() {
+    private Storage loadStorage() {
+        if (dataStore == null) {
+            dataStore = Storage.getLocalStorageIfSupported();
+        }
+        return dataStore;
+    }
+
+    public UserResults getStoredData(UserData userData) {
         UserResults userResults = new UserResults();
-        dataStore = Storage.getLocalStorageIfSupported();
+        loadStorage();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                userResults.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + metadataField.getPostName()));
+                userData.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + userData.getRandomIdString() + "." + metadataField.getPostName()));
             }
         }
         userResults.updateBestScore(getCleanStoredInt(USER_RESULTS + MAX_SCORE));
@@ -59,19 +72,44 @@ public class LocalStorage {
     }
 
     public void clear() {
-        dataStore = Storage.getLocalStorageIfSupported();
+        loadStorage();
         if (dataStore != null) {
             dataStore.clear();
         }
     }
 
     public void storeData(UserResults userResults) {
-        dataStore = Storage.getLocalStorageIfSupported();
+        loadStorage();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getMetadataValue(metadataField));
+                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getUserData().getMetadataValue(metadataField));
             }
         }
         dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getGameData().getBestScore()));
+    }
+
+    public UserData getLastUserId() {
+        loadStorage();
+        if (dataStore != null) {
+            final String storedUserId = dataStore.getItem(LAST_USER_ID);
+            return new UserData(null, storedUserId);
+        } else {
+            return new UserData("last used id");
+        }
+    }
+
+    private final Messages messages = GWT.create(Messages.class);
+
+    public List<UserData> getUserIdList() {
+        ArrayList<UserData> userIdList = new ArrayList<>();
+        userIdList.add(new UserData(messages.defaultUserName() + 1));
+        userIdList.add(new UserData(messages.defaultUserName() + 2));
+        userIdList.add(new UserData(messages.defaultUserName() + 3));
+        userIdList.add(new UserData(messages.defaultUserName() + 4));
+        userIdList.add(new UserData(messages.defaultUserName() + 5));
+        userIdList.add(new UserData(messages.defaultUserName() + 6));
+        userIdList.add(new UserData(messages.defaultUserName() + 7));
+        userIdList.add(new UserData(messages.defaultUserName() + 8));
+        return userIdList;
     }
 }
