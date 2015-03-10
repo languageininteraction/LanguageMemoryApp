@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.storage.client.Storage;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
@@ -52,7 +53,7 @@ public class LocalStoragePresenter extends AbstractPresenter {
             public void eventFired(Button button) {
                 final Storage localStorage = Storage.getLocalStorageIfSupported();
                 localStorage.clear();
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.start);
+                Window.Location.replace(Window.Location.getPath());
             }
         });
 

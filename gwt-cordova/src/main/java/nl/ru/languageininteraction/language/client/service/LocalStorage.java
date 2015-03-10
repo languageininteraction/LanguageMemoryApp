@@ -89,14 +89,15 @@ public class LocalStorage {
         dataStore.setItem(LAST_USER_ID, userResults.getUserData().getUserId().toString());
     }
 
-    public UserId getLastUserData() {
+    public UserId getLastUserId() {
         loadStorage();
         if (dataStore != null) {
-            final String storedUserId = dataStore.getItem(LAST_USER_ID);
-            return new UserId(storedUserId);
-        } else {
-            return new UserId();
+            final String storedUserId = getCleanStoredData(LAST_USER_ID);
+            if (!storedUserId.isEmpty()) {
+                return new UserId(storedUserId);
+            }
         }
+        return null;
     }
 
     public List<UserLabelData> getUserIdList() {
@@ -108,8 +109,11 @@ public class LocalStorage {
             for (int itemIndex = 0; itemIndex < dataStore.getLength(); itemIndex++) {
                 final String key = dataStore.key(itemIndex);
                 if (key.endsWith(postName)) {
-                    final String userIdString = key.split(".")[1];
-                    userIdList.add(new UserLabelData(new UserId(userIdString), dataStore.getItem(key)));
+                    final String userIdString = key.split("\\.")[1];
+                    final String cleanStoredData = getCleanStoredData(key);
+                    if (!cleanStoredData.isEmpty()) {
+                        userIdList.add(new UserLabelData(new UserId(userIdString), cleanStoredData));
+                    }
                 }
             }
         }

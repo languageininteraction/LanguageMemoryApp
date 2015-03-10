@@ -22,6 +22,8 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AudioExceptionListner;
+import nl.ru.languageininteraction.language.client.model.UserData;
+import nl.ru.languageininteraction.language.client.model.UserId;
 import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
 import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
@@ -59,14 +61,19 @@ public class AppController implements AppEventListner, AudioExceptionListner {
 
     public AppController(RootLayoutPanel widgetTag) {
         this.widgetTag = widgetTag;
-        userResults = new UserResults(localStorage.getStoredData(localStorage.getLastUserData()));
+        final UserId lastUserId = localStorage.getLastUserId();
+        if (lastUserId == null) {
+            userResults = new UserResults(new UserData(messages.defaultUserName()));
+        } else {
+            userResults = new UserResults(localStorage.getStoredData(lastUserId));
+        }
     }
 
     @Override
     public void requestApplicationState(ApplicationState applicationState) {
         try {
             trackView(applicationState.name());
-// todo:
+            // todo:
             // on each state change check if there is an completed game data, if the share is true then upload or store if offline
             // when any stored data is uploaded then delete the store 
             // on new game play erase any in memory game data regardless of its shared or not shared state
