@@ -17,13 +17,16 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.ArrayList;
+import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserData;
+import nl.ru.languageininteraction.language.client.model.UserLabelData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -37,6 +40,7 @@ import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
 public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
+    private final Messages messages = GWT.create(Messages.class);
     final LocalStorage localStorage;
     final AppEventListner appEventListner;
 
@@ -83,7 +87,8 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.createplayer);
+                userResults.setUser(new UserData(messages.defaultUserName()));
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
             }
         });
         ((ChoosePlayerView) abstractSvgView).setSwitchButtonListner(new PresenterEventListner() {
@@ -96,17 +101,17 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
             @Override
             public void eventFired(Button button) {
                 ArrayList<PresenterEventListner> playerListeners = new ArrayList<>();
-                for (final UserData userData : localStorage.getUserIdList()) {
+                for (final UserLabelData labelData : localStorage.getUserIdList()) {
                     playerListeners.add(new PresenterEventListner() {
 
                         @Override
                         public String getLabel() {
-                            return userData.getMetadataValue(metadataFieldProvider.firstNameMetadataField);
+                            return labelData.getUserName();
                         }
 
                         @Override
                         public void eventFired(Button button) {
-                            userResults.setUser(localStorage.getStoredData(userData.getUserId()));
+                            userResults.setUser(localStorage.getStoredData(labelData.getUserId()));
                             ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
                         }
                     });

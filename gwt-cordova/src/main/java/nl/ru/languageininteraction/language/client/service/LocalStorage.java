@@ -17,15 +17,14 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
-import com.google.gwt.core.client.GWT;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import com.google.gwt.storage.client.Storage;
 import java.util.ArrayList;
 import java.util.List;
-import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserData;
 import nl.ru.languageininteraction.language.client.model.UserId;
+import nl.ru.languageininteraction.language.client.model.UserLabelData;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -100,18 +99,20 @@ public class LocalStorage {
         }
     }
 
-    private final Messages messages = GWT.create(Messages.class);
+    public List<UserLabelData> getUserIdList() {
+        final String postName = metadataFieldProvider.firstNameMetadataField.getPostName();
+        ArrayList<UserLabelData> userIdList = new ArrayList<>();
+        loadStorage();
+        if (dataStore != null) {
 
-    public List<UserData> getUserIdList() {
-        ArrayList<UserData> userIdList = new ArrayList<>();
-        userIdList.add(new UserData(messages.defaultUserName() + 1));
-        userIdList.add(new UserData(messages.defaultUserName() + 2));
-        userIdList.add(new UserData(messages.defaultUserName() + 3));
-        userIdList.add(new UserData(messages.defaultUserName() + 4));
-        userIdList.add(new UserData(messages.defaultUserName() + 5));
-        userIdList.add(new UserData(messages.defaultUserName() + 6));
-        userIdList.add(new UserData(messages.defaultUserName() + 7));
-        userIdList.add(new UserData(messages.defaultUserName() + 8));
+            for (int itemIndex = 0; itemIndex < dataStore.getLength(); itemIndex++) {
+                final String key = dataStore.key(itemIndex);
+                if (key.endsWith(postName)) {
+                    final String userIdString = key.split(".")[1];
+                    userIdList.add(new UserLabelData(new UserId(userIdString), dataStore.getItem(key)));
+                }
+            }
+        }
         return userIdList;
     }
 }
