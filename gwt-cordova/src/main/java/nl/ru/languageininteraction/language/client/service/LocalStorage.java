@@ -25,6 +25,7 @@ import java.util.List;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserData;
+import nl.ru.languageininteraction.language.client.model.UserId;
 
 /**
  * @since Oct 24, 2014 3:01:35 PM (creation date)
@@ -45,16 +46,16 @@ public class LocalStorage {
         return dataStore;
     }
 
-    public UserResults getStoredData(UserData userData) {
-        UserResults userResults = new UserResults();
+    public UserData getStoredData(UserId userId) {
+        UserData userData = new UserData(userId);
         loadStorage();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                userData.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + userData.getRandomIdString() + "." + metadataField.getPostName()));
+                userData.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + userData.getUserId().toString() + "." + metadataField.getPostName()));
             }
         }
-        userResults.updateBestScore(getCleanStoredInt(USER_RESULTS + MAX_SCORE));
-        return userResults;
+        userData.updateBestScore(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + MAX_SCORE));
+        return userData;
     }
 
     private int getCleanStoredInt(String keyString) {
@@ -82,19 +83,20 @@ public class LocalStorage {
         loadStorage();
         if (dataStore != null) {
             for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-                dataStore.setItem(USER_RESULTS + metadataField.getPostName(), userResults.getUserData().getMetadataValue(metadataField));
+                dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + metadataField.getPostName(), userResults.getUserData().getMetadataValue(metadataField));
             }
         }
-        dataStore.setItem(USER_RESULTS + MAX_SCORE, Integer.toString(userResults.getGameData().getBestScore()));
+        dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + MAX_SCORE, Integer.toString(userResults.getUserData().getBestScore()));
+        dataStore.setItem(LAST_USER_ID, userResults.getUserData().getUserId().toString());
     }
 
-    public UserData getLastUserId() {
+    public UserId getLastUserData() {
         loadStorage();
         if (dataStore != null) {
             final String storedUserId = dataStore.getItem(LAST_USER_ID);
-            return new UserData(null, storedUserId);
+            return new UserId(storedUserId);
         } else {
-            return new UserData("last used id");
+            return new UserId();
         }
     }
 

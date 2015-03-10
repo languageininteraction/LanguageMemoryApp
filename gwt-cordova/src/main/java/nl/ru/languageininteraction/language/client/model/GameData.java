@@ -29,7 +29,6 @@ public class GameData {
     private int roundsCorrect = 0;
     private int roundsCorrectEndangered = 0;
     private int choicesPerRound = 0;
-    private int bestScore = 0;
     private final ArrayList<RoundData> gameRoundData = new ArrayList<>();
 
     public ArrayList<RoundData> getGameRoundData() {
@@ -71,13 +70,5 @@ public class GameData {
 
     public void setChoicesPerRound(int choicesPerRound) {
         this.choicesPerRound = choicesPerRound;
-    }
-
-    public int getBestScore() {
-        return bestScore;
-    }
-
-    public void setBestScore(int bestScore) {
-        this.bestScore = bestScore;
     }
 }

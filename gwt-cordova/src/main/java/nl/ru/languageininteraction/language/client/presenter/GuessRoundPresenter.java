@@ -46,7 +46,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
         super(widgetTag, userResults, audioPlayer, new GuessRoundView(audioPlayer));
         guessRoundView = (GuessRoundView) abstractSvgView;
         languageDataProvider = new LanguageDataProvider();
-        playerScore = userResults.getGameData().getBestScore();
+        playerScore = userResults.getUserData().getBestScore();
         userResults.getGameData().clearGameCounters();
         playerLevel = new GameState().getPlayerLevel(playerScore);
     }
@@ -78,7 +78,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
                 roundsPlayed++;
                 if (roundSample.isCorrect()) {
                     playerScore = (playerScore == 0) ? 1 : playerScore * 2;
-                    userResults.updateBestScore(playerScore);
+                    userResults.getUserData().updateBestScore(playerScore);
                 }
                 roundData.setChosenAnswer(roundSample);
                 roundData.setDurationMs(System.currentTimeMillis() - startMs);

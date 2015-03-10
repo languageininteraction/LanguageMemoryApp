@@ -144,7 +144,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
             }
         });
         playerDetailsView.setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
-        playerDetailsView.setUserScoreField(userResults.getGameData().getBestScore());
+        playerDetailsView.setUserScoreField(userResults.getUserData().getBestScore());
     }
 
     @Override

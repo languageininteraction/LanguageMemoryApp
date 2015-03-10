@@ -34,6 +34,7 @@ import nl.ru.languageininteraction.language.client.presenter.GuessRoundPresenter
 import nl.ru.languageininteraction.language.client.presenter.InfoScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
+import nl.ru.languageininteraction.language.client.presenter.LocalStoragePresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
 import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
@@ -51,19 +52,24 @@ public class AppController implements AppEventListner, AudioExceptionListner {
 
     private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
+    final LocalStorage localStorage = new LocalStorage();
     private final RootLayoutPanel widgetTag;
     private Presenter presenter;
     private final UserResults userResults;
 
     public AppController(RootLayoutPanel widgetTag) {
         this.widgetTag = widgetTag;
-        userResults = new LocalStorage().getStoredData();
+        userResults = new UserResults(localStorage.getStoredData(localStorage.getLastUserData()));
     }
 
     @Override
     public void requestApplicationState(ApplicationState applicationState) {
         try {
             trackView(applicationState.name());
+// todo:
+            // on each state change check if there is an completed game data, if the share is true then upload or store if offline
+            // when any stored data is uploaded then delete the store 
+            // on new game play erase any in memory game data regardless of its shared or not shared state
             switch (applicationState) {
 //                case menu:
 //                    userResults.setPendingStimuliGroup(null);
@@ -83,7 +89,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.version, ApplicationState.scores);
                     break;
                 case chooseplayer:
-                    this.presenter = new ChoosePlayerPresenter(widgetTag, userResults, new AudioPlayer(this), this);
+                    this.presenter = new ChoosePlayerPresenter(widgetTag, localStorage, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.version, ApplicationState.playerdetails);
                     break;
                 case playerdetails:
@@ -91,6 +97,11 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.version, ApplicationState.chooseplayer);
                     break;
                 case start:
+// todo:            // if no player data then go to game
+                    // if one or more player data then go to select player
+                    this.presenter = new LocalStoragePresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
+                    break;
                 case startscreen:
                     this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game

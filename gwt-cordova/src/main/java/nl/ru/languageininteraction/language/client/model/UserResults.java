@@ -28,6 +28,10 @@ public class UserResults {
     private StimuliGroup pendingStimuliGroup = null;
     private String scoreLog = "";
 
+    public UserResults(UserData userId) {
+        this.userData = userId;
+    }
+
     public void setUser(UserData userId) {
         this.userData = userId;
     }
@@ -51,10 +55,6 @@ public class UserResults {
 
     public void setPendingStimuliGroup(StimuliGroup pendingStimuliGroup) {
         this.pendingStimuliGroup = pendingStimuliGroup;
-    }
-
-    public void updateBestScore(int bestScore) {
-        gameData.setBestScore((gameData.getBestScore() < bestScore) ? bestScore : gameData.getBestScore());
     }
 
     public String getScoreLog() {

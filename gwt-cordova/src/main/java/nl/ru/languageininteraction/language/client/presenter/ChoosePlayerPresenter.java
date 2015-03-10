@@ -37,11 +37,13 @@ import nl.ru.languageininteraction.language.client.view.ChoosePlayerView;
 public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Presenter {
 
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
+    final LocalStorage localStorage;
     final AppEventListner appEventListner;
 
-    public ChoosePlayerPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
+    public ChoosePlayerPresenter(RootLayoutPanel widgetTag, LocalStorage localStorage, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
         super(widgetTag, userResults, audioPlayer, new ChoosePlayerView(audioPlayer));
         this.appEventListner = appEventListner;
+        this.localStorage = localStorage;
     }
 
     @Override
@@ -94,17 +96,17 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
             @Override
             public void eventFired(Button button) {
                 ArrayList<PresenterEventListner> playerListeners = new ArrayList<>();
-                for (final UserData userId : new LocalStorage().getUserIdList()) {
+                for (final UserData userData : localStorage.getUserIdList()) {
                     playerListeners.add(new PresenterEventListner() {
 
                         @Override
                         public String getLabel() {
-                            return userId.getUserLabel();
+                            return userData.getMetadataValue(metadataFieldProvider.firstNameMetadataField);
                         }
 
                         @Override
                         public void eventFired(Button button) {
-                            userResults.setUser(userId);
+                            userResults.setUser(localStorage.getStoredData(userData.getUserId()));
                             ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
                         }
                     });

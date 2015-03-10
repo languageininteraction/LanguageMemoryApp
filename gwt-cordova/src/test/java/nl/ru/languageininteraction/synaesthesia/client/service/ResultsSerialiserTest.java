@@ -22,6 +22,7 @@ import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
+import nl.ru.languageininteraction.language.client.model.UserData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -42,7 +43,7 @@ public class ResultsSerialiserTest {
     @Test
     public void testSerialise() {
         System.out.println("serialise");
-        UserResults userResults = new UserResults();
+        UserResults userResults = new UserResults(new UserData());
         final String postName_email = "postName_email";
         final MetadataField emailField = new MetadataField(postName_email, postName_email, postName_email, postName_email, postName_email);
         userResults.getUserData().setMetadataValue(emailField, "postName@email");

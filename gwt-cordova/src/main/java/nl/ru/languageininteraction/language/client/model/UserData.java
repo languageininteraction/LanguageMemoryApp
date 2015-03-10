@@ -17,9 +17,9 @@
  */
 package nl.ru.languageininteraction.language.client.model;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 
 /**
  * @since Mar 10, 2015 11:11:43 AM (creation date)
@@ -28,35 +28,29 @@ import java.util.Set;
 public class UserData {
 
     private final HashMap<MetadataField, String> metadataValues = new HashMap<>();
-    private final String userLabel;
-    private final String randomIdString;
+    private final UserId userId;
+    private int bestScore = 0;
 
-    public UserData(String userLabel, String randomIdString) {
-        this.userLabel = userLabel;
-        this.randomIdString = randomIdString;
+    public UserData() {
+        this.userId = new UserId();
+    }
+
+    public UserData(UserId userId) {
+        this.userId = userId;
     }
 
     public UserData(String userLabel) {
-        this.userLabel = userLabel;
-        this.randomIdString = getRandomId();
+        this.userId = new UserId();
+        metadataValues.put(new MetadataFieldProvider().firstNameMetadataField, userLabel);
     }
 
-    private String getRandomId() {
-        return Long.toHexString(new Date().getTime()) + "-" + Long.toHexString((long) (Math.random() * 0xFFFF)) + "-" + Long.toHexString((long) (Math.random() * 0xFFFF)) + "-" + Long.toHexString((long) (Math.random() * 0xFFFF)) + "-" + Long.toHexString((long) (Math.random() * 0xFFFF));
+    public UserId getUserId() {
+        return userId;
     }
 
-    public String getUserLabel() {
-        return userLabel;
-    }
-
-    public String getRandomIdString() {
-        return randomIdString;
-    }
-
-    public void clearMetadata() {
-        metadataValues.clear();
-    }
-
+//    public void clearMetadata() {
+//        metadataValues.clear();
+//    }
     public void setMetadataValue(MetadataField metadataField, String value) {
         metadataValues.put(metadataField, value);
     }
@@ -67,5 +61,17 @@ public class UserData {
 
     public Set<MetadataField> getMetadataFields() {
         return metadataValues.keySet();
+    }
+
+    public int getBestScore() {
+        return bestScore;
+    }
+
+    public void setBestScore(int bestScore) {
+        this.bestScore = bestScore;
+    }
+
+    public void updateBestScore(int bestScore) {
+        setBestScore((getBestScore() < bestScore) ? bestScore : getBestScore());
     }
 }
