@@ -65,7 +65,7 @@ public class MatchLanguageView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {
+    protected boolean performClick(final String svgGroupStateString) {
         if (!svgGroupStateString.isEmpty()) {
 //            label.setText(elementId);
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(svgGroupStateString);
@@ -137,6 +137,7 @@ public class MatchLanguageView extends AbstractSvgView {
         } else {
 //            label.setText(targetElement.getId());
         }
+        return true;
     }
 
     @Override
