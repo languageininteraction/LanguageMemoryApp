@@ -44,6 +44,12 @@
             <xsl:value-of select="@transform"/>
             <xsl:text>
 </xsl:text>
+            <xsl:text>id</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text>
+</xsl:text>
     </xsl:template>
     <xsl:template match="svg:text">
             <xsl:text>style</xsl:text>

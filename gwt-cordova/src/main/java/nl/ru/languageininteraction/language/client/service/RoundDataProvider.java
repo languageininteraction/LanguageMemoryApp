@@ -30,12 +30,22 @@ import nl.ru.languageininteraction.language.client.util.GameState;
 public class RoundDataProvider {
 
     public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
-        return new RoundData(new RoundSample(LanguageDataProvider.LanguageSample.arz, true, 1),
-                new RoundSample[]{new RoundSample(LanguageDataProvider.LanguageSample.arz, true, 2),
-                    new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 3),
-                    new RoundSample(LanguageDataProvider.LanguageSample.deu, false, 3),
-                    new RoundSample(LanguageDataProvider.LanguageSample.fij, false, 3),
-                    new RoundSample(LanguageDataProvider.LanguageSample.spa, false, 2)
-                }, new Date());
+        if (Math.random() > 0.5) {
+            return new RoundData(new RoundSample(LanguageDataProvider.LanguageSample.bos, true, 1),
+                    new RoundSample[]{new RoundSample(LanguageDataProvider.LanguageSample.bos, true, 2),
+                        new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.deu, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.fij, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.spa, false, 2)
+                    }, new Date());
+        } else {
+            return new RoundData(new RoundSample(LanguageDataProvider.LanguageSample.cym, true, 1),
+                    new RoundSample[]{new RoundSample(LanguageDataProvider.LanguageSample.dip, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.ell, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.cym, true, 2),
+                        new RoundSample(LanguageDataProvider.LanguageSample.kor, false, 3),
+                        new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 2)
+                    }, new Date());
+        }
     }
 }

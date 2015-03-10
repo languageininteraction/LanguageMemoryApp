@@ -139,7 +139,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
         getSvg</xsl:text><xsl:value-of select="translate(if (@inkscape:label) then @inkscape:label else @id, ' -', '__')"/><xsl:text>(builder, SvgTemplate.Visibility.inherit);</xsl:text>
     </xsl:template>
     <xsl:template match="svg:path">
-<xsl:text>    builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));</xsl:text>
+<xsl:text>    builder.append(SVG_TEMPLATE.pathTag(SVG_DATA.transform</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.data</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.id</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));</xsl:text>
     </xsl:template>
     <xsl:template match="svg:defs">
 <xsl:text>public void getDefsTag(SafeHtmlBuilder builder) {

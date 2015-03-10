@@ -21,6 +21,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.user.client.DOM;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgTextElements;
@@ -82,6 +83,9 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.getSvgChoiceArrow4(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgChoiceArrow5(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgLanguageInfoBox(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgDobesSymbol(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgMap(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgPins(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgTargetButton(builder, SvgTemplate.Visibility.visible);
         matchLanguageBuilder.getSvgTargetButtonPlay(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
@@ -97,6 +101,16 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.getSvgSampleButtonPlay3(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgSampleButtonPlay4(builder, SvgTemplate.Visibility.hidden);
         matchLanguageBuilder.getSvgSampleButtonPlay5(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgIncorrectButton5(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton1(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton2(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton3(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton4(builder, SvgTemplate.Visibility.hidden);
+        matchLanguageBuilder.getSvgCorrectButton5(builder, SvgTemplate.Visibility.hidden);
 //        matchLanguageBuilder.getSvgCorrectButton(builder, SvgTemplate.Visibility.visible);
 //        matchLanguageBuilder.getSvgIncorrectButton(builder, SvgTemplate.Visibility.visible);
 //        matchLanguageBuilder.getSvgSampleButtonPlay(builder, SvgTemplate.Visibility.visible);
@@ -104,7 +118,7 @@ public class GuessRoundView extends AbstractSvgView {
 //        matchLanguageBuilder.getSvgNextRoundButton(builder, SvgTemplate.Visibility.hidden);
 
 //        matchLanguageBuilder.getSvgOceania(builder, SvgTemplate.Visibility.visible);
-//        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.hidden);
+//        matchLanguageBuilder.getSvgg4704(builder, SvgTemplate.Visibility.hidden);        
     }
 
     public void setSampleListeners(LanguageSampleListener targetSampleListener, RoundData roundData) {
@@ -124,7 +138,7 @@ public class GuessRoundView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {
+    protected boolean performClick(final String svgGroupStateString) {
         if (!svgGroupStateString.isEmpty()) {
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
@@ -248,32 +262,84 @@ public class GuessRoundView extends AbstractSvgView {
                     break;
                 case ChoiceArrow1:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[0]);
+                    showCorrectButton();
+                    if (!roundData.getRoundChoices()[0].isCorrect()) {
+                        matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton1);
+                    }
                     showResult();
                     break;
                 case ChoiceArrow2:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[1]);
+                    showCorrectButton();
+                    if (!roundData.getRoundChoices()[1].isCorrect()) {
+                        matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton2);
+                    }
                     showResult();
                     break;
                 case ChoiceArrow3:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[2]);
+                    showCorrectButton();
+                    if (!roundData.getRoundChoices()[2].isCorrect()) {
+                        matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton3);
+                    }
                     showResult();
                     break;
                 case ChoiceArrow4:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[3]);
+                    showCorrectButton();
+                    if (!roundData.getRoundChoices()[3].isCorrect()) {
+                        matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton4);
+                    }
                     showResult();
                     break;
                 case ChoiceArrow5:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[4]);
+                    showCorrectButton();
+                    if (!roundData.getRoundChoices()[4].isCorrect()) {
+                        matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton5);
+                    }
                     showResult();
                     break;
             }
         } else {
 //            label.setText(targetElement.getId());
         }
+        return true;
+    }
+
+    private void showCorrectButton() {
+        if (roundData.getRoundChoices()[0].isCorrect()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton1);
+        }
+        if (roundData.getRoundChoices()[1].isCorrect()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton2);
+        }
+        if (roundData.getRoundChoices()[2].isCorrect()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton3);
+        }
+        if (roundData.getRoundChoices()[3].isCorrect()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton4);
+        }
+        if (roundData.getRoundChoices()[4].isCorrect()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton5);
+        }
     }
 
     private void clearChoices() {
         matchLanguageBuilder.hideGroup(SvgGroupStates.LanguageInfoBox);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.DobesSymbol);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.Map);
+        hideChildrenOfGroup(SvgGroupStates.Pins);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.IncorrectButton1);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.CorrectButton1);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.IncorrectButton2);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.CorrectButton2);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.IncorrectButton3);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.CorrectButton3);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.IncorrectButton4);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.CorrectButton4);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.IncorrectButton5);
+        matchLanguageBuilder.hideGroup(SvgGroupStates.CorrectButton5);
         matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
         matchLanguageBuilder.hideGroup(SvgGroupStates.NextRoundButton);
 //        matchLanguageBuilder.hideGroup(SvgGroupStates.g4704);
@@ -294,6 +360,31 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButton5);
     }
 
+    public void showSingleChildOfGroup(SvgGroupStates group, String chidId) {
+        final Element elementById = DOM.getElementById(group.name());
+        elementById.setAttribute("style", "visibility:" + SvgTemplate.Visibility.visible);
+        Element childElement = elementById.getFirstChildElement();
+        while (childElement != null) {
+            if (chidId.equals(childElement.getId())) {
+                // todo: it would be better to get this from the SVG / properties file
+                childElement.setAttribute("style", "fill:#ee282b;fill-opacity:1;fill-rule:nonzero;stroke:none; visibility:" + SvgTemplate.Visibility.visible);
+            } else {
+                childElement.setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
+            }
+            childElement = childElement.getNextSiblingElement();
+        }
+    }
+
+    public void hideChildrenOfGroup(SvgGroupStates group) {
+        final Element elementById = DOM.getElementById(group.name());
+        elementById.setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
+        Element childElement = elementById.getFirstChildElement();
+        while (childElement != null) {
+            childElement.setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
+            childElement = childElement.getNextSiblingElement();
+        }
+    }
+
     private void showResult() {
         matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
         matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
@@ -309,6 +400,13 @@ public class GuessRoundView extends AbstractSvgView {
         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
 //                    matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
         matchLanguageBuilder.showGroup(SvgGroupStates.LanguageInfoBox);
+        if (roundData.getCorrectSample().getLanguageSample().isDobes()) {
+            matchLanguageBuilder.showGroup(SvgGroupStates.DobesSymbol);
+        } else {
+            matchLanguageBuilder.hideGroup(SvgGroupStates.DobesSymbol);
+        }
+        matchLanguageBuilder.showGroup(SvgGroupStates.Map);
+        showSingleChildOfGroup(SvgGroupStates.Pins, roundData.getCorrectSample().getLanguageSample().getIsoCode());
 //        matchLanguageBuilder.showGroup(SvgGroupStates.g4704);
 //                    matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
         matchLanguageBuilder.showGroup(SvgGroupStates.NextRoundButton);

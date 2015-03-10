@@ -64,5 +64,4 @@ public class RoundData {
     public double getDurationMs() {
         return durationMs;
     }
-
 }
