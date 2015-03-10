@@ -29,7 +29,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
         <xsl:for-each select="tokenize($csvText, '\n')">
             <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)$'>
                 <xsl:matching-substring>
-<xsl:value-of select="regex-group(2)"/><xsl:text>("</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(3)"/><xsl:text>,"</xsl:text><xsl:value-of select="regex-group(4)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(5)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(6)"/><xsl:text>==1),
+<xsl:value-of select="regex-group(2)"/><xsl:text>("</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(3)"/><xsl:text>,"</xsl:text><xsl:value-of select="regex-group(4)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(5)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(6)"/><xsl:text>==1),
         </xsl:text>
                 </xsl:matching-substring>
             </xsl:analyze-string>
@@ -39,14 +39,16 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
     final private int population;
     final private String area;
     final private String family;
+    final private String name;
     final private boolean dobes;
 
-        private LanguageSample(String isoCode, int population, String area, String family, boolean dobes) {
+        private LanguageSample(String name, String isoCode, int population, String area, String family, boolean dobes) {
             this.isoCode = isoCode;
             this.population = population;
             this.area = area;
             this.family = family;
             this.dobes = dobes;
+            this.name = name;
         }
         
         public String getIsoCode() {
@@ -70,11 +72,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
         }
 
         public String getLanguageName() {
-            return LANGUAGE_DATA.arz_Name();
-        }
-
-        public String getLanguageDescription() {
-            return LANGUAGE_DATA.arz_Description();
+            return name;
         }
 
         public String[] getSoundFiles() {

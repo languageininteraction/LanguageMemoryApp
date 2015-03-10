@@ -139,6 +139,7 @@ public class GuessRoundView extends AbstractSvgView {
 
     @Override
     protected boolean performClick(final String svgGroupStateString) {
+        boolean consumed = false;
         if (!svgGroupStateString.isEmpty()) {
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4319, SvgTextElements.tspan4319.name());
 //            matchLanguageBuilder.setLabel(SvgTextElements.tspan4326, SvgTextElements.tspan4319.name());
@@ -148,6 +149,7 @@ public class GuessRoundView extends AbstractSvgView {
             switch (svgGroup) {
                 case NextRoundButton:
                     nextEventListner.eventFired(null);
+                    consumed = true;
                     break;
                 case TargetButtonPlay:
                 case SampleButtonPlay1:
@@ -161,6 +163,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.stopAll();
+                    consumed = true;
                     break;
                 case TargetButton:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.SampleButtonPlay1);
@@ -188,6 +191,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton5);
                     }
                     audioPlayer.playSampleAudio(roundData.getCorrectSample());
+                    consumed = true;
                     break;
                 case SampleButton1:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
@@ -203,6 +207,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.playSampleAudio(roundData.getRoundChoices()[0]);
+                    consumed = true;
                     break;
                 case SampleButton2:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
@@ -217,6 +222,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.playSampleAudio(roundData.getRoundChoices()[1]);
+                    consumed = true;
                     break;
                 case SampleButton3:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
@@ -231,6 +237,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.playSampleAudio(roundData.getRoundChoices()[2]);
+                    consumed = true;
                     break;
                 case SampleButton4:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
@@ -245,6 +252,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.playSampleAudio(roundData.getRoundChoices()[3]);
+                    consumed = true;
                     break;
                 case SampleButton5:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.TargetButtonPlay);
@@ -259,6 +267,7 @@ public class GuessRoundView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow5);
                     audioPlayer.playSampleAudio(roundData.getRoundChoices()[4]);
+                    consumed = true;
                     break;
                 case ChoiceArrow1:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[0]);
@@ -267,6 +276,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton1);
                     }
                     showResult();
+                    consumed = true;
                     break;
                 case ChoiceArrow2:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[1]);
@@ -275,6 +285,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton2);
                     }
                     showResult();
+                    consumed = true;
                     break;
                 case ChoiceArrow3:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[2]);
@@ -283,6 +294,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton3);
                     }
                     showResult();
+                    consumed = true;
                     break;
                 case ChoiceArrow4:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[3]);
@@ -291,6 +303,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton4);
                     }
                     showResult();
+                    consumed = true;
                     break;
                 case ChoiceArrow5:
                     targetSampleListener.eventFired(roundData.getRoundChoices()[4]);
@@ -299,12 +312,13 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton5);
                     }
                     showResult();
+                    consumed = true;
                     break;
             }
         } else {
 //            label.setText(targetElement.getId());
         }
-        return true;
+        return consumed;
     }
 
     private void showCorrectButton() {
