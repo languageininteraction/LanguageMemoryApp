@@ -51,28 +51,38 @@ public class HighScoreService {
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, highScoresUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
         StringBuilder stringBuilder = new StringBuilder();
-        for (MetadataField key : userResults.getUserData().getMetadataFields()) {
-            String value = URL.encodeQueryString(userResults.getUserData().getMetadataValue(key));
-            if (stringBuilder.length() > 0) {
-                stringBuilder.append("&");
+        final boolean isShareData = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
+        if (isShareData) {
+            for (MetadataField key : userResults.getUserData().getMetadataFields()) {
+                String value = URL.encodeQueryString(userResults.getUserData().getMetadataValue(key));
+                if (stringBuilder.length() > 0) {
+                    stringBuilder.append("&");
+                }
+                stringBuilder.append(key.getPostName()).append("=").append(value);
             }
-            stringBuilder.append(key.getPostName()).append("=").append(value);
         }
         if (stringBuilder.length() > 0) {
             stringBuilder.append("&");
         }
+        stringBuilder.append("UserId").append("=").append(userResults.getUserData().getUserId()).append("&");
         stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
-        String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
-        stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
-        String restultsData = URL.encodeQueryString(new ResultsSerialiser() {
-            final DateTimeFormat format = DateTimeFormat.getFormat(reportDateFormat);
+        if (!isShareData) {
+            stringBuilder.append(metadataFieldProvider.shareMetadataField.getPostName()).append("=").append(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField)).append("&");
+        }
 
-            @Override
-            protected String formatDate(Date date) {
-                return format.format(date);
-            }
-        }.serialise(userResults));
-        stringBuilder.append("quest_results=").append(restultsData);
+        if (isShareData) {
+            String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
+            stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
+            String restultsData = URL.encodeQueryString(new ResultsSerialiser() {
+                final DateTimeFormat format = DateTimeFormat.getFormat(reportDateFormat);
+
+                @Override
+                protected String formatDate(Date date) {
+                    return format.format(date);
+                }
+            }.serialise(userResults));
+            stringBuilder.append("quest_results=").append(restultsData);
+        }
         try {
             builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, highScoreListener, highScoresUrl));
         } catch (RequestException exception) {

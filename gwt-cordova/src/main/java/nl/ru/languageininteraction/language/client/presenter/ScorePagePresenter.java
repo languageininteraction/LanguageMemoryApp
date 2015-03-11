@@ -31,6 +31,7 @@ import nl.ru.languageininteraction.language.client.registration.HighScoreExcepti
 import nl.ru.languageininteraction.language.client.registration.HighScoreListener;
 import nl.ru.languageininteraction.language.client.registration.HighScoreService;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ScorePageView;
 
@@ -108,6 +109,7 @@ public class ScorePagePresenter implements Presenter {
                 userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
                 try {
                     userResults.getUserData().validateNameField();
+                    new LocalStorage().storeData(userResults);
                     appEventListner.requestApplicationState(nextState);
                 } catch (MetadataFieldException exception) {
                     // if the user has not entered their name etc then all actions force them to go to the edit details screen (which can only happen if they are playing for the first time or the clicked new player)
@@ -128,6 +130,7 @@ public class ScorePagePresenter implements Presenter {
                 userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
                 try {
                     userResults.getUserData().validateNameField();
+                    new LocalStorage().storeData(userResults);
                     appEventListner.requestApplicationState(nextState);
                 } catch (MetadataFieldException exception) {
                     // if the user has not entered their name etc then all actions force them to go to the edit details screen (which can only happen if they are playing for the first time or the clicked new player)
@@ -156,12 +159,13 @@ public class ScorePagePresenter implements Presenter {
         scorePageView.setUserLevel(userResults.getGameData().getChoicesPerRound());
         scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());
         scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
-        
+
         final HighScoreService registrationService = new HighScoreService();
         registrationService.submitScores(userResults, new HighScoreListener() {
 
             @Override
             public void scoreSubmissionFailed(HighScoreException exception) {
+                // todo: store the serialised data for later upload
                 switch (exception.getErrorType()) {
                     case buildererror:
                         appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresfailedbuildererror);
