@@ -46,7 +46,7 @@ public class HighScoreService {
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final Version version = GWT.create(Version.class);
 
-    public void submitRegistration(UserResults userResults, RegistrationListener registrationListener, final String reportDateFormat) {
+    public void submitRegistration(UserResults userResults, HighScoreListener registrationListener, final String reportDateFormat) {
         final String registratinoUrl = serviceLocations.highScoresUrl();
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
@@ -81,7 +81,7 @@ public class HighScoreService {
         }
     }
 
-    private RequestCallback geRequestBuilder(final RequestBuilder builder, final RegistrationListener registrationListener, final String targetUri) {
+    private RequestCallback geRequestBuilder(final RequestBuilder builder, final HighScoreListener registrationListener, final String targetUri) {
         return new RequestCallback() {
             @Override
             public void onError(Request request, Throwable exception) {

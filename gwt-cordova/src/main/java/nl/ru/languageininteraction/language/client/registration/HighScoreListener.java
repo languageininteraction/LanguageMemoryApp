@@ -21,7 +21,7 @@ package nl.ru.languageininteraction.language.client.registration;
  * @since Oct 29, 2014 11:27:39 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface RegistrationListener {
+public interface HighScoreListener {
 
     void registrationFailed(RegistrationException exception);
 
