@@ -39,9 +39,9 @@ import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser
  * @since Oct 29, 2014 11:18:31 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class RegistrationService {
+public class HighScoreService {
 
-    private static final Logger logger = Logger.getLogger(RegistrationService.class.getName());
+    private static final Logger logger = Logger.getLogger(HighScoreService.class.getName());
     final private ServiceLocations serviceLocations = GWT.create(ServiceLocations.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final Version version = GWT.create(Version.class);
