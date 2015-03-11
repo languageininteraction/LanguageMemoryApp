@@ -21,7 +21,7 @@ package nl.ru.languageininteraction.language.client.registration;
  * @since Oct 29, 2014 11:23:33 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class RegistrationException extends Exception {
+public class HighScoreException extends Exception {
 
     private final ErrorType errorType;
 
@@ -32,12 +32,12 @@ public class RegistrationException extends Exception {
         connectionerror
     }
 
-    public RegistrationException(ErrorType errorType, Throwable cause) {
+    public HighScoreException(ErrorType errorType, Throwable cause) {
         super(cause);
         this.errorType = errorType;
     }
 
-    public RegistrationException(ErrorType errorType, String message) {
+    public HighScoreException(ErrorType errorType, String message) {
         super(message);
         this.errorType = errorType;
     }

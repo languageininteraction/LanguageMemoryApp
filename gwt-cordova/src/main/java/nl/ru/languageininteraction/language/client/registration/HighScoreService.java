@@ -76,7 +76,7 @@ public class HighScoreService {
         try {
             builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));
         } catch (RequestException exception) {
-            registrationListener.registrationFailed(new RegistrationException(RegistrationException.ErrorType.buildererror, exception));
+            registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.buildererror, exception));
             logger.log(Level.SEVERE, "SubmitRegistration", exception);
         }
     }
@@ -85,7 +85,7 @@ public class HighScoreService {
         return new RequestCallback() {
             @Override
             public void onError(Request request, Throwable exception) {
-                registrationListener.registrationFailed(new RegistrationException(RegistrationException.ErrorType.connectionerror, exception));
+                registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.connectionerror, exception));
                 logger.warning(builder.getUrl());
                 logger.log(Level.WARNING, "RequestCallback", exception);
             }
@@ -97,7 +97,7 @@ public class HighScoreService {
                     logger.info(text);
                     registrationListener.registrationComplete();
                 } else {
-                    registrationListener.registrationFailed(new RegistrationException(RegistrationException.ErrorType.non202response, "An error occured on the server: " + response.getStatusText()));
+                    registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.non202response, "An error occured on the server: " + response.getStatusText()));
                     logger.warning(targetUri);
                     logger.warning(response.getStatusText());
                 }

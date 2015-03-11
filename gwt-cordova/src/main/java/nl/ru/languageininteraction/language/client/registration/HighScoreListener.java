@@ -23,7 +23,7 @@ package nl.ru.languageininteraction.language.client.registration;
  */
 public interface HighScoreListener {
 
-    void registrationFailed(RegistrationException exception);
+    void registrationFailed(HighScoreException exception);
 
     void registrationComplete();
 }
