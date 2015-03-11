@@ -64,7 +64,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
         this.widgetTag = widgetTag;
         final UserId lastUserId = localStorage.getLastUserId();
         if (lastUserId == null) {
-            userResults = new UserResults(new UserData(messages.defaultUserName()));
+            userResults = new UserResults(new UserData());
         } else {
             userResults = new UserResults(localStorage.getStoredData(lastUserId));
         }
@@ -120,7 +120,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case scores:
                     this.presenter = new ScorePagePresenter(widgetTag, new AudioPlayer(this), userResults);
-                    presenter.setState(this, ApplicationState.setuser, ApplicationState.guessround);
+                    presenter.setState(this, ApplicationState.setuser, ApplicationState.startscreen);
                     break;
                 case matchlanguage:
                     this.presenter = new MatchLanguagePresenter(widgetTag, new AudioPlayer(this));

@@ -17,9 +17,11 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
@@ -34,6 +36,7 @@ import nl.ru.languageininteraction.language.client.view.PlayerDetailsView;
  */
 public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Presenter {
 
+    protected final Messages messages = GWT.create(Messages.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final PlayerDetailsView playerDetailsView;
 
@@ -126,7 +129,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
             @Override
             public void eventFired(Button button) {
                 final TextBox userNameBox = new TextBox();
-                userNameBox.setStylePrimaryName("stimulusHelpText");
+                userNameBox.setStylePrimaryName("popupTextBox");
                 userNameBox.setValue(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
                 playerDetailsView.showWidgetPopup(new PresenterEventListner() {
 
@@ -143,7 +146,8 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
                 }, userNameBox);
             }
         });
-        playerDetailsView.setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+        final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
+        playerDetailsView.setUserNameField((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
         playerDetailsView.setUserScoreField(userResults.getUserData().getBestScore());
     }
 

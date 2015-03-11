@@ -40,11 +40,10 @@ public class UserData {
         this.userId = userId;
     }
 
-    public UserData(String userLabel) {
-        this.userId = new UserId();
-        metadataValues.put(new MetadataFieldProvider().firstNameMetadataField, userLabel);
-    }
-
+//    public UserData(String userLabel) {
+//        this.userId = new UserId();
+//        metadataValues.put(new MetadataFieldProvider().firstNameMetadataField, userLabel);
+//    }
     public UserId getUserId() {
         return userId;
     }
@@ -57,7 +56,8 @@ public class UserData {
     }
 
     public String getMetadataValue(MetadataField metadataField) {
-        return metadataValues.get(metadataField);
+        final String returnString = metadataValues.get(metadataField);
+        return (returnString == null) ? "" : returnString;
     }
 
     public Set<MetadataField> getMetadataFields() {

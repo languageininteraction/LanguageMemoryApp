@@ -87,7 +87,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-                userResults.setUser(new UserData(messages.defaultUserName()));
+                userResults.setUser(new UserData());
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
             }
         });
@@ -120,7 +120,8 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
             }
         }
         );
-        ((ChoosePlayerView) abstractSvgView).setUserNameField(userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField));
+        final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
+        ((ChoosePlayerView) abstractSvgView).setUserNameField((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
     }
 
     @Override

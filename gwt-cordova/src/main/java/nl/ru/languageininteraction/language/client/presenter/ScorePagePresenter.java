@@ -17,8 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.presenter;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
@@ -35,6 +37,7 @@ import nl.ru.languageininteraction.language.client.view.ScorePageView;
  */
 public class ScorePagePresenter implements Presenter {
 
+    protected final Messages messages = GWT.create(Messages.class);
     protected final RootLayoutPanel widgetTag;
     final AudioPlayer audioPlayer;
     final ScorePageView scorePageView;
@@ -144,7 +147,8 @@ public class ScorePagePresenter implements Presenter {
             }
         });
         widgetTag.add(scorePageView);
-        scorePageView.setUserName(userResults.getUserData().getMetadataValue(metadataFieldProvider.metadataFieldArray[0]));
+        final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
+        scorePageView.setUserName((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
         scorePageView.setUserScore(userResults.getUserData().getBestScore());
         scorePageView.setUserLevel(userResults.getGameData().getChoicesPerRound());
         scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());

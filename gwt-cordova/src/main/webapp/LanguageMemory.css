@@ -231,6 +231,7 @@ canvas {
     border-style: solid;
 }
 
+.popupTextBox,
 .stimulusHelpText {
     font-size: 17pt;
     color: black;
@@ -294,7 +295,7 @@ canvas {
 
 .choosePlayerList,
 .svgPopupPanel .gwt-Button,
-table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
+table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText, .popupTextBox,
 .gwt-Label, .gwt-HTML, .gwt-CheckBox, .pageLink, .contentBody, .metadataError, .metadataOK, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton {  
     font-size: 17pt;
@@ -329,7 +330,7 @@ table#screenExample td, .stimulusHelpPanel .gwt-Button, .stimulusHelpText,
 
 .choosePlayerList,
 .svgPopupPanel .gwt-Button,
-.stimulusHelpText,
+.stimulusHelpText, .popupTextBox,
 table#screenExample td, .stimulusHelpPanel .gwt-Button,
 .gwt-Label, .gwt-HTML, .headerLabel, .resultsTableTitle, .gwt-CheckBox, .pageLink, .contentBody, .metadataErrorMessage,
 .gwt-Button.nextButton, .gwt-Button.menuButton,.gwt-Button.stimulusHelpButton, .gwt-Button.stimulusQuitButton, .gwt-Button.stimulusButton, .gwt-Button.optionButton, .gwt-Label.headerButton 
