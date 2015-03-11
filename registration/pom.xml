@@ -5,9 +5,9 @@
     <artifactId>registration</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>SynQuiz Registration Demo Application</name>
+    <name>LingQuest Demo High Scores Server</name>
     <build>
-        <finalName>registration</finalName>
+        <finalName>LingQuestScores</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

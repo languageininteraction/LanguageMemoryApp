@@ -1,8 +1,8 @@
 <html>
     <body>
-        <h2>SynQuiz Registration Demo Application</h2>
-        <p><a href="registration/submit">submit</a><br>
-        <form action="registration/submit" method="post">
+        <h2>LingQuest Demo High Scores Server</h2>
+        <p><a href="scores/submit">submit</a><br>
+        <form action="scores/submit" method="post">
             <input type="text" name="firstname" value="firstname"/>
             <input type="text" name="lastname" value="lastname"/>
             <input type="text" name="age" value="age"/>

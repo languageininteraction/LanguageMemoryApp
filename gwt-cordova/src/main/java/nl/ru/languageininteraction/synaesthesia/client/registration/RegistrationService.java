@@ -47,7 +47,7 @@ public class RegistrationService {
     private final Version version = GWT.create(Version.class);
 
     public void submitRegistration(UserResults userResults, RegistrationListener registrationListener, final String reportDateFormat) {
-        final String registratinoUrl = serviceLocations.registrationUrl();
+        final String registratinoUrl = serviceLocations.highScoresUrl();
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
         StringBuilder stringBuilder = new StringBuilder();

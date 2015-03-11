@@ -1,9 +1,9 @@
 #mvn install
 cd target
-synquizname=languagememorygame-0.1.291-testing
-rm -rf $synquizname-cordova
-unzip $synquizname-cordova.zip -d $synquizname-cordova
-cd $synquizname-cordova
+appname=languagememorygame-0.1.308-testing
+rm -rf $appname-cordova
+unzip $appname-cordova.zip -d $appname-cordova
+cd $appname-cordova
 cordova platform add ios
 cordova platform add android
 cordova plugin add https://github.com/danwilson/google-analytics-plugin.git
@@ -21,7 +21,7 @@ cordova plugin add https://github.com/GetJobber/cordova-plugin-keyboard.git
 splashResourcesDir="./platforms/ios/LanguageMemory/Resources/splash/"
 echo $splashResourcesDir
 splashImage="images/splash.png" #"images/splash.gif" 
-iconResourcesDir="./platforms/ios/SynQuiz/Resources/icons/"
+iconResourcesDir="./platforms/ios/Language\ Memory/Resources/icons/"
 iconImage="images/icon.png"
 
 echo $splashImage
@@ -106,7 +106,7 @@ convert -resize 100x100 -quality 100 $iconImage $iconResourcesDir/icon-50@2x.png
 #adb install target/*-testing-cordova/platforms/android/ant-build/CordovaApp-release.apk
 
 echo "launching xcode"
-open platforms/ios/SynQuiz.xcodeproj&
+open platforms/ios/Language\ Memory.xcodeproj&
 #echo "launching xcode"
 #open platforms/ios/LanguageMemory.xcodeproj
 
@@ -124,10 +124,10 @@ open platforms/ios/SynQuiz.xcodeproj&
 cd platforms/ios/
 cd build/emulator
 pwd
-xcrun -sdk iphoneos PackageApplication -v "$(pwd)/LanguageMemory.app" -o "$(pwd)/$synquizname.ipa"
+xcrun -sdk iphoneos PackageApplication -v "$(pwd)/LanguageMemory.app" -o "$(pwd)/$appname.ipa"
 
 # validate the results
-xcrun -verbose -sdk iphoneos Validation "$(pwd)/$synquizname.ipa"
+xcrun -verbose -sdk iphoneos Validation "$(pwd)/$appname.ipa"
 
 pwd
 cd ../../../../

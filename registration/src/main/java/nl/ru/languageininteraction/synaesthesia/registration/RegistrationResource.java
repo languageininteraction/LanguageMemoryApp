@@ -14,6 +14,12 @@ public class RegistrationResource {
 
     private static final Logger logger = Logger.getLogger(RegistrationResource.class.getName());
 
+    private static final String SAMPLE_JSON_RESPONSE = "{\"scores\":[\n"
+            + "    {\"player\":\"John\", \"highscore\":\"149\"}, \n"
+            + "    {\"player\":\"Anna\", \"highscore\":\"34\"},\n"
+            + "    {\"player\":\"Peter\", \"highscore\":\"3\"}\n"
+            + "]}";
+
     public RegistrationResource() {
         logger.setLevel(Level.ALL);
     }
@@ -22,7 +28,7 @@ public class RegistrationResource {
     @Produces("text/plain")
     public String getSubmit() {
         logger.info("getSubmit");
-        return "submitted";
+        return SAMPLE_JSON_RESPONSE;
     }
 
     @POST
@@ -30,6 +36,7 @@ public class RegistrationResource {
     public Response postSubmit(MultivaluedMap<String, String> formParams) {
         StringBuilder stringBuilder = new StringBuilder();
         logger.info("postSubmit");
+        stringBuilder.append(SAMPLE_JSON_RESPONSE);
         stringBuilder.append("postSubmit");
         for (String key : formParams.keySet()) {
             logger.info("key");

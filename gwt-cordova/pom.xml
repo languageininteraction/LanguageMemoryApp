@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.291-testing</version>
+    <version>0.1.308-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
