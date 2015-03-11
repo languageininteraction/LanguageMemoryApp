@@ -18,7 +18,6 @@
 package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import nl.ru.languageininteraction.language.client.ScorePage;
@@ -26,6 +25,7 @@ import nl.ru.languageininteraction.language.client.ScorePageBuilder.SvgGroupStat
 import nl.ru.languageininteraction.language.client.ScorePageBuilder.SvgTextElements;
 import nl.ru.languageininteraction.language.client.ScorePageBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 
 /**
@@ -37,8 +37,24 @@ public class ScorePageView extends AbstractSvgView {
     protected final ScorePageBuilder scorePageBuilder = new ScorePageBuilder();
     private static final ScorePage SCORE_PAGE = GWT.create(ScorePage.class);
 
+    protected PresenterEventListner shareContinueListner = null;
+    protected PresenterEventListner justContinueListner = null;
+    protected PresenterEventListner editUserListner = null;
+
     public ScorePageView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+    }
+
+    public void setShareContinueListner(PresenterEventListner shareContinueListner) {
+        this.shareContinueListner = shareContinueListner;
+    }
+
+    public void setJustContinueListner(PresenterEventListner justContinueListner) {
+        this.justContinueListner = justContinueListner;
+    }
+
+    public void setEditUserListner(PresenterEventListner editUserListner) {
+        this.editUserListner = editUserListner;
     }
 
     @Override
@@ -51,7 +67,8 @@ public class ScorePageView extends AbstractSvgView {
     }
 
     @Override
-    protected void performClick(final String svgGroupStateString) {        
+    protected boolean performClick(final String svgGroupStateString) {
+        boolean consumed = false;
         label.setText(svgGroupStateString);
         setUserName(svgGroupStateString);
         if (!svgGroupStateString.isEmpty()) {
@@ -61,16 +78,22 @@ public class ScorePageView extends AbstractSvgView {
             SvgGroupStates svgGroup = SvgGroupStates.valueOf(svgGroupStateString);
             switch (svgGroup) {
                 case ContinueWithoutSharing:
+                    justContinueListner.eventFired(null);
+                    consumed = true;
+                    break;
                 case ShareAndContinueButton:
-                    nextEventListner.eventFired(null);
+                    shareContinueListner.eventFired(null);
+                    consumed = true;
                     break;
                 case EditProfileButton:
-                    backEventListner.eventFired(null);
+                    editUserListner.eventFired(null);
+                    consumed = true;
                     break;
             }
         } else {
 //            label.setText(targetElement.getId());
         }
+        return consumed;
     }
 
     public void setUserName(String userName) {

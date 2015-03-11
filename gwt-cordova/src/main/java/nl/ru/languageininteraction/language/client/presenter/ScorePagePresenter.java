@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.language.client.presenter;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
@@ -72,7 +73,7 @@ public class ScorePagePresenter implements Presenter {
                 @Override
                 public void eventFired(Button button) {
                     audioPlayer.stopAll();
-                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.menu);
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
                 }
 
                 @Override
@@ -81,21 +82,59 @@ public class ScorePagePresenter implements Presenter {
                 }
             };
         }
-        if (nextState != null) {
-            nextEventListner = new PresenterEventListner() {
+        scorePageView.setEditUserListner(new PresenterEventListner() {
 
-                @Override
-                public void eventFired(Button button) {
-                    audioPlayer.stopAll();
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
+            }
+
+            @Override
+            public String getLabel() {
+                return AppEventListner.ApplicationState.playerdetails.label;
+            }
+        });
+        scorePageView.setJustContinueListner(new PresenterEventListner() {
+
+            @Override
+            public void eventFired(Button button) {
+                audioPlayer.stopAll();
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
+                try {
+                    userResults.getUserData().validateNameField();
                     appEventListner.requestApplicationState(nextState);
+                } catch (MetadataFieldException exception) {
+                    // if the user has not entered their name etc then all actions force them to go to the edit details screen (which can only happen if they are playing for the first time or the clicked new player)
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
                 }
+            }
 
-                @Override
-                public String getLabel() {
-                    return nextState.label;
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+        });
+        scorePageView.setShareContinueListner(new PresenterEventListner() {
+
+            @Override
+            public void eventFired(Button button) {
+                audioPlayer.stopAll();
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+                try {
+                    userResults.getUserData().validateNameField();
+                    appEventListner.requestApplicationState(nextState);
+                } catch (MetadataFieldException exception) {
+                    // if the user has not entered their name etc then all actions force them to go to the edit details screen (which can only happen if they are playing for the first time or the clicked new player)
+                    appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
                 }
-            };
-        }
+            }
+
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+        });
+
         scorePageView.setupScreen(backEventListner, nextEventListner);
         audioPlayer.addOnEndedListener(new AudioEventListner() {
 
@@ -105,11 +144,11 @@ public class ScorePagePresenter implements Presenter {
             }
         });
         widgetTag.add(scorePageView);
-        scorePageView.setUserName(userResults.getMetadataValue(metadataFieldProvider.metadataFieldArray[0]));
-        scorePageView.setUserScore(userResults.getGameData().getBestScore());
+        scorePageView.setUserName(userResults.getUserData().getMetadataValue(metadataFieldProvider.metadataFieldArray[0]));
+        scorePageView.setUserScore(userResults.getUserData().getBestScore());
         scorePageView.setUserLevel(userResults.getGameData().getChoicesPerRound());
         scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());
-        scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(),userResults.getGameData().getRoundsPlayed());
+        scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
     }
 
     @Override

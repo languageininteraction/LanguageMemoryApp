@@ -56,6 +56,30 @@ public class LocalStoragePresenter extends AbstractPresenter {
                 Window.Location.replace(Window.Location.getPath());
             }
         });
+        ((ComplexView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "Edit Current User Data";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.metadata);
+            }
+        });
+        ((ComplexView) simpleView).addOptionButton(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return AppEventListner.ApplicationState.scores.label;
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.scores);
+            }
+        });
 
         final Storage localStorage = Storage.getLocalStorageIfSupported();
         for (int itemIndex = 0; itemIndex < localStorage.getLength(); itemIndex++) {

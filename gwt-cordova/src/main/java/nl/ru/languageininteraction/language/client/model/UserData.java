@@ -19,6 +19,7 @@ package nl.ru.languageininteraction.language.client.model;
 
 import java.util.HashMap;
 import java.util.Set;
+import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 
 /**
@@ -73,5 +74,11 @@ public class UserData {
 
     public void updateBestScore(int bestScore) {
         setBestScore((getBestScore() < bestScore) ? bestScore : getBestScore());
+    }
+
+    public void validateNameField() throws MetadataFieldException {
+        final MetadataField firstNameMetadataField = new MetadataFieldProvider().firstNameMetadataField;
+        final String nameValue = metadataValues.get(firstNameMetadataField);
+        firstNameMetadataField.validateValue(nameValue);
     }
 }

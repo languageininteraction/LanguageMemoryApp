@@ -39,6 +39,7 @@ import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalStoragePresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
+import nl.ru.languageininteraction.language.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.StartScreenPresenter;
@@ -177,11 +178,11 @@ public class AppController implements AppEventListner, AudioExceptionListner {
 //                    this.presenter = new FeedbackPresenter(widgetTag);
 //                    presenter.setState(this, ApplicationState.report, ApplicationState.metadata);
 //                    break;
-//                case metadata:
-//                    this.presenter = new MetadataPresenter(widgetTag, userResults);
-//                    presenter.setState(this, null, ApplicationState.registration);
-//                    ((MetadataPresenter) presenter).focusFirstTextBox();
-//                    break;
+                case metadata:
+                    this.presenter = new MetadataPresenter(widgetTag, userResults);
+                    presenter.setState(this, null, ApplicationState.registration);
+                    ((MetadataPresenter) presenter).focusFirstTextBox();
+                    break;
 //                case registration:
 //                    if (userResults.getStimuliGroups().isEmpty()) {
 //                        this.presenter = new RegisterDisabledPresenter(widgetTag);
