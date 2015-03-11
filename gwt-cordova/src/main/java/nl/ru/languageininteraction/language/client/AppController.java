@@ -199,6 +199,12 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                 case end:
                     exitApplication();
                     break;
+                case highscoresubmitted:
+                case highscoresfailedbuildererror:
+                case highscoresfailedconnectionerror:
+                case highscoresfailednon202:
+                case registration:
+                    break;
                 default:
                     this.presenter = new ErrorPresenter(widgetTag, "No state for: " + applicationState);
                     presenter.setState(this, ApplicationState.start, applicationState);

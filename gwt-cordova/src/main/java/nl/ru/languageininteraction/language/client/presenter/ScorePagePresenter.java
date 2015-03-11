@@ -27,6 +27,9 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.registration.HighScoreException;
+import nl.ru.languageininteraction.language.client.registration.HighScoreListener;
+import nl.ru.languageininteraction.language.client.registration.HighScoreService;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ScorePageView;
@@ -153,6 +156,31 @@ public class ScorePagePresenter implements Presenter {
         scorePageView.setUserLevel(userResults.getGameData().getChoicesPerRound());
         scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());
         scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
+        
+        final HighScoreService registrationService = new HighScoreService();
+        registrationService.submitScores(userResults, new HighScoreListener() {
+
+            @Override
+            public void scoreSubmissionFailed(HighScoreException exception) {
+                switch (exception.getErrorType()) {
+                    case buildererror:
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresfailedbuildererror);
+                        break;
+                    case connectionerror:
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresfailedconnectionerror);
+                        break;
+                    case non202response:
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresfailednon202);
+                        break;
+                }
+            }
+
+            @Override
+            public void scoreSubmissionComplete() {
+                userResults.clearResults();
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresubmitted);
+            }
+        }, messages.reportDateFormat());
     }
 
     @Override

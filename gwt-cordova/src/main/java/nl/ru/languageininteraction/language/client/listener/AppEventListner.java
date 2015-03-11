@@ -63,10 +63,10 @@ public interface AppEventListner {
         @Deprecated
         metadata(messages.metadataMenuLabel()),
         registration(messages.registerMenuLabel()),
-        registrationcomplete(""),
-        registrationfailednon202(""),
-        registrationfailedbuildererror(""),
-        registrationfailedconnectionerror(""),
+        highscoresubmitted(""),
+        highscoresfailednon202(""),
+        highscoresfailedbuildererror(""),
+        highscoresfailedconnectionerror(""),
         @Deprecated
         moreinfo(messages.moreInfoMenuLabel()),
         end(messages.exitButton());

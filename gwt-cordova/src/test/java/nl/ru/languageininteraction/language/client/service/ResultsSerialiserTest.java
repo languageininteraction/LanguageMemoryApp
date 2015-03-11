@@ -17,13 +17,12 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
-import nl.ru.languageininteraction.language.client.service.ResultsSerialiser;
 import java.util.Date;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
-import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
 import nl.ru.languageininteraction.language.client.model.UserData;
+import nl.ru.languageininteraction.language.client.model.UserId;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -44,10 +43,7 @@ public class ResultsSerialiserTest {
     @Test
     public void testSerialise() {
         System.out.println("serialise");
-        UserResults userResults = new UserResults(new UserData());
-        final String postName_email = "postName_email";
-        final MetadataField emailField = new MetadataField(postName_email, postName_email, postName_email, postName_email, postName_email);
-        userResults.getUserData().setMetadataValue(emailField, "postName@email");
+        UserResults userResults = new UserResults(new UserData(new UserId("auserid")));
         final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
         roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
         roundData.setDurationMs(123456);
@@ -62,9 +58,9 @@ public class ResultsSerialiserTest {
                 return date.toString();
             }
         };
-        String expResult = "postName@email	fij_1	cmn_2	arz_3,spa_3,deu_3,	Thu Jan 01 03:46:39 CET 1970	123456.0\n"
-                + "postName@email	cmn_1	spa_1	cmn_1,deu_1,fij_1,	Thu Jan 01 03:46:39 CET 1970	123456.0\n";
-        String result = instance.serialise(userResults, emailField);
+        String expResult = "auserid	fij_1	cmn_2	arz_3,spa_3,deu_3,	Thu Jan 01 03:46:39 CET 1970	123456.0\n"
+                + "auserid	cmn_1	spa_1	cmn_1,deu_1,fij_1,	Thu Jan 01 03:46:39 CET 1970	123456.0\n";
+        String result = instance.serialise(userResults);
         System.out.println(result);
         assertEquals(expResult, result);
     }

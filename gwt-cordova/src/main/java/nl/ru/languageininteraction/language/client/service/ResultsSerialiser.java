@@ -18,9 +18,9 @@
 package nl.ru.languageininteraction.language.client.service;
 
 import java.util.Date;
-import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
+import nl.ru.languageininteraction.language.client.model.UserId;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 
 /**
@@ -30,10 +30,11 @@ import nl.ru.languageininteraction.language.client.model.UserResults;
 public abstract class ResultsSerialiser {
 
 //    private final MetadataFields mateadataFields = GWT.create(MetadataFields.class);
-    public String serialise(UserResults userResults, MetadataField metadataField_email) {
+    public String serialise(UserResults userResults) {
+        UserId userId = userResults.getUserData().getUserId();
         StringBuilder stringBuilder = new StringBuilder();
         for (RoundData roundData : userResults.getGameData().getGameRoundData()) {
-            stringBuilder.append(userResults.getUserData().getMetadataValue(metadataField_email));
+            stringBuilder.append(userId.toString());
             stringBuilder.append("\t");
             stringBuilder.append(roundData.getChosenAnswer().getLanguageSample().getIsoCode());
             stringBuilder.append("_");

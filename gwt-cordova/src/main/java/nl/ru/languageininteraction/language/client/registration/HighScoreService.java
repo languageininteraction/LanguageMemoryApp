@@ -33,7 +33,7 @@ import nl.ru.languageininteraction.language.client.ServiceLocations;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
-import nl.ru.languageininteraction.synaesthesia.client.service.ResultsSerialiser;
+import nl.ru.languageininteraction.language.client.service.ResultsSerialiser;
 
 /**
  * @since Oct 29, 2014 11:18:31 AM (creation date)
@@ -46,9 +46,9 @@ public class HighScoreService {
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final Version version = GWT.create(Version.class);
 
-    public void submitRegistration(UserResults userResults, HighScoreListener registrationListener, final String reportDateFormat) {
-        final String registratinoUrl = serviceLocations.highScoresUrl();
-        final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, registratinoUrl);
+    public void submitScores(UserResults userResults, HighScoreListener highScoreListener, final String reportDateFormat) {
+        final String highScoresUrl = serviceLocations.highScoresUrl();
+        final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, highScoresUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
         StringBuilder stringBuilder = new StringBuilder();
         for (MetadataField key : userResults.getUserData().getMetadataFields()) {
@@ -56,7 +56,7 @@ public class HighScoreService {
             if (stringBuilder.length() > 0) {
                 stringBuilder.append("&");
             }
-            stringBuilder.append(key).append("=").append(value);
+            stringBuilder.append(key.getPostName()).append("=").append(value);
         }
         if (stringBuilder.length() > 0) {
             stringBuilder.append("&");
@@ -71,21 +71,21 @@ public class HighScoreService {
             protected String formatDate(Date date) {
                 return format.format(date);
             }
-        }.serialise(userResults, metadataFieldProvider.emailMetadataField));
-        stringBuilder.append("quiz_results=").append(restultsData);
+        }.serialise(userResults));
+        stringBuilder.append("quest_results=").append(restultsData);
         try {
-            builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, registrationListener, registratinoUrl));
+            builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, highScoreListener, highScoresUrl));
         } catch (RequestException exception) {
-            registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.buildererror, exception));
-            logger.log(Level.SEVERE, "SubmitRegistration", exception);
+            highScoreListener.scoreSubmissionFailed(new HighScoreException(HighScoreException.ErrorType.buildererror, exception));
+            logger.log(Level.SEVERE, "SubmitHighScore", exception);
         }
     }
 
-    private RequestCallback geRequestBuilder(final RequestBuilder builder, final HighScoreListener registrationListener, final String targetUri) {
+    private RequestCallback geRequestBuilder(final RequestBuilder builder, final HighScoreListener highScoreListener, final String targetUri) {
         return new RequestCallback() {
             @Override
             public void onError(Request request, Throwable exception) {
-                registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.connectionerror, exception));
+                highScoreListener.scoreSubmissionFailed(new HighScoreException(HighScoreException.ErrorType.connectionerror, exception));
                 logger.warning(builder.getUrl());
                 logger.log(Level.WARNING, "RequestCallback", exception);
             }
@@ -95,9 +95,9 @@ public class HighScoreService {
                 if (200 == response.getStatusCode()) {
                     final String text = response.getText();
                     logger.info(text);
-                    registrationListener.registrationComplete();
+                    highScoreListener.scoreSubmissionComplete();
                 } else {
-                    registrationListener.registrationFailed(new HighScoreException(HighScoreException.ErrorType.non202response, "An error occured on the server: " + response.getStatusText()));
+                    highScoreListener.scoreSubmissionFailed(new HighScoreException(HighScoreException.ErrorType.non202response, "An error occured on the server: " + response.getStatusText()));
                     logger.warning(targetUri);
                     logger.warning(response.getStatusText());
                 }
