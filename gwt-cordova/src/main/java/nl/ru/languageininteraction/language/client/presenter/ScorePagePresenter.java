@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import nl.ru.languageininteraction.language.client.Messages;
@@ -26,6 +27,7 @@ import nl.ru.languageininteraction.language.client.exception.MetadataFieldExcept
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.AudioEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
+import nl.ru.languageininteraction.language.client.model.HighScoreData;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.registration.HighScoreException;
 import nl.ru.languageininteraction.language.client.registration.HighScoreListener;
@@ -180,8 +182,12 @@ public class ScorePagePresenter implements Presenter {
             }
 
             @Override
-            public void scoreSubmissionComplete() {
+            public void scoreSubmissionComplete(JsArray<HighScoreData> highScoreData) {
                 userResults.clearResults();
+                final HighScoreData highScoreJson = highScoreData.get(0);
+                for (int index = 0; index < highScoreJson.getCount(); index++) {
+                    scorePageView.setHighScore(index, highScoreJson.getPlayerName(index), highScoreJson.getPlayerHighScore(index));
+                }
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresubmitted);
             }
         }, messages.reportDateFormat());

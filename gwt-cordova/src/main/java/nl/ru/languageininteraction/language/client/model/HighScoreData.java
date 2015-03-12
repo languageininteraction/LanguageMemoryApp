@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Language In Interaction
+ * Copyright (C) 2015 Language In Interaction
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -15,18 +15,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.language.client.registration;
+package nl.ru.languageininteraction.language.client.model;
 
-import com.google.gwt.core.client.JsArray;
-import nl.ru.languageininteraction.language.client.model.HighScoreData;
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * @since Oct 29, 2014 11:27:39 AM (creation date)
+ * @since Mar 12, 2015 10:35:28 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public interface HighScoreListener {
+public class HighScoreData extends JavaScriptObject {
 
-    void scoreSubmissionFailed(HighScoreException exception);
+    protected HighScoreData() {
+    }
 
-    void scoreSubmissionComplete(JsArray<HighScoreData> highScoreData);
+    public final native int getCount() /*-{ return this.scores.length; }-*/;
+
+    public final native String getPlayerName(int index) /*-{ return this.scores[index].player; }-*/;
+
+    public final native int getPlayerHighScore(int index) /*-{ return this.scores[index].highscore; }-*/;
 }

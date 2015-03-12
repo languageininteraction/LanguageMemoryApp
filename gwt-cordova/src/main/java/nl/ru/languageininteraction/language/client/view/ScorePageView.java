@@ -109,6 +109,31 @@ public class ScorePageView extends AbstractSvgView {
         scorePageBuilder.setLabel(SvgTextElements.tspan3303, formattedScore);
     }
 
+    public void setHighScore(int scoreIndex, String playerName, int highScore) {
+        int maxLength = SCORE_PAGE.texttspan5634().length();
+        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
+        String formattedScore = decimalFormat.format(highScore);
+        String labelText = playerName.substring(0, maxLength - 1 - formattedScore.length()).concat(" ").concat(formattedScore);
+//        String.format("%1$" + n + "s", playerName);
+        switch (scoreIndex) {
+            case 0:
+                scorePageBuilder.setLabel(SvgTextElements.tspan4348, labelText);
+                break;
+            case 1:
+                scorePageBuilder.setLabel(SvgTextElements.tspan5630, labelText);
+                break;
+            case 2:
+                scorePageBuilder.setLabel(SvgTextElements.tspan4379, labelText);
+                break;
+            case 3:
+                scorePageBuilder.setLabel(SvgTextElements.tspan5632, labelText);
+                break;
+            case 4:
+                scorePageBuilder.setLabel(SvgTextElements.tspan5634, labelText);
+                break;
+        }
+    }
+
     public void setUserLevel(int choicePerRound) {
 //        NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
 //        String formattedChoiceCount = decimalFormat.format(choicePerRound);

@@ -18,6 +18,8 @@
 package nl.ru.languageininteraction.language.client.registration;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -30,6 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.ru.languageininteraction.language.client.Version;
 import nl.ru.languageininteraction.language.client.ServiceLocations;
+import nl.ru.languageininteraction.language.client.model.HighScoreData;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
@@ -64,7 +67,7 @@ public class HighScoreService {
         if (stringBuilder.length() > 0) {
             stringBuilder.append("&");
         }
-        stringBuilder.append("UserId").append("=").append(userResults.getUserData().getUserId()).append("&");
+        stringBuilder.append("userid").append("=").append(userResults.getUserData().getUserId()).append("&");
         stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
         if (!isShareData) {
             stringBuilder.append(metadataFieldProvider.shareMetadataField.getPostName()).append("=").append(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField)).append("&");
@@ -105,7 +108,7 @@ public class HighScoreService {
                 if (200 == response.getStatusCode()) {
                     final String text = response.getText();
                     logger.info(text);
-                    highScoreListener.scoreSubmissionComplete();
+                    highScoreListener.scoreSubmissionComplete(JsonUtils.<JsArray<HighScoreData>>safeEval(response.getText()));
                 } else {
                     highScoreListener.scoreSubmissionFailed(new HighScoreException(HighScoreException.ErrorType.non202response, "An error occured on the server: " + response.getStatusText()));
                     logger.warning(targetUri);
