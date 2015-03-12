@@ -19,8 +19,11 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.http.client.URL;
+import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import java.util.Date;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.exception.MetadataFieldException;
@@ -35,6 +38,7 @@ import nl.ru.languageininteraction.language.client.registration.HighScoreService
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
+import nl.ru.languageininteraction.language.client.service.ResultsSerialiser;
 import nl.ru.languageininteraction.language.client.view.ScorePageView;
 
 /**
@@ -133,6 +137,16 @@ public class ScorePagePresenter implements Presenter {
                 try {
                     userResults.getUserData().validateNameField();
                     new LocalStorage().storeData(userResults);
+                    String restultsData = URL.encodeQueryString(new ResultsSerialiser() {
+                        final DateTimeFormat format = DateTimeFormat.getFormat(messages.reportDateFormat());
+
+                        @Override
+                        protected String formatDate(Date date) {
+                            return format.format(date);
+                        }
+                    }.serialise(userResults));
+                    new LocalStorage().addStoredGameData(userResults.getUserData().getUserId(), restultsData);
+                    userResults.clearResults();
                     appEventListner.requestApplicationState(nextState);
                 } catch (MetadataFieldException exception) {
                     // if the user has not entered their name etc then all actions force them to go to the edit details screen (which can only happen if they are playing for the first time or the clicked new player)
@@ -163,7 +177,8 @@ public class ScorePagePresenter implements Presenter {
         scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
 
         final HighScoreService registrationService = new HighScoreService();
-        registrationService.submitScores(userResults, new HighScoreListener() {
+        final boolean isShareData = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
+        registrationService.submitScores(isShareData, userResults, new HighScoreListener() {
 
             @Override
             public void scoreSubmissionFailed(HighScoreException exception) {
@@ -183,10 +198,13 @@ public class ScorePagePresenter implements Presenter {
 
             @Override
             public void scoreSubmissionComplete(JsArray<HighScoreData> highScoreData) {
-                userResults.clearResults();
                 final HighScoreData highScoreJson = highScoreData.get(0);
                 for (int index = 0; index < highScoreJson.getCount(); index++) {
                     scorePageView.setHighScore(index, highScoreJson.getPlayerName(index), highScoreJson.getPlayerHighScore(index));
+                }
+                if (isShareData) {
+                    userResults.clearResults();
+                    new LocalStorage().clearStoredGameData(userResults.getUserData().getUserId());
                 }
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.highscoresubmitted);
             }

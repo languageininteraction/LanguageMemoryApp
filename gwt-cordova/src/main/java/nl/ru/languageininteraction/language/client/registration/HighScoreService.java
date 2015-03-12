@@ -35,6 +35,7 @@ import nl.ru.languageininteraction.language.client.ServiceLocations;
 import nl.ru.languageininteraction.language.client.model.HighScoreData;
 import nl.ru.languageininteraction.language.client.model.MetadataField;
 import nl.ru.languageininteraction.language.client.model.UserResults;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.service.ResultsSerialiser;
 
@@ -49,12 +50,11 @@ public class HighScoreService {
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final Version version = GWT.create(Version.class);
 
-    public void submitScores(UserResults userResults, HighScoreListener highScoreListener, final String reportDateFormat) {
+    public void submitScores(final boolean isShareData,UserResults userResults, HighScoreListener highScoreListener, final String reportDateFormat) {
         final String highScoresUrl = serviceLocations.highScoresUrl();
         final RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, highScoresUrl);
         builder.setHeader("Content-type", "application/x-www-form-urlencoded");
-        StringBuilder stringBuilder = new StringBuilder();
-        final boolean isShareData = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
+        StringBuilder stringBuilder = new StringBuilder();        
         if (isShareData) {
             for (MetadataField key : userResults.getUserData().getMetadataFields()) {
                 String value = URL.encodeQueryString(userResults.getUserData().getMetadataValue(key));
@@ -74,8 +74,8 @@ public class HighScoreService {
         }
 
         if (isShareData) {
-            String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
-            stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
+//            String scoreLog = URL.encodeQueryString(userResults.getScoreLog());
+//            stringBuilder.append("scorelog").append("=").append(scoreLog).append("&");
             String restultsData = URL.encodeQueryString(new ResultsSerialiser() {
                 final DateTimeFormat format = DateTimeFormat.getFormat(reportDateFormat);
 
@@ -84,17 +84,17 @@ public class HighScoreService {
                     return format.format(date);
                 }
             }.serialise(userResults));
-            stringBuilder.append("quest_results=").append(restultsData);
+            stringBuilder.append("quest_results=").append(new LocalStorage().getStoredGameData(userResults.getUserData().getUserId())).append(restultsData);
         }
         try {
-            builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, highScoreListener, highScoresUrl));
+            builder.sendRequest(stringBuilder.toString(), geRequestBuilder(builder, highScoreListener, highScoresUrl, userResults));
         } catch (RequestException exception) {
             highScoreListener.scoreSubmissionFailed(new HighScoreException(HighScoreException.ErrorType.buildererror, exception));
             logger.log(Level.SEVERE, "SubmitHighScore", exception);
         }
     }
 
-    private RequestCallback geRequestBuilder(final RequestBuilder builder, final HighScoreListener highScoreListener, final String targetUri) {
+    private RequestCallback geRequestBuilder(final RequestBuilder builder, final HighScoreListener highScoreListener, final String targetUri, final UserResults userResults) {
         return new RequestCallback() {
             @Override
             public void onError(Request request, Throwable exception) {

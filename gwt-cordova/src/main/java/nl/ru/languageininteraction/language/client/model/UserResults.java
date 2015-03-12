@@ -25,8 +25,6 @@ public class UserResults {
 
     private UserData userData = null;
     private GameData gameData = new GameData();
-    private StimuliGroup pendingStimuliGroup = null;
-    private String scoreLog = "";
 
     public UserResults(UserData userId) {
         this.userData = userId;
@@ -47,21 +45,5 @@ public class UserResults {
 
     public GameData getGameData() {
         return gameData;
-    }
-
-    public StimuliGroup getPendingStimuliGroup() {
-        return pendingStimuliGroup;
-    }
-
-    public void setPendingStimuliGroup(StimuliGroup pendingStimuliGroup) {
-        this.pendingStimuliGroup = pendingStimuliGroup;
-    }
-
-    public String getScoreLog() {
-        return scoreLog;
-    }
-
-    public void setScoreLog(String scoreLog) {
-        this.scoreLog = scoreLog;
     }
 }

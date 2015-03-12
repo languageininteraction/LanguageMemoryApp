@@ -35,6 +35,7 @@ public class LocalStorage {
     private Storage dataStore = null;
     private static final String USER_RESULTS = "UserResults.";
     private static final String LAST_USER_ID = "LastUserId.";
+    private static final String GAME_DATA = "GameData.";
     protected static final String MAX_SCORE = "maxScore";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
@@ -43,6 +44,21 @@ public class LocalStorage {
             dataStore = Storage.getLocalStorageIfSupported();
         }
         return dataStore;
+    }
+
+    public void clearStoredGameData(UserId userId) {
+        loadStorage();
+        dataStore.setItem(GAME_DATA + userId.toString(), "");
+    }
+
+    public String getStoredGameData(UserId userId) {
+        loadStorage();
+        return getCleanStoredData(GAME_DATA + userId.toString());
+    }
+
+    public void addStoredGameData(UserId userId, String serialisedGameData) {
+        loadStorage();
+        dataStore.setItem(GAME_DATA + userId.toString(), getCleanStoredData(GAME_DATA + userId.toString()) + serialisedGameData);
     }
 
     public UserData getStoredData(UserId userId) {
