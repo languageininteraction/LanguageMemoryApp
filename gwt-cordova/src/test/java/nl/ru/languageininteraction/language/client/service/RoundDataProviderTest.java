@@ -17,7 +17,8 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -39,13 +40,14 @@ public class RoundDataProviderTest {
         System.out.println("getUniqueLanguage");
         final int languagesLength = LanguageDataProvider.LanguageSample.values().length;
         System.out.println("languagesLength: " + languagesLength);
-        HashSet<LanguageDataProvider.LanguageSample> excludedLanguages = new HashSet<>();
+        ArrayList<LanguageDataProvider.LanguageSample> availableLanguages = new ArrayList(Arrays.asList(LanguageDataProvider.LanguageSample.values()));
         RoundDataProvider instance = new RoundDataProvider();
-        while (excludedLanguages.size() < languagesLength) {
-            final LanguageDataProvider.LanguageSample uniqueLanguage = instance.getUniqueLanguage(excludedLanguages);
-            System.out.println(uniqueLanguage + " : " + excludedLanguages.size());
-            excludedLanguages.add(uniqueLanguage);
+        int generatedSampleCount = 0;
+        while (availableLanguages.size() > 0) {
+            final LanguageDataProvider.LanguageSample uniqueLanguage = instance.getUniqueLanguage(availableLanguages);
+            System.out.println(uniqueLanguage + " : " + availableLanguages.size());
+            generatedSampleCount++;
         }
-        assertEquals(languagesLength, excludedLanguages.size());
+        assertEquals(languagesLength, generatedSampleCount);
     }
 }

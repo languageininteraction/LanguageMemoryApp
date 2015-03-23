@@ -18,8 +18,8 @@
 package nl.ru.languageininteraction.language.client.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.model.RoundData;
@@ -32,39 +32,31 @@ import nl.ru.languageininteraction.language.client.util.GameState;
  */
 public class RoundDataProvider {
 
-    final HashSet<LanguageDataProvider.LanguageSample> seenCorrectLanguages;
+    final ArrayList<LanguageDataProvider.LanguageSample> unseenCorrectLanguages;
 
     public RoundDataProvider() {
-        this.seenCorrectLanguages = new HashSet<>();
+        this.unseenCorrectLanguages = new ArrayList<>(Arrays.asList(LanguageDataProvider.LanguageSample.values()));
     }
 
-    protected LanguageDataProvider.LanguageSample getUniqueLanguage(HashSet<LanguageDataProvider.LanguageSample> excludedLanguages) {
-        final int languagesLength = LanguageDataProvider.LanguageSample.values().length;
-        int randomIndex = (int) (Math.random() * (languagesLength - 1));
-        System.out.println("randomIndex: " + randomIndex);
-        LanguageDataProvider.LanguageSample selectedLanguage = LanguageDataProvider.LanguageSample.values()[randomIndex];
-        while (excludedLanguages.contains(selectedLanguage)) {
-            // this assumes that the max number of samples used in a game are reasonably greater than the number of samples available
-            randomIndex = (randomIndex < languagesLength - 1) ? randomIndex + 1 : 0;
-            selectedLanguage = LanguageDataProvider.LanguageSample.values()[randomIndex];
-            System.out.println("randomIndexUpdated: " + randomIndex);
-        }
-        excludedLanguages.add(selectedLanguage);
+    protected LanguageDataProvider.LanguageSample getUniqueLanguage(ArrayList<LanguageDataProvider.LanguageSample> availableLanguages) {
+        final int availableLength = availableLanguages.size();
+        int randomIndex = (int) (Math.random() * (availableLength - 1));
+        LanguageDataProvider.LanguageSample selectedLanguage = availableLanguages.remove(randomIndex);
         return selectedLanguage;
     }
 
     public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
-        final HashSet<LanguageDataProvider.LanguageSample> seenChoiceLanguages = new HashSet<>();
+        final ArrayList<LanguageDataProvider.LanguageSample> choiceLanguages = new ArrayList(Arrays.asList(LanguageDataProvider.LanguageSample.values()));
         final int correctSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
         int correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
         while (correctChoiceSampleIndex == correctSampleIndex) {
             correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
         }
-        final RoundSample correctSample = new RoundSample(getUniqueLanguage(seenCorrectLanguages), true, correctSampleIndex);
+        final RoundSample correctSample = new RoundSample(getUniqueLanguage(unseenCorrectLanguages), true, correctSampleIndex);
         final List<RoundSample> roundChoices = new ArrayList<>();
         roundChoices.add(new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
         for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount(); choiceIndex++) {
-            roundChoices.add(new RoundSample(getUniqueLanguage(seenChoiceLanguages), false, (int) (Math.random() * LanguageDataProvider.soundFileCount)));
+            roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, (int) (Math.random() * LanguageDataProvider.soundFileCount)));
         }
         return new RoundData(correctSample, roundChoices, new Date());
     }
