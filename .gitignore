@@ -3,3 +3,4 @@
 /gwt-cordova/target/
 /gwt-cordova/src/main/webapp/media/*.wav
 /gwt-cordova/src/main/webapp/media/*/*.mp3
+/gwt-cordova/src/main/webapp/media/*/*.m4a

@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
+import java.util.Arrays;
 import java.util.Date;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.model.RoundData;
@@ -44,11 +45,11 @@ public class ResultsSerialiserTest {
     public void testSerialise() {
         System.out.println("serialise");
         UserResults userResults = new UserResults(new UserData(new UserId("auserid")));
-        final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}, new Date(9999999));
+        final RoundData roundData = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 2, false), Arrays.asList(new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.arz, 3, true), getRoundSample(LanguageDataProvider.LanguageSample.spa, 3, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 3, true)}), new Date(9999999));
         roundData.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, true));
         roundData.setDurationMs(123456);
         userResults.getGameData().addRoundData(roundData);
-        final RoundData roundData1 = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.spa, 1, true), new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 1, true), getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, false)}, new Date(9999999));
+        final RoundData roundData1 = new RoundData(getRoundSample(LanguageDataProvider.LanguageSample.spa, 1, true), Arrays.asList(new RoundSample[]{getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false), getRoundSample(LanguageDataProvider.LanguageSample.deu, 1, true), getRoundSample(LanguageDataProvider.LanguageSample.fij, 1, false)}), new Date(9999999));
         roundData1.setChosenAnswer(getRoundSample(LanguageDataProvider.LanguageSample.cmn, 1, false));
         roundData1.setDurationMs(123456);
         userResults.getGameData().addRoundData(roundData1);

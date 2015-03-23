@@ -18,10 +18,11 @@
             
 import com.google.gwt.core.client.GWT;
                         
-// generated with svg2java.xsl
+// generated with csv2java.xsl
 public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider implements com.google.gwt.i18n.client.Messages {
 
     private static final </xsl:text><xsl:value-of select="$classname" /><xsl:text> LANGUAGE_DATA = GWT.create(</xsl:text><xsl:value-of select="$classname" /><xsl:text>.class);
+    public static final int soundFileCount = 5;
 
     public enum LanguageSample {
         </xsl:text>

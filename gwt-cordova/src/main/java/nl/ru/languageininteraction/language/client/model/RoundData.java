@@ -18,6 +18,7 @@
 package nl.ru.languageininteraction.language.client.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @since Jan 28, 2015 4:09:17 PM (creation date)
@@ -27,11 +28,11 @@ public class RoundData {
 
     private RoundSample chosenAnswer;
     private final RoundSample correctSample;
-    private final RoundSample[] roundChoices;
+    private final List<RoundSample> roundChoices;
     private final Date time;
     private long durationMs = 0;
 
-    public RoundData(RoundSample correctSample, RoundSample[] roundChoices, Date time) {
+    public RoundData(RoundSample correctSample, List<RoundSample> roundChoices, Date time) {
         this.correctSample = correctSample;
         this.roundChoices = roundChoices;
         this.time = time;
@@ -53,7 +54,7 @@ public class RoundData {
         return correctSample;
     }
 
-    public RoundSample[] getRoundChoices() {
+    public List<RoundSample> getRoundChoices() {
         return roundChoices;
     }
 

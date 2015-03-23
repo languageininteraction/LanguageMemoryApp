@@ -42,6 +42,7 @@ public interface AppEventListner {
         setuser(messages.setUserMenuLabel()),
         //        adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         //        stimulus(messages.stimulusMenuLabel()),
+        tutorial("Tutorial"),
         guessround("Guess"),
         scores("Scores"),
         matchlanguage("Match"),

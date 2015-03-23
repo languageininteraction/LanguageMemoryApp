@@ -180,16 +180,16 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                         matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton1);
-                        if (roundData.getRoundChoices().length > 1) {
+                        if (roundData.getRoundChoices().size() > 1) {
                             matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton2);
                         }
-                        if (roundData.getRoundChoices().length > 2) {
+                        if (roundData.getRoundChoices().size() > 2) {
                             matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton3);
                         }
-                        if (roundData.getRoundChoices().length > 3) {
+                        if (roundData.getRoundChoices().size() > 3) {
                             matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton4);
                         }
-                        if (roundData.getRoundChoices().length > 4) {
+                        if (roundData.getRoundChoices().size() > 4) {
                             matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton5);
                         }
                     }
@@ -211,7 +211,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     }
-                    audioPlayer.playSampleAudio(roundData.getRoundChoices()[0]);
+                    audioPlayer.playSampleAudio(roundData.getRoundChoices().get(0));
                     consumed = true;
                     break;
                 case SampleButton2:
@@ -228,7 +228,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     }
-                    audioPlayer.playSampleAudio(roundData.getRoundChoices()[1]);
+                    audioPlayer.playSampleAudio(roundData.getRoundChoices().get(1));
                     consumed = true;
                     break;
                 case SampleButton3:
@@ -245,7 +245,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     }
-                    audioPlayer.playSampleAudio(roundData.getRoundChoices()[2]);
+                    audioPlayer.playSampleAudio(roundData.getRoundChoices().get(2));
                     consumed = true;
                     break;
                 case SampleButton4:
@@ -262,7 +262,7 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     }
-                    audioPlayer.playSampleAudio(roundData.getRoundChoices()[3]);
+                    audioPlayer.playSampleAudio(roundData.getRoundChoices().get(3));
                     consumed = true;
                     break;
                 case SampleButton5:
@@ -279,49 +279,49 @@ public class GuessRoundView extends AbstractSvgView {
                         matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow4);
                         matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow5);
                     }
-                    audioPlayer.playSampleAudio(roundData.getRoundChoices()[4]);
+                    audioPlayer.playSampleAudio(roundData.getRoundChoices().get(4));
                     consumed = true;
                     break;
                 case ChoiceArrow1:
-                    targetSampleListener.eventFired(roundData.getRoundChoices()[0]);
+                    targetSampleListener.eventFired(roundData.getRoundChoices().get(0));
                     showCorrectButton();
-                    if (!roundData.getRoundChoices()[0].isCorrect()) {
+                    if (!roundData.getRoundChoices().get(0).isCorrect()) {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton1);
                     }
                     showResult();
                     consumed = true;
                     break;
                 case ChoiceArrow2:
-                    targetSampleListener.eventFired(roundData.getRoundChoices()[1]);
+                    targetSampleListener.eventFired(roundData.getRoundChoices().get(1));
                     showCorrectButton();
-                    if (!roundData.getRoundChoices()[1].isCorrect()) {
+                    if (!roundData.getRoundChoices().get(1).isCorrect()) {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton2);
                     }
                     showResult();
                     consumed = true;
                     break;
                 case ChoiceArrow3:
-                    targetSampleListener.eventFired(roundData.getRoundChoices()[2]);
+                    targetSampleListener.eventFired(roundData.getRoundChoices().get(2));
                     showCorrectButton();
-                    if (!roundData.getRoundChoices()[2].isCorrect()) {
+                    if (!roundData.getRoundChoices().get(2).isCorrect()) {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton3);
                     }
                     showResult();
                     consumed = true;
                     break;
                 case ChoiceArrow4:
-                    targetSampleListener.eventFired(roundData.getRoundChoices()[3]);
+                    targetSampleListener.eventFired(roundData.getRoundChoices().get(3));
                     showCorrectButton();
-                    if (!roundData.getRoundChoices()[3].isCorrect()) {
+                    if (!roundData.getRoundChoices().get(3).isCorrect()) {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton4);
                     }
                     showResult();
                     consumed = true;
                     break;
                 case ChoiceArrow5:
-                    targetSampleListener.eventFired(roundData.getRoundChoices()[4]);
+                    targetSampleListener.eventFired(roundData.getRoundChoices().get(4));
                     showCorrectButton();
-                    if (!roundData.getRoundChoices()[4].isCorrect()) {
+                    if (!roundData.getRoundChoices().get(4).isCorrect()) {
                         matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton5);
                     }
                     showResult();
@@ -335,19 +335,19 @@ public class GuessRoundView extends AbstractSvgView {
     }
 
     private void showCorrectButton() {
-        if (roundData.getRoundChoices()[0].isCorrect()) {
+        if (roundData.getRoundChoices().get(0).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton1);
         }
-        if (roundData.getRoundChoices()[1].isCorrect()) {
+        if (roundData.getRoundChoices().get(1).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton2);
         }
-        if (roundData.getRoundChoices()[2].isCorrect()) {
+        if (roundData.getRoundChoices().get(2).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton3);
         }
-        if (roundData.getRoundChoices()[3].isCorrect()) {
+        if (roundData.getRoundChoices().get(3).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton4);
         }
-        if (roundData.getRoundChoices()[4].isCorrect()) {
+        if (roundData.getRoundChoices().get(4).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton5);
         }
     }

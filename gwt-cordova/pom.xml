@@ -17,7 +17,7 @@
     </organization>
     <properties>
         <netbeans.hint.license>gpl20</netbeans.hint.license>
-        <plugin.license.copyrightYear>2014</plugin.license.copyrightYear>
+        <plugin.license.copyrightYear>2015</plugin.license.copyrightYear>
         <!-- Convenience property to set the GWT version -->
         <gwtVersion>2.7.0</gwtVersion>
         <!-- GWT needs at least java 1.5 -->
@@ -207,6 +207,7 @@
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.AutotypRegions</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.MatchLanguage</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.GuessRound</i18nMessagesBundle>
+                        <i18nMessagesBundle>nl.ru.languageininteraction.language.client.GuessRound_Tutorial</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.ScorePage</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.LanguageData</i18nMessagesBundle>
                         <i18nMessagesBundle>nl.ru.languageininteraction.language.client.InfoScreen</i18nMessagesBundle>
@@ -284,6 +285,13 @@
                         <exclude>**/nbactions.xml</exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

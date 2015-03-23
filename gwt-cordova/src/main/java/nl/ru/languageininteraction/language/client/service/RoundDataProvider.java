@@ -17,7 +17,10 @@
  */
 package nl.ru.languageininteraction.language.client.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
@@ -29,23 +32,40 @@ import nl.ru.languageininteraction.language.client.util.GameState;
  */
 public class RoundDataProvider {
 
-    public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
-        if (Math.random() > 0.5) {
-            return new RoundData(new RoundSample(LanguageDataProvider.LanguageSample.bos, true, 1),
-                    new RoundSample[]{new RoundSample(LanguageDataProvider.LanguageSample.bos, true, 2),
-                        new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.deu, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.fij, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.spa, false, 2)
-                    }, new Date());
-        } else {
-            return new RoundData(new RoundSample(LanguageDataProvider.LanguageSample.cym, true, 1),
-                    new RoundSample[]{new RoundSample(LanguageDataProvider.LanguageSample.dip, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.ell, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.cym, true, 2),
-                        new RoundSample(LanguageDataProvider.LanguageSample.kor, false, 3),
-                        new RoundSample(LanguageDataProvider.LanguageSample.cmn, false, 2)
-                    }, new Date());
+    final HashSet<LanguageDataProvider.LanguageSample> seenCorrectLanguages;
+
+    public RoundDataProvider() {
+        this.seenCorrectLanguages = new HashSet<>();
+    }
+
+    protected LanguageDataProvider.LanguageSample getUniqueLanguage(HashSet<LanguageDataProvider.LanguageSample> excludedLanguages) {
+        final int languagesLength = LanguageDataProvider.LanguageSample.values().length;
+        int randomIndex = (int) (Math.random() * (languagesLength - 1));
+        System.out.println("randomIndex: " + randomIndex);
+        LanguageDataProvider.LanguageSample selectedLanguage = LanguageDataProvider.LanguageSample.values()[randomIndex];
+        while (excludedLanguages.contains(selectedLanguage)) {
+            // this assumes that the max number of samples used in a game are reasonably greater than the number of samples available
+            randomIndex = (randomIndex < languagesLength - 1) ? randomIndex + 1 : 0;
+            selectedLanguage = LanguageDataProvider.LanguageSample.values()[randomIndex];
+            System.out.println("randomIndexUpdated: " + randomIndex);
         }
+        excludedLanguages.add(selectedLanguage);
+        return selectedLanguage;
+    }
+
+    public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
+        final HashSet<LanguageDataProvider.LanguageSample> seenChoiceLanguages = new HashSet<>();
+        final int correctSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
+        int correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
+        while (correctChoiceSampleIndex == correctSampleIndex) {
+            correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
+        }
+        final RoundSample correctSample = new RoundSample(getUniqueLanguage(seenCorrectLanguages), true, correctSampleIndex);
+        final List<RoundSample> roundChoices = new ArrayList<>();
+        roundChoices.add(new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
+        for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount(); choiceIndex++) {
+            roundChoices.add(new RoundSample(getUniqueLanguage(seenChoiceLanguages), false, (int) (Math.random() * LanguageDataProvider.soundFileCount)));
+        }
+        return new RoundData(correctSample, roundChoices, new Date());
     }
 }

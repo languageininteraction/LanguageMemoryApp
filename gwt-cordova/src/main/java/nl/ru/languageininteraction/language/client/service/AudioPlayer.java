@@ -70,21 +70,6 @@ public class AudioPlayer {
         playSample(soundFiles[roundSample.getSampleIndex()]);
     }
 
-    @Deprecated
-    public void playSampleAudio1() {
-        playSample("media/Sample1.wav");
-    }
-
-    @Deprecated
-    public void playSampleAudio2() {
-        playSample("media/Sample2.wav");
-    }
-
-    @Deprecated
-    public void playSampleAudio3() {
-        playSample("media/Sample3.wav");
-    }
-
     private void playSample(String sample) {
         if (audioPlayer == null) {
             try {

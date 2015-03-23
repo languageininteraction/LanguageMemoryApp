@@ -41,6 +41,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
     private int roundsPlayed = 0;
     private int playerScore = 0;
     private final GameState.PlayerLevel playerLevel;
+    final RoundDataProvider roundDataProvider;
 
     public GuessRoundPresenter(RootLayoutPanel widgetTag, UserResults userResults, final AudioPlayer audioPlayer) throws AudioException {
         super(widgetTag, userResults, audioPlayer, new GuessRoundView(audioPlayer));
@@ -49,6 +50,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
         playerScore = userResults.getUserData().getBestScore();
         userResults.getGameData().clearGameCounters();
         playerLevel = new GameState().getPlayerLevel(playerScore);
+        roundDataProvider = new RoundDataProvider();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
     }
 
     private void setSamples(GameState.PlayerLevel playerLevel) {
-        final RoundData roundData = new RoundDataProvider().getRoundData(playerLevel);
+        final RoundData roundData = roundDataProvider.getRoundData(playerLevel);
         final long startMs = System.currentTimeMillis();
         guessRoundView.setSampleListeners(new LanguageSampleListener() {
 

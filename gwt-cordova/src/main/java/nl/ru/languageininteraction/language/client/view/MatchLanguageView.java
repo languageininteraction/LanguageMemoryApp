@@ -81,7 +81,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton3);
                     matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton4);
                     matchLanguageBuilder.showGroup(SvgGroupStates.SampleButton5);
-                    audioPlayer.playSampleAudio1();
+//                    audioPlayer.playSampleAudio1();
                     break;
                 case SampleButton1:
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow1);
@@ -91,7 +91,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
-                    audioPlayer.playSampleAudio2();
+//                    audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton2:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
@@ -101,7 +101,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
-                    audioPlayer.playSampleAudio3();
+//                    audioPlayer.playSampleAudio3();
                     break;
                 case SampleButton3:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
@@ -111,7 +111,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
-                    audioPlayer.playSampleAudio1();
+//                    audioPlayer.playSampleAudio1();
                     break;
                 case SampleButton4:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
@@ -121,7 +121,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow5);
                     matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
-                    audioPlayer.playSampleAudio2();
+//                    audioPlayer.playSampleAudio2();
                     break;
                 case SampleButton5:
                     matchLanguageBuilder.hideGroup(SvgGroupStates.ChoiceArrow1);
@@ -131,7 +131,7 @@ public class MatchLanguageView extends AbstractSvgView {
                     matchLanguageBuilder.showGroup(SvgGroupStates.ChoiceArrow5);
                     matchLanguageBuilder.showGroup(SvgGroupStates.IncorrectButton);
                     matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton);
-                    audioPlayer.playSampleAudio3();
+//                    audioPlayer.playSampleAudio3();
                     break;
             }
         } else {
