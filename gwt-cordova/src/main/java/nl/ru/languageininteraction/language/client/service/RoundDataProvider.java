@@ -47,17 +47,18 @@ public class RoundDataProvider {
 
     public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
         final ArrayList<LanguageDataProvider.LanguageSample> choiceLanguages = new ArrayList(Arrays.asList(LanguageDataProvider.LanguageSample.values()));
-        final int correctSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
-        int correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
+        final int correctSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
+        int correctChoiceSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
         while (correctChoiceSampleIndex == correctSampleIndex) {
-            correctChoiceSampleIndex = (int) (Math.random() * LanguageDataProvider.soundFileCount);
+            correctChoiceSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
         }
         final RoundSample correctSample = new RoundSample(getUniqueLanguage(unseenCorrectLanguages), true, correctSampleIndex);
         final List<RoundSample> roundChoices = new ArrayList<>();
-        roundChoices.add(new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
         for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount(); choiceIndex++) {
-            roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, (int) (Math.random() * LanguageDataProvider.soundFileCount)));
+            roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1))));
         }
+        // insert the correct sample in a random location in the arraylist
+        roundChoices.add((int) (Math.random() * (roundChoices.size() - 1)), new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
         return new RoundData(correctSample, roundChoices, new Date());
     }
 }
