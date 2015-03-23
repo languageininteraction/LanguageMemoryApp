@@ -77,7 +77,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
         }
 
         public String[] getSoundFiles() {
-            return new String[]{"media/" + isoCode + "/s1.mp3", "media/" + isoCode + "/s2.mp3", "media/" + isoCode + "/s3.mp3"};
+            return new String[]{"media/" + isoCode + "/s1.m4a", "media/" + isoCode + "/s2.m4a", "media/" + isoCode + "/s3.m4a", "media/" + isoCode + "/s4.m4a", "media/" + isoCode + "/s5.m4a"};
         }
     }
 }
