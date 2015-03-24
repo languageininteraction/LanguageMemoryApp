@@ -37,9 +37,19 @@ public class ChoosePlayerView extends AbstractSvgView {
     protected PresenterEventListner goButtonListner;
     protected PresenterEventListner createButtonListner;
     protected PresenterEventListner switchButtonListner;
+    protected PresenterEventListner settingsButtonListner;
+    protected PresenterEventListner infoButtonListner;
 
     public ChoosePlayerView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+    }
+
+    public void setInfoButtonListner(PresenterEventListner infoButtonListner) {
+        this.infoButtonListner = infoButtonListner;
+    }
+
+    public void setSettingsButtonListner(PresenterEventListner settingsButtonListner) {
+        this.settingsButtonListner = settingsButtonListner;
     }
 
     public void setEditButtonListner(PresenterEventListner editButtonListner) {
@@ -87,6 +97,14 @@ public class ChoosePlayerView extends AbstractSvgView {
             case SwitchPlayerButton:
                 consumed = true;
                 switchButtonListner.eventFired(null);
+                break;
+            case SettingsButton:
+                consumed = true;
+                settingsButtonListner.eventFired(null);
+                break;
+            case InfoButton:
+                consumed = true;
+                infoButtonListner.eventFired(null);
                 break;
         }
         return consumed;

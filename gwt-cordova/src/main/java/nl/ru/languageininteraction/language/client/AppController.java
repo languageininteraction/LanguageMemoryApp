@@ -94,7 +94,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case tutorial:
                     this.presenter = new TutorialPresenter(widgetTag, userResults, new AudioPlayer(this), this);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.startscreen);
                     break;
                 case chooseplayer:
                     // only if there is an existing user, show the choose player screen

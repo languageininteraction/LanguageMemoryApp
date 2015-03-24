@@ -32,11 +32,13 @@ public class StartScreenView extends AbstractSvgView {
     protected final StartScreenBuilder svgBuilder = new StartScreenBuilder();
     protected final PresenterEventListner infoButtonListner;
     protected final PresenterEventListner goButtonListner;
+    protected final PresenterEventListner settingsButtonListner;
 
-    public StartScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, AudioPlayer audioPlayer) throws AudioException {
+    public StartScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, PresenterEventListner settingsButtonListner, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
         this.infoButtonListner = infoButtonListner;
         this.goButtonListner = goButtonListner;
+        this.settingsButtonListner = settingsButtonListner;
     }
 
     @Override
@@ -53,6 +55,10 @@ public class StartScreenView extends AbstractSvgView {
             case InfoButton:
                 consumed = true;
                 infoButtonListner.eventFired(null);
+                break;
+            case SettingsButton:
+                consumed = true;
+                settingsButtonListner.eventFired(null);
                 break;
             case LQLogo:
             case GoButton:

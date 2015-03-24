@@ -58,6 +58,17 @@ public class StartScreenPresenter extends AbstractSvgPresenter implements Presen
             public void eventFired(Button button) {
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
             }
+        }, new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.tutorial);
+            }
         },
                 audioPlayer));
     }

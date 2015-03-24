@@ -31,14 +31,10 @@ import nl.ru.languageininteraction.language.client.util.SvgTemplate;
 public class TutorialView extends AbstractSvgView {
 
     protected final GuessRound_TutorialBuilder svgBuilder = new GuessRound_TutorialBuilder();
-    protected final PresenterEventListner infoButtonListner;
-    protected final PresenterEventListner goButtonListner;
     GuessRound_TutorialBuilder.SvgGroupStates currentState = GuessRound_TutorialBuilder.SvgGroupStates.Tutorial1;
 
-    public TutorialView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, AudioPlayer audioPlayer) throws AudioException {
+    public TutorialView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
-        this.infoButtonListner = infoButtonListner;
-        this.goButtonListner = goButtonListner;
     }
 
     @Override
@@ -84,7 +80,7 @@ public class TutorialView extends AbstractSvgView {
                 break;
             case Tutorial4:
                 consumed = true;
-                goButtonListner.eventFired(null);
+                nextEventListner.eventFired(null);
                 break;
         }
         return consumed;

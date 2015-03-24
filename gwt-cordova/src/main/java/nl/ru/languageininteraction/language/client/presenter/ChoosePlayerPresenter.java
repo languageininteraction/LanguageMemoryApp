@@ -65,6 +65,32 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
                         appEventListner.requestApplicationState(AppEventListner.ApplicationState.playerdetails);
                     }
                 });
+        ((ChoosePlayerView) abstractSvgView).setInfoButtonListner(
+                new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
+                    }
+                });
+        ((ChoosePlayerView) abstractSvgView).setSettingsButtonListner(
+                new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.tutorial);
+                    }
+                });
         ((ChoosePlayerView) abstractSvgView).setGoButtonListner(new PresenterEventListner() {
 
             @Override

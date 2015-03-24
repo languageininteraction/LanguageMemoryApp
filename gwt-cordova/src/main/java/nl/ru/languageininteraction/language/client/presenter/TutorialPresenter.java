@@ -36,30 +36,7 @@ public class TutorialPresenter extends AbstractSvgPresenter implements Presenter
     protected final GuessRound_TutorialBuilder svgBuilder = new GuessRound_TutorialBuilder();
 
     public TutorialPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new TutorialView(new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return "";
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
-            }
-        }, new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return "";
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
-            }
-        },
-                audioPlayer));
+        super(widgetTag, userResults, audioPlayer, new TutorialView(audioPlayer));
     }
 
     @Override
