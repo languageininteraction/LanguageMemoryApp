@@ -37,6 +37,7 @@ public class LocalStorage {
     private static final String LAST_USER_ID = "LastUserId.";
     private static final String GAME_DATA = "GameData.";
     protected static final String MAX_SCORE = "maxScore";
+    protected static final String GAMES_PLAYED = "gamesPlayed";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
     private Storage loadStorage() {
@@ -70,6 +71,7 @@ public class LocalStorage {
             }
         }
         userData.updateBestScore(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + MAX_SCORE));
+        userData.setGamesPlayed(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + GAMES_PLAYED));
         return userData;
     }
 
@@ -102,6 +104,7 @@ public class LocalStorage {
             }
         }
         dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + MAX_SCORE, Integer.toString(userResults.getUserData().getBestScore()));
+        dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + GAMES_PLAYED, Integer.toString(userResults.getUserData().getGamesPlayed()));
         dataStore.setItem(LAST_USER_ID, userResults.getUserData().getUserId().toString());
     }
 

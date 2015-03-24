@@ -68,6 +68,8 @@ public class HighScoreService {
             stringBuilder.append("&");
         }
         stringBuilder.append("userid").append("=").append(userResults.getUserData().getUserId()).append("&");
+        stringBuilder.append("highscore").append("=").append(userResults.getUserData().getBestScore()).append("&");
+        stringBuilder.append("gamesplayed").append("=").append(userResults.getUserData().getGamesPlayed()).append("&");
         stringBuilder.append("applicationversion").append("=").append(version.projectVersion()).append("&");
         if (!isShareData) {
             stringBuilder.append(metadataFieldProvider.shareMetadataField.getPostName()).append("=").append(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField)).append("&");

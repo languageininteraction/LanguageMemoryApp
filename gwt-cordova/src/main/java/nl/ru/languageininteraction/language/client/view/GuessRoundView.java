@@ -22,6 +22,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.DOM;
+import nl.ru.languageininteraction.language.client.GuessRound;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgGroupStates;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder;
 import nl.ru.languageininteraction.language.client.GuessRoundBuilder.SvgTextElements;
@@ -42,6 +43,7 @@ public class GuessRoundView extends AbstractSvgView {
     private LanguageSampleListener targetSampleListener;
     private RoundData roundData;
     private boolean answerShowing = false;
+    private static final GuessRound SVG_DATA = GWT.create(GuessRound.class);
 
     public GuessRoundView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
@@ -396,7 +398,7 @@ public class GuessRoundView extends AbstractSvgView {
         while (childElement != null) {
             if (chidId.equals(childElement.getId())) {
                 // todo: it would be better to get this from the SVG / properties file
-                childElement.setAttribute("style", "fill:#ee282b;fill-opacity:1;fill-rule:nonzero;stroke:none;visibility:" + SvgTemplate.Visibility.visible);
+                childElement.setAttribute("style", SVG_DATA.styleaii() + ";visibility:" + SvgTemplate.Visibility.visible);
             } else {
                 childElement.setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
             }

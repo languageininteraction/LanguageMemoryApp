@@ -17,6 +17,7 @@
  */
 package nl.ru.languageininteraction.language.client;
 
+import com.google.gwt.user.client.History;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import java.util.logging.Logger;
@@ -24,7 +25,6 @@ import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AudioExceptionListner;
 import nl.ru.languageininteraction.language.client.model.UserData;
 import nl.ru.languageininteraction.language.client.model.UserId;
-import nl.ru.languageininteraction.language.client.presenter.AlienScreen;
 import nl.ru.languageininteraction.language.client.presenter.AutotypRegionsMapScreen;
 import nl.ru.languageininteraction.language.client.presenter.Presenter;
 import nl.ru.languageininteraction.language.client.presenter.ErrorPresenter;
@@ -35,7 +35,6 @@ import nl.ru.languageininteraction.language.client.presenter.ChoosePlayerPresent
 import nl.ru.languageininteraction.language.client.presenter.GuessRoundPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InfoScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
-import nl.ru.languageininteraction.language.client.presenter.IntroPresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalStoragePresenter;
 import nl.ru.languageininteraction.language.client.presenter.LocalePresenter;
 import nl.ru.languageininteraction.language.client.presenter.MapPresenter;
@@ -43,7 +42,7 @@ import nl.ru.languageininteraction.language.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.StartScreenPresenter;
-import nl.ru.languageininteraction.language.client.presenter.UserNamePresenter;
+import nl.ru.languageininteraction.language.client.presenter.TutorialPresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
 
@@ -74,6 +73,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
     public void requestApplicationState(ApplicationState applicationState) {
         try {
             trackView(applicationState.name());
+            History.newItem(applicationState.name(), false);
             // todo:
             // on each state change check if there is an completed game data, if the share is true then upload or store if offline
             // when any stored data is uploaded then delete the store 
@@ -92,13 +92,27 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     this.presenter = new VersionPresenter(widgetTag);
                     presenter.setState(this, ApplicationState.startscreen, null);
                     break;
-                case guessround:
-                    this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
-                    presenter.setState(this, ApplicationState.version, ApplicationState.scores);
+                case tutorial:
+                    this.presenter = new TutorialPresenter(widgetTag, userResults, new AudioPlayer(this), this);
+                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
                     break;
                 case chooseplayer:
-                    this.presenter = new ChoosePlayerPresenter(widgetTag, localStorage, userResults, new AudioPlayer(this), this);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.playerdetails);
+                    // only if there is an existing user, show the choose player screen
+                    if (localStorage.getLastUserId() != null) {
+                        this.presenter = new ChoosePlayerPresenter(widgetTag, localStorage, userResults, new AudioPlayer(this), this);
+                        presenter.setState(this, ApplicationState.version, ApplicationState.playerdetails);
+                        break;
+                    }
+                case tutorialorguessround:
+                    // only if the user has not played before, show the tutorial
+                    if (userResults.getUserData().getGamesPlayed() < 1) {
+                        this.presenter = new TutorialPresenter(widgetTag, userResults, new AudioPlayer(this), this);
+                        presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
+                        break;
+                    }
+                case guessround:
+                    this.presenter = new GuessRoundPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    presenter.setState(this, ApplicationState.tutorial, ApplicationState.scores);
                     break;
                 case playerdetails:
                     this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this));
@@ -138,23 +152,23 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     this.presenter = new AutotypRegionsMapScreen(widgetTag);
                     presenter.setState(this, ApplicationState.moreinfo, ApplicationState.alien);
                     break;
-                case alien:
-                    this.presenter = new AlienScreen(widgetTag);
-                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
-                    break;
+//                case alien:
+//                    this.presenter = new AlienScreen(widgetTag);
+//                    presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
+//                    break;
 //                case start:
 //                    this.presenter = new TestSvgDuplicateStringsPresenter(widgetTag);
 //                    presenter.setState(this, null, ApplicationState.startscreen);
 //                    break;
-                case intro:
-                    this.presenter = new IntroPresenter(widgetTag);
-                    presenter.setState(this, null, ApplicationState.guessround);
-                    break;
-                case setuser:
-                    this.presenter = new UserNamePresenter(widgetTag, userResults);
-                    presenter.setState(this, null, ApplicationState.guessround);
-//                    ((MetadataPresenter) presenter).focusFirstTextBox();
-                    break;
+//                case intro:
+//                    this.presenter = new IntroPresenter(widgetTag);
+//                    presenter.setState(this, null, ApplicationState.guessround);
+//                    break;
+//                case setuser:
+//                    this.presenter = new UserNamePresenter(widgetTag, userResults);
+//                    presenter.setState(this, null, ApplicationState.guessround);
+////                    ((MetadataPresenter) presenter).focusFirstTextBox();
+//                    break;
 //                case stimulus:
 //                    if (userResults.getPendingStimuliGroup() == null) {
 //                        this.presenter = new StimulusMenuPresenter(widgetTag, stimuliProvider, userResults);

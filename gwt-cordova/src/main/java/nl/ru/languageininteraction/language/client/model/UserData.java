@@ -31,6 +31,7 @@ public class UserData {
     private final HashMap<MetadataField, String> metadataValues = new HashMap<>();
     private final UserId userId;
     private int bestScore = 0;
+    private int gamesPlayed = 0;
 
     public UserData() {
         this.userId = new UserId();
@@ -62,6 +63,18 @@ public class UserData {
 
     public Set<MetadataField> getMetadataFields() {
         return metadataValues.keySet();
+    }
+
+    public int getGamesPlayed() {
+        return gamesPlayed;
+    }
+
+    public void setGamesPlayed(int gamesPlayed) {
+        this.gamesPlayed = gamesPlayed;
+    }
+
+    public void addGamePlayed() {
+        this.gamesPlayed++;
     }
 
     public int getBestScore() {

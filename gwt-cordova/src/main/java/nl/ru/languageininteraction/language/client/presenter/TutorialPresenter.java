@@ -56,7 +56,7 @@ public class TutorialPresenter extends AbstractSvgPresenter implements Presenter
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
             }
         },
                 audioPlayer));

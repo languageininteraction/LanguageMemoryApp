@@ -43,6 +43,7 @@ public interface AppEventListner {
         //        adddummyresults("Add Dummy Results"), // todo: remove this option when testing complete
         //        stimulus(messages.stimulusMenuLabel()),
         tutorial("Tutorial"),
+        tutorialorguessround("First Run Tutorial or Game"),
         guessround("Guess"),
         scores("Scores"),
         matchlanguage("Match"),

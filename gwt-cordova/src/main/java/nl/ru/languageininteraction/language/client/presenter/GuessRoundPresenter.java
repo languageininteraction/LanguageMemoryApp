@@ -60,6 +60,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
             return false;
         } else {
             new LocalStorage().storeData(userResults);
+            userResults.getUserData().addGamePlayed();
             return true;
         }
     }

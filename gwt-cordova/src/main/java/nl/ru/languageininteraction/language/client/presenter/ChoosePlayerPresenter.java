@@ -74,8 +74,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
             @Override
             public void eventFired(Button button) {
-//                appEventListner.requestApplicationState(AppEventListner.ApplicationState.scores);
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.tutorialorguessround);
             }
         });
         ((ChoosePlayerView) abstractSvgView).setCreateButtonListner(new PresenterEventListner() {
