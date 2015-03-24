@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchEndHandler;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -187,7 +188,16 @@ public abstract class AbstractSvgView extends AbstractView {
         }
         popupverticalPanel.add(buttonPanel);
         popupPanel.setWidget(popupverticalPanel);
-        popupPanel.center();
+        popupPanel.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+
+            @Override
+            public void setPosition(int offsetWidth, int offsetHeight) {
+                final int topPosition = Window.getClientHeight() / 2 - offsetHeight;
+                // topPosition is used to make sure the dialogue is above the half way point on the screen to avoid the software keyboard covering the box
+                // topPosition is also checked to make sure it does not show above the top of the page
+                popupPanel.setPopupPosition(Window.getClientWidth() / 2 - offsetWidth / 2, (topPosition < 0) ? 0 : topPosition);
+            }
+        });
     }
 
     abstract protected void getSvg(SafeHtmlBuilder builder);
