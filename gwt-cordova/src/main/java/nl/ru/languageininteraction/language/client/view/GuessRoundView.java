@@ -335,19 +335,20 @@ public class GuessRoundView extends AbstractSvgView {
     }
 
     private void showCorrectButton() {
-        if (roundData.getRoundChoices().get(0).isCorrect()) {
+        final int choicecount = roundData.getRoundChoices().size();
+        if (choicecount > 0 && roundData.getRoundChoices().get(0).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton1);
         }
-        if (roundData.getRoundChoices().get(1).isCorrect()) {
+        if (choicecount > 1 && roundData.getRoundChoices().get(1).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton2);
         }
-        if (roundData.getRoundChoices().get(2).isCorrect()) {
+        if (choicecount > 2 && roundData.getRoundChoices().get(2).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton3);
         }
-        if (roundData.getRoundChoices().get(3).isCorrect()) {
+        if (choicecount > 3 && roundData.getRoundChoices().get(3).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton4);
         }
-        if (roundData.getRoundChoices().get(4).isCorrect()) {
+        if (choicecount > 4 && roundData.getRoundChoices().get(4).isCorrect()) {
             matchLanguageBuilder.showGroup(SvgGroupStates.CorrectButton5);
         }
     }
@@ -395,7 +396,7 @@ public class GuessRoundView extends AbstractSvgView {
         while (childElement != null) {
             if (chidId.equals(childElement.getId())) {
                 // todo: it would be better to get this from the SVG / properties file
-                childElement.setAttribute("style", "fill:#ee282b;fill-opacity:1;fill-rule:nonzero;stroke:none; visibility:" + SvgTemplate.Visibility.visible);
+                childElement.setAttribute("style", "fill:#ee282b;fill-opacity:1;fill-rule:nonzero;stroke:none;visibility:" + SvgTemplate.Visibility.visible);
             } else {
                 childElement.setAttribute("style", "visibility:" + SvgTemplate.Visibility.hidden);
             }

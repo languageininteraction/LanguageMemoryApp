@@ -25,7 +25,7 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.view.StartScreenView;
+import nl.ru.languageininteraction.language.client.view.TutorialView;
 
 /**
  * @since Feb 4, 2015 11:26:10 AM (creation date)
@@ -36,7 +36,7 @@ public class TutorialPresenter extends AbstractSvgPresenter implements Presenter
     protected final GuessRound_TutorialBuilder svgBuilder = new GuessRound_TutorialBuilder();
 
     public TutorialPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new StartScreenView(new PresenterEventListner() {
+        super(widgetTag, userResults, audioPlayer, new TutorialView(new PresenterEventListner() {
 
             @Override
             public String getLabel() {

@@ -1,22 +1,22 @@
 "language","iso","pop","area","family","dobes"
 "Fijian","fij","337320","Oceania","Austronesian",0
 "Kannada","kan","37739040","Indic","Dravidian",0
-"Shona","sna","10741700","","Atlantic-Congo",1
+"Shona","sna","10741700","","Atlantic-Congo",0
 "Dinka","dip","1365900","","Nilotic",0
 "Hausa","hau","24988000","African","Afro-Asiatic",0
 "Tigrinya","tir","6915000","","Afro-Asiatic",0
 "Maori","mri","148660","Oceania","Austronesian",0
 "Dari","prs","9600000","","Indo-European",0
-"Scottish Gaelic","gla","63130","","Indo-European",1
+"Scottish Gaelic","gla","63130","","Indo-European",0
 "Bangla","ben","193261200","","Indo-European",0
-"South Efate","erk","6000","","Austronesian",1
+"South Efate","erk","6000","","Austronesian",0
 "Maltese","mlt","522000","Europe","Afro-Asiatic",0
 "Nepali","nep","15360100","","Indo-European",0
 "Malay","zsm","15848500","SoutheastAsia","Austronesian",0
 "Indonesian","ind","23200480","SoutheastAsia","Austronesian",0
 "Amharic","amh","21811600","GreaterAbyssinia","Afro-Asiatic",0
-"Samoan","smo","413257","","Austronesian",1
-"Sinhalese","sin","15579980","Asia","Indo-European",1
+"Samoan","smo","413257","","Austronesian",0
+"Sinhalese","sin","15579980","Asia","Indo-European",0
 "Basque","eus","545872","","Isolate",0
 "Tongan","ton","169120","","Austronesian",0
 "Hindi","hin","260333620","Europe","Indo-European",0
@@ -29,8 +29,8 @@
 "Latvian","lav","1552260","InnerAsia","Indo-European",0
 "Malayalam","mal","33550900","Indic","Dravidian",0
 "Welsh","cym","536890","Europe","Indo-European",0
-"Somali","som","14679300","GreaterAbyssinia","Afro-Asiatic",1
-"Swahili","swh","15457390","SAfrica","Atlantic-Congo",1
+"Somali","som","14679300","GreaterAbyssinia","Afro-Asiatic",0
+"Swahili","swh","15457390","SAfrica","Atlantic-Congo",0
 "Khmer","kxm","14224500","SoutheastAsia","Austro-asiatic",0
 "Northern Ndebele","nde","1572800","","Atlantic-Congo",0
 "Turkish","tur","70805930","GreaterMesopotamia","Turkic",0
@@ -54,14 +54,14 @@
 "Yiddish","ydd","1510430","","Indo-European",0
 "Macedonian","mkd","1407810","Europe","Indo-European",0
 "Greek","ell","13432940","Europe","Indo-European",0
-"Serbian","srp","8957906","Europe","Indo-European",1
-"Slovenian","slv","2085160","Europe","Indo-European",1
+"Serbian","srp","8957906","Europe","Indo-European",0
+"Slovenian","slv","2085160","Europe","Indo-European",0
 "Norwegian","nob","4741780","Europe","Indo-European",0
 "Polish","pol","38663780","Europe","Indo-European",0
 "Central Tibetan","bod","1172940","","Sino-Tibetan",0
-"Swedish","swe","9197090","Europe","Indo-European",1
+"Swedish","swe","9197090","Europe","Indo-European",0
 "Romanian","ron","23782990","Europe","Indo-European",0
-"Slovak","slk","5187740","Europe","Indo-European",1
+"Slovak","slk","5187740","Europe","Indo-European",0
 "Hebrew","heb","5302770","SouthAsia","Afro-Asiatic",0
 "Cantonese","yue","62221560","SoutheastAsia","Sino-Tibetan",0
 "Czech","ces","10619340","Europe","Indo-European",0
@@ -72,8 +72,23 @@
 "Mandarin","cmn","847808270","SoutheastAsia","Sino-Tibetan",0
 "Russian","rus","167332230","InnerAsia","Indo-European",0
 "Japanese","jpn","122056940","NCoastAsia","Japonic",0
+"Spanish","spa","414170030","Europe","Indo-European",0
 "Korean","kor","77166230","SoutheastAsia","Isolate",0
 "Italian","ita","63655047","Europe","Indo-European",0
-"German","deu","78245280","Europe","Indo-European",1
-"Spanish","spa","414170030","Europe","Indo-European",0
+"German","deu","78245280","Europe","Indo-European",0
 "French","fra","74980460","Europe","Indo-European",0
+"Akie","mwy","0",NA,"Nilotic",1
+"Bayso","bsw","2000",NA,"Cushitic",1
+"Bora","boa","3000",NA,"Boran",1
+"Chintang","ctn","3710",NA,"Sino-Tibetan",1
+"Chipaya","cap","2000",NA,"Uru-Chipaya",1
+"Haro","kcx","200",NA,"Omotic",1
+"Kómnzo","tci","200",NA,"Morehead-Wasur",1
+"Lacandon","lac","350",NA,"Mayan",1
+"Even","eve","3000",NA,"",1
+"Svan","sva","15000",NA,"Kartvelian",1
+"Tima","tms","5000",NA,"Katla-Tima",1
+"Uru","ure","2",NA,"Uru-Chipaya",1
+"Wooi","wbw","1800",NA,"Austronesian",1
+"Siwu","akp","27000",NA,"",0
+"West Ambrym","ambx","3000",NA,"",1
