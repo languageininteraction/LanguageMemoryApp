@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>languagememorygame</artifactId>
     <packaging>war</packaging>
-    <version>0.1.326-testing</version>
+    <version>0.1.327-testing</version>
     <name>Language Memory Game</name>
     <organization>
         <name>Language In Interaction</name>
@@ -271,7 +271,7 @@
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.9.0</version> 
                 <configuration>
-                    <header>${project.parent.basedir}/license-header.txt</header>
+                    <header>${project.basedir}/license-header.txt</header>
                     <strictCheck>false</strictCheck>
                     <properties>
                         <year>${plugin.license.copyrightYear}</year>

@@ -1,6 +1,6 @@
 #mvn install
 cd target
-appname=languagememorygame-0.1.326-testing
+appname=languagememorygame-0.1.327-testing
 rm -rf $appname-cordova
 unzip $appname-cordova.zip -d $appname-cordova
 cd $appname-cordova
