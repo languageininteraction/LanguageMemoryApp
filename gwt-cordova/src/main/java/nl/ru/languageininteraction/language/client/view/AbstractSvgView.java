@@ -53,6 +53,7 @@ public abstract class AbstractSvgView extends AbstractView {
     protected PresenterEventListner backEventListner = null;
     protected PresenterEventListner nextEventListner = null;
     protected Label label = new Label("clicked labels show here");
+//    private static final String ROTATABLE_GROUP = "rotatableGroup";
 
     public AbstractSvgView(AudioPlayer audioPlayer) throws AudioException {
         this.audioPlayer = audioPlayer;
@@ -60,10 +61,11 @@ public abstract class AbstractSvgView extends AbstractView {
 
     @Override
     protected void parentResized(int height, int width, String units) {
-//        final Element diagramElement = DOM.getElementById(MatchLanguageBuilder.SvgGroupStates.diagram.name());
+//        final Element diagramElement = DOM.getElementById(MatchLanguageBuilder.SvgGroupStates.svgDiagram.name());
+//        final Element diagramElement = DOM.getElementById(ROTATABLE_GROUP);
 //        if (diagramElement != null) {
-//            diagramElement.setAttribute("height", height - (HEADER_SIZE * 3) + units);
-//            diagramElement.setAttribute("width", width + units);
+//            diagramElement.setAttribute("transform", "rotate(-90)");
+////            diagramElement.setAttribute("width", width + units);
 //        }
 //        super.parentResized(height, width, units);
     }
@@ -98,8 +100,10 @@ public abstract class AbstractSvgView extends AbstractView {
 //        int height = Window.getClientHeight() - (HEADER_SIZE * 3);
 //        int width = Window.getClientWidth();
         builder.append(SafeHtmlUtils.fromTrustedString("<svg class='svgDiagram' id='" + MatchLanguageBuilder.SvgGroupStates.svgDiagram.name() + "' width=\"100%\" height=\"100%\" viewBox='0 0 568 320' >"));
+//<g id=\"" + ROTATABLE_GROUP + "\">
         getSvg(builder);
         builder.append(SafeHtmlUtils.fromTrustedString("</svg>"));
+//</g>
         final HTML html = new HTML(builder.toSafeHtml());
         html.addClickHandler(new ClickHandler() {
 

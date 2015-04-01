@@ -121,9 +121,9 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                 case start:
 // todo:            // if no player data then go to game
                     // if one or more player data then go to select player
-                    this.presenter = new LocalStoragePresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
-                    break;
+//                    this.presenter = new LocalStoragePresenter(widgetTag);
+//                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
+//                    break;
                 case startscreen:
                     this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game

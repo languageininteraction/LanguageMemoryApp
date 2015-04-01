@@ -7,10 +7,10 @@
     <!-- POM file generated with GWT webAppCreator -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.ru.languageininteraction</groupId>
-    <artifactId>languagememorygame</artifactId>
+    <artifactId>lingquiz</artifactId>
     <packaging>war</packaging>
-    <version>0.1.327-testing</version>
-    <name>Language Memory Game</name>
+    <version>0.1.328-testing</version>
+    <name>LingQuiz</name>
     <organization>
         <name>Language In Interaction</name>
         <url>https://www.languageininteraction.nl</url>
@@ -271,7 +271,7 @@
                 <artifactId>maven-license-plugin</artifactId>
                 <version>1.9.0</version> 
                 <configuration>
-                    <header>${project.basedir}/license-header.txt</header>
+                    <header>${project.basedir}/src/license-header.txt</header>
                     <strictCheck>false</strictCheck>
                     <properties>
                         <year>${plugin.license.copyrightYear}</year>
@@ -285,13 +285,13 @@
                         <exclude>**/nbactions.xml</exclude>
                     </excludes>
                 </configuration>
-                <executions>
+<!--                <executions>
                     <execution>
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

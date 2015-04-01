@@ -1,6 +1,6 @@
 #mvn install
 cd target
-appname=languagememorygame-0.1.327-testing
+appname=lingquiz-0.1.328-testing
 rm -rf $appname-cordova
 unzip $appname-cordova.zip -d $appname-cordova
 cd $appname-cordova
@@ -18,14 +18,14 @@ cordova plugin add https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plug
 #cordova plugin install org.apache.cordova.labs.keyboard
 cordova plugin add https://github.com/GetJobber/cordova-plugin-keyboard.git
 
-splashResourcesDir="./platforms/ios/LanguageMemory/Resources/splash/"
+splashResourcesDir="./platforms/ios/LingQuiz/Resources/splash/"
 echo $splashResourcesDir
 splashImage="images/splash.png" #"images/splash.gif" 
-iconResourcesDir="./platforms/ios/Language\ Memory/Resources/icons/"
+iconResourcesDir="./platforms/ios/LingQuiz/Resources/icons/"
 iconImage="images/icon.png"
 
 echo $splashImage
-#file ./platforms/ios/LanguageMemory/Resources/splash/*
+#file ./platforms/ios/LingQuiz/Resources/splash/*
 
 echo "making 9 patch splash images"
 #convert -background none images/LiI_logo_rgb.jpg -resize 320x320 -matte -bordercolor "rgb(0,158,200)" -border 2 -fill black -draw "line 1,0 1,0" -draw "line 0,1 0,1" -draw "line 0,67 0,67" -draw "line 322,0 322,0" platforms/splash320x320.9.png
@@ -106,9 +106,9 @@ convert -resize 100x100 -quality 100 $iconImage $iconResourcesDir/icon-50@2x.png
 #adb install target/*-testing-cordova/platforms/android/ant-build/CordovaApp-release.apk
 
 echo "launching xcode"
-open platforms/ios/Language\ Memory.xcodeproj&
+open platforms/ios/LingQuiz.xcodeproj&
 #echo "launching xcode"
-#open platforms/ios/LanguageMemory.xcodeproj
+#open platforms/ios/LingQuiz.xcodeproj
 
 # generate the IPA
 #cd platforms/ios/CordovaLib/
@@ -118,13 +118,13 @@ open platforms/ios/Language\ Memory.xcodeproj&
 
 #cd ..
 #pwd
-#xcodebuild -alltargets -project LanguageMemory.xcodeproj -sdk iphoneos -configuration Release
-#xcodebuild -scheme LanguageMemory -project LanguageMemory.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -alltargets -project LingQuiz.xcodeproj -sdk iphoneos -configuration Release
+#xcodebuild -scheme LingQuiz -project LingQuiz.xcodeproj -sdk iphoneos -configuration Release
 #cd build/Release-iphoneos
 cd platforms/ios/
 cd build/emulator
 pwd
-xcrun -sdk iphoneos PackageApplication -v "$(pwd)/LanguageMemory.app" -o "$(pwd)/$appname.ipa"
+xcrun -sdk iphoneos PackageApplication -v "$(pwd)/LingQuiz.app" -o "$(pwd)/$appname.ipa"
 
 # validate the results
 xcrun -verbose -sdk iphoneos Validation "$(pwd)/$appname.ipa"

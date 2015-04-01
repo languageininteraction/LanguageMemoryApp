@@ -3,10 +3,10 @@
         version="${application.majorVersion}.${application.minorVersion}.${application.buildVersion}" 
         xmlns="http://www.w3.org/ns/widgets" 
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Language Memory</name>
+    <name>LingQuiz</name>
 
     <description>
-        Language Memory is a game where players learn about rare and exotic languages in the holdings of The Language Archive / Max-Planck-Institute for Psycholinguistics by listening to clips from the languages and matching clips of the same language. Combining a general interest in cultural diversity with a simple game interface has proven extremely popular with casual social gamers, as the popularity of ‘the Great Language Game’ has shown. This app improves these concepts by including a greater number of more diverse languages and collecting crucial data on players’ performance and linguistic backgrounds. The app offers links to more information on each language from a range of databases.
+        LingQuiz is a game where players learn about rare and exotic languages in the holdings of The Language Archive / Max-Planck-Institute for Psycholinguistics by listening to clips from the languages and matching clips of the same language. Combining a general interest in cultural diversity with a simple game interface has proven extremely popular with casual social gamers, as the popularity of ‘the Great Language Game’ has shown. This app improves these concepts by including a greater number of more diverse languages and collecting crucial data on players’ performance and linguistic backgrounds. The app offers links to more information on each language from a range of databases.
     </description>
 
     <author href="https://github.com/languageininteraction/LanguageMemoryApp" email="">
@@ -28,7 +28,7 @@
     <preference name="exit-on-suspend"            value="false" />          <!-- ios: if set to true, app will terminate when home button is pressed -->
     <preference name="auto-hide-splash-screen"    value="true" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
-    <preference name="android-minSdkVersion"      value="9" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
+    <preference name="android-minSdkVersion"      value="19" />              <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
     <!--<preference name="EnableViewportScale" value="true" />-->
     <!--<preference name="KeyboardDisplayRequiresUserAction" value="false" /> it is unconfirmed if this preference is required for the keybard to show correctly -->

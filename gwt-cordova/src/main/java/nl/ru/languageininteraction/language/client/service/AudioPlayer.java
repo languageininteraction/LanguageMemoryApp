@@ -80,7 +80,7 @@ public class AudioPlayer {
             }
         }
         audioPlayer.setSrc(sample);
-        audioPlayer.setCurrentTime(0);
+        //audioPlayer.setCurrentTime(0); // on android the if the ready state is not correct then this will fail and audio will not play
         audioPlayer.play();
     }
 
