@@ -19,24 +19,24 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import nl.ru.languageininteraction.language.client.StartScreenBuilder;
+import nl.ru.languageininteraction.language.client.ExplainDataSharingScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
-import nl.ru.languageininteraction.language.client.view.StartScreenView;
+import nl.ru.languageininteraction.language.client.view.ExplainDataSharingScreenView;
 
 /**
  * @since Feb 4, 2015 11:26:10 AM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class StartScreenPresenter extends AbstractSvgPresenter implements Presenter {
+public class ExplainDataSharingScreenPresenter extends AbstractSvgPresenter implements Presenter {
 
-    protected final StartScreenBuilder svgBuilder = new StartScreenBuilder();
+    protected final ExplainDataSharingScreenBuilder svgBuilder = new ExplainDataSharingScreenBuilder();
 
-    public StartScreenPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
-        super(widgetTag, userResults, audioPlayer, new StartScreenView(new PresenterEventListner() {
+    public ExplainDataSharingScreenPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
+        super(widgetTag, userResults, audioPlayer, new ExplainDataSharingScreenView(new PresenterEventListner() {
 
             @Override
             public String getLabel() {
@@ -57,17 +57,6 @@ public class StartScreenPresenter extends AbstractSvgPresenter implements Presen
             @Override
             public void eventFired(Button button) {
                 appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
-            }
-        }, new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return "";
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.locale);
             }
         }, new PresenterEventListner() {
 

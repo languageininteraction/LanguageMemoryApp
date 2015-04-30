@@ -176,6 +176,10 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Builder im
 <xsl:text>    builder.append(SVG_TEMPLATE.circleTag(SVG_DATA.cx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.cy</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.r</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
 </xsl:text>
     </xsl:template>
+    <xsl:template match="svg:ellipse">
+<xsl:text>    builder.append(SVG_TEMPLATE.ellipseTag(SVG_DATA.cx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.cy</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.rx</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.ry</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>(), SVG_DATA.style</xsl:text><xsl:value-of select="translate(@id, ' -', '__')"/><xsl:text>()));
+</xsl:text>
+    </xsl:template>
     <xsl:template match="svg:flowRoot">
     </xsl:template>
 </xsl:stylesheet>

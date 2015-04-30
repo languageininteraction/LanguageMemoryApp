@@ -18,7 +18,7 @@
 package nl.ru.languageininteraction.language.client.view;
 
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import nl.ru.languageininteraction.language.client.StartScreenBuilder;
+import nl.ru.languageininteraction.language.client.ExplainDataSharingScreenBuilder;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
@@ -27,20 +27,18 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
  * @since Feb 4, 2015 1:22:32 PM (creation date)
  * @author Peter Withers <p.withers@psych.ru.nl>
  */
-public class StartScreenView extends AbstractSvgView {
+public class ExplainDataSharingScreenView extends AbstractSvgView {
 
-    protected final StartScreenBuilder svgBuilder = new StartScreenBuilder();
+    protected final ExplainDataSharingScreenBuilder svgBuilder = new ExplainDataSharingScreenBuilder();
     protected final PresenterEventListner infoButtonListner;
     protected final PresenterEventListner goButtonListner;
-    protected final PresenterEventListner languageButtonListner;
-    protected final PresenterEventListner tutorialButtonListner;
+    protected final PresenterEventListner settingsButtonListner;
 
-    public StartScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, PresenterEventListner languageButtonListner, PresenterEventListner tutorialButtonListner, AudioPlayer audioPlayer) throws AudioException {
+    public ExplainDataSharingScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, PresenterEventListner settingsButtonListner, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
         this.infoButtonListner = infoButtonListner;
         this.goButtonListner = goButtonListner;
-        this.languageButtonListner = languageButtonListner;
-        this.tutorialButtonListner = tutorialButtonListner;
+        this.settingsButtonListner = settingsButtonListner;
     }
 
     @Override
@@ -52,25 +50,21 @@ public class StartScreenView extends AbstractSvgView {
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
         label.setText(svgGroupStateString);
-        StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
+        ExplainDataSharingScreenBuilder.SvgGroupStates svgGroup = ExplainDataSharingScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
-            case InfoButton:
+            case ContinueWithoutSharingButton:
                 consumed = true;
                 infoButtonListner.eventFired(null);
                 break;
-            case SettingsButton:
+            case ShareAndContinueButton:
                 consumed = true;
-                languageButtonListner.eventFired(null);
+                settingsButtonListner.eventFired(null);
                 break;
-            case TutorialButton:
-                consumed = true;
-                tutorialButtonListner.eventFired(null);
-                break;
-            case LQLogo:
-            case GoButton:
-                consumed = true;
-                goButtonListner.eventFired(null);
-                break;
+//            case LQLogo:
+//            case GoButton:
+//                consumed = true;
+//                goButtonListner.eventFired(null);
+//                break;
         }
         return consumed;
     }

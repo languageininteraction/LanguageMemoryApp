@@ -61,7 +61,10 @@ public class RoundDataProvider {
         }
         // insert the correct sample in a random location in the arraylist
         roundChoices.add((int) (Math.random() * (roundChoices.size() - 1)), new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
-        Collections.shuffle(roundChoices, new Random());
+        Random random = new Random(roundChoices.size());
+        for (int index = 0; index < roundChoices.size(); index += 1) {
+            Collections.swap(roundChoices, index, index + random.nextInt(roundChoices.size() - index));
+        }
         return new RoundData(correctSample, roundChoices, new Date());
     }
 }

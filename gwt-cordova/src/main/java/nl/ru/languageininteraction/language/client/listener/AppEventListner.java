@@ -44,6 +44,7 @@ public interface AppEventListner {
         //        stimulus(messages.stimulusMenuLabel()),
         tutorial("Tutorial"),
         tutorialorguessround("First Run Tutorial or Game"),
+        explaindatasharing("Explain Data Sharing Screen"),
         guessround("Guess"),
         scores("Scores"),
         matchlanguage("Match"),
