@@ -400,11 +400,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3680844"
-     inkscape:cx="131.81423"
-     inkscape:cy="171.25136"
+     inkscape:zoom="1.6744885"
+     inkscape:cx="186.4608"
+     inkscape:cy="164.00614"
      inkscape:document-units="px"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:window-width="1917"
      inkscape:window-height="1157"
@@ -1177,6 +1177,18 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="ShareCheckBoxUnchecked"
+     style="display:inline"
+     transform="translate(595.75698,0)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="ShareCheckBoxChecked"
+     style="display:inline"
+     transform="translate(595.75698,0)" />
+  <g
+     inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="ShareBox"
      style="display:inline"
@@ -1215,19 +1227,41 @@
       </g>
     </g>
     <g
-       style="display:inline;fill:#ffffff"
+       transform="matrix(1,0,0,-1,-575.30628,263.5576)"
+       id="g5857"
+       style="display:inline;fill:#f6aa8b">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5859"
+         style="fill:#f6aa8b;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         d="m 0,0 c -3.118,0 -5.669,-2.551 -5.669,-5.669 l 0,-33.417 c 0,-3.118 2.551,-5.669 5.669,-5.669 l 39.085,0 L 39.085,0 0,0 Z" />
+    </g>
+    <g
+       style="display:inline;fill:#f6aa8b"
        id="g4315"
        transform="matrix(1,0,0,-1,-153.62128,263.5576)">
       <path
          d="m 0,0 -384.6,0 0,-44.755 384.6,0 c 3.118,0 5.669,2.551 5.669,5.669 l 0,33.417 C 5.669,-2.551 3.118,0 0,0"
-         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         style="fill:#f6aa8b;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path4317"
          inkscape:connector-curvature="0" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.3037796px;line-height:110.00000238%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="-526.96008"
+       y="292.40961"
+       id="shareDetailsText"
+       sodipodi:linespacing="110%"
+       inkscape:label="shareDetailsText"><tspan
+         sodipodi:role="line"
+         id="tspan5873"
+         x="-526.96008"
+         y="292.40961">STOP SHARING MY DATA WITH RESEARCHERS</tspan></text>
     <g
        style="display:inline;stroke:#0073ab"
        id="g4649"
-       transform="matrix(1,0,0,-1,-506.87468,274.8965)">
+       transform="matrix(1,0,0,-1,-557.54855,274.8965)">
       <path
          d="m 0,0 -13.882,0 0,-22.865 23.768,0 -10e-4,5.717"
          style="fill:none;stroke:#0073ab;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1237,83 +1271,23 @@
     <g
        style="display:inline;fill:#0073ab"
        id="g4799"
-       transform="matrix(1,0,0,-1,-515.84238,292.0449)">
+       transform="matrix(1,0,0,-1,-566.51625,292.0449)">
       <path
          d="m 0,0 c 1.312,13.996 15.235,14.543 15.235,14.543 l 0,6.091 11.017,-9.136 -11.017,-9.136 0,6.091 C 15.236,8.453 7.085,9.938 0,0"
          style="fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none"
          id="path4801"
          inkscape:connector-curvature="0" />
     </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.3037796px;line-height:110.00000238%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="-486.42096"
-       y="291.98734"
-       id="shareDetailsText"
-       sodipodi:linespacing="110%"
-       inkscape:label="shareDetailsText"><tspan
-         sodipodi:role="line"
-         id="tspan5873"
-         x="-486.42096"
-         y="291.98734">SHARE MY DATA WITH RESEARCHERS</tspan></text>
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer4"
-     inkscape:label="ShareCheckBoxUnchecked"
-     style="display:none"
-     transform="translate(595.75698,0)">
-    <g
-       transform="matrix(1,0,0,-1,-577.30628,263.5576)"
-       id="g5857"
-       style="display:inline">
-      <path
-         inkscape:connector-curvature="0"
-         id="path5859"
-         style="fill:#b3e2ee;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="m 0,0 c -3.118,0 -5.669,-2.551 -5.669,-5.669 l 0,-33.417 c 0,-3.118 2.551,-5.669 5.669,-5.669 l 39.085,0 L 39.085,0 0,0 Z" />
-    </g>
-    <rect
-       style="opacity:1;fill:#a1a1a1;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.61099994;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect4476"
-       width="35.471706"
-       height="35.471706"
-       x="-577.59888"
-       y="268.90387" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer7"
-     inkscape:label="ShareCheckBoxChecked"
-     style="display:inline"
-     transform="translate(595.75698,0)">
-    <g
-       style="display:inline"
-       id="g4319"
-       transform="matrix(1,0,0,-1,-577.30628,263.5576)">
-      <path
-         d="m 0,0 c -3.118,0 -5.669,-2.551 -5.669,-5.669 l 0,-33.417 c 0,-3.118 2.551,-5.669 5.669,-5.669 l 39.085,0 L 39.085,0 0,0 Z"
-         style="fill:#b3e2ee;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         id="path4321-0"
-         inkscape:connector-curvature="0" />
-    </g>
-    <rect
-       y="268.90387"
-       x="-577.59888"
-       height="35.471706"
-       width="35.471706"
-       id="rect4478"
-       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.61099994;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <g
-       transform="matrix(1,0,0,-1,-575.68179,284.37161)"
-       id="g5861"
-       style="display:inline">
-      <path
-         inkscape:connector-curvature="0"
-         id="path5863"
-         style="fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="M 0,0 13.652,-17.439 35.234,19.381 11.98,-6.341 0,0 Z" />
-    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ef2b2d;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -576.96542,271.64868 34.20486,34.20487"
+       id="path4480"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ef2b2d;stroke-width:2.9000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -540.64914,271.2264 -35.04943,34.62714"
+       id="path4482"
+       inkscape:connector-curvature="0" />
   </g>
   <g
      inkscape:groupmode="layer"
