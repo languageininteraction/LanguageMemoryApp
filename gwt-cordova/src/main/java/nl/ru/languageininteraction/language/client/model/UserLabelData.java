@@ -38,5 +38,4 @@ public class UserLabelData {
     public String getUserName() {
         return userName;
     }
-
 }

@@ -126,7 +126,13 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
             @Override
             public void eventFired(Button button) {
                 ArrayList<PresenterEventListner> playerListeners = new ArrayList<>();
+                int selectedIndex = 0;
+                int currentIndex = 0;
                 for (final UserLabelData labelData : localStorage.getUserIdList()) {
+                    if (labelData.getUserId().equals(userResults.getUserData().getUserId())) {
+                        selectedIndex = currentIndex;
+                    }
+                    currentIndex++;
                     playerListeners.add(new PresenterEventListner() {
 
                         @Override
@@ -141,7 +147,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
                         }
                     });
                 }
-                ((ChoosePlayerView) abstractSvgView).showChoosePlayer(playerListeners);
+                ((ChoosePlayerView) abstractSvgView).showChoosePlayer(playerListeners, selectedIndex);
             }
         }
         );

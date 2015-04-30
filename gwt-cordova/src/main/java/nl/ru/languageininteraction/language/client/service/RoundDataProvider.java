@@ -19,8 +19,10 @@ package nl.ru.languageininteraction.language.client.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import nl.ru.languageininteraction.language.client.LanguageDataProvider;
 import nl.ru.languageininteraction.language.client.model.RoundData;
 import nl.ru.languageininteraction.language.client.model.RoundSample;
@@ -59,6 +61,7 @@ public class RoundDataProvider {
         }
         // insert the correct sample in a random location in the arraylist
         roundChoices.add((int) (Math.random() * (roundChoices.size() - 1)), new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
+        Collections.shuffle(roundChoices, new Random());
         return new RoundData(correctSample, roundChoices, new Date());
     }
 }

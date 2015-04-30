@@ -66,6 +66,9 @@ public class ChoosePlayerView extends AbstractSvgView {
 
     public void setSwitchButtonListner(PresenterEventListner switchButtonListner) {
         this.switchButtonListner = switchButtonListner;
+//        if (userCount < 2) {
+//            svgBuilder.hideGroup(ChoosePlayerScreenBuilder.SvgGroupStates.g4373);
+//        }
     }
 
     @Override
@@ -114,13 +117,14 @@ public class ChoosePlayerView extends AbstractSvgView {
     public void showAudioEnded() {
     }
 
-    public void showChoosePlayer(final List<PresenterEventListner> playerListeners) {
+    public void showChoosePlayer(final List<PresenterEventListner> playerListeners, int selectedIndex) {
         final ListBox listBox = new ListBox();
         listBox.setVisibleItemCount(5);
         listBox.setStylePrimaryName("choosePlayerList");
         for (PresenterEventListner currentListener : playerListeners) {
             listBox.addItem(currentListener.getLabel());
         }
+        listBox.setSelectedIndex(selectedIndex);
         showWidgetPopup(new PresenterEventListner() {
 
             @Override
