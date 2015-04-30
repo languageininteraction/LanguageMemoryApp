@@ -37,19 +37,24 @@ public class ChoosePlayerView extends AbstractSvgView {
     protected PresenterEventListner goButtonListner;
     protected PresenterEventListner createButtonListner;
     protected PresenterEventListner switchButtonListner;
-    protected PresenterEventListner settingsButtonListner;
+    protected PresenterEventListner localeButtonListner;
     protected PresenterEventListner infoButtonListner;
+    protected PresenterEventListner tutorialButtonListner;
 
     public ChoosePlayerView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
+    }
+
+    public void setTutorialButtonListner(PresenterEventListner tutorialButtonListner) {
+        this.tutorialButtonListner = tutorialButtonListner;
     }
 
     public void setInfoButtonListner(PresenterEventListner infoButtonListner) {
         this.infoButtonListner = infoButtonListner;
     }
 
-    public void setSettingsButtonListner(PresenterEventListner settingsButtonListner) {
-        this.settingsButtonListner = settingsButtonListner;
+    public void setLocaleButtonListner(PresenterEventListner localeButtonListner) {
+        this.localeButtonListner = localeButtonListner;
     }
 
     public void setEditButtonListner(PresenterEventListner editButtonListner) {
@@ -64,11 +69,13 @@ public class ChoosePlayerView extends AbstractSvgView {
         this.createButtonListner = createButtonListner;
     }
 
-    public void setSwitchButtonListner(PresenterEventListner switchButtonListner) {
-        this.switchButtonListner = switchButtonListner;
-//        if (userCount < 2) {
-//            svgBuilder.hideGroup(ChoosePlayerScreenBuilder.SvgGroupStates.g4373);
-//        }
+    public void setSwitchButtonListner(PresenterEventListner switchButtonListner, int userCount) {
+        if (userCount < 2) {
+            svgBuilder.hideGroup(ChoosePlayerScreenBuilder.SvgGroupStates.g4373);
+            this.switchButtonListner = null;
+        } else {
+            this.switchButtonListner = switchButtonListner;
+        }
     }
 
     @Override
@@ -99,11 +106,17 @@ public class ChoosePlayerView extends AbstractSvgView {
                 break;
             case SwitchPlayerButton:
                 consumed = true;
-                switchButtonListner.eventFired(null);
+                if (switchButtonListner != null) {
+                    switchButtonListner.eventFired(null);
+                }
                 break;
             case SettingsButton:
                 consumed = true;
-                settingsButtonListner.eventFired(null);
+                localeButtonListner.eventFired(null);
+                break;
+            case TutorialButton:
+                consumed = true;
+                tutorialButtonListner.eventFired(null);
                 break;
             case InfoButton:
                 consumed = true;

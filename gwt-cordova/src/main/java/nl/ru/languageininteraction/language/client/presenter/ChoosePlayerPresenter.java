@@ -78,7 +78,20 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
                         appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
                     }
                 });
-        ((ChoosePlayerView) abstractSvgView).setSettingsButtonListner(
+        ((ChoosePlayerView) abstractSvgView).setLocaleButtonListner(
+                new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        appEventListner.requestApplicationState(AppEventListner.ApplicationState.locale);
+                    }
+                });
+        ((ChoosePlayerView) abstractSvgView).setTutorialButtonListner(
                 new PresenterEventListner() {
 
                     @Override
@@ -149,7 +162,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
                 }
                 ((ChoosePlayerView) abstractSvgView).showChoosePlayer(playerListeners, selectedIndex);
             }
-        }
+        }, localStorage.getUserIdList().size()
         );
         final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
         ((ChoosePlayerView) abstractSvgView).setUserNameField((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
