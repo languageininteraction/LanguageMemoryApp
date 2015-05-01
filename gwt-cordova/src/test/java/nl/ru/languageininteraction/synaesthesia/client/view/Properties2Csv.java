@@ -49,11 +49,11 @@ public class Properties2Csv {
         Properties properties = new Properties();
         Properties properties_nl = new Properties();
         Properties properties_de = new Properties();
-        final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
+        final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + ".properties");
         properties.load(resourceAsStream);
-        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_nl.properties");
+        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + "_nl.properties");
         properties_nl.load(resourceAsStream_nl);
-        final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
+        final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + "_de.properties");
         properties_de.load(resourceAsStream_de);
         OutputStream outputStream = new FileOutputStream(outputFile, true);
         try (OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8")) {
@@ -87,7 +87,7 @@ public class Properties2Csv {
         final Properties2Csv properties2Csv = new Properties2Csv();
         properties2Csv.deleteOutputFile();
         properties2Csv.writePropertyValues("Messages");
-        properties2Csv.writePropertyValues("Stimuli");
+//        properties2Csv.writePropertyValues("Stimuli");
         properties2Csv.writePropertyValues("MetadataFields");
     }
 }
