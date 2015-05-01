@@ -20,6 +20,7 @@ package nl.ru.languageininteraction.language.client.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -40,6 +41,7 @@ import nl.ru.languageininteraction.language.client.service.LocalStorage;
 import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.service.ResultsSerialiser;
 import nl.ru.languageininteraction.language.client.view.ScorePageView;
+import nl.ru.languageininteraction.language.client.service.SocialMediaPost;
 
 /**
  * @since Nov 26, 2014 4:12:27 PM (creation date)
@@ -157,6 +159,26 @@ public class ScorePagePresenter implements Presenter {
             @Override
             public String getLabel() {
                 return nextState.label;
+            }
+        });
+        scorePageView.setSocialMediaListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return nextState.label;
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                audioPlayer.stopAll();
+                final NumberFormat numberFormat2 = NumberFormat.getFormat("0");
+                new SocialMediaPost().postImageAndLink(
+                        messages.socialMediaPostText(
+                                numberFormat2.format(userResults.getUserData().getGamesPlayed()),
+                                numberFormat2.format(userResults.getUserData().getBestScore())),
+                        messages.socialMediaPostSubject(),
+                        messages.socialMediaPostImage(),
+                        messages.socialMediaPostUrl());
             }
         });
 

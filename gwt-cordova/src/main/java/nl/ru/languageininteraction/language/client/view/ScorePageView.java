@@ -40,6 +40,7 @@ public class ScorePageView extends AbstractSvgView {
     protected PresenterEventListner shareContinueListner = null;
     protected PresenterEventListner justContinueListner = null;
     protected PresenterEventListner editUserListner = null;
+    protected PresenterEventListner socialMediaListner = null;
 
     public ScorePageView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
@@ -55,6 +56,10 @@ public class ScorePageView extends AbstractSvgView {
 
     public void setEditUserListner(PresenterEventListner editUserListner) {
         this.editUserListner = editUserListner;
+    }
+
+    public void setSocialMediaListner(PresenterEventListner socialMediaListner) {
+        this.socialMediaListner = socialMediaListner;
     }
 
     @Override
@@ -86,6 +91,10 @@ public class ScorePageView extends AbstractSvgView {
                     break;
                 case EditProfileButton:
                     editUserListner.eventFired(null);
+                    consumed = true;
+                    break;
+                case ShareOnSocialMedia:
+                    socialMediaListner.eventFired(null);
                     consumed = true;
                     break;
             }

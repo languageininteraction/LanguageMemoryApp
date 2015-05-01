@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package nl.ru.languageininteraction.synaesthesia.client.service;
+package nl.ru.languageininteraction.language.client.service;
 
 /**
  * @since Dec 11, 2014 3:47:25 PM (creation date)
