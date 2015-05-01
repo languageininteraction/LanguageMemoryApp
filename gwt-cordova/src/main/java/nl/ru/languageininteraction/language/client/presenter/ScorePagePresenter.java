@@ -112,7 +112,7 @@ public class ScorePagePresenter implements Presenter {
             @Override
             public void eventFired(Button button) {
                 audioPlayer.stopAll();
-                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
+//                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
                 try {
                     userResults.getUserData().validateNameField();
                     new LocalStorage().storeData(userResults);
@@ -133,7 +133,7 @@ public class ScorePagePresenter implements Presenter {
             @Override
             public void eventFired(Button button) {
                 audioPlayer.stopAll();
-                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+//                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
                 try {
                     userResults.getUserData().validateNameField();
                     new LocalStorage().storeData(userResults);

@@ -77,11 +77,12 @@ public class PlayerDetailsView extends AbstractSvgView {
 
     public void setShareData(Boolean shareOption) {
         if (shareOption) {
-            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
-            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
+//            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
+//            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
         } else {
-            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
-            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
+//            svgBuilder.showGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxUnchecked);
+//            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareCheckBoxChecked);
+            svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.ShareBox);
         }
     }
 

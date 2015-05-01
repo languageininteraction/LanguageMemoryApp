@@ -25,6 +25,8 @@ import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
+import nl.ru.languageininteraction.language.client.service.LocalStorage;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 import nl.ru.languageininteraction.language.client.view.ExplainDataSharingScreenView;
 
 /**
@@ -35,7 +37,7 @@ public class ExplainDataSharingScreenPresenter extends AbstractSvgPresenter impl
 
     protected final ExplainDataSharingScreenBuilder svgBuilder = new ExplainDataSharingScreenBuilder();
 
-    public ExplainDataSharingScreenPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
+    public ExplainDataSharingScreenPresenter(RootLayoutPanel widgetTag, final UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
         super(widgetTag, userResults, audioPlayer, new ExplainDataSharingScreenView(new PresenterEventListner() {
 
             @Override
@@ -45,7 +47,11 @@ public class ExplainDataSharingScreenPresenter extends AbstractSvgPresenter impl
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.version);
+                // shareAgreed
+                final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
+                userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+                new LocalStorage().storeData(userResults);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
             }
         }, new PresenterEventListner() {
 
@@ -56,18 +62,8 @@ public class ExplainDataSharingScreenPresenter extends AbstractSvgPresenter impl
 
             @Override
             public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.chooseplayer);
-            }
-        }, new PresenterEventListner() {
-
-            @Override
-            public String getLabel() {
-                return "";
-            }
-
-            @Override
-            public void eventFired(Button button) {
-                appEventListner.requestApplicationState(AppEventListner.ApplicationState.tutorial);
+                new LocalStorage().storeData(userResults);
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.guessround);
             }
         },
                 audioPlayer));

@@ -55,15 +55,16 @@ public class RoundDataProvider {
             correctChoiceSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
         }
         final RoundSample correctSample = new RoundSample(getUniqueLanguage(unseenCorrectLanguages), true, correctSampleIndex);
-        final List<RoundSample> roundChoices = new ArrayList<>();
-        for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount(); choiceIndex++) {
+        final ArrayList<RoundSample> roundChoices = new ArrayList<>();
+        for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount() - 1 /* -1 to leave space for the correct answer*/; choiceIndex++) {
             roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1))));
         }
+        Random random = new Random();
         // insert the correct sample in a random location in the arraylist
-        roundChoices.add((int) (Math.random() * (roundChoices.size() - 1)), new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
-        Random random = new Random(roundChoices.size());
+        roundChoices.add(random.nextInt(roundChoices.size()), new RoundSample(correctSample.getLanguageSample(), true, correctChoiceSampleIndex));
+        // further shuffle the samples
         for (int index = 0; index < roundChoices.size(); index += 1) {
-            Collections.swap(roundChoices, index, index + random.nextInt(roundChoices.size() - index));
+            Collections.swap(roundChoices, index, random.nextInt(roundChoices.size()));
         }
         return new RoundData(correctSample, roundChoices, new Date());
     }

@@ -30,15 +30,13 @@ import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 public class ExplainDataSharingScreenView extends AbstractSvgView {
 
     protected final ExplainDataSharingScreenBuilder svgBuilder = new ExplainDataSharingScreenBuilder();
-    protected final PresenterEventListner infoButtonListner;
-    protected final PresenterEventListner goButtonListner;
-    protected final PresenterEventListner settingsButtonListner;
+    protected final PresenterEventListner yesButtonListner;
+    protected final PresenterEventListner noButtonListner;
 
-    public ExplainDataSharingScreenView(PresenterEventListner infoButtonListner, PresenterEventListner goButtonListner, PresenterEventListner settingsButtonListner, AudioPlayer audioPlayer) throws AudioException {
+    public ExplainDataSharingScreenView(PresenterEventListner yesButtonListner, PresenterEventListner noButtonListner, AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
-        this.infoButtonListner = infoButtonListner;
-        this.goButtonListner = goButtonListner;
-        this.settingsButtonListner = settingsButtonListner;
+        this.yesButtonListner = yesButtonListner;
+        this.noButtonListner = noButtonListner;
     }
 
     @Override
@@ -54,17 +52,12 @@ public class ExplainDataSharingScreenView extends AbstractSvgView {
         switch (svgGroup) {
             case ContinueWithoutSharingButton:
                 consumed = true;
-                infoButtonListner.eventFired(null);
+                noButtonListner.eventFired(null);
                 break;
             case ShareAndContinueButton:
                 consumed = true;
-                settingsButtonListner.eventFired(null);
+                yesButtonListner.eventFired(null);
                 break;
-//            case LQLogo:
-//            case GoButton:
-//                consumed = true;
-//                goButtonListner.eventFired(null);
-//                break;
         }
         return consumed;
     }

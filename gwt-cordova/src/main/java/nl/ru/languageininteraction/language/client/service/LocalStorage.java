@@ -130,9 +130,9 @@ public class LocalStorage {
                 if (key.endsWith(postName)) {
                     final String userIdString = key.split("\\.")[1];
                     final String cleanStoredData = getCleanStoredData(key);
-                    if (!cleanStoredData.isEmpty()) {
+//                    if (!cleanStoredData.isEmpty()) {
                         userIdList.add(new UserLabelData(new UserId(userIdString), cleanStoredData));
-                    }
+//                    }
                 }
             }
         }

@@ -32,6 +32,7 @@ import nl.ru.languageininteraction.language.client.presenter.MatchLanguagePresen
 import nl.ru.languageininteraction.language.client.presenter.VersionPresenter;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.presenter.ChoosePlayerPresenter;
+import nl.ru.languageininteraction.language.client.presenter.ExplainDataSharingScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.GuessRoundPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InfoScreenPresenter;
 import nl.ru.languageininteraction.language.client.presenter.InstructionsPresenter;
@@ -45,6 +46,7 @@ import nl.ru.languageininteraction.language.client.presenter.StartScreenPresente
 import nl.ru.languageininteraction.language.client.presenter.TutorialPresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
+import nl.ru.languageininteraction.language.client.service.MetadataFieldProvider;
 
 /**
  * @since Oct 7, 2014 11:07:35 AM (creation date)
@@ -58,6 +60,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
     private final RootLayoutPanel widgetTag;
     private Presenter presenter;
     private final UserResults userResults;
+    final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
     public AppController(RootLayoutPanel widgetTag) {
         this.widgetTag = widgetTag;
@@ -86,7 +89,7 @@ public class AppController implements AppEventListner, AudioExceptionListner {
 //                    break;
                 case locale:
                     this.presenter = new LocalePresenter(widgetTag);
-                    presenter.setState(this, null, null);
+                    presenter.setState(this, ApplicationState.startscreen, null);
                     break;
                 case version:
                     this.presenter = new VersionPresenter(widgetTag);
@@ -107,7 +110,14 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     // only if the user has not played before, show the tutorial
                     if (userResults.getUserData().getGamesPlayed() < 1) {
                         this.presenter = new TutorialPresenter(widgetTag, userResults, new AudioPlayer(this), this);
-                        presenter.setState(this, ApplicationState.version, ApplicationState.guessround);
+                        presenter.setState(this, ApplicationState.version, ApplicationState.explaindatasharing);
+                        break;
+                    }
+                case explaindatasharing:
+                    boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
+                    if (!shareAgreed) {
+                        this.presenter = new ExplainDataSharingScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
+                        presenter.setState(this, ApplicationState.infoscreen, ApplicationState.guessround);
                         break;
                     }
                 case guessround:
@@ -120,10 +130,10 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     break;
                 case start:
 // todo:            // if no player data then go to game
-                    // if one or more player data then go to select player
-//                    this.presenter = new LocalStoragePresenter(widgetTag);
-//                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
-//                    break;
+                // if one or more player data then go to select player
+                    this.presenter = new LocalStoragePresenter(widgetTag);
+                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
+                    break;
                 case startscreen:
                     this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game

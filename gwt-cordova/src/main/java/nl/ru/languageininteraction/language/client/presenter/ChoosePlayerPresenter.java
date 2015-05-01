@@ -150,7 +150,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
 
                         @Override
                         public String getLabel() {
-                            return labelData.getUserName();
+                            return (labelData.getUserName().isEmpty()) ? messages.defaultUserName() : labelData.getUserName();
                         }
 
                         @Override
@@ -165,7 +165,7 @@ public class ChoosePlayerPresenter extends AbstractSvgPresenter implements Prese
         }, localStorage.getUserIdList().size()
         );
         final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
-        ((ChoosePlayerView) abstractSvgView).setUserNameField((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
+        ((ChoosePlayerView) abstractSvgView).setUserNameField(userNameValue);
     }
 
     @Override
