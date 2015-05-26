@@ -61,9 +61,9 @@ public class Csv2Properties {
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(reader);
         for (CSVRecord record : records) {
             String key_name = record.get(KEY_COLUMN);
-            String en_value = record.get(EN_COLUMN);
-            String nl_value = record.get(NL_COLUMN);
-            String de_value = record.get(DE_COLUMN);
+            String en_value = record.get(EN_COLUMN + 2);
+            String nl_value = record.get(NL_COLUMN + 2);
+            String de_value = record.get(DE_COLUMN + 2);
             System.out.println(key_name);
             System.out.println(en_value);
             System.out.println(nl_value);
@@ -75,16 +75,17 @@ public class Csv2Properties {
     }
 
     public void writePropertyValues(String propertiesFileName) throws FileNotFoundException, IOException {
+        System.out.println("propertiesFileName: " + propertiesFileName);
         Properties properties = new Properties();
         Properties properties_nl = new Properties();
         Properties properties_de = new Properties();
-        final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
+        final InputStream resourceAsStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + ".properties");
         properties.load(resourceAsStream);
-        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_nl.properties");
+        final InputStream resourceAsStream_nl = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + "_nl.properties");
         properties_nl.load(resourceAsStream_nl);
-        final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + "_de.properties");
+        final InputStream resourceAsStream_de = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + "_de.properties");
         properties_de.load(resourceAsStream_de);
-        final String targetDirectory = "src/main/resources/nl/ru/languageininteraction/synaesthesia/client/";
+        final String targetDirectory = "src/main/resources/nl/ru/languageininteraction/language/client/";
         final File outputFile = new File(targetDirectory + propertiesFileName + PROPERTIES_SUFFIX);
         final File outputFileDE = new File(targetDirectory + propertiesFileName + "_de" + PROPERTIES_SUFFIX);
         final File outputFileNL = new File(targetDirectory + propertiesFileName + "_nl" + PROPERTIES_SUFFIX);
@@ -95,7 +96,7 @@ public class Csv2Properties {
                 OutputStreamWriter writerDE = new OutputStreamWriter(outputStreamDE, "ISO-8859-1");
                 OutputStreamWriter writerNL = new OutputStreamWriter(outputStreamNL, "ISO-8859-1")) {
 
-            final InputStream propertiesFileStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/synaesthesia/client/" + propertiesFileName + ".properties");
+            final InputStream propertiesFileStream = SimpleViewTest.class.getResourceAsStream("/nl/ru/languageininteraction/language/client/" + propertiesFileName + ".properties");
             InputStreamReader inputStreamReader = new InputStreamReader(propertiesFileStream, Charset.forName("UTF-8"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String lineString;
@@ -157,7 +158,7 @@ public class Csv2Properties {
         final Csv2Properties properties2Csv = new Csv2Properties();
         properties2Csv.parseInputCSV();
         properties2Csv.writePropertyValues("Messages");
-        properties2Csv.writePropertyValues("Stimuli");
+//        properties2Csv.writePropertyValues("Stimuli");
         properties2Csv.writePropertyValues("MetadataFields");
     }
 }
