@@ -20,7 +20,7 @@
         <xsl:for-each select="tokenize($csvText, '\n')">
             <!--<xsl:text>line: </xsl:text><xsl:sequence select="."/>-->
             <!--<xsl:text>analyze</xsl:text>-->
-            <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)$'>
+            <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*).*$'>
                 <xsl:matching-substring>
 <xsl:value-of select="regex-group(2)"/><xsl:text>_Name=</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>
 </xsl:text>
