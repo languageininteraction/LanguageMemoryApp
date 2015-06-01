@@ -1831,30 +1831,27 @@
             style="fill:#000000">CHRISTOPHER</tspan></text>
     </g>
     <g
-        inkscape:groupmode="layer"
+     inkscape:groupmode="layer"
         id="layer2"
-        inkscape:label="InfoButton"
-        style="display:inline">
-        <circle
-            r="20.813103"
-            cy="25.803898"
-            cx="534.22607"
-            id="path6026"
-            style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-        <g
-            transform="matrix(1.6224127,0,0,-1.6586764,551.81328,25.456484)"
-            id="g4897"
-            style="display:inline" />
-        <g
-            transform="matrix(1.3407626,0,0,1.3407626,-194.83453,-55.560338)"
-            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22px;line-height:110.00000238%;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:start;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.93800002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:0.93800002, 1.87600005;stroke-dashoffset:1.03180003;stroke-opacity:0"
-            id="flowRoot4613">
-            <path
-                d="m 543.83203,53.85008 q 0.69824,0 1.26758,0.504883 0.56934,0.504883 0.56934,1.310547 0,0.762695 -0.54786,1.289062 -0.53711,0.526367 -1.28906,0.526367 -0.77344,0 -1.31055,-0.537109 -0.52636,-0.547852 -0.52636,-1.289063 0,-0.751953 0.54785,-1.27832 0.54785,-0.526367 1.28906,-0.526367 z m -1.71875,4.995117 3.40527,0 0,10.237305 -3.40527,0 0,-10.237305 z"
-                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-family:'Abadi MT Condensed Extra Bold';-inkscape-font-specification:'Abadi MT Condensed Extra Bold,  Condensed'"
-                id="path4622" />
-        </g>
-    </g>
+     inkscape:label="InfoButton"
+     style="display:inline">
+    <circle
+       r="20.813103"
+       cy="25.803982"
+       cx="534.22571"     
+       id="path6026"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.79999995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+    />
+    <g
+       style="display:inline"
+       id="g4897"
+       transform="matrix(1.6224127,0,0,-1.6586764,551.81289,25.456569)" />
+    <path
+       inkscape:connector-curvature="0"
+       d="m 534.25687,16.049594 q 0.93617,0 1.69952,0.676929 0.76335,0.676928 0.76335,1.757132 0,1.022593 -0.73455,1.728326 -0.72014,0.705733 -1.72832,0.705733 -1.037,0 -1.75714,-0.720135 -0.70572,-0.73454 -0.70572,-1.728328 0,-1.00819 0.73453,-1.713924 0.73454,-0.705733 1.72833,-0.705733 z m -2.30444,6.697266 4.56566,0 0,13.725796 -4.56566,0 0,-13.725796 z"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:medium;line-height:110.00000238%;font-family:'Abadi MT Condensed Extra Bold';-inkscape-font-specification:'Abadi MT Condensed Extra Bold,  Condensed';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.93800002;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:0.93800002, 1.87600005;stroke-dashoffset:1.03180003;stroke-opacity:0"
+       id="path4622" />
+  </g>
     <g
         inkscape:groupmode="layer"
         id="layer3"
