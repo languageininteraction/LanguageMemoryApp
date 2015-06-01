@@ -51,7 +51,7 @@ public class StartScreenView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         StartScreenBuilder.SvgGroupStates svgGroup = StartScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
             case InfoButton:

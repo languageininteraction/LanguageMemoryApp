@@ -47,7 +47,7 @@ public class ExplainDataSharingScreenView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         ExplainDataSharingScreenBuilder.SvgGroupStates svgGroup = ExplainDataSharingScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
             case ContinueWithoutSharingButton:

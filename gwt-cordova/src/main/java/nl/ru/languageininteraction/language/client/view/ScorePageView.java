@@ -74,7 +74,7 @@ public class ScorePageView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         if (!svgGroupStateString.isEmpty()) {
 //            for (SvgTextElements svgTextElement : SvgTextElements.values()) {
 //                scorePageBuilder.setLabel(svgTextElement, svgTextElement.name());

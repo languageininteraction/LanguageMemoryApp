@@ -86,7 +86,7 @@ public class ChoosePlayerView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         ChoosePlayerScreenBuilder.SvgGroupStates svgGroup = ChoosePlayerScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
             case EditButton:

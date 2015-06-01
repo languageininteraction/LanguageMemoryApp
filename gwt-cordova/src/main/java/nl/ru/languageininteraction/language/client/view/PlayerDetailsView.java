@@ -140,7 +140,7 @@ public class PlayerDetailsView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         UserDetailsBuilder.SvgGroupStates svgGroup = UserDetailsBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
             case NameField:

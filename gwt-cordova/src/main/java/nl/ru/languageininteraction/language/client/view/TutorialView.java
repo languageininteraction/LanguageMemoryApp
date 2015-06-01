@@ -52,7 +52,7 @@ public class TutorialView extends AbstractSvgView {
     @Override
     protected boolean performClick(final String svgGroupStateString) {
         boolean consumed = false;
-        label.setText(svgGroupStateString);
+        showDebugLabel(svgGroupStateString);
         switch (currentState) {
             case Tutorial1:
                 consumed = true;

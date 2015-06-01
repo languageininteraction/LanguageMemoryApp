@@ -52,7 +52,7 @@ public abstract class AbstractSvgView extends AbstractView {
     protected final AudioPlayer audioPlayer;
     protected PresenterEventListner backEventListner = null;
     protected PresenterEventListner nextEventListner = null;
-    protected Label label = new Label("clicked labels show here");
+    protected Label debugLabel = new Label();
 //    private static final String ROTATABLE_GROUP = "rotatableGroup";
 
     public AbstractSvgView(AudioPlayer audioPlayer) throws AudioException {
@@ -94,7 +94,7 @@ public abstract class AbstractSvgView extends AbstractView {
     public void setupScreen(PresenterEventListner backEventListner, PresenterEventListner nextEventListner) {
         this.backEventListner = backEventListner;
         this.nextEventListner = nextEventListner;
-        verticalPanel.add(label);
+        verticalPanel.add(debugLabel);
         SafeHtmlBuilder builder = new SafeHtmlBuilder();
         builder.append(SafeHtmlUtils.fromTrustedString("<style>.overlay {pointer-events: none;}</style>"));
 //        int height = Window.getClientHeight() - (HEADER_SIZE * 3);
@@ -124,6 +124,10 @@ public abstract class AbstractSvgView extends AbstractView {
         html.setStylePrimaryName("svgPanel");
         verticalPanel.add(html);
         add(verticalPanel);
+    }
+
+    protected void showDebugLabel(String labelString) {
+        debugLabel.setText(labelString);
     }
 
     private void eventTriggered(Element targetElement) {

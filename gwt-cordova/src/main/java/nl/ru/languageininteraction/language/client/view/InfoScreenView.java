@@ -41,8 +41,8 @@ public class InfoScreenView extends AbstractSvgView {
 
     @Override
     protected boolean performClick(final String svgGroupStateString) {
-boolean consumed = false;
-        label.setText(svgGroupStateString);
+        boolean consumed = false;
+        showDebugLabel(svgGroupStateString);
         InfoScreenBuilder.SvgGroupStates svgGroup = InfoScreenBuilder.SvgGroupStates.valueOf(svgGroupStateString);
         switch (svgGroup) {
             case InfoButton:
