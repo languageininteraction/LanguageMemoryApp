@@ -49,10 +49,11 @@ public interface AppEventListner {
         scores("Scores"),
         matchlanguage("Match"),
         chooseplayer("Choose Player"),
-        playerdetails("Player Details"),
+        playerdetails("Player"),
         createplayer("New Player"),
         startscreen("Start"),
         infoscreen("Information"),
+        stopSharing(""),
         @Deprecated
         map(messages.mapMenuLabel()),
         @Deprecated

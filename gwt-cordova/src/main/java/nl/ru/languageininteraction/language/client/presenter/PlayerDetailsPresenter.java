@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
+import nl.ru.languageininteraction.language.client.listener.AppEventListner;
 import nl.ru.languageininteraction.language.client.listener.PresenterEventListner;
 import nl.ru.languageininteraction.language.client.model.UserResults;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
@@ -39,10 +40,12 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
     protected final Messages messages = GWT.create(Messages.class);
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
     private final PlayerDetailsView playerDetailsView;
+    final AppEventListner appEventListner;
 
-    public PlayerDetailsPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer) throws AudioException {
+    public PlayerDetailsPresenter(RootLayoutPanel widgetTag, UserResults userResults, AudioPlayer audioPlayer, final AppEventListner appEventListner) throws AudioException {
         super(widgetTag, userResults, audioPlayer, new PlayerDetailsView(audioPlayer));
         playerDetailsView = ((PlayerDetailsView) abstractSvgView);
+        this.appEventListner = appEventListner;
     }
 
     @Override
@@ -109,14 +112,15 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
-                if (shareAgreed) {
-//                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
-                    playerDetailsView.setShareData(Boolean.FALSE);
-                } else {
-//                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
-                    playerDetailsView.setShareData(Boolean.TRUE);
-                }
+//                boolean shareAgreed = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
+//                if (shareAgreed) {
+////                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[1]);
+//                    playerDetailsView.setShareData(Boolean.FALSE);
+//                } else {
+////                    userResults.getUserData().setMetadataValue(metadataFieldProvider.shareMetadataField, metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0]);
+//                    playerDetailsView.setShareData(Boolean.TRUE);
+//                }
+                appEventListner.requestApplicationState(AppEventListner.ApplicationState.stopSharing);
             }
         });
         playerDetailsView.setEditNameListner(new PresenterEventListner() {

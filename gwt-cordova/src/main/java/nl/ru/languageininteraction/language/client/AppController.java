@@ -43,6 +43,7 @@ import nl.ru.languageininteraction.language.client.presenter.MetadataPresenter;
 import nl.ru.languageininteraction.language.client.presenter.PlayerDetailsPresenter;
 import nl.ru.languageininteraction.language.client.presenter.ScorePagePresenter;
 import nl.ru.languageininteraction.language.client.presenter.StartScreenPresenter;
+import nl.ru.languageininteraction.language.client.presenter.StopSharingPresenter;
 import nl.ru.languageininteraction.language.client.presenter.TutorialPresenter;
 import nl.ru.languageininteraction.language.client.service.AudioPlayer;
 import nl.ru.languageininteraction.language.client.service.LocalStorage;
@@ -95,6 +96,10 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     this.presenter = new VersionPresenter(widgetTag);
                     presenter.setState(this, ApplicationState.startscreen, null);
                     break;
+                case stopSharing:
+                    this.presenter = new StopSharingPresenter(widgetTag, userResults);
+                    presenter.setState(this, ApplicationState.playerdetails, null);
+                    break;
                 case tutorial:
                     this.presenter = new TutorialPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.version, ApplicationState.startscreen);
@@ -125,15 +130,15 @@ public class AppController implements AppEventListner, AudioExceptionListner {
                     presenter.setState(this, ApplicationState.tutorial, ApplicationState.scores);
                     break;
                 case playerdetails:
-                    this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this));
+                    this.presenter = new PlayerDetailsPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.version, ApplicationState.chooseplayer);
                     break;
                 case start:
 // todo:            // if no player data then go to game
                 // if one or more player data then go to select player
-                    this.presenter = new LocalStoragePresenter(widgetTag);
-                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
-                    break;
+//                    this.presenter = new LocalStoragePresenter(widgetTag);
+//                    presenter.setState(this, ApplicationState.infoscreen, ApplicationState.startscreen);
+//                    break;
                 case startscreen:
                     this.presenter = new StartScreenPresenter(widgetTag, userResults, new AudioPlayer(this), this);
                     presenter.setState(this, ApplicationState.infoscreen, ApplicationState.chooseplayer); // if there are already users otherwise go the the game
