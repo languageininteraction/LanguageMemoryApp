@@ -63,14 +63,14 @@ public class Csv2Properties {
             String key_name = record.get(KEY_COLUMN);
             String en_value = record.get(EN_COLUMN + 2);
             String nl_value = record.get(NL_COLUMN + 2);
-            String de_value = record.get(DE_COLUMN + 2);
+//            String de_value = record.get(DE_COLUMN + 2);
             System.out.println(key_name);
             System.out.println(en_value);
             System.out.println(nl_value);
-            System.out.println(de_value);
+//            System.out.println(de_value);
             translationsEN.put(key_name, en_value);
             translationsNL.put(key_name, nl_value);
-            translationsDE.put(key_name, de_value);
+//            translationsDE.put(key_name, de_value);
         }
     }
 

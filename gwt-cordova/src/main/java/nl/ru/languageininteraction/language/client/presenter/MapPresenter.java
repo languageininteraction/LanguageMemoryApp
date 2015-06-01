@@ -34,7 +34,8 @@ public class MapPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     public void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.mapScreenTitle(), titleBarListner);
+        throw new UnsupportedOperationException();
+//        simpleView.addTitle(messages.mapScreenTitle(), titleBarListner);
     }
 
     @Override

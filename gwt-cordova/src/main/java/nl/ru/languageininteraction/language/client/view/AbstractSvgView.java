@@ -127,7 +127,7 @@ public abstract class AbstractSvgView extends AbstractView {
     }
 
     protected void showDebugLabel(String labelString) {
-        debugLabel.setText(labelString);
+//        debugLabel.setText(labelString);
     }
 
     private void eventTriggered(Element targetElement) {

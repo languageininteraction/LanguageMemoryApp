@@ -212,6 +212,12 @@
             <xsl:value-of select="@ry"/>
             <xsl:text>
 </xsl:text>
+            <xsl:text>transform</xsl:text>
+            <xsl:value-of select="translate(@id, ' -', '__')"/>
+            <xsl:text>=</xsl:text>
+            <xsl:value-of select="@transform"/>
+            <xsl:text>
+</xsl:text>
     </xsl:template>
     <xsl:template match="svg:g">
             <xsl:text>transform</xsl:text>

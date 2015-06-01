@@ -80,6 +80,6 @@ public interface SvgTemplate extends SafeHtmlTemplates {
     @Template("<circle cx=\"{0}\" cy=\"{1}\" r=\"{2}\" style=\"{3}\" />")
     SafeHtml circleTag(String cx, String cy, String r, String style);
 
-    @Template("<ellipse cx=\"{0}\" cy=\"{1}\" rx=\"{2}\" ry=\"{3}\" style=\"{4}\" />")
-    SafeHtml ellipseTag(String cx, String cy, String rx, String ry, String style);
+    @Template("<ellipse cx=\"{0}\" cy=\"{1}\" rx=\"{2}\" ry=\"{3}\" style=\"{4}\" transform=\"{5}\" />")
+    SafeHtml ellipseTag(String cx, String cy, String rx, String ry, String style, String transform);
 }

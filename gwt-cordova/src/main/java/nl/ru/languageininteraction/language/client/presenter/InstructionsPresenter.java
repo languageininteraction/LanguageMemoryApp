@@ -34,12 +34,14 @@ public class InstructionsPresenter extends AbstractPresenter implements Presente
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.instructionscreenTitle(), titleBarListner);
+        throw new UnsupportedOperationException();
+//        simpleView.addTitle(messages.instructionscreenTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(final AppEventListner appEventListner) {
-        ((ComplexView) simpleView).addText(messages.instructionscreentext());
+        throw new UnsupportedOperationException();
+//        ((ComplexView) simpleView).addText(messages.instructionscreentext());
 //        ((ComplexView) simpleView).addHtmlText(messages.instructionscreenExample());
     }
 }

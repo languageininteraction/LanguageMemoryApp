@@ -100,15 +100,17 @@ public class MetadataPresenter extends AbstractPresenter implements Presenter {
 
     @Override
     protected void setTitle(PresenterEventListner titleBarListner) {
-        simpleView.addTitle(messages.metadataScreenTitle(), titleBarListner);
+        throw new UnsupportedOperationException();
+//        simpleView.addTitle(messages.metadataScreenTitle(), titleBarListner);
     }
 
     @Override
     protected void setContent(AppEventListner appEventListner) {
-        ((MetadataView) simpleView).addText(messages.metadataScreenText());
-        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
-            ((MetadataView) simpleView).addField(metadataField, userResults.getUserData().getMetadataValue(metadataField), metadataField.getFieldLabel());
-        }
+        throw new UnsupportedOperationException();
+//        ((MetadataView) simpleView).addText(messages.metadataScreenText());
+//        for (MetadataField metadataField : metadataFieldProvider.metadataFieldArray) {
+//            ((MetadataView) simpleView).addField(metadataField, userResults.getUserData().getMetadataValue(metadataField), metadataField.getFieldLabel());
+//        }
     }
 
     public void focusFirstTextBox() {
