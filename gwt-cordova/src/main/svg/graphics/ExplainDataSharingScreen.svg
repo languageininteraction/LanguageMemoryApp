@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="ExplainDataSharingScreen.svg"
+   sodipodi:docname="ExplainDataSharingScreen2.svg"
    inkscape:export-filename="/Users/pplsuser/Documents/MPI/LanguageMemory/AppDevelopment/Assets/Images/GuessRound/Drag2.png"
    inkscape:export-xdpi="90.040451"
    inkscape:export-ydpi="90.040451">
@@ -1158,8 +1158,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.88886313"
-     inkscape:cx="266.58338"
-     inkscape:cy="122.06675"
+     inkscape:cx="347.71678"
+     inkscape:cy="253.21016"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -1177,7 +1177,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1997,7 +1997,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="display:inline;fill:none;fill-rule:evenodd;stroke:#f6aa8b;stroke-width:2.4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#f6aa8b;stroke-width:2.4000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 12.728291,206.2409 2.784313,-7.95518 2.784314,4.77311 3.977591,-8.7507 6.364145,5.17087 4.37535,-5.56863 5.568628,1.19328 6.364145,-1.9888"
        id="path4922"
        inkscape:connector-curvature="0"
@@ -2014,52 +2014,12 @@
        id="path4781"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
-    <ellipse
-       style="display:inline;opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4783"
-       cx="164.3291"
-       cy="4.3791342"
-       rx="5.2426858"
-       ry="6.4659791"
-       transform="matrix(0.91848777,0.39544938,-0.39544938,0.91848777,0,0)" />
-    <ellipse
-       transform="matrix(0.91848777,0.39544938,-0.39544938,0.91848777,0,0)"
-       ry="6.4659791"
-       rx="5.2426858"
-       cy="-11.680873"
-       cx="162.74199"
-       id="ellipse4785"
-       style="display:inline;opacity:1;fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <ellipse
-       style="display:inline;opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="ellipse4787"
-       cx="175.35524"
-       cy="11.428339"
-       rx="5.2426858"
-       ry="6.4659791"
-       transform="matrix(0.91848777,0.39544938,-0.39544938,0.91848777,0,0)" />
-    <ellipse
-       transform="matrix(0.91848777,0.39544938,-0.39544938,0.91848777,0,0)"
-       ry="6.4659791"
-       rx="5.2426858"
-       cy="19.623421"
-       cx="187.25526"
-       id="ellipse4789"
-       style="display:inline;opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cssccccccccccccscc"
        inkscape:connector-curvature="0"
        id="path5680"
        d="m 40.702537,112.85878 c -7.222806,1.59495 52.861913,0.10922 72.384723,-5.49257 5.68437,-1.63105 8.0798,-9.197815 11.26476,-9.793393 5.27017,-0.985458 6.00607,2.769933 6.31463,3.303773 l 23.2403,-4.433276 c 3.63117,-0.623356 4.77349,5.762126 1.2129,6.358386 -4.66,0.88894 -12.89243,2.41028 -17.58452,3.35438 l 4.05763,-0.77402 c 2.01471,0.3248 4.20051,4.33027 0.46468,6.67765 -0.7603,0.15605 -2.49944,0.47677 -3.30459,0.63037 0.73891,-0.14095 2.74964,-0.52509 3.43933,-0.65608 1.72317,0.8106 3.36978,5.48528 -0.70528,6.96854 -0.18695,0.0408 -3.81724,0.70425 -4.191,0.79889 0.21924,-0.0316 2.28586,-0.47385 2.863,-0.30642 3.2525,1.03318 2.70855,5.98519 0.23273,6.67438 l -13.71206,2.61571 c -3.80622,0.72607 -7.70356,-2.28761 -11.61059,-3.3226 -16.27665,7.97208 -100.248431,15.94064 -90.235236,13.13558"
        style="display:inline;fill:#ef2b2d;stroke:none;stroke-width:2.81218696;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <ellipse
-       transform="matrix(0.91848777,0.39544938,-0.39544938,0.91848777,0,0)"
-       ry="2.108448"
-       rx="1.7095524"
-       cy="23.495411"
-       cx="170.47342"
-       id="ellipse4791"
-       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <rect
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4846"
@@ -2298,52 +2258,42 @@
        id="path6506"
        d="m 100.35444,188.63407 c -3.446032,0.70853 -5.506661,1.53263 -8.20591,2.48387 -0.799213,0.22175 -1.700572,0.75547 -1.765694,1.67221 -0.148077,1.6093 0.63734,3.18911 1.725323,4.33242 1.612619,1.66307 4.153914,2.35431 6.373266,1.65433 2.278515,-0.65993 4.158575,-2.66427 4.477655,-5.0432 0.3067,-1.65999 0.011,-3.56051 -1.2108,-4.80216 -0.40341,-0.28637 -0.91064,-0.36816 -1.39384,-0.29747 z"
        style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.21099997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       style="opacity:1;fill:#0073ab;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.03180003;stroke-opacity:1"
+       id="path6464"
+       cx="154.41072"
+       cy="55.336082"
+       r="6.4689374" />
+    <ellipse
+       cy="69.117729"
+       cx="148.78555"
+       id="circle6466"
+       style="opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.03180003;stroke-opacity:1"
+       r="6.4689374" />
+    <circle
+       style="opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.03180003;stroke-opacity:1"
+       id="circle6468"
+       cx="156.66078"
+       cy="80.368057"
+       r="6.4689374" />
+    <circle
+       r="6.4689374"
+       cy="91.899643"
+       cx="164.25476"
+       id="circle6470"
+       style="opacity:1;fill:#ef2b2d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.03180003;stroke-opacity:1" />
+    <circle
+       r="1.9688071"
+       cy="91.33712"
+       cx="149.34808"
+       id="circle6472"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.03180003;stroke-opacity:1" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="ExperExplanationText"
      style="display:inline">
-    <text
-       sodipodi:linespacing="110%"
-       id="permissionLine1"
-       y="26.424736"
-       x="244.13112"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         id="tspan6195"
-         y="26.424736"
-         x="244.13112"
-         sodipodi:role="line"><tspan
-           style="font-size:17.5px"
-           id="tspan6197"
-           y="26.424736"
-           x="244.13112"
-           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0">We would like to use your data       </tspan></tspan><tspan
-         id="tspan6243"
-         y="45.674736"
-         x="244.13112"
-         sodipodi:role="line" /></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       x="244.13112"
-       y="46.000301"
-       id="permissionLine2"
-       sodipodi:linespacing="110%"><tspan
-         sodipodi:role="line"
-         x="244.13112"
-         y="46.000301"
-         id="tspan6340"><tspan
-           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
-           x="244.13112"
-           y="46.000301"
-           id="tspan6342"
-           style="font-size:17.5px">for scientific research into        </tspan></tspan><tspan
-         sodipodi:role="line"
-         x="244.13112"
-         y="65.250305"
-         id="tspan6344" /></text>
     <text
        sodipodi:linespacing="110%"
        id="permissionLine3"
@@ -2354,7 +2304,7 @@
          id="tspan6352"
          y="65.575867"
          x="244.13112"
-         sodipodi:role="line">linguistic diversity. We will </tspan></text>
+         sodipodi:role="line">linguistic diversity. We will         </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -2365,7 +2315,7 @@
          sodipodi:role="line"
          x="244.13112"
          y="85.151413"
-         id="tspan6360">not distribute personal data.</tspan></text>
+         id="tspan6360">not distribute personal data.     </tspan></text>
     <text
        sodipodi:linespacing="110%"
        id="permissionLine5"
@@ -2376,7 +2326,7 @@
          id="tspan6368"
          y="104.72699"
          x="244.13112"
-         sodipodi:role="line">Data is stored in a secure </tspan></text>
+         sodipodi:role="line">Data is stored in a secure       </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -2387,7 +2337,7 @@
          sodipodi:role="line"
          x="244.13112"
          y="124.30255"
-         id="tspan6376">database. Any analysis will </tspan></text>
+         id="tspan6376">database. Any analysis will        </tspan></text>
     <text
        sodipodi:linespacing="110%"
        id="permissionLine7"
@@ -2398,7 +2348,7 @@
          id="tspan6384"
          y="143.87811"
          x="244.13112"
-         sodipodi:role="line">be anonymous. You can </tspan></text>
+         sodipodi:role="line">be anonymous. You can               </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -2409,7 +2359,7 @@
          sodipodi:role="line"
          x="244.13112"
          y="163.45367"
-         id="tspan6392">withdraw your consent at any</tspan></text>
+         id="tspan6392">withdraw your consent at any   </tspan></text>
     <text
        sodipodi:linespacing="110%"
        id="permissionLine9"
@@ -2420,7 +2370,7 @@
          id="tspan6400"
          y="183.02924"
          x="244.13112"
-         sodipodi:role="line">time in the edit user page.</tspan></text>
+         sodipodi:role="line">time in the edit user page.         </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -2443,5 +2393,27 @@
          y="222.18037"
          x="244.13112"
          sodipodi:role="line"> </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="244.13112"
+       y="47.575344"
+       id="permissionLine2"
+       sodipodi:linespacing="110%"><tspan
+         sodipodi:role="line"
+         x="244.13112"
+         y="47.575344"
+         id="tspan6488">for scientific research into           </tspan></text>
+    <text
+       sodipodi:linespacing="110%"
+       id="permissionLine1"
+       y="28.449789"
+       x="244.13112"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:110.00000238%;font-family:'Lucida Grande';-inkscape-font-specification:'Lucida Grande Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start;display:inline;opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.0999999;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan6492"
+         y="28.449789"
+         x="244.13112"
+         sodipodi:role="line">We would like to use your data    </tspan></text>
   </g>
 </svg>
