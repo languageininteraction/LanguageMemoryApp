@@ -1,94 +1,95 @@
-"language","iso","pop","area","family","dobes"
-"Fijian","fij","337320","Oceania","Austronesian",0
-"Kannada","kan","37739040","Indic","Dravidian",0
-"Shona","sna","10741700","","Atlantic-Congo",0
-"Dinka","dip","1365900","","Nilotic",0
-"Hausa","hau","24988000","African","Afro-Asiatic",0
-"Tigrinya","tir","6915000","","Afro-Asiatic",0
-"Maori","mri","148660","Oceania","Austronesian",0
-"Dari","prs","9600000","","Indo-European",0
-"Scottish Gaelic","gla","63130","","Indo-European",0
-"Bangla","ben","193261200","","Indo-European",0
-"South Efate","erk","6000","","Austronesian",0
-"Maltese","mlt","522000","Europe","Afro-Asiatic",0
-"Nepali","nep","15360100","","Indo-European",0
-"Malay","zsm","15848500","SoutheastAsia","Austronesian",0
-"Indonesian","ind","23200480","SoutheastAsia","Austronesian",0
-"Amharic","amh","21811600","GreaterAbyssinia","Afro-Asiatic",0
-"Samoan","smo","413257","","Austronesian",0
-"Sinhalese","sin","15579980","Asia","Indo-European",0
-"Basque","eus","545872","","Isolate",0
-"Tongan","ton","169120","","Austronesian",0
-"Hindi","hin","260333620","Europe","Indo-European",0
-"Northern Sami","sma","20700","","Uralic",0
-"Tamil","tam","68763360","","Dravidian",0
-"Tagalog","tgl","24245200","Oceania","Austronesian",0
-"Urdu","urd","63948800","Indic","Indo-European",0
-"Punjabi","pan","29514770","","Indo-European",0
-"Farsi","pes","47045100","GreaterMesopotamia","Indo-European",0
-"Latvian","lav","1552260","InnerAsia","Indo-European",0
-"Malayalam","mal","33550900","Indic","Dravidian",0
-"Welsh","cym","536890","Europe","Indo-European",0
-"Somali","som","14679300","GreaterAbyssinia","Afro-Asiatic",0
-"Swahili","swh","15457390","SAfrica","Atlantic-Congo",0
-"Khmer","kxm","14224500","SoutheastAsia","Austro-asiatic",0
-"Northern Ndebele","nde","1572800","","Atlantic-Congo",0
-"Turkish","tur","70805930","GreaterMesopotamia","Turkic",0
-"Croatian","hrv","5752090","Europe","Indo-European",0
-"Hungarian","hun","12606130","Europe","Uralic",0
-"Bosnian","bos","2225290","","Indo-European",0
-"Burmese","mya","32035300","SoutheastAsia","Sino-Tibetan",0
-"Assyrian","aii","232300","","Afro-Asiatic",0
-"Finnish","fin","5392180","InnerAsia","Uralic",0
-"Albanian","als","5414300","","Indo-European",0
-"Armenian","hye","3140000","","Indo-European",0
-"Gujarati","guj","46636510","","Indo-European",0
-"Kurdish","kmr","29960890","","Indo-European",0
-"Portuguese","por","203349200","Europe","Indo-European",0
-"Lao","lao","3273180","","Tai-Kadai",0
-"Icelandic","isl","243840","Europe","Indo-European",0
-"Estonian","est","1105400","InnerAsia","Uralic",0
-"Dutch","nld","21944690","Europe","Indo-European",0
-"Bulgarian","bul","8157770","Europe","Indo-European",0
-"Danish","dan","5522490","Europe","Indo-European",0
-"Yiddish","ydd","1510430","","Indo-European",0
-"Macedonian","mkd","1407810","Europe","Indo-European",0
-"Greek","ell","13432940","Europe","Indo-European",0
-"Serbian","srp","8957906","Europe","Indo-European",0
-"Slovenian","slv","2085160","Europe","Indo-European",0
-"Norwegian","nob","4741780","Europe","Indo-European",0
-"Polish","pol","38663780","Europe","Indo-European",0
-"Central Tibetan","bod","1172940","","Sino-Tibetan",0
-"Swedish","swe","9197090","Europe","Indo-European",0
-"Romanian","ron","23782990","Europe","Indo-European",0
-"Slovak","slk","5187740","Europe","Indo-European",0
-"Hebrew","heb","5302770","SouthAsia","Afro-Asiatic",0
-"Cantonese","yue","62221560","SoutheastAsia","Sino-Tibetan",0
-"Czech","ces","10619340","Europe","Indo-European",0
-"Arabic","arz","236748330","MiddleEast","Afro-Asiatic",0
-"Thai","tha","20396930","SoutheastAsia","Tai-Kadai",0
-"Vietnamese","vie","67778030","SoutheastAsia","Austro-asiatic",0
-"Ukrainian","ukr","36048890","Europe","Indo-European",0
-"Mandarin","cmn","847808270","SoutheastAsia","Sino-Tibetan",0
-"Russian","rus","167332230","InnerAsia","Indo-European",0
-"Japanese","jpn","122056940","NCoastAsia","Japonic",0
-"Spanish","spa","414170030","Europe","Indo-European",0
-"Korean","kor","77166230","SoutheastAsia","Isolate",0
-"Italian","ita","63655047","Europe","Indo-European",0
-"German","deu","78245280","Europe","Indo-European",0
-"French","fra","74980460","Europe","Indo-European",0
-"Akie","mwy","0",NA,"Nilotic",1
-"Bayso","bsw","2000",NA,"Cushitic",1
-"Bora","boa","3000",NA,"Boran",1
-"Chintang","ctn","3710",NA,"Sino-Tibetan",1
-"Chipaya","cap","2000",NA,"Uru-Chipaya",1
-"Haro","kcx","200",NA,"Omotic",1
-"Kómnzo","tci","200",NA,"Morehead-Wasur",1
-"Lacandon","lac","350",NA,"Mayan",1
-"Even","eve","3000",NA,"",1
-"Svan","sva","15000",NA,"Kartvelian",1
-"Tima","tms","5000",NA,"Katla-Tima",1
-"Uru","ure","2",NA,"Uru-Chipaya",1
-"Wooi","wbw","1800",NA,"Austronesian",1
-"Siwu","akp","27000",NA,"",0
-"West Ambrym","ambx","3000",NA,"",1
+language,iso,pop,area,family,dobes,"ru","de","ja","es","fr","zh","pt","it","pl","nl","cy"
+Fijian,fij,337320,Oceania,Austronesian,0,"Фиджи","Fidschi","フィジー語","Fidjiano","Fidjien","斐濟語","Fijiano","Figiano","Fidżijski","Fijisch","Ffijïeg"
+Kannada,kan,37739040,Indic,Dravidian,0,"Каннада","","カンナダ語","Canarés","Kannada","卡纳达语","Canarês","Lingua kannada","Język kannada","",""
+Shona,sna,10741700,,Atlantic-Congo,0,"Шона","","ショナ語","Idioma shona","Shona","","Língua chona","Lingua shona","Szona","",""
+Dinka,dip,1365900,,Nilotic,0,"","","","","","","","","","",""
+Hausa,hau,24988000,African,Afro-Asiatic,0,"Хауса","","ハウサ語","Idioma hausa","Haoussa","豪萨语","Haúça","Haussa","Język hausa","","Hawsa"
+Tigrinya,tir,6915000,,Afro-Asiatic,0,"Тигринья","Tigrinja","ティグリニア語","Tigriña","Tigrigna","提格利尼亞語","Tigre","Lingua tigrina","Tigrinia","","Tigriniaeg"
+Maori,mri,148660,Oceania,Austronesian,0,"Маори","Maorische sprache","マオリ語","Maorí","Maori de nouvelle-zélande","毛利语","Língua maori","Lingua māori","Maoryjski","",""
+Dari,prs,9600000,,Indo-European,0,"","","","","","","","","","",""
+Scottish Gaelic,gla,63130,,Indo-European,0,"Гэльский","Schottisches gälisch","スコットランド・ゲール語","Gaélico escocés","Gaélique","加拿大苏格兰盖尔语","Gaélico escocês","Gaelico scozzese","Szkocki gaelicki","Schots gaelic","Gaeleg yr alban"
+Bangla,ben,193261200,,Indo-European,0,"Бенгальский","Bengalisch","ベンガル語","Bengalí","Bengali","孟加拉语","Língua bengali","Bengalese","Bengalski","Bengaals","Bengaleg"
+Maltese,mlt,522000,Europe,Afro-Asiatic,0,"Мальтийский","Maltesisch","マルタ語","Maltés","Maltais","马耳他语","Maltês","Lingua maltese","Maltański","Maltees","Malteg"
+Nepali,nep,15360100,,Indo-European,0,"Непальский","Nepalesisch","ネパール語","Nepalí","Népalais","尼泊尔语","Língua nepali","Nepalese","Nepalski","Nepalees","Nepaleg"
+Malay,zsm,15848500,SoutheastAsia,Austronesian,0,"Малайский","Malaiisch","マレー語","Malayo","Malais","","Malaio","Malese","Malajski","Maleis","Malai"
+Indonesian,ind,23200480,SoutheastAsia,Austronesian,0,"Индонезийский","Indonesisch","インドネシア語","Indonesio","Indonésien","印尼语","Indonésio","Indonesiano","Indonezyjski","Indonesisch","Indoneseg"
+Amharic,amh,21811600,GreaterAbyssinia,Afro-Asiatic,0,"Амхарский","Amharisch","アムハラ語","Amárico","Amharique","","Amárico","Amarico","Amharski","Amhaars","Amhareg"
+Samoan,smo,413257,,Austronesian,0,"Самоанский","Samoanisch","サモア語","Samoano","Samoan","薩摩亞語","Samoano","Samoano","Samoański","Samoaans","Samöeg"
+Sinhalese,sin,15579980,Asia,Indo-European,0,"Сингальский","Singhalesisch","シンハラ語","Cingalés","Cingalais","僧伽罗语","Cingalês","Singalese","Syngaleski","Singalees","Sinhaleg"
+Basque,eus,545872,,Isolate,0,"Баскский","Baskisch","バスク語","Vasco","Basque","巴斯克語","Basco","Basco","Baskijski","Baskisch","Basgeg"
+Tongan,ton,169120,,Austronesian,0,"Тонга","Tongaisch","トンガ語","Tongano","Tongien","湯加語","Tonganês","Tongano","Język tonga","Tongaans","Tongeg"
+Hindi,hin,260333620,Europe,Indo-European,0,"Хинди","","ヒンディー語","","","","Híndi","","","",""
+Northern Sami,sma,20700,,Uralic,0,"Саамский (южный)","Süd-samisch","南サーミ語","Sami meridional","Same du sud","","Sami do sul","Sami del sud","Lapoński południowy","Zuid-samisch","Sami deheuol"
+Tamil,tam,68763360,,Dravidian,0,"Тамильский","Tamilisch","タミル語","Idioma tamil","Tamoul","泰米尔语","Tâmil","Lingua tamil","Tamilski","","Tamileg"
+Tagalog,tgl,24245200,Oceania,Austronesian,0,"Тагалог","","タガログ語","Tagalo","Tagalog","他加祿語","Tagalo","Lingua tagalog","Tagalski","","Tagalog*"
+Urdu,urd,63948800,Indic,Indo-European,0,"Урду","","ウルドゥー語","Urdu","Ourdou","乌尔都语","Língua urdu","Lingua urdu","Język urdu","","Wrdw"
+Punjabi,pan,29514770,,Indo-European,0,"Панджаби","Pandschabisch","パンジャブ語","Punjabí","Panjābī","旁遮普語","Língua panjabi","Lingua punjabi","Pendżabski","","Pwnjabi"
+Farsi,pes,47045100,GreaterMesopotamia,Indo-European,0,"","","","","","","","","","",""
+Latvian,lav,1552260,InnerAsia,Indo-European,0,"Латышский","Lettisch","ラトビア語","Letón","Letton","","Letão","Lettone","Łotewski","Lets","Latfieg"
+Malayalam,mal,33550900,Indic,Dravidian,0,"Малаялам","","マラヤーラム語","Malayalam","Malayalam","马拉雅拉姆语","Malaiala","Lingua malayalam","Malajalam","",""
+Welsh,cym,536890,Europe,Indo-European,0,"Валлийский","Walisisch","ウェールズ語","Galés","Gallois","威尔士语","Galês","Gallese","Walijski","","Cymraeg"
+Somali,som,14679300,GreaterAbyssinia,Afro-Asiatic,0,"Сомали","","ソマリ語","Somalí","Somali","索馬里語","Língua somali","Somalo","Somalijski","Somalisch","Somaleg"
+Swahili,swh,15457390,SAfrica,Atlantic-Congo,0,"Суахили","Suaheli","スワヒリ語","","","","Suaili","","Suahili","",""
+Khmer,kxm,14224500,SoutheastAsia,Austro-asiatic,0,"","","","","","","","","","",""
+Northern Ndebele,nde,1572800,,Atlantic-Congo,0,"Северный ндебеле","Isindebele","北ンデベレ語","Ndebele septentrional","Sindebele","","Ndebele do norte","Ndebele del nord","Ndebele północny","Noord-ndbele","Ndebele gogleddol"
+Turkish,tur,70805930,GreaterMesopotamia,Turkic,0,"Турецкий","Türkisch","トルコ語","Turco","Turc","土耳其语","Turco","Turco","Turecki","Turks","Tyrceg"
+Croatian,hrv,5752090,Europe,Indo-European,0,"Хорватский","Kroatisch","クロアチア語","Croata","Croate","克罗地亚语","Croata","Croato","Chorwacki","Kroatisch","Croateg"
+Hungarian,hun,12606130,Europe,Uralic,0,"Венгерский","Ungarisch","ハンガリー語","Húngaro","Hongrois","匈牙利语","Húngaro","Ungherese","Węgierski","Hongaars","Hwngareg"
+Bosnian,bos,2225290,,Indo-European,0,"Боснийский","Bosnisch","ボスニア語","Bosnio","Bosnien","波斯尼亚语","Bósnio","Bosniaco","Bośniacki","Bosnisch","Bosnieg"
+Burmese,mya,32035300,SoutheastAsia,Sino-Tibetan,0,"Бирманский","Birmanisch","ビルマ語","Birmano","Birman","缅甸语","Birmanês","Birmano","Birmański","Birmees","Byrmaneg"
+Assyrian,aii,232300,,Afro-Asiatic,0,"","Assyrisch-neuaramäische sprache","アッシリア現代アラム語","Neoarameo asirio","","","","","Język asyryjski","",""
+Finnish,fin,5392180,InnerAsia,Uralic,0,"Финский","Finnisch","フィンランド語","Finés","Finnois","芬兰语","Finlandês","Finlandese","Fiński","Fins","Ffineg"
+Albanian,als,5414300,,Indo-European,0,"Тоскский диалект албанского языка","Toskisch","トスク方言","Albanés tosco","Tosque","","","Tosco","Dialekt toskijski języka albańskiego","Toskisch",""
+Armenian,hye,3140000,,Indo-European,0,"Армянский","Armenisch","アルメニア語","Armenio","Arménien","","Arménio","Armeno","Ormiański","Armeens","Armeneg"
+Gujarati,guj,46636510,,Indo-European,0,"Гуджарати","","グジャラート語","Idioma guyaratí","Goudjrati","古吉拉特语","Guzerate","Lingua gujarati","Gudźaracki","","Gwjarati"
+Kurdish,kmr,29960890,,Indo-European,0,"Курманджи","Kurmandschi","","","Kurmandji","","Curmânji","","Język kurmandżi","Kirmanci",""
+Portuguese,por,203349200,Europe,Indo-European,0,"Португальский","Portugiesisch","ポルトガル語","Portugués","Portugais","","Português","Portoghese","Portugalski","Portugees","Portiwgaleg"
+Lao,lao,3273180,,Tai-Kadai,0,"Лаосский","Laotisch","ラオ語","Laosiano","Lao","老挝语","Laosiano","Lingua lao","Laotański","Laotiaans","Laoeg"
+Icelandic,isl,243840,Europe,Indo-European,0,"Исландский","Isländisch","アイスランド語","Islandés","Islandais","冰岛语","Islandês","Islandese","Islandzki","Ijslands","Islandeg"
+Estonian,est,1105400,InnerAsia,Uralic,0,"Эстонский","Estnisch","エストニア語","Estonio","Estonien","爱沙尼亚语","Estónio","Estone","Estoński","Estisch","Estoneg"
+Dutch,nld,21944690,Europe,Indo-European,0,"Голландский","Niederländisch","オランダ語","Neerlandés","Néerlandais","荷蘭語","Holandês","Olandese","Niderlandzki","Nederlands","Iseldireg"
+Bulgarian,bul,8157770,Europe,Indo-European,0,"Болгарский","Bulgarisch","ブルガリア語","Búlgaro","Bulgare","保加利亚语","Búlgaro","Bulgaro","Bułgarski","Bulgaars","Bwlgareg"
+Danish,dan,5522490,Europe,Indo-European,0,"Датский","Dänisch","デンマーク語","Danés","Danois","丹麦语","Dinamarquês","Danese","Duński","Deens","Daneg"
+Yiddish,ydd,1510430,,Indo-European,0,"","","","","","","","","","",""
+Macedonian,mkd,1407810,Europe,Indo-European,0,"Македонский","Mazedonisch","マケドニア語","Macedonio","Macédonien","马其顿语","Macedónio","Macedone","Macedoński","Macedonisch","Macedoneg"
+Greek,ell,13432940,Europe,Indo-European,0,"Греческий","Griechisch","ギリシャ語","Griego","Grec","","Grego","Greco","Grecki","Grieks","Groeg"
+Serbian,srp,8957906,Europe,Indo-European,0,"Сербский","Serbisch","セルビア語","Serbio","Serbe","塞尔维亚语","Sérvio","Serbo","Serbski","Servisch","Serbeg"
+Slovenian,slv,2085160,Europe,Indo-European,0,"Словенский","Slowenisch","スロベニア語","Esloveno","Slovène","斯洛文尼亚语","Esloveno","Sloveno","Słoweński","Sloveens","Slofeneg"
+Norwegian,nob,4741780,Europe,Indo-European,0,"Букмол","Norwegisch bokmål","ブークモール","Bokmal noruego","Norvégien bokmål","書面挪威語","Bokmål norueguês","Norvegese bokmal","Norweski bokmål","Noors - bokmål","Norwyeg bokmal"
+Polish,pol,38663780,Europe,Indo-European,0,"Польский","Polnisch","ポーランド語","Polaco","Polonais","波兰语","Polaco","Polacco","Polski","Pools","Pwyleg"
+Central Tibetan,bod,1172940,,Sino-Tibetan,0,"Тибетский","Tibetisch","チベット語","Tibetano","Tibétain","藏语","Tibetano","Tibetano","Tybetański","Tibetaans","Tibeteg"
+Swedish,swe,9197090,Europe,Indo-European,0,"Шведский","Schwedisch","スウェーデン語","Sueco","Suédois","瑞典語","Sueco","Svedese","Szwedzki","Zweeds","Swedeg"
+Romanian,ron,23782990,Europe,Indo-European,0,"Румынский","Rumänisch","ルーマニア語","Rumano","Roumain","羅馬尼亞語","Romeno","Rumeno","Rumuński","Roemeens","Rwmaneg"
+Slovak,slk,5187740,Europe,Indo-European,0,"Словацкий","Slowakisch","スロバキア語","Eslovaco","Slovaque","斯洛伐克语","Eslovaco","Slovacco","Słowacki","Slowaaks","Slofaceg"
+Hebrew,heb,5302770,SouthAsia,Afro-Asiatic,0,"Иврит","Hebräisch","サマリア語","Hebreo","Hébreu","","Hebraico","Ebraico","Hebrajski","Hebreeuws","Hebraeg"
+Cantonese,yue,62221560,SoutheastAsia,Sino-Tibetan,0,"Кантонский","Kantonesisch","広東語","Cantonés","Cantonais","广州话","Cantonês","","Kantoński","Kantonees","Cantoneg"
+Czech,ces,10619340,Europe,Indo-European,0,"Чешский","Tschechisch","チェコ語","Checo","Tchèque","捷克语","Checo","Ceco","Czeski","Tsjechisch","Tsiec"
+Arabic,arz,236748330,MiddleEast,Afro-Asiatic,0,"Египетский диалект арабского языка","Ägyptisch-arabisch","アラビア語エジプト方言","Árabe egipcio","Arabe égyptien","埃及阿拉伯語","Árabe egípcio","Arabo egiziano","Dialekt egipski języka arabskiego","",""
+Thai,tha,20396930,SoutheastAsia,Tai-Kadai,0,"Тайский","Thailändisch","タイ語","Tailandés","Thaï","泰语","Tailandês","Lingua thailandese","Tajski","Thais",""
+Vietnamese,vie,67778030,SoutheastAsia,Austro-asiatic,0,"Вьетнамский","Vietnamesisch","ベトナム語","Vietnamita","Vietnamien","越南语","Vietnamita","Vietnamita","Wietnamski","Vietnamees","Fietnameg"
+Ukrainian,ukr,36048890,Europe,Indo-European,0,"Украинский","Ukrainisch","ウクライナ語","Ucraniano","Ukrainien","乌克兰语","Ucraniano","Ucraino","Ukraiński","Oekraïens","Wcreineg"
+Mandarin,cmn,847808270,SoutheastAsia,Sino-Tibetan,0,"Китайский","Chinesisch","中国語","Chino","Chinois","官话","Chinês","Cinese","Chiński","Chinees","Tseineeg"
+Russian,rus,167332230,InnerAsia,Indo-European,0,"Русский","Russisch","ロシア語","Ruso","Russe","俄语","Russo","Russo","Rosyjski","Russisch","Rwseg"
+Japanese,jpn,122056940,NCoastAsia,Japonic,0,"Японский","Japanisch","日本語","Japonés","Japonais","日语","Japonês","Giapponese","Japoński","Japans","Japaneg"
+Spanish,spa,414170030,Europe,Indo-European,0,"Испанский","Spanisch","スペイン語","Español","Espagnol","西班牙语","Espanhol","Spagnolo","Hiszpański","Spaans","Sbaeneg"
+Korean,kor,77166230,SoutheastAsia,Isolate,0,"Корейский","Koreanisch","朝鮮語","Coreano","Coréen","朝鮮語","Coreano","Coreano","Koreański","Koreaans","Corëeg"
+Italian,ita,63655047,Europe,Indo-European,0,"Итальянский","Italienisch","イタリア語","Italiano","Italien","意大利语","Italiano","Italiano","Włoski","Italiaans","Eidaleg"
+German,deu,78245280,Europe,Indo-European,0,"Немецкий","Deutsch","ドイツ語","Alemán","Allemand","","Alemão","Tedesco","Niemiecki","Duits","Almaeneg"
+French,fra,74980460,Europe,Indo-European,0,"Французский","Französisch","フランス語","Francés","Français","法语","Francês","Francese","Francuski","Frans","Ffrangeg"
+Akie,mwy,0,NA,Nilotic,1,"","","","","","","","","","",""
+Bayso,bsw,2000,NA,Cushitic,1,"","Bayso","","","","","","","","",""
+Bora,boa,3000,NA,Boran,1,"Бора","","","Idioma bora","","","Língua bora","","","",""
+Chintang,ctn,3710,NA,Sino-Tibetan,1,"","","","","","","","","","",""
+Chipaya,cap,2000,NA,Uru-Chipaya,1,"Чипайя","","","Idioma chipaya","Puquina","","","","","",""
+Haro,kcx,200,NA,Omotic,1,"","","","","","","","","","",""
+Kómnzo,tci,200,NA,Morehead-Wasur,1,"","","","","","","","","","",""
+Lacandon,lac,350,NA,Mayan,1,"Лакандонский язык","Lakandonisch","","Idioma lacandón","","","Língua lacandona","","","",""
+Even,eve,3000,NA,,1,"Эвенский язык","Ewenische sprache","","Idioma even","Évène","","Língua even","Lingua evena","Język eweński","Eveens",""
+Svan,sva,15000,NA,Kartvelian,1,"Сванский язык","Swanische sprache","スヴァン語","Idioma esvano","Svane","","Língua svan","Lingua svan","Język swański","Svanetisch",""
+Tima,tms,5000,NA,Katla-Tima,1,"","","","","","","","","","",""
+Uru,ure,2,NA,Uru-Chipaya,1,"Уру","","","Idioma uru","","","","","","",""
+Wooi,wbw,1800,NA,Austronesian,1,"","","","","","","","","","",""
+Siwu,akp,27000,NA,,0,"","","","","","","","","","",""
+West Ambrym,ambx,3000,NA,,1,"","","","","","","","","","",""
+Sanzhi,dar,300,NA,Nakh-Daghestanian,1,"","","","","","","","","","",""
+Cashinahua,cbs,1150,NA,Panoan,1,"Кашинауа","","","","","","","","","",""
