@@ -198,6 +198,8 @@ public class ScorePagePresenter implements Presenter {
         scorePageView.setEndangeredCount(userResults.getGameData().getRoundsCorrectEndangered());
         scorePageView.setRoundsData(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
 
+        // clear the highscores text
+        scorePageView.clearHighScoreText();
         final HighScoreService registrationService = new HighScoreService();
         final boolean isShareData = metadataFieldProvider.shareMetadataField.getControlledVocabulary()[0].equals(userResults.getUserData().getMetadataValue(metadataFieldProvider.shareMetadataField));
         registrationService.submitScores(isShareData, userResults, new HighScoreListener() {

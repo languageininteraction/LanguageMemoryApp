@@ -119,11 +119,22 @@ public class ScorePageView extends AbstractSvgView {
         scorePageBuilder.setLabel(SvgTextElements.tspan3303, formattedScore);
     }
 
+    public void clearHighScoreText() {
+        String labelText = "";
+        scorePageBuilder.setLabel(SvgTextElements.tspan4348, labelText);
+        scorePageBuilder.setLabel(SvgTextElements.tspan5630, labelText);
+        scorePageBuilder.setLabel(SvgTextElements.tspan4379, labelText);
+        scorePageBuilder.setLabel(SvgTextElements.tspan5632, labelText);
+        scorePageBuilder.setLabel(SvgTextElements.tspan5634, labelText);
+    }
+
     public void setHighScore(int scoreIndex, String playerName, int highScore) {
         int maxLength = SCORE_PAGE.texttspan5634().length();
         NumberFormat decimalFormat = NumberFormat.getDecimalFormat();
         String formattedScore = decimalFormat.format(highScore);
+        playerName += "                                      ";
         String labelText = playerName.substring(0, maxLength - 1 - formattedScore.length()).concat(" ").concat(formattedScore);
+//        labelText = labelText.replace(" ", "&nbsp;");
 //        String.format("%1$" + n + "s", playerName);
         switch (scoreIndex) {
             case 0:
