@@ -30,7 +30,7 @@ public class </xsl:text><xsl:value-of select="$classname" /><xsl:text>Provider i
         <xsl:for-each select="tokenize($csvText, '\n')">
             <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*).*$'>
                 <xsl:matching-substring>
-<xsl:value-of select="regex-group(2)"/><xsl:text>("</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(3)"/><xsl:text>,"</xsl:text><xsl:value-of select="regex-group(4)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(5)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(6)"/><xsl:text>==1),
+<xsl:value-of select="regex-group(2)"/><xsl:text>(LANGUAGE_DATA.</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>_Name(),"</xsl:text><xsl:value-of select="regex-group(2)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(3)"/><xsl:text>,"</xsl:text><xsl:value-of select="regex-group(4)"/><xsl:text>","</xsl:text><xsl:value-of select="regex-group(5)"/><xsl:text>",</xsl:text><xsl:value-of select="regex-group(6)"/><xsl:text>==1),
         </xsl:text>
                 </xsl:matching-substring>
             </xsl:analyze-string>

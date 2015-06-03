@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>lingquest</artifactId>
     <packaging>war</packaging>
-    <version>0.1.347-testing</version>
+    <version>0.1.350-testing</version>
     <name>LingQuest</name>
     <organization>
         <name>Language In Interaction</name>
@@ -159,10 +159,56 @@
                                 <include>*.xml</include>
                             </includes>
                             <stylesheet>src/main/xsl/csv2properties.xsl</stylesheet>
+                            <parameters>
+                                <parameter>
+                                    <name>nameField</name>
+                                    <value>1</value>
+                                </parameter>
+                            </parameters>
                             <fileMappers>
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
                                     <pattern>\.xml$</pattern>
                                     <replacement>.properties</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>src/main/csv</dir>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <stylesheet>src/main/xsl/csv2properties.xsl</stylesheet>
+                            <parameters>
+                                <parameter>
+                                    <name>nameField</name>
+                                    <value>8</value>
+                                </parameter>
+                            </parameters>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>\.xml$</pattern>
+                                    <replacement>_de.properties</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>src/main/csv</dir>
+                            <includes>
+                                <include>*.xml</include>
+                            </includes>
+                            <stylesheet>src/main/xsl/csv2properties.xsl</stylesheet>
+                            <parameters>
+                                <parameter>
+                                    <name>nameField</name>
+                                    <value>16</value>
+                                </parameter>
+                            </parameters>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>\.xml$</pattern>
+                                    <replacement>_nl.properties</replacement>
                                 </fileMapper>
                             </fileMappers>
                             <outputDir>${project.build.directory}/generated-sources/gwt/nl/ru/languageininteraction/language/client</outputDir>
@@ -286,7 +332,7 @@
                         <exclude>**/nbactions.xml</exclude>
                     </excludes>
                 </configuration>
-<!--                <executions>
+                <!--                <executions>
                     <execution>
                         <goals>
                             <goal>check</goal>
