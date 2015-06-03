@@ -24,10 +24,12 @@
             <!--<xsl:text>analyze</xsl:text>-->
             <xsl:analyze-string select="." regex='^"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*)"?,"?([^,^"]*).*$'>
                 <xsl:matching-substring>
+                    <xsl:if test="regex-group($nameField)">
 <xsl:value-of select="regex-group(2)"/><xsl:text>_Name=</xsl:text><xsl:value-of select="regex-group($nameField)"/><xsl:text>
 </xsl:text>
 <xsl:value-of select="regex-group(2)"/><xsl:text>_Description=</xsl:text><xsl:value-of select="regex-group(1)"/><xsl:text>: no description available yet
 </xsl:text>
+                 </xsl:if>
                 </xsl:matching-substring>
             </xsl:analyze-string>
         </xsl:for-each>

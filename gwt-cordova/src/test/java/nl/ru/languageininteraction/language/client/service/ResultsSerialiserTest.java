@@ -40,7 +40,10 @@ public class ResultsSerialiserTest {
 
     /**
      * Test of serialise method, of class ResultsSerialiser.
-     */
+     */   
+//  This test will fail beause GWT.create cannot run in a normal unit test. So for now we will ignore this test, but at some point it should be mocked. 
+//  While this could be done with /*extends GWTTestCase*/ that would make the tests run very slowly for no good reason.
+//    @Ignore
     @Test
     public void testSerialise() {
         System.out.println("serialise");

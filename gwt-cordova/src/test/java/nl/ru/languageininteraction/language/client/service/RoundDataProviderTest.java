@@ -35,6 +35,9 @@ public class RoundDataProviderTest {
      * (although efficiency is not likely to be an issue in the current intended
      * use)
      */
+//  This test will fail beause GWT.create cannot run in a normal unit test. So for now we will ignore this test, but at some point it should be mocked. 
+//  While this could be done with /*extends GWTTestCase*/ that would make the tests run very slowly for no good reason.
+//    @Ignore
     @Test
     public void testGetUniqueLanguage() {
         System.out.println("getUniqueLanguage");
