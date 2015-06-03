@@ -131,6 +131,8 @@ public class PlayerDetailsView extends AbstractSvgView {
         svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AddLangButton);
         svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.DeleteLangButton);
         svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3285, userName);
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan4521, messages.text4519());
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan5873, messages.shareDetailsText());
     }
 
     public void setUserScoreField(int userScore) {

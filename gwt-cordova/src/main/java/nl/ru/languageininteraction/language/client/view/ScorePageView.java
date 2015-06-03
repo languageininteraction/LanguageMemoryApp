@@ -109,6 +109,8 @@ public class ScorePageView extends AbstractSvgView {
         // trim the user name so that it fits in the text box
         String shortName = (userName.length() <= maxNameLength) ? userName : userName.substring(0, maxNameLength) + "...";
         scorePageBuilder.setLabel(SvgTextElements.tspan3285, shortName);
+        scorePageBuilder.setLabel(ScorePageBuilder.SvgTextElements.tspan5588, messages.text5586());
+        scorePageBuilder.setLabel(ScorePageBuilder.SvgTextElements.tspan5638, messages.highScoresText());
     }
 
     public void setUserScore(int userScore) {

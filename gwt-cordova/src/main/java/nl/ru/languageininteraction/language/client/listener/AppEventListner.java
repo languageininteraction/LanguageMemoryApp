@@ -49,9 +49,9 @@ public interface AppEventListner {
         scores("Scores"),
         matchlanguage("Match"),
         chooseplayer("Choose Player"),
-        playerdetails("Player"),
+        playerdetails(messages.playerScreenButtonLabel()),
         createplayer("New Player"),
-        startscreen("Start"),
+        startscreen(messages.startScreenButtonLabel()),
         infoscreen("Information"),
         stopSharing(""),
         @Deprecated

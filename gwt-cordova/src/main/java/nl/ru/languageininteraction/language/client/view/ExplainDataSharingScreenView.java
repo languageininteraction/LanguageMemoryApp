@@ -42,6 +42,8 @@ public class ExplainDataSharingScreenView extends AbstractSvgView {
     @Override
     protected void getSvg(SafeHtmlBuilder builder) {
         svgBuilder.getSvg(builder);
+        svgBuilder.setLabel(ExplainDataSharingScreenBuilder.SvgTextElements.tspan5602, messages.yesText());
+        svgBuilder.setLabel(ExplainDataSharingScreenBuilder.SvgTextElements.tspan6386, messages.noText());
     }
 
     @Override

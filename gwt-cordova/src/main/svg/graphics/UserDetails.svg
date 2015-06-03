@@ -549,7 +549,7 @@
              style="font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans-Bold';writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
              id="text4519">
             <tspan
-               x="0 11.358 20.997 34.407001 38.474998 48.159 52.587002 62.252998 66.320999 75.212997 81.387001 90.441002 94.509003 102.8502 112.5342 122.2002"
+               x="0"
                y="0"
                sodipodi:role="line"
                id="tspan4521">How old are you?</tspan>
@@ -1190,7 +1190,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="ShareBox"
+     inkscape:label="ShareBoxBackground"
      style="display:inline"
      transform="translate(595.75698,0)">
     <g
@@ -1225,7 +1225,13 @@
           </g>
         </g>
       </g>
-    </g>
+    </g></g>
+    <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="ShareBox"
+     style="display:inline"
+     transform="translate(595.75698,0)">
     <g
        transform="matrix(1,0,0,-1,-575.30628,263.5576)"
        id="g5857"

@@ -154,5 +154,8 @@ public class ChoosePlayerView extends AbstractSvgView {
 
     public void setUserNameField(String userName) {
         svgBuilder.setLabel(ChoosePlayerScreenBuilder.SvgTextElements.tspan3491, (userName.isEmpty()) ? messages.defaultUserName() : userName);
+        svgBuilder.setLabel(ChoosePlayerScreenBuilder.SvgTextElements.tspan5885, messages.editDetailsTextChoose());
+        svgBuilder.setLabel(ChoosePlayerScreenBuilder.SvgTextElements.tspan5893, messages.newPlayerText());
+        svgBuilder.setLabel(ChoosePlayerScreenBuilder.SvgTextElements.tspan5889, messages.switchPlayerText());
     }
 }
