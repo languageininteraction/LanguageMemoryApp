@@ -1,6 +1,6 @@
 #mvn install
 cd target
-appname=lingquest-0.1.351-testing
+appname=lingquest-0.1.351-stable
 rm -rf $appname-cordova
 unzip $appname-cordova.zip -d $appname-cordova
 cd $appname-cordova
