@@ -68,10 +68,10 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
     @Override
     void configureSvg() {
         setSamples(playerLevel);
-        guessRoundView.updateRoundsLabel(0, 0);
+        guessRoundView.updateRoundsLabel(0, 0, playerLevel.getRoundsPerGame());
     }
 
-    private void setSamples(GameState.PlayerLevel playerLevel) {
+    private void setSamples(final GameState.PlayerLevel playerLevel) {
         final RoundData roundData = roundDataProvider.getRoundData(playerLevel);
         final long startMs = System.currentTimeMillis();
         guessRoundView.setSampleListeners(new LanguageSampleListener() {
@@ -86,7 +86,7 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
                 roundData.setChosenAnswer(roundSample);
                 roundData.setDurationMs(System.currentTimeMillis() - startMs);
                 userResults.getGameData().addRoundData(roundData);
-                guessRoundView.updateRoundsLabel(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed());
+                guessRoundView.updateRoundsLabel(userResults.getGameData().getRoundsCorrect(), userResults.getGameData().getRoundsPlayed(), playerLevel.getRoundsPerGame());
             }
         }, roundData);
     }
