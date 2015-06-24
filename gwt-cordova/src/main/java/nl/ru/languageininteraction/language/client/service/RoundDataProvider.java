@@ -49,15 +49,15 @@ public class RoundDataProvider {
 
     public RoundData getRoundData(GameState.PlayerLevel playerLevel) {
         final ArrayList<LanguageDataProvider.LanguageSample> choiceLanguages = new ArrayList(Arrays.asList(LanguageDataProvider.LanguageSample.values()));
-        final int correctSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
-        int correctChoiceSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
+        final int correctSampleIndex = new Random().nextInt(LanguageDataProvider.soundFileCount);
+        int correctChoiceSampleIndex = new Random().nextInt(LanguageDataProvider.soundFileCount);
         while (correctChoiceSampleIndex == correctSampleIndex) {
-            correctChoiceSampleIndex = (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1));
+            correctChoiceSampleIndex = new Random().nextInt(LanguageDataProvider.soundFileCount);
         }
         final RoundSample correctSample = new RoundSample(getUniqueLanguage(unseenCorrectLanguages), true, correctSampleIndex);
         final ArrayList<RoundSample> roundChoices = new ArrayList<>();
         for (int choiceIndex = 0; choiceIndex < playerLevel.getChoiceCount() - 1 /* -1 to leave space for the correct answer*/; choiceIndex++) {
-            roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, (int) (Math.random() * (LanguageDataProvider.soundFileCount - 1))));
+            roundChoices.add(new RoundSample(getUniqueLanguage(choiceLanguages), false, new Random().nextInt(LanguageDataProvider.soundFileCount)));
         }
         Random random = new Random();
         // insert the correct sample in a random location in the arraylist
