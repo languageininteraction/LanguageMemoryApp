@@ -79,10 +79,8 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
             @Override
             public void eventFired(RoundSample roundSample) {
                 roundsPlayed++;
-                if (roundSample.isCorrect()) {
-                    playerScore = (playerScore == 0) ? 1 : playerScore * 2;
-                    userResults.getUserData().updateBestScore(playerScore);
-                }
+                playerScore += new GameState().getScore(roundSample.isCorrect(), roundData.getCorrectSample().getLanguageSample().isDobes(),playerLevel.getChoiceCount());
+                userResults.getUserData().updateBestScore(playerScore);
                 roundData.setChosenAnswer(roundSample);
                 roundData.setDurationMs(System.currentTimeMillis() - startMs);
                 userResults.getGameData().addRoundData(roundData);

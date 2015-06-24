@@ -34,8 +34,8 @@ public class GameState {
     protected static final int LEVEL_3_CHOICES = 4;
     protected static final int LEVEL_2_CHOICES = 3;
 
-    protected static final int LEVEL_4_ROUNDS = 10;
-    protected static final int LEVEL_3_ROUNDS = 8;
+    protected static final int LEVEL_4_ROUNDS = 8;
+    protected static final int LEVEL_3_ROUNDS = 7;
     protected static final int LEVEL_2_ROUNDS = 6;
     protected static final int LEVEL_1_ROUNDS = 5;
 
@@ -70,8 +70,8 @@ public class GameState {
 
     public enum LanguageStatus {
 
-        endangered(1.5f),
-        vigorous(1);
+        endangered(15f),
+        vigorous(10f);
         final private float scoreFactor;
 
         private LanguageStatus(float scoreFactor) {
@@ -92,7 +92,7 @@ public class GameState {
         return PlayerLevel.level_4;
     }
 
-    public int getScore(boolean playerCorrect, LanguageStatus languageStatus, int choiceCount) {
-        return (!playerCorrect) ? 0 : (int) (languageStatus.getScoreFactor() * (choiceCount - 1));
+    public int getScore(boolean playerCorrect, boolean isDobes, int choiceCount) {
+        return (!playerCorrect) ? 0 : (int) ((isDobes) ? LanguageStatus.endangered.getScoreFactor() : LanguageStatus.vigorous.getScoreFactor() * (choiceCount - 1));
     }
 }
