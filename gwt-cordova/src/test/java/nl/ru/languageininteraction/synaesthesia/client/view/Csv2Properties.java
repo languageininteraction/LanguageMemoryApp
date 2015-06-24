@@ -61,9 +61,9 @@ public class Csv2Properties {
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(reader);
         for (CSVRecord record : records) {
             String key_name = record.get(KEY_COLUMN);
-            String en_value = record.get(EN_COLUMN + 2);
-            String nl_value = record.get(NL_COLUMN + 2);
-            String de_value = record.get(DE_COLUMN + 2);
+            String en_value = record.get(EN_COLUMN);
+            String nl_value = record.get(NL_COLUMN);
+            String de_value = record.get(DE_COLUMN);
             System.out.println(key_name);
             System.out.println(en_value);
             System.out.println(nl_value);
