@@ -9,7 +9,7 @@
     <groupId>nl.ru.languageininteraction</groupId>
     <artifactId>lingquest</artifactId>
     <packaging>war</packaging>
-    <version>0.1.361-stable</version>
+    <version>0.1.364-stable</version>
     <name>LingQuest</name>
     <organization>
         <name>Language In Interaction</name>
