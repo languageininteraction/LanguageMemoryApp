@@ -37,6 +37,7 @@ public class LocalStorage {
     private static final String LAST_USER_ID = "LastUserId.";
     private static final String GAME_DATA = "GameData.";
     protected static final String MAX_SCORE = "maxScore";
+    protected static final String MAX_POTENTIAL_SCORE = "potentialMaxScore";
     protected static final String GAMES_PLAYED = "gamesPlayed";
     final MetadataFieldProvider metadataFieldProvider = new MetadataFieldProvider();
 
@@ -70,7 +71,8 @@ public class LocalStorage {
                 userData.setMetadataValue(metadataField, getCleanStoredData(USER_RESULTS + userData.getUserId().toString() + "." + metadataField.getPostName()));
             }
         }
-        userData.updateBestScore(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + MAX_SCORE));
+        userData.setBestScore(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + MAX_SCORE));
+        userData.setPotentialMaxScore(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + MAX_POTENTIAL_SCORE));
         userData.setGamesPlayed(getCleanStoredInt(USER_RESULTS + userData.getUserId().toString() + "." + GAMES_PLAYED));
         return userData;
     }
@@ -104,6 +106,7 @@ public class LocalStorage {
             }
         }
         dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + MAX_SCORE, Integer.toString(userResults.getUserData().getBestScore()));
+        dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + MAX_POTENTIAL_SCORE, Integer.toString(userResults.getUserData().getPotentialMaxScore()));
         dataStore.setItem(USER_RESULTS + userResults.getUserData().getUserId().toString() + "." + GAMES_PLAYED, Integer.toString(userResults.getUserData().getGamesPlayed()));
         dataStore.setItem(LAST_USER_ID, userResults.getUserData().getUserId().toString());
     }
@@ -131,7 +134,7 @@ public class LocalStorage {
                     final String userIdString = key.split("\\.")[1];
                     final String cleanStoredData = getCleanStoredData(key);
 //                    if (!cleanStoredData.isEmpty()) {
-                        userIdList.add(new UserLabelData(new UserId(userIdString), cleanStoredData));
+                    userIdList.add(new UserLabelData(new UserId(userIdString), cleanStoredData));
 //                    }
                 }
             }

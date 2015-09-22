@@ -39,7 +39,6 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
     protected final LanguageDataProvider languageDataProvider;
     private final GuessRoundView guessRoundView;
     private int roundsPlayed = 0;
-    private int playerScore = 0;
     private final GameState.PlayerLevel playerLevel;
     final RoundDataProvider roundDataProvider;
 
@@ -47,9 +46,9 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
         super(widgetTag, userResults, audioPlayer, new GuessRoundView(audioPlayer));
         guessRoundView = (GuessRoundView) abstractSvgView;
         languageDataProvider = new LanguageDataProvider();
-        playerScore = userResults.getUserData().getBestScore();
+        int playerGamesPlayed = userResults.getUserData().getGamesPlayed();
         userResults.getGameData().clearGameCounters();
-        playerLevel = new GameState().getPlayerLevel(playerScore);
+        playerLevel = new GameState().getPlayerLevel(playerGamesPlayed);
         roundDataProvider = new RoundDataProvider();
     }
 
@@ -79,8 +78,8 @@ public class GuessRoundPresenter extends AbstractSvgPresenter implements Present
             @Override
             public void eventFired(RoundSample roundSample) {
                 roundsPlayed++;
-                playerScore += new GameState().getScore(roundSample.isCorrect(), roundData.getCorrectSample().getLanguageSample().isDobes(),playerLevel.getChoiceCount());
-                userResults.getUserData().updateBestScore(playerScore);
+                userResults.getUserData().updateBestScore(new GameState().getScore(roundSample.isCorrect(), roundData.getCorrectSample().getLanguageSample().isDobes(), playerLevel.getChoiceCount()));
+                userResults.getUserData().updatePotentialMaxScore(new GameState().getScore(true, roundData.getCorrectSample().getLanguageSample().isDobes(), playerLevel.getChoiceCount()));
                 roundData.setChosenAnswer(roundSample);
                 roundData.setDurationMs(System.currentTimeMillis() - startMs);
                 userResults.getGameData().addRoundData(roundData);

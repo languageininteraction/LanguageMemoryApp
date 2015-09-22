@@ -31,6 +31,7 @@ public class UserData {
     private final HashMap<MetadataField, String> metadataValues = new HashMap<>();
     private final UserId userId;
     private int bestScore = 0;
+    private int potentialMaxScore = 0;
     private int gamesPlayed = 0;
 
     public UserData() {
@@ -77,16 +78,44 @@ public class UserData {
         this.gamesPlayed++;
     }
 
+    public int getScoreRating() {
+        final double z = 1.2815;
+        // if no games played, return zero
+        if (gamesPlayed == 0) {
+            return (0);
+        }
+        final double phat = bestScore / potentialMaxScore;
+        // wilson lower bound is between 0 and 1
+        final double wilsonLowerBound = ((phat + z * z / (2 * gamesPlayed) - z * Math.sqrt((phat * (1 - phat) + z * z / (4 * gamesPlayed)) / gamesPlayed)) / (1 + z * z / gamesPlayed));
+        // scale rating to be between 0 and 10
+        // (note: for display, may also need to round to 1 or 2 decimal places)
+        return (int) Math.ceil(wilsonLowerBound * 100);
+    }
+
     public int getBestScore() {
         return bestScore;
+    }
+
+    public int getPotentialMaxScore() {
+        return potentialMaxScore;
     }
 
     public void setBestScore(int bestScore) {
         this.bestScore = bestScore;
     }
 
+    public void setPotentialMaxScore(int potentialMaxScore) {
+        this.potentialMaxScore = potentialMaxScore;
+    }
+
     public void updateBestScore(int bestScore) {
-        setBestScore((getBestScore() < bestScore) ? bestScore : getBestScore());
+//        setBestScore((getBestScore() < bestScore) ? bestScore : getBestScore());
+        setBestScore(getBestScore() + bestScore);
+    }
+
+    public void updatePotentialMaxScore(int potentialMaxScore) {
+//        setPotentialMaxScore((getPotentialMaxScore() < potentialMaxScore) ? potentialMaxScore : getPotentialMaxScore());
+        setPotentialMaxScore(getPotentialMaxScore() + potentialMaxScore);
     }
 
     public void validateNameField() throws MetadataFieldException {

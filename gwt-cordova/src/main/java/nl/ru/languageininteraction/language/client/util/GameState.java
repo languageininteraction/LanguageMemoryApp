@@ -23,11 +23,15 @@ package nl.ru.languageininteraction.language.client.util;
  */
 public class GameState {
 
-    protected static final int MAX_SCORE = 50000;
-    protected static final int LEVEL_1_MAX = 500;
-    protected static final int LEVEL_2_MAX = 1500;
-    protected static final int LEVEL_3_MAX = 3000;
-    protected static final int LEVEL_4_MAX = 12000;
+//    protected static final int MAX_SCORE = 50000;
+//    protected static final int LEVEL_1_MAX = 500;
+//    protected static final int LEVEL_2_MAX = 1500;
+//    protected static final int LEVEL_3_MAX = 3000;
+//    protected static final int LEVEL_4_MAX = 12000;
+    protected static final int LEVEL_1_MAX_GAMES = 2;
+    protected static final int LEVEL_2_MAX_GAMES = 5;
+    protected static final int LEVEL_3_MAX_GAMES = 9;
+    protected static final int LEVEL_4_MAX_GAMES = 14;
 
     protected static final int LEVEL_1_CHOICES = 2;
     protected static final int LEVEL_4_CHOICES = 5;
@@ -41,18 +45,18 @@ public class GameState {
 
     public enum PlayerLevel {
 
-        level_1(LEVEL_1_ROUNDS, LEVEL_1_CHOICES, LEVEL_1_MAX),
-        level_2(LEVEL_2_ROUNDS, LEVEL_2_CHOICES, LEVEL_2_MAX),
-        level_3(LEVEL_3_ROUNDS, LEVEL_3_CHOICES, LEVEL_3_MAX),
-        level_4(LEVEL_4_ROUNDS, LEVEL_4_CHOICES, LEVEL_4_MAX);
+        level_1(LEVEL_1_ROUNDS, LEVEL_1_CHOICES, LEVEL_1_MAX_GAMES),
+        level_2(LEVEL_2_ROUNDS, LEVEL_2_CHOICES, LEVEL_2_MAX_GAMES),
+        level_3(LEVEL_3_ROUNDS, LEVEL_3_CHOICES, LEVEL_3_MAX_GAMES),
+        level_4(LEVEL_4_ROUNDS, LEVEL_4_CHOICES, LEVEL_4_MAX_GAMES);
         final private int roundsPerGame;
         final private int choiceCount;
-        final private int maxScoreForLevel;
+        final private int maxGamesForLevel;
 
-        private PlayerLevel(int roundsPerGame, int choiceCount, int maxScoreForLevel) {
+        private PlayerLevel(int roundsPerGame, int choiceCount, int maxGamesForLevel) {
             this.roundsPerGame = roundsPerGame;
             this.choiceCount = choiceCount;
-            this.maxScoreForLevel = maxScoreForLevel;
+            this.maxGamesForLevel = maxGamesForLevel;
         }
 
         public int getRoundsPerGame() {
@@ -63,8 +67,8 @@ public class GameState {
             return choiceCount;
         }
 
-        public int getMaxScoreForLevel() {
-            return maxScoreForLevel;
+        public int getMaxGamesForLevel() {
+            return maxGamesForLevel;
         }
     }
 
@@ -83,9 +87,9 @@ public class GameState {
         }
     }
 
-    public PlayerLevel getPlayerLevel(int playerScore) {
+    public PlayerLevel getPlayerLevel(int playerGameCount) {
         for (PlayerLevel testLevel : PlayerLevel.values()) {
-            if (playerScore < testLevel.getMaxScoreForLevel()) {
+            if (playerGameCount < testLevel.getMaxGamesForLevel()) {
                 return testLevel;
             }
         }
@@ -93,6 +97,6 @@ public class GameState {
     }
 
     public int getScore(boolean playerCorrect, boolean isDobes, int choiceCount) {
-        return (!playerCorrect) ? 0 : (int) ((isDobes) ? LanguageStatus.endangered.getScoreFactor() : LanguageStatus.vigorous.getScoreFactor() * (choiceCount - 1));
+        return (!playerCorrect) ? 0 : (int) (((isDobes) ? LanguageStatus.endangered.getScoreFactor() : LanguageStatus.vigorous.getScoreFactor()) * (choiceCount - 1));
     }
 }
