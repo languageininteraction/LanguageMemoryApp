@@ -142,7 +142,7 @@ public class ChoosePlayerView extends AbstractSvgView {
 
             @Override
             public String getLabel() {
-                return "";
+                return messages.popupOkButtonLabel();
             }
 
             @Override

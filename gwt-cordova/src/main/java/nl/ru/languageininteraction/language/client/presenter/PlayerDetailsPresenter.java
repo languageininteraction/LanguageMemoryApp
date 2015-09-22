@@ -19,7 +19,10 @@ package nl.ru.languageininteraction.language.client.presenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import nl.ru.languageininteraction.language.client.Messages;
 import nl.ru.languageininteraction.language.client.exception.AudioException;
@@ -139,7 +142,7 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
                     @Override
                     public String getLabel() {
-                        return "";
+                        return messages.popupOkButtonLabel();
                     }
 
                     @Override
@@ -159,13 +162,17 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                final TextBox addLanguageBox = new TextBox();
+                MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+                for (String suggestion : messages.languageSuggestionList().split("\\|")) {
+                    oracle.add(suggestion);
+                }
+                final SuggestBox addLanguageBox = new SuggestBox(oracle);
                 addLanguageBox.setStylePrimaryName("popupTextBox");
                 playerDetailsView.showWidgetPopup(new PresenterEventListner() {
 
                     @Override
                     public String getLabel() {
-                        return "";
+                        return messages.popupOkButtonLabel();
                     }
 
                     @Override
@@ -187,20 +194,31 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
 
             @Override
             public void eventFired(Button button) {
-                final TextBox deleteLanguageBox = new TextBox();
+                final ListBox deleteLanguageBox = new ListBox();
                 deleteLanguageBox.setStylePrimaryName("popupTextBox");
-                deleteLanguageBox.setValue(userResults.getUserData().getMetadataValue(metadataFieldProvider.languagesMetadataField));
+                for (final String spokenLanguage : userResults.getUserData().getMetadataValue(metadataFieldProvider.languagesMetadataField).split("\\|")) {
+                    deleteLanguageBox.addItem(spokenLanguage);
+                }
+                deleteLanguageBox.setVisibleItemCount(5);
                 playerDetailsView.showWidgetPopup(new PresenterEventListner() {
 
                     @Override
                     public String getLabel() {
-                        return "";
+                        return messages.popupDeleteButtonLabel();
                     }
 
                     @Override
                     public void eventFired(Button button) {
-//                        userResults.getUserData().setMetadataValue(metadataFieldProvider.firstNameMetadataField, deleteLanguageBox.getValue());
-                        setLanguageLabels();
+                        if (deleteLanguageBox.getItemCount() > 0) {
+                            String resultingLanguages = "";
+                            for (int itemCounter = 0; itemCounter < deleteLanguageBox.getItemCount(); itemCounter++) {
+                                if (itemCounter != deleteLanguageBox.getSelectedIndex()) {
+                                    resultingLanguages = (resultingLanguages.isEmpty()) ? deleteLanguageBox.getItemText(itemCounter) : resultingLanguages + "|" + deleteLanguageBox.getItemText(itemCounter);
+                                }
+                            }
+                            userResults.getUserData().setMetadataValue(metadataFieldProvider.languagesMetadataField, resultingLanguages);
+                            setLanguageLabels();
+                        }
                     }
                 }, deleteLanguageBox);
             }

@@ -187,7 +187,7 @@ public abstract class AbstractSvgView extends AbstractView {
                     saveEventListner.eventFired(null);
                 }
             };
-            final Button okButton = new Button(messages.popupOkButtonLabel());
+            final Button okButton = new Button(saveEventListner.getLabel());
             okButton.addClickHandler(okSingleShotEventListner);
             okButton.addTouchStartHandler(okSingleShotEventListner);
             okButton.addTouchMoveHandler(okSingleShotEventListner);
