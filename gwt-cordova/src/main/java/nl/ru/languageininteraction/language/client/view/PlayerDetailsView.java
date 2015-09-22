@@ -37,6 +37,8 @@ public class PlayerDetailsView extends AbstractSvgView {
     protected PresenterEventListner addListner;
     protected PresenterEventListner removeListner;
     protected PresenterEventListner editNameListner;
+    protected PresenterEventListner addLanguageListner;
+    protected PresenterEventListner deleteLanguageListner;
 
     public PlayerDetailsView(AudioPlayer audioPlayer) throws AudioException {
         super(audioPlayer);
@@ -73,6 +75,14 @@ public class PlayerDetailsView extends AbstractSvgView {
 
     public void setEditNameListner(PresenterEventListner editNameListner) {
         this.editNameListner = editNameListner;
+    }
+
+    public void setAddLanguageListner(PresenterEventListner addLanguageListner) {
+        this.addLanguageListner = addLanguageListner;
+    }
+
+    public void setDeleteLanguageListner(PresenterEventListner deleteLanguageListner) {
+        this.deleteLanguageListner = deleteLanguageListner;
     }
 
     public void setShareData(Boolean shareOption) {
@@ -127,12 +137,16 @@ public class PlayerDetailsView extends AbstractSvgView {
     }
 
     public void setUserNameField(String userName) {
-        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.LangBox);
-        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.AddLangButton);
-        svgBuilder.hideGroup(UserDetailsBuilder.SvgGroupStates.DeleteLangButton);
         svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3285, userName);
         svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan4521, messages.text4519());
         svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan5873, messages.shareDetailsText());
+    }
+
+    public void setSpokenLanguages(String spokenLanguage1, String spokenLanguage2, String spokenLanguage3, String spokenLanguage4) {
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3559, spokenLanguage1);
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3561, spokenLanguage2);
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3563, spokenLanguage3);
+        svgBuilder.setLabel(UserDetailsBuilder.SvgTextElements.tspan3567, spokenLanguage4);
     }
 
     public void setUserScoreField(int userScore) {
@@ -181,6 +195,14 @@ public class PlayerDetailsView extends AbstractSvgView {
                 break;
             case ShareAndContinueButton:
                 nextEventListner.eventFired(null);
+                consumed = true;
+                break;
+            case AddLangButton:
+                addLanguageListner.eventFired(null);
+                consumed = true;
+                break;
+            case DeleteLangButton:
+                deleteLanguageListner.eventFired(null);
                 consumed = true;
                 break;
         }

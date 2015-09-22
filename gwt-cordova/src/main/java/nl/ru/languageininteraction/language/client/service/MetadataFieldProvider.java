@@ -31,10 +31,11 @@ public class MetadataFieldProvider {
     public final MetadataField ageMetadataField = new MetadataField(mateadataFields.postName_age(), mateadataFields.registrationField_age(), mateadataFields.fieldValues_age(), null, null);
     public final MetadataField shareMetadataField = new MetadataField(mateadataFields.postName_share(), mateadataFields.registrationField_share(), mateadataFields.fieldValues_share(), mateadataFields.controlledRegex_share(), mateadataFields.controlledMessage_share());
     public final MetadataField firstNameMetadataField = new MetadataField(mateadataFields.postName_playername(), mateadataFields.registrationField_playername(), null, mateadataFields.controlledRegex_playername(), mateadataFields.controlledMessage_playername());
+    public final MetadataField languagesMetadataField = new MetadataField(mateadataFields.postName_language(), mateadataFields.registrationField_language(), null, null, null);
     public final MetadataField[] metadataFieldArray = new MetadataField[]{
         firstNameMetadataField,
         ageMetadataField,
-        new MetadataField(mateadataFields.postName_language(), mateadataFields.registrationField_language(), null, null, null),
+        languagesMetadataField,
         shareMetadataField
     };
 }

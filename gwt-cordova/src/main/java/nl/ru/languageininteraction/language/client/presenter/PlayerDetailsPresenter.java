@@ -150,9 +150,74 @@ public class PlayerDetailsPresenter extends AbstractSvgPresenter implements Pres
                 }, userNameBox);
             }
         });
+        playerDetailsView.setAddLanguageListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                final TextBox addLanguageBox = new TextBox();
+                addLanguageBox.setStylePrimaryName("popupTextBox");
+                playerDetailsView.showWidgetPopup(new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+                        final String storedValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.languagesMetadataField);
+                        final String spokenLanguages = (storedValue == null || storedValue.isEmpty()) ? addLanguageBox.getValue() : storedValue + "|" + addLanguageBox.getValue();
+                        userResults.getUserData().setMetadataValue(metadataFieldProvider.languagesMetadataField, spokenLanguages);
+                        setLanguageLabels();
+                    }
+                }, addLanguageBox);
+            }
+        });
+        playerDetailsView.setDeleteLanguageListner(new PresenterEventListner() {
+
+            @Override
+            public String getLabel() {
+                return "";
+            }
+
+            @Override
+            public void eventFired(Button button) {
+                final TextBox deleteLanguageBox = new TextBox();
+                deleteLanguageBox.setStylePrimaryName("popupTextBox");
+                deleteLanguageBox.setValue(userResults.getUserData().getMetadataValue(metadataFieldProvider.languagesMetadataField));
+                playerDetailsView.showWidgetPopup(new PresenterEventListner() {
+
+                    @Override
+                    public String getLabel() {
+                        return "";
+                    }
+
+                    @Override
+                    public void eventFired(Button button) {
+//                        userResults.getUserData().setMetadataValue(metadataFieldProvider.firstNameMetadataField, deleteLanguageBox.getValue());
+                        setLanguageLabels();
+                    }
+                }, deleteLanguageBox);
+            }
+        });
         final String userNameValue = userResults.getUserData().getMetadataValue(metadataFieldProvider.firstNameMetadataField);
         playerDetailsView.setUserNameField((userNameValue.isEmpty()) ? messages.defaultUserName() : userNameValue);
         playerDetailsView.setUserScoreField(userResults.getUserData().getBestScore());
+        setLanguageLabels();
+    }
+
+    private void setLanguageLabels() {
+        final String[] spokenLanguages = userResults.getUserData().getMetadataValue(metadataFieldProvider.languagesMetadataField).split("\\|");
+        String spokenLanguage1 = (spokenLanguages.length > 0) ? spokenLanguages[0] : "";
+        String spokenLanguage2 = (spokenLanguages.length > 1) ? spokenLanguages[1] : "";
+        String spokenLanguage3 = (spokenLanguages.length > 2) ? spokenLanguages[2] : "";
+        String spokenLanguage4 = (spokenLanguages.length > 3) ? spokenLanguages[3] : "";
+        playerDetailsView.setSpokenLanguages(spokenLanguage1, spokenLanguage2, spokenLanguage3, spokenLanguage4);
     }
 
     @Override
